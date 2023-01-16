@@ -2,16 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Boat;
+use App\Models\ContentTag;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 
-class UpdateBoatRequest extends FormRequest
+class StoreContentTagRequest extends FormRequest
 {
     public function authorize()
     {
-        return Gate::allows('boat_edit');
+        return Gate::allows('content_tag_create');
     }
 
     public function rules()
@@ -19,15 +19,11 @@ class UpdateBoatRequest extends FormRequest
         return [
             'name' => [
                 'string',
-                'min:1',
-                'max:50',
                 'required',
             ],
-            'clients.*' => [
-                'integer',
-            ],
-            'clients' => [
-                'array',
+            'slug' => [
+                'string',
+                'nullable',
             ],
         ];
     }

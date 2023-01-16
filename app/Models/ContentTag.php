@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Boat extends Model
+class ContentTag extends Model
 {
     use SoftDeletes;
     use HasFactory;
 
-    public $table = 'boats';
+    public $table = 'content_tags';
 
     protected $dates = [
         'created_at',
@@ -22,15 +22,11 @@ class Boat extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
-
-    public function clients()
-    {
-        return $this->belongsToMany(Client::class);
-    }
 
     protected function serializeDate(DateTimeInterface $date)
     {

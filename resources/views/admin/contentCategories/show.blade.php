@@ -3,13 +3,13 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.boat.title') }}
+        {{ trans('global.show') }} {{ trans('cruds.contentCategory.title') }}
     </div>
 
     <div class="card-body">
         <div class="form-group">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.boats.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.content-categories.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -17,34 +17,32 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.boat.fields.id') }}
+                            {{ trans('cruds.contentCategory.fields.id') }}
                         </th>
                         <td>
-                            {{ $boat->id }}
+                            {{ $contentCategory->id }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.boat.fields.name') }}
+                            {{ trans('cruds.contentCategory.fields.name') }}
                         </th>
                         <td>
-                            {{ $boat->name }}
+                            {{ $contentCategory->name }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.boat.fields.client') }}
+                            {{ trans('cruds.contentCategory.fields.slug') }}
                         </th>
                         <td>
-                            @foreach($boat->clients as $key => $client)
-                                <span class="label label-info">{{ $client->name }}</span>
-                            @endforeach
+                            {{ $contentCategory->slug }}
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.boats.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.content-categories.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>

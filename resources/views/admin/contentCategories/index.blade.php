@@ -1,81 +1,71 @@
 @extends('layouts.admin')
 @section('content')
-@can('client_create')
+@can('content_category_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.clients.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.client.title_singular') }}
+            <a class="btn btn-success" href="{{ route('admin.content-categories.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.contentCategory.title_singular') }}
             </a>
-            <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
-                {{ trans('global.app_csvImport') }}
-            </button>
-            @include('csvImport.modal', ['model' => 'Client', 'route' => 'admin.clients.parseCsvImport'])
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.client.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.contentCategory.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Client">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-ContentCategory">
                 <thead>
                     <tr>
                         <th width="10">
 
                         </th>
                         <th>
-                            {{ trans('cruds.client.fields.id') }}
+                            {{ trans('cruds.contentCategory.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.client.fields.name') }}
+                            {{ trans('cruds.contentCategory.fields.name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.contentCategory.fields.slug') }}
                         </th>
                         <th>
                             &nbsp;
                         </th>
                     </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                        </td>
-                    </tr>
                 </thead>
                 <tbody>
-                    @foreach($clients as $key => $client)
-                        <tr data-entry-id="{{ $client->id }}">
+                    @foreach($contentCategories as $key => $contentCategory)
+                        <tr data-entry-id="{{ $contentCategory->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $client->id ?? '' }}
+                                {{ $contentCategory->id ?? '' }}
                             </td>
                             <td>
-                                {{ $client->name ?? '' }}
+                                {{ $contentCategory->name ?? '' }}
                             </td>
                             <td>
-                                @can('client_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.clients.show', $client->id) }}">
+                                {{ $contentCategory->slug ?? '' }}
+                            </td>
+                            <td>
+                                @can('content_category_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.content-categories.show', $contentCategory->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('client_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.clients.edit', $client->id) }}">
+                                @can('content_category_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.content-categories.edit', $contentCategory->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('client_delete')
-                                    <form action="{{ route('admin.clients.destroy', $client->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('content_category_delete')
+                                    <form action="{{ route('admin.content-categories.destroy', $contentCategory->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -100,11 +90,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('client_delete')
+@can('content_category_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.clients.massDestroy') }}",
+    url: "{{ route('admin.content-categories.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -135,33 +125,12 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  let table = $('.datatable-Client:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  let table = $('.datatable-ContentCategory:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
   
-let visibleColumnsIndexes = null;
-$('.datatable thead').on('input', '.search', function () {
-      let strict = $(this).attr('strict') || false
-      let value = strict && this.value ? "^" + this.value + "$" : this.value
-
-      let index = $(this).parent().index()
-      if (visibleColumnsIndexes !== null) {
-        index = visibleColumnsIndexes[index]
-      }
-
-      table
-        .column(index)
-        .search(value, strict)
-        .draw()
-  });
-table.on('column-visibility.dt', function(e, settings, column, state) {
-      visibleColumnsIndexes = []
-      table.columns(":visible").every(function(colIdx) {
-          visibleColumnsIndexes.push(colIdx);
-      });
-  })
 })
 
 </script>

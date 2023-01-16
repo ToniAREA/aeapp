@@ -2,31 +2,35 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Boat;
+use App\Models\ContentPage;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 
-class UpdateBoatRequest extends FormRequest
+class StoreContentPageRequest extends FormRequest
 {
     public function authorize()
     {
-        return Gate::allows('boat_edit');
+        return Gate::allows('content_page_create');
     }
 
     public function rules()
     {
         return [
-            'name' => [
+            'title' => [
                 'string',
-                'min:1',
-                'max:50',
                 'required',
             ],
-            'clients.*' => [
+            'categories.*' => [
                 'integer',
             ],
-            'clients' => [
+            'categories' => [
+                'array',
+            ],
+            'tags.*' => [
+                'integer',
+            ],
+            'tags' => [
                 'array',
             ],
         ];
