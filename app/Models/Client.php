@@ -27,6 +27,16 @@ class Client extends Model
         'deleted_at',
     ];
 
+    public function clientBoats()
+    {
+        return $this->belongsToMany(Boat::class);
+    }
+
+    public function boats()
+    {
+        return $this->belongsToMany(Boat::class);
+    }
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');

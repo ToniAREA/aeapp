@@ -23,6 +23,13 @@ class StoreBoatRequest extends FormRequest
                 'max:50',
                 'required',
             ],
+            'clients.*' => [
+                'integer',
+            ],
+            'clients' => [
+                'required',
+                'array',
+            ],
         ];
     }
 }

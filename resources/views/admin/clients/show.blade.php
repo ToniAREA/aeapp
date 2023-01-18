@@ -31,6 +31,16 @@
                             {{ $client->name }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.boats') }}
+                        </th>
+                        <td>
+                            @foreach($client->boats as $key => $boats)
+                                <span class="label label-info">{{ $boats->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -42,6 +52,22 @@
     </div>
 </div>
 
-
+<div class="card">
+    <div class="card-header">
+        {{ trans('global.relatedData') }}
+    </div>
+    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="#client_boats" role="tab" data-toggle="tab">
+                {{ trans('cruds.boat.title') }}
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" role="tabpanel" id="client_boats">
+            @includeIf('admin.clients.relationships.clientBoats', ['boats' => $client->clientBoats])
+        </div>
+    </div>
+</div>
 
 @endsection
