@@ -23,6 +23,12 @@ class UpdateClientRequest extends FormRequest
                 'max:50',
                 'required',
             ],
+            'boats.*' => [
+                'integer',
+            ],
+            'boats' => [
+                'array',
+            ],
         ];
     }
 }

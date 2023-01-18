@@ -116,6 +116,70 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 27,
+                'title' => 'content_management_access',
+            ],
+            [
+                'id'    => 28,
+                'title' => 'content_category_create',
+            ],
+            [
+                'id'    => 29,
+                'title' => 'content_category_edit',
+            ],
+            [
+                'id'    => 30,
+                'title' => 'content_category_show',
+            ],
+            [
+                'id'    => 31,
+                'title' => 'content_category_delete',
+            ],
+            [
+                'id'    => 32,
+                'title' => 'content_category_access',
+            ],
+            [
+                'id'    => 33,
+                'title' => 'content_tag_create',
+            ],
+            [
+                'id'    => 34,
+                'title' => 'content_tag_edit',
+            ],
+            [
+                'id'    => 35,
+                'title' => 'content_tag_show',
+            ],
+            [
+                'id'    => 36,
+                'title' => 'content_tag_delete',
+            ],
+            [
+                'id'    => 37,
+                'title' => 'content_tag_access',
+            ],
+            [
+                'id'    => 38,
+                'title' => 'content_page_create',
+            ],
+            [
+                'id'    => 39,
+                'title' => 'content_page_edit',
+            ],
+            [
+                'id'    => 40,
+                'title' => 'content_page_show',
+            ],
+            [
+                'id'    => 41,
+                'title' => 'content_page_delete',
+            ],
+            [
+                'id'    => 42,
+                'title' => 'content_page_access',
+            ],
+            [
+                'id'    => 43,
                 'title' => 'profile_password_edit',
             ],
         ];
