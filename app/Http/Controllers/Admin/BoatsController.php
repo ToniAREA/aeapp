@@ -109,7 +109,7 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boat->load('clients', 'boatsClients');
+        $boat->load('clients', 'boatWlists', 'boatsClients');
 
         return view('admin.boats.show', compact('boat'));
     }

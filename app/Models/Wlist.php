@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Boat extends Model
+class Wlist extends Model
 {
     use SoftDeletes;
     use HasFactory;
 
-    public $table = 'boats';
+    public $table = 'wlists';
 
     protected $dates = [
         'created_at',
@@ -21,25 +21,32 @@ class Boat extends Model
     ];
 
     protected $fillable = [
-        'name',
+        'desciption',
+        'client_id',
+        'boat_id',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    public function boatWlists()
+    public function wlistWlogs()
     {
-        return $this->hasMany(Wlist::class, 'boat_id', 'id');
+        return $this->hasMany(Wlog::class, 'wlist_id', 'id');
     }
 
-    public function boatsClients()
+    public function wlogs()
     {
-        return $this->belongsToMany(Client::class);
+        return $this->belongsToMany(Wlog::class);
     }
 
-    public function clients()
+    public function client()
     {
-        return $this->belongsToMany(Client::class);
+        return $this->belongsTo(Client::class, 'client_id');
+    }
+
+    public function boat()
+    {
+        return $this->belongsTo(Boat::class, 'boat_id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

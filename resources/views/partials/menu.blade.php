@@ -35,8 +35,40 @@
                 </a>
             </li>
         @endcan
+        @can('work_access')
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/wlists*") ? "c-show" : "" }} {{ request()->is("admin/wlogs*") ? "c-show" : "" }}">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.work.title') }}
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    @can('wlist_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.wlists.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/wlists") || request()->is("admin/wlists/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.wlist.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('wlog_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.wlogs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/wlogs") || request()->is("admin/wlogs/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.wlog.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
         @can('user_management_access')
-            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/permissions*") ? "c-show" : "" }} {{ request()->is("admin/roles*") ? "c-show" : "" }} {{ request()->is("admin/users*") ? "c-show" : "" }}">
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/users*") ? "c-show" : "" }} {{ request()->is("admin/roles*") ? "c-show" : "" }} {{ request()->is("admin/permissions*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
                     <i class="fa-fw fas fa-users c-sidebar-nav-icon">
 
@@ -44,13 +76,13 @@
                     {{ trans('cruds.userManagement.title') }}
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
-                    @can('permission_access')
+                    @can('user_access')
                         <li class="c-sidebar-nav-item">
-                            <a href="{{ route("admin.permissions.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/permissions") || request()->is("admin/permissions/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-unlock-alt c-sidebar-nav-icon">
+                            <a href="{{ route("admin.users.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/users") || request()->is("admin/users/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-user c-sidebar-nav-icon">
 
                                 </i>
-                                {{ trans('cruds.permission.title') }}
+                                {{ trans('cruds.user.title') }}
                             </a>
                         </li>
                     @endcan
@@ -64,13 +96,13 @@
                             </a>
                         </li>
                     @endcan
-                    @can('user_access')
+                    @can('permission_access')
                         <li class="c-sidebar-nav-item">
-                            <a href="{{ route("admin.users.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/users") || request()->is("admin/users/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-user c-sidebar-nav-icon">
+                            <a href="{{ route("admin.permissions.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/permissions") || request()->is("admin/permissions/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-unlock-alt c-sidebar-nav-icon">
 
                                 </i>
-                                {{ trans('cruds.user.title') }}
+                                {{ trans('cruds.permission.title') }}
                             </a>
                         </li>
                     @endcan
@@ -78,7 +110,7 @@
             </li>
         @endcan
         @can('content_management_access')
-            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/content-categories*") ? "c-show" : "" }} {{ request()->is("admin/content-tags*") ? "c-show" : "" }} {{ request()->is("admin/content-pages*") ? "c-show" : "" }}">
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/content-pages*") ? "c-show" : "" }} {{ request()->is("admin/content-categories*") ? "c-show" : "" }} {{ request()->is("admin/content-tags*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
                     <i class="fa-fw fas fa-book c-sidebar-nav-icon">
 
@@ -86,6 +118,16 @@
                     {{ trans('cruds.contentManagement.title') }}
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
+                    @can('content_page_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.content-pages.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/content-pages") || request()->is("admin/content-pages/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-file c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.contentPage.title') }}
+                            </a>
+                        </li>
+                    @endcan
                     @can('content_category_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.content-categories.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/content-categories") || request()->is("admin/content-categories/*") ? "c-active" : "" }}">
@@ -106,19 +148,39 @@
                             </a>
                         </li>
                     @endcan
-                    @can('content_page_access')
+                </ul>
+            </li>
+        @endcan
+        @can('material_access')
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/m-logs*") ? "c-show" : "" }}">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-box-open c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.material.title') }}
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    @can('m_log_access')
                         <li class="c-sidebar-nav-item">
-                            <a href="{{ route("admin.content-pages.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/content-pages") || request()->is("admin/content-pages/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-file c-sidebar-nav-icon">
+                            <a href="{{ route("admin.m-logs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/m-logs") || request()->is("admin/m-logs/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
 
                                 </i>
-                                {{ trans('cruds.contentPage.title') }}
+                                {{ trans('cruds.mLog.title') }}
                             </a>
                         </li>
                     @endcan
                 </ul>
             </li>
         @endcan
+        <li class="c-sidebar-nav-item">
+            <a href="{{ route("admin.systemCalendar") }}" class="c-sidebar-nav-link {{ request()->is("admin/system-calendar") || request()->is("admin/system-calendar/*") ? "c-active" : "" }}">
+                <i class="c-sidebar-nav-icon fa-fw fas fa-calendar">
+
+                </i>
+                {{ trans('global.systemCalendar') }}
+            </a>
+        </li>
         @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
             @can('profile_password_edit')
                 <li class="c-sidebar-nav-item">

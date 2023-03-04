@@ -50,6 +50,26 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('content-pages/media', 'ContentPageController@storeMedia')->name('content-pages.storeMedia');
     Route::post('content-pages/ckmedia', 'ContentPageController@storeCKEditorImages')->name('content-pages.storeCKEditorImages');
     Route::resource('content-pages', 'ContentPageController');
+
+    // Wlogs
+    Route::delete('wlogs/destroy', 'WlogsController@massDestroy')->name('wlogs.massDestroy');
+    Route::post('wlogs/parse-csv-import', 'WlogsController@parseCsvImport')->name('wlogs.parseCsvImport');
+    Route::post('wlogs/process-csv-import', 'WlogsController@processCsvImport')->name('wlogs.processCsvImport');
+    Route::resource('wlogs', 'WlogsController');
+
+    // Wlist
+    Route::delete('wlists/destroy', 'WlistController@massDestroy')->name('wlists.massDestroy');
+    Route::post('wlists/parse-csv-import', 'WlistController@parseCsvImport')->name('wlists.parseCsvImport');
+    Route::post('wlists/process-csv-import', 'WlistController@processCsvImport')->name('wlists.processCsvImport');
+    Route::resource('wlists', 'WlistController');
+
+    // M Logs
+    Route::delete('m-logs/destroy', 'MLogsController@massDestroy')->name('m-logs.massDestroy');
+    Route::post('m-logs/parse-csv-import', 'MLogsController@parseCsvImport')->name('m-logs.parseCsvImport');
+    Route::post('m-logs/process-csv-import', 'MLogsController@processCsvImport')->name('m-logs.processCsvImport');
+    Route::resource('m-logs', 'MLogsController');
+
+    Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password

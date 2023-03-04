@@ -27,6 +27,11 @@ class Client extends Model
         'deleted_at',
     ];
 
+    public function clientWlists()
+    {
+        return $this->hasMany(Wlist::class, 'client_id', 'id');
+    }
+
     public function clientBoats()
     {
         return $this->belongsToMany(Boat::class);
