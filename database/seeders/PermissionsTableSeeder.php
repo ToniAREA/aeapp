@@ -180,6 +180,74 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 43,
+                'title' => 'work_access',
+            ],
+            [
+                'id'    => 44,
+                'title' => 'wlog_create',
+            ],
+            [
+                'id'    => 45,
+                'title' => 'wlog_edit',
+            ],
+            [
+                'id'    => 46,
+                'title' => 'wlog_show',
+            ],
+            [
+                'id'    => 47,
+                'title' => 'wlog_delete',
+            ],
+            [
+                'id'    => 48,
+                'title' => 'wlog_access',
+            ],
+            [
+                'id'    => 49,
+                'title' => 'wlist_create',
+            ],
+            [
+                'id'    => 50,
+                'title' => 'wlist_edit',
+            ],
+            [
+                'id'    => 51,
+                'title' => 'wlist_show',
+            ],
+            [
+                'id'    => 52,
+                'title' => 'wlist_delete',
+            ],
+            [
+                'id'    => 53,
+                'title' => 'wlist_access',
+            ],
+            [
+                'id'    => 54,
+                'title' => 'material_access',
+            ],
+            [
+                'id'    => 55,
+                'title' => 'm_log_create',
+            ],
+            [
+                'id'    => 56,
+                'title' => 'm_log_edit',
+            ],
+            [
+                'id'    => 57,
+                'title' => 'm_log_show',
+            ],
+            [
+                'id'    => 58,
+                'title' => 'm_log_delete',
+            ],
+            [
+                'id'    => 59,
+                'title' => 'm_log_access',
+            ],
+            [
+                'id'    => 60,
                 'title' => 'profile_password_edit',
             ],
         ];

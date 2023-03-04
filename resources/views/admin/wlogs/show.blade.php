@@ -3,13 +3,13 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.client.title') }}
+        {{ trans('global.show') }} {{ trans('cruds.wlog.title') }}
     </div>
 
     <div class="card-body">
         <div class="form-group">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.clients.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.wlogs.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -17,34 +17,32 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.client.fields.id') }}
+                            {{ trans('cruds.wlog.fields.id') }}
                         </th>
                         <td>
-                            {{ $client->id }}
+                            {{ $wlog->id }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.client.fields.name') }}
+                            {{ trans('cruds.wlog.fields.date') }}
                         </th>
                         <td>
-                            {{ $client->name }}
+                            {{ $wlog->date }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.client.fields.boats') }}
+                            {{ trans('cruds.wlog.fields.wlist') }}
                         </th>
                         <td>
-                            @foreach($client->boats as $key => $boats)
-                                <span class="label label-info">{{ $boats->name }}</span>
-                            @endforeach
+                            {{ $wlog->wlist->desciption ?? '' }}
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.clients.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.wlogs.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -58,22 +56,14 @@
     </div>
     <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
         <li class="nav-item">
-            <a class="nav-link" href="#client_wlists" role="tab" data-toggle="tab">
+            <a class="nav-link" href="#wlogs_wlists" role="tab" data-toggle="tab">
                 {{ trans('cruds.wlist.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#client_boats" role="tab" data-toggle="tab">
-                {{ trans('cruds.boat.title') }}
             </a>
         </li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="client_wlists">
-            @includeIf('admin.clients.relationships.clientWlists', ['wlists' => $client->clientWlists])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="client_boats">
-            @includeIf('admin.clients.relationships.clientBoats', ['boats' => $client->clientBoats])
+        <div class="tab-pane" role="tabpanel" id="wlogs_wlists">
+            @includeIf('admin.wlogs.relationships.wlogsWlists', ['wlists' => $wlog->wlogsWlists])
         </div>
     </div>
 </div>

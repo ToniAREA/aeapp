@@ -58,12 +58,20 @@
     </div>
     <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
         <li class="nav-item">
+            <a class="nav-link" href="#boat_wlists" role="tab" data-toggle="tab">
+                {{ trans('cruds.wlist.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#boats_clients" role="tab" data-toggle="tab">
                 {{ trans('cruds.client.title') }}
             </a>
         </li>
     </ul>
     <div class="tab-content">
+        <div class="tab-pane" role="tabpanel" id="boat_wlists">
+            @includeIf('admin.boats.relationships.boatWlists', ['wlists' => $boat->boatWlists])
+        </div>
         <div class="tab-pane" role="tabpanel" id="boats_clients">
             @includeIf('admin.boats.relationships.boatsClients', ['clients' => $boat->boatsClients])
         </div>

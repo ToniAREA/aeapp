@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
-use \DateTimeInterface;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Boat extends Model
+class MLog extends Model
 {
-    use SoftDeletes;
-    use HasFactory;
+    use SoftDeletes, HasFactory;
 
-    public $table = 'boats';
+    public $table = 'm_logs';
 
     protected $dates = [
         'created_at',
@@ -21,26 +20,11 @@ class Boat extends Model
     ];
 
     protected $fillable = [
-        'name',
+        'code',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
-
-    public function boatWlists()
-    {
-        return $this->hasMany(Wlist::class, 'boat_id', 'id');
-    }
-
-    public function boatsClients()
-    {
-        return $this->belongsToMany(Client::class);
-    }
-
-    public function clients()
-    {
-        return $this->belongsToMany(Client::class);
-    }
 
     protected function serializeDate(DateTimeInterface $date)
     {
