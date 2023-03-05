@@ -25,6 +25,16 @@
                 </a>
             </li>
         @endcan
+        @can('appointment_access')
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route("admin.appointments.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/appointments") || request()->is("admin/appointments/*") ? "c-active" : "" }}">
+                    <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.appointment.title') }}
+                </a>
+            </li>
+        @endcan
         @can('client_access')
             <li class="c-sidebar-nav-item">
                 <a href="{{ route("admin.clients.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/clients") || request()->is("admin/clients/*") ? "c-active" : "" }}">

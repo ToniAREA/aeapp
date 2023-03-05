@@ -1,17 +1,9 @@
 <?php
 
-Route::redirect('/', '/login');
-Route::get('/home', function () {
-    if (session('status')) {
-        return redirect()->route('admin.home')->with('status', session('status'));
-    }
+Route::view('/', 'welcome');
+Auth::routes();
 
-    return redirect()->route('admin.home');
-});
-
-Auth::routes(['register' => false]);
-
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
@@ -79,6 +71,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('priorities/destroy', 'PrioritiesController@massDestroy')->name('priorities.massDestroy');
     Route::resource('priorities', 'PrioritiesController');
 
+    // Appointments
+    Route::delete('appointments/destroy', 'AppointmentsController@massDestroy')->name('appointments.massDestroy');
+    Route::resource('appointments', 'AppointmentsController');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
@@ -89,4 +85,72 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
         Route::post('profile', 'ChangePasswordController@updateProfile')->name('password.updateProfile');
         Route::post('profile/destroy', 'ChangePasswordController@destroy')->name('password.destroyProfile');
     }
+});
+Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['auth']], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    // Permissions
+    Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
+    Route::resource('permissions', 'PermissionsController');
+
+    // Roles
+    Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
+    Route::resource('roles', 'RolesController');
+
+    // Users
+    Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
+    Route::resource('users', 'UsersController');
+
+    // Clients
+    Route::delete('clients/destroy', 'ClientsController@massDestroy')->name('clients.massDestroy');
+    Route::resource('clients', 'ClientsController');
+
+    // Boats
+    Route::delete('boats/destroy', 'BoatsController@massDestroy')->name('boats.massDestroy');
+    Route::resource('boats', 'BoatsController');
+
+    // Content Category
+    Route::delete('content-categories/destroy', 'ContentCategoryController@massDestroy')->name('content-categories.massDestroy');
+    Route::resource('content-categories', 'ContentCategoryController');
+
+    // Content Tag
+    Route::delete('content-tags/destroy', 'ContentTagController@massDestroy')->name('content-tags.massDestroy');
+    Route::resource('content-tags', 'ContentTagController');
+
+    // Content Page
+    Route::delete('content-pages/destroy', 'ContentPageController@massDestroy')->name('content-pages.massDestroy');
+    Route::post('content-pages/media', 'ContentPageController@storeMedia')->name('content-pages.storeMedia');
+    Route::post('content-pages/ckmedia', 'ContentPageController@storeCKEditorImages')->name('content-pages.storeCKEditorImages');
+    Route::resource('content-pages', 'ContentPageController');
+
+    // Wlogs
+    Route::delete('wlogs/destroy', 'WlogsController@massDestroy')->name('wlogs.massDestroy');
+    Route::resource('wlogs', 'WlogsController');
+
+    // Wlist
+    Route::delete('wlists/destroy', 'WlistController@massDestroy')->name('wlists.massDestroy');
+    Route::resource('wlists', 'WlistController');
+
+    // M Logs
+    Route::delete('m-logs/destroy', 'MLogsController@massDestroy')->name('m-logs.massDestroy');
+    Route::resource('m-logs', 'MLogsController');
+
+    // To Do
+    Route::delete('to-dos/destroy', 'ToDoController@massDestroy')->name('to-dos.massDestroy');
+    Route::post('to-dos/media', 'ToDoController@storeMedia')->name('to-dos.storeMedia');
+    Route::post('to-dos/ckmedia', 'ToDoController@storeCKEditorImages')->name('to-dos.storeCKEditorImages');
+    Route::resource('to-dos', 'ToDoController');
+
+    // Priorities
+    Route::delete('priorities/destroy', 'PrioritiesController@massDestroy')->name('priorities.massDestroy');
+    Route::resource('priorities', 'PrioritiesController');
+
+    // Appointments
+    Route::delete('appointments/destroy', 'AppointmentsController@massDestroy')->name('appointments.massDestroy');
+    Route::resource('appointments', 'AppointmentsController');
+
+    Route::get('frontend/profile', 'ProfileController@index')->name('profile.index');
+    Route::post('frontend/profile', 'ProfileController@update')->name('profile.update');
+    Route::post('frontend/profile/destroy', 'ProfileController@destroy')->name('profile.destroy');
+    Route::post('frontend/profile/password', 'ProfileController@password')->name('profile.password');
 });
