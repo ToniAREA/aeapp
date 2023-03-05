@@ -268,6 +268,30 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 65,
+                'title' => 'configuration_access',
+            ],
+            [
+                'id'    => 66,
+                'title' => 'priority_create',
+            ],
+            [
+                'id'    => 67,
+                'title' => 'priority_edit',
+            ],
+            [
+                'id'    => 68,
+                'title' => 'priority_show',
+            ],
+            [
+                'id'    => 69,
+                'title' => 'priority_delete',
+            ],
+            [
+                'id'    => 70,
+                'title' => 'priority_access',
+            ],
+            [
+                'id'    => 71,
                 'title' => 'profile_password_edit',
             ],
         ];

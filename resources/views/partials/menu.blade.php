@@ -183,6 +183,28 @@
                 </ul>
             </li>
         @endcan
+        @can('configuration_access')
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/priorities*") ? "c-show" : "" }}">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.configuration.title') }}
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    @can('priority_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.priorities.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/priorities") || request()->is("admin/priorities/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.priority.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
         <li class="c-sidebar-nav-item">
             <a href="{{ route("admin.systemCalendar") }}" class="c-sidebar-nav-link {{ request()->is("admin/system-calendar") || request()->is("admin/system-calendar/*") ? "c-active" : "" }}">
                 <i class="c-sidebar-nav-icon fa-fw fas fa-calendar">
