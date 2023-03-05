@@ -69,6 +69,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('m-logs/process-csv-import', 'MLogsController@processCsvImport')->name('m-logs.processCsvImport');
     Route::resource('m-logs', 'MLogsController');
 
+    // To Do
+    Route::delete('to-dos/destroy', 'ToDoController@massDestroy')->name('to-dos.massDestroy');
+    Route::resource('to-dos', 'ToDoController');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

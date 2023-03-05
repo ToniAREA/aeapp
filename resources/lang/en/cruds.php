@@ -231,5 +231,21 @@ return [
             'deleted_at_helper' => ' ',
         ],
     ],
+    'toDo' => [
+        'title'          => 'To Do',
+        'title_singular' => 'To Do',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => ' ',
+            'task'              => 'Task',
+            'task_helper'       => 'Description of the task to do.',
+            'created_at'        => 'Created at',
+            'created_at_helper' => ' ',
+            'updated_at'        => 'Updated at',
+            'updated_at_helper' => ' ',
+            'deleted_at'        => 'Deleted at',
+            'deleted_at_helper' => ' ',
+        ],
+    ],
 
 ];
