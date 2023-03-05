@@ -71,7 +71,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // To Do
     Route::delete('to-dos/destroy', 'ToDoController@massDestroy')->name('to-dos.massDestroy');
+    Route::post('to-dos/media', 'ToDoController@storeMedia')->name('to-dos.storeMedia');
+    Route::post('to-dos/ckmedia', 'ToDoController@storeCKEditorImages')->name('to-dos.storeCKEditorImages');
     Route::resource('to-dos', 'ToDoController');
+
+    // Priorities
+    Route::delete('priorities/destroy', 'PrioritiesController@massDestroy')->name('priorities.massDestroy');
+    Route::resource('priorities', 'PrioritiesController');
 
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
 });

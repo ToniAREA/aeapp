@@ -22,6 +22,17 @@ class StoreToDoRequest extends FormRequest
                 'max:200',
                 'nullable',
             ],
+            'photo' => [
+                'array',
+            ],
+            'deadline' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable',
+            ],
+            'priority_id' => [
+                'required',
+                'integer',
+            ],
         ];
     }
 }

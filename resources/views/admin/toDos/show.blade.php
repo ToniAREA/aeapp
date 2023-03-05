@@ -31,6 +31,34 @@
                             {{ $toDo->task }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.toDo.fields.photo') }}
+                        </th>
+                        <td>
+                            @foreach($toDo->photo as $key => $media)
+                                <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
+                                    <img src="{{ $media->getUrl('thumb') }}">
+                                </a>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.toDo.fields.deadline') }}
+                        </th>
+                        <td>
+                            {{ $toDo->deadline }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.toDo.fields.priority') }}
+                        </th>
+                        <td>
+                            {{ $toDo->priority->level ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
