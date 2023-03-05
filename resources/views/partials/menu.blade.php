@@ -15,6 +15,16 @@
                 {{ trans('global.dashboard') }}
             </a>
         </li>
+        @can('to_do_access')
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route("admin.to-dos.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/to-dos") || request()->is("admin/to-dos/*") ? "c-active" : "" }}">
+                    <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.toDo.title') }}
+                </a>
+            </li>
+        @endcan
         @can('client_access')
             <li class="c-sidebar-nav-item">
                 <a href="{{ route("admin.clients.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/clients") || request()->is("admin/clients/*") ? "c-active" : "" }}">
