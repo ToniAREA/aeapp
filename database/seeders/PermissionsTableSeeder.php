@@ -312,6 +312,146 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 76,
+                'title' => 'audit_log_show',
+            ],
+            [
+                'id'    => 77,
+                'title' => 'audit_log_access',
+            ],
+            [
+                'id'    => 78,
+                'title' => 'product_management_access',
+            ],
+            [
+                'id'    => 79,
+                'title' => 'product_category_create',
+            ],
+            [
+                'id'    => 80,
+                'title' => 'product_category_edit',
+            ],
+            [
+                'id'    => 81,
+                'title' => 'product_category_show',
+            ],
+            [
+                'id'    => 82,
+                'title' => 'product_category_delete',
+            ],
+            [
+                'id'    => 83,
+                'title' => 'product_category_access',
+            ],
+            [
+                'id'    => 84,
+                'title' => 'product_tag_create',
+            ],
+            [
+                'id'    => 85,
+                'title' => 'product_tag_edit',
+            ],
+            [
+                'id'    => 86,
+                'title' => 'product_tag_show',
+            ],
+            [
+                'id'    => 87,
+                'title' => 'product_tag_delete',
+            ],
+            [
+                'id'    => 88,
+                'title' => 'product_tag_access',
+            ],
+            [
+                'id'    => 89,
+                'title' => 'product_create',
+            ],
+            [
+                'id'    => 90,
+                'title' => 'product_edit',
+            ],
+            [
+                'id'    => 91,
+                'title' => 'product_show',
+            ],
+            [
+                'id'    => 92,
+                'title' => 'product_delete',
+            ],
+            [
+                'id'    => 93,
+                'title' => 'product_access',
+            ],
+            [
+                'id'    => 94,
+                'title' => 'task_management_access',
+            ],
+            [
+                'id'    => 95,
+                'title' => 'task_status_create',
+            ],
+            [
+                'id'    => 96,
+                'title' => 'task_status_edit',
+            ],
+            [
+                'id'    => 97,
+                'title' => 'task_status_show',
+            ],
+            [
+                'id'    => 98,
+                'title' => 'task_status_delete',
+            ],
+            [
+                'id'    => 99,
+                'title' => 'task_status_access',
+            ],
+            [
+                'id'    => 100,
+                'title' => 'task_tag_create',
+            ],
+            [
+                'id'    => 101,
+                'title' => 'task_tag_edit',
+            ],
+            [
+                'id'    => 102,
+                'title' => 'task_tag_show',
+            ],
+            [
+                'id'    => 103,
+                'title' => 'task_tag_delete',
+            ],
+            [
+                'id'    => 104,
+                'title' => 'task_tag_access',
+            ],
+            [
+                'id'    => 105,
+                'title' => 'task_create',
+            ],
+            [
+                'id'    => 106,
+                'title' => 'task_edit',
+            ],
+            [
+                'id'    => 107,
+                'title' => 'task_show',
+            ],
+            [
+                'id'    => 108,
+                'title' => 'task_delete',
+            ],
+            [
+                'id'    => 109,
+                'title' => 'task_access',
+            ],
+            [
+                'id'    => 110,
+                'title' => 'tasks_calendar_access',
+            ],
+            [
+                'id'    => 111,
                 'title' => 'profile_password_edit',
             ],
         ];
