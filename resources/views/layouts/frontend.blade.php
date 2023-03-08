@@ -172,6 +172,46 @@
                                             {{ trans('cruds.priority.title') }}
                                         </a>
                                     @endcan
+                                    @can('product_management_access')
+                                        <a class="dropdown-item disabled" href="#">
+                                            {{ trans('cruds.productManagement.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('product_category_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.product-categories.index') }}">
+                                            {{ trans('cruds.productCategory.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('product_tag_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.product-tags.index') }}">
+                                            {{ trans('cruds.productTag.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('product_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.products.index') }}">
+                                            {{ trans('cruds.product.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('task_management_access')
+                                        <a class="dropdown-item disabled" href="#">
+                                            {{ trans('cruds.taskManagement.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('task_status_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.task-statuses.index') }}">
+                                            {{ trans('cruds.taskStatus.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('task_tag_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.task-tags.index') }}">
+                                            {{ trans('cruds.taskTag.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('task_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.tasks.index') }}">
+                                            {{ trans('cruds.task.title') }}
+                                        </a>
+                                    @endcan
 
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

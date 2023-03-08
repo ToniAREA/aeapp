@@ -1,6 +1,6 @@
 <?php
 
-Route::view('/', 'main');
+Route::view('/', 'welcome');
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function () {
@@ -75,7 +75,53 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('appointments/destroy', 'AppointmentsController@massDestroy')->name('appointments.massDestroy');
     Route::resource('appointments', 'AppointmentsController');
 
+    // Audit Logs
+    Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
+
+    // Product Category
+    Route::delete('product-categories/destroy', 'ProductCategoryController@massDestroy')->name('product-categories.massDestroy');
+    Route::post('product-categories/media', 'ProductCategoryController@storeMedia')->name('product-categories.storeMedia');
+    Route::post('product-categories/ckmedia', 'ProductCategoryController@storeCKEditorImages')->name('product-categories.storeCKEditorImages');
+    Route::resource('product-categories', 'ProductCategoryController');
+
+    // Product Tag
+    Route::delete('product-tags/destroy', 'ProductTagController@massDestroy')->name('product-tags.massDestroy');
+    Route::resource('product-tags', 'ProductTagController');
+
+    // Product
+    Route::delete('products/destroy', 'ProductController@massDestroy')->name('products.massDestroy');
+    Route::post('products/media', 'ProductController@storeMedia')->name('products.storeMedia');
+    Route::post('products/ckmedia', 'ProductController@storeCKEditorImages')->name('products.storeCKEditorImages');
+    Route::resource('products', 'ProductController');
+
+    // Task Status
+    Route::delete('task-statuses/destroy', 'TaskStatusController@massDestroy')->name('task-statuses.massDestroy');
+    Route::resource('task-statuses', 'TaskStatusController');
+
+    // Task Tag
+    Route::delete('task-tags/destroy', 'TaskTagController@massDestroy')->name('task-tags.massDestroy');
+    Route::resource('task-tags', 'TaskTagController');
+
+    // Task
+    Route::delete('tasks/destroy', 'TaskController@massDestroy')->name('tasks.massDestroy');
+    Route::post('tasks/media', 'TaskController@storeMedia')->name('tasks.storeMedia');
+    Route::post('tasks/ckmedia', 'TaskController@storeCKEditorImages')->name('tasks.storeCKEditorImages');
+    Route::resource('tasks', 'TaskController');
+
+    // Tasks Calendar
+    Route::resource('tasks-calendars', 'TasksCalendarController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
+    Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
+    Route::get('messenger', 'MessengerController@index')->name('messenger.index');
+    Route::get('messenger/create', 'MessengerController@createTopic')->name('messenger.createTopic');
+    Route::post('messenger', 'MessengerController@storeTopic')->name('messenger.storeTopic');
+    Route::get('messenger/inbox', 'MessengerController@showInbox')->name('messenger.showInbox');
+    Route::get('messenger/outbox', 'MessengerController@showOutbox')->name('messenger.showOutbox');
+    Route::get('messenger/{topic}', 'MessengerController@showMessages')->name('messenger.showMessages');
+    Route::delete('messenger/{topic}', 'MessengerController@destroyTopic')->name('messenger.destroyTopic');
+    Route::post('messenger/{topic}/reply', 'MessengerController@replyToTopic')->name('messenger.reply');
+    Route::get('messenger/{topic}/reply', 'MessengerController@showReply')->name('messenger.showReply');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
@@ -148,6 +194,39 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     // Appointments
     Route::delete('appointments/destroy', 'AppointmentsController@massDestroy')->name('appointments.massDestroy');
     Route::resource('appointments', 'AppointmentsController');
+
+    // Product Category
+    Route::delete('product-categories/destroy', 'ProductCategoryController@massDestroy')->name('product-categories.massDestroy');
+    Route::post('product-categories/media', 'ProductCategoryController@storeMedia')->name('product-categories.storeMedia');
+    Route::post('product-categories/ckmedia', 'ProductCategoryController@storeCKEditorImages')->name('product-categories.storeCKEditorImages');
+    Route::resource('product-categories', 'ProductCategoryController');
+
+    // Product Tag
+    Route::delete('product-tags/destroy', 'ProductTagController@massDestroy')->name('product-tags.massDestroy');
+    Route::resource('product-tags', 'ProductTagController');
+
+    // Product
+    Route::delete('products/destroy', 'ProductController@massDestroy')->name('products.massDestroy');
+    Route::post('products/media', 'ProductController@storeMedia')->name('products.storeMedia');
+    Route::post('products/ckmedia', 'ProductController@storeCKEditorImages')->name('products.storeCKEditorImages');
+    Route::resource('products', 'ProductController');
+
+    // Task Status
+    Route::delete('task-statuses/destroy', 'TaskStatusController@massDestroy')->name('task-statuses.massDestroy');
+    Route::resource('task-statuses', 'TaskStatusController');
+
+    // Task Tag
+    Route::delete('task-tags/destroy', 'TaskTagController@massDestroy')->name('task-tags.massDestroy');
+    Route::resource('task-tags', 'TaskTagController');
+
+    // Task
+    Route::delete('tasks/destroy', 'TaskController@massDestroy')->name('tasks.massDestroy');
+    Route::post('tasks/media', 'TaskController@storeMedia')->name('tasks.storeMedia');
+    Route::post('tasks/ckmedia', 'TaskController@storeCKEditorImages')->name('tasks.storeCKEditorImages');
+    Route::resource('tasks', 'TaskController');
+
+    // Tasks Calendar
+    Route::resource('tasks-calendars', 'TasksCalendarController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
 
     Route::get('frontend/profile', 'ProfileController@index')->name('profile.index');
     Route::post('frontend/profile', 'ProfileController@update')->name('profile.update');
