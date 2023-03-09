@@ -11,8 +11,9 @@ class CreateBoatsTable extends Migration
         Schema::create('boats', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('id_boat')->unique();
+            $table->string('type')->nullable();
             $table->string('name');
-            $table->integer('mmsi')->nullable();
+            $table->string('mmsi')->nullable();
             $table->string('notes')->nullable();
             $table->string('internalnotes')->nullable();
             $table->date('lastuse')->nullable();

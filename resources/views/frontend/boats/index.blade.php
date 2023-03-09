@@ -33,13 +33,16 @@
                                         {{ trans('cruds.boat.fields.id_boat') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.boat.fields.type') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.boat.fields.name') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.boat.fields.client') }}
+                                        {{ trans('cruds.boat.fields.mmsi') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.boat.fields.mmsi') }}
+                                        {{ trans('cruds.boat.fields.client') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.boat.fields.notes') }}
@@ -67,15 +70,18 @@
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
                                         <select class="search">
                                             <option value>{{ trans('global.all') }}</option>
                                             @foreach($clients as $key => $item)
                                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -99,15 +105,18 @@
                                             {{ $boat->id_boat ?? '' }}
                                         </td>
                                         <td>
+                                            {{ $boat->type ?? '' }}
+                                        </td>
+                                        <td>
                                             {{ $boat->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $boat->mmsi ?? '' }}
                                         </td>
                                         <td>
                                             @foreach($boat->clients as $key => $item)
                                                 <span>{{ $item->name }}</span>
                                             @endforeach
-                                        </td>
-                                        <td>
-                                            {{ $boat->mmsi ?? '' }}
                                         </td>
                                         <td>
                                             {{ $boat->notes ?? '' }}

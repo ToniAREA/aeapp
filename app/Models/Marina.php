@@ -2,17 +2,22 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Boat extends Model
+class Marina extends Model
 {
-    use SoftDeletes, HasFactory;
+    use SoftDeletes, Auditable, HasFactory;
 
-    public $table = 'boats';
+    public $table = 'marinas';
+
+    public static $searchable = [
+        'name',
+    ];
 
     protected $dates = [
         'lastuse',
@@ -21,20 +26,9 @@ class Boat extends Model
         'deleted_at',
     ];
 
-    public static $searchable = [
-        'id_boat',
-        'mmsi',
-        'notes',
-        'internalnotes',
-    ];
-
     protected $fillable = [
-        'id_boat',
-        'type',
         'name',
-        'mmsi',
-        'notes',
-        'internalnotes',
+        'coordinates',
         'lastuse',
         'created_at',
         'updated_at',
@@ -44,21 +38,6 @@ class Boat extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
-    }
-
-    public function boatWlists()
-    {
-        return $this->hasMany(Wlist::class, 'boat_id', 'id');
-    }
-
-    public function boatsClients()
-    {
-        return $this->belongsToMany(Client::class);
-    }
-
-    public function clients()
-    {
-        return $this->belongsToMany(Client::class);
     }
 
     public function getLastuseAttribute($value)

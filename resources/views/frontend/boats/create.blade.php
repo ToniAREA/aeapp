@@ -24,6 +24,16 @@
                             <span class="help-block">{{ trans('cruds.boat.fields.id_boat_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="type">{{ trans('cruds.boat.fields.type') }}</label>
+                            <input class="form-control" type="text" name="type" id="type" value="{{ old('type', '') }}">
+                            @if($errors->has('type'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('type') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.type_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label class="required" for="name">{{ trans('cruds.boat.fields.name') }}</label>
                             <input class="form-control" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
                             @if($errors->has('name'))
@@ -32,6 +42,16 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.boat.fields.name_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="mmsi">{{ trans('cruds.boat.fields.mmsi') }}</label>
+                            <input class="form-control" type="text" name="mmsi" id="mmsi" value="{{ old('mmsi', '') }}">
+                            @if($errors->has('mmsi'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('mmsi') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.mmsi_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label for="clients">{{ trans('cruds.boat.fields.client') }}</label>
@@ -50,16 +70,6 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.boat.fields.client_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="mmsi">{{ trans('cruds.boat.fields.mmsi') }}</label>
-                            <input class="form-control" type="number" name="mmsi" id="mmsi" value="{{ old('mmsi', '') }}" step="1">
-                            @if($errors->has('mmsi'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('mmsi') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.boat.fields.mmsi_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label for="notes">{{ trans('cruds.boat.fields.notes') }}</label>

@@ -28,13 +28,16 @@
                             {{ trans('cruds.boat.fields.id_boat') }}
                         </th>
                         <th>
+                            {{ trans('cruds.boat.fields.type') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.boat.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.boat.fields.client') }}
+                            {{ trans('cruds.boat.fields.mmsi') }}
                         </th>
                         <th>
-                            {{ trans('cruds.boat.fields.mmsi') }}
+                            {{ trans('cruds.boat.fields.client') }}
                         </th>
                         <th>
                             {{ trans('cruds.boat.fields.notes') }}
@@ -63,15 +66,18 @@
                                 {{ $boat->id_boat ?? '' }}
                             </td>
                             <td>
+                                {{ $boat->type ?? '' }}
+                            </td>
+                            <td>
                                 {{ $boat->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $boat->mmsi ?? '' }}
                             </td>
                             <td>
                                 @foreach($boat->clients as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>
                                 @endforeach
-                            </td>
-                            <td>
-                                {{ $boat->mmsi ?? '' }}
                             </td>
                             <td>
                                 {{ $boat->notes ?? '' }}

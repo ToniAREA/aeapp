@@ -11,6 +11,7 @@ class GlobalSearchController extends Controller
     private $models = [
         'Client' => 'cruds.client.title',
         'Boat'   => 'cruds.boat.title',
+        'Marina' => 'cruds.marina.title',
     ];
 
     public function search(Request $request)

@@ -212,6 +212,11 @@
                                             {{ trans('cruds.priority.title') }}
                                         </a>
                                     @endcan
+                                    @can('marina_access')
+                                        <a class="dropdown-item" href="{{ route('frontend.marinas.index') }}">
+                                            {{ trans('cruds.marina.title') }}
+                                        </a>
+                                    @endcan
 
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

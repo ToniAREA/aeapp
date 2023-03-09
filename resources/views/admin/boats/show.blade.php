@@ -33,10 +33,26 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.boat.fields.type') }}
+                        </th>
+                        <td>
+                            {{ $boat->type }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.boat.fields.name') }}
                         </th>
                         <td>
                             {{ $boat->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.boat.fields.mmsi') }}
+                        </th>
+                        <td>
+                            {{ $boat->mmsi }}
                         </td>
                     </tr>
                     <tr>
@@ -47,14 +63,6 @@
                             @foreach($boat->clients as $key => $client)
                                 <span class="label label-info">{{ $client->name }}</span>
                             @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.boat.fields.mmsi') }}
-                        </th>
-                        <td>
-                            {{ $boat->mmsi }}
                         </td>
                     </tr>
                     <tr>

@@ -452,6 +452,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 111,
+                'title' => 'marina_create',
+            ],
+            [
+                'id'    => 112,
+                'title' => 'marina_edit',
+            ],
+            [
+                'id'    => 113,
+                'title' => 'marina_show',
+            ],
+            [
+                'id'    => 114,
+                'title' => 'marina_delete',
+            ],
+            [
+                'id'    => 115,
+                'title' => 'marina_access',
+            ],
+            [
+                'id'    => 116,
                 'title' => 'profile_password_edit',
             ],
         ];
