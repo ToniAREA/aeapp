@@ -25,6 +25,9 @@
                             {{ trans('cruds.client.fields.id') }}
                         </th>
                         <th>
+                            {{ trans('cruds.client.fields.id_client') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.client.fields.name') }}
                         </th>
                         <th>
@@ -82,6 +85,9 @@
                             </td>
                             <td>
                                 {{ $client->id ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->id_client ?? '' }}
                             </td>
                             <td>
                                 {{ $client->name ?? '' }}

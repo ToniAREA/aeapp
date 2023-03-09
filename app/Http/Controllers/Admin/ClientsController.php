@@ -47,6 +47,9 @@ class ClientsController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : '';
             });
+            $table->editColumn('id_client', function ($row) {
+                return $row->id_client ? $row->id_client : '';
+            });
             $table->editColumn('name', function ($row) {
                 return $row->name ? $row->name : '';
             });

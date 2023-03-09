@@ -18,9 +18,11 @@ class StoreBoatRequest extends FormRequest
     {
         return [
             'id_boat' => [
-                'string',
                 'required',
-                'unique:boats',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+                'unique:boats,id_boat',
             ],
             'name' => [
                 'string',

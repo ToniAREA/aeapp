@@ -28,6 +28,7 @@ class Client extends Model
     ];
 
     public static $searchable = [
+        'id_client',
         'lastname',
         'vat',
         'address',
@@ -40,6 +41,7 @@ class Client extends Model
     ];
 
     protected $fillable = [
+        'id_client',
         'name',
         'lastname',
         'vat',

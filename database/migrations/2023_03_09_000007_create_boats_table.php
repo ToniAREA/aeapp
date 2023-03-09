@@ -10,7 +10,7 @@ class CreateBoatsTable extends Migration
     {
         Schema::create('boats', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('id_boat')->unique();
+            $table->integer('id_boat')->unique();
             $table->string('name');
             $table->integer('mmsi')->nullable();
             $table->string('notes')->nullable();
