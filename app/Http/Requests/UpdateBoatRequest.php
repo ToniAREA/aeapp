@@ -32,7 +32,6 @@ class UpdateBoatRequest extends FormRequest
                 'integer',
             ],
             'clients' => [
-                'required',
                 'array',
             ],
             'mmsi' => [
