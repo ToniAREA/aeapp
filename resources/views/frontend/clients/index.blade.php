@@ -33,7 +33,46 @@
                                         {{ trans('cruds.client.fields.name') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.client.fields.lastname') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.client.fields.boats') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.vat') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.address') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.country') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.email') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.phone') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.mobile') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.notes') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.internalnotes') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.defaulter') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.lastuse') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.link_fd') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.coordinates') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -41,6 +80,9 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -57,6 +99,46 @@
                                         </select>
                                     </td>
                                     <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <select class="search" strict="true">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach(App\Models\Client::DEFAULTER_RADIO as $key => $item)
+                                                <option value="{{ $item }}">{{ $item }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
                                     </td>
                                 </tr>
                             </thead>
@@ -70,9 +152,48 @@
                                             {{ $client->name ?? '' }}
                                         </td>
                                         <td>
+                                            {{ $client->lastname ?? '' }}
+                                        </td>
+                                        <td>
                                             @foreach($client->boats as $key => $item)
                                                 <span>{{ $item->name }}</span>
                                             @endforeach
+                                        </td>
+                                        <td>
+                                            {{ $client->vat ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $client->address ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $client->country ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $client->email ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $client->phone ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $client->mobile ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $client->notes ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $client->internalnotes ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ App\Models\Client::DEFAULTER_RADIO[$client->defaulter] ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $client->lastuse ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $client->link_fd ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $client->coordinates ?? '' }}
                                         </td>
                                         <td>
                                             @can('client_show')

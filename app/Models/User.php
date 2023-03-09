@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\VerifyUserNotification;
+use App\Traits\Auditable;
 use Carbon\Carbon;
 use DateTimeInterface;
 use Hash;
@@ -16,7 +17,7 @@ use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, Notifiable, HasFactory;
+    use SoftDeletes, Notifiable, Auditable, HasFactory;
 
     public $table = 'users';
 

@@ -23,29 +23,32 @@ class BoatsController extends Controller
         abort_if(Gate::denies('boat_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Boat::with(['clients'])->select(sprintf('%s.*', (new Boat())->table));
+            $query = Boat::with(['clients'])->select(sprintf('%s.*', (new Boat)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
 
             $table->editColumn('actions', function ($row) {
-                $viewGate = 'boat_show';
-                $editGate = 'boat_edit';
-                $deleteGate = 'boat_delete';
+                $viewGate      = 'boat_show';
+                $editGate      = 'boat_edit';
+                $deleteGate    = 'boat_delete';
                 $crudRoutePart = 'boats';
 
                 return view('partials.datatablesActions', compact(
-                'viewGate',
-                'editGate',
-                'deleteGate',
-                'crudRoutePart',
-                'row'
-            ));
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
             });
 
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : '';
+            });
+            $table->editColumn('id_boat', function ($row) {
+                return $row->id_boat ? $row->id_boat : '';
             });
             $table->editColumn('name', function ($row) {
                 return $row->name ? $row->name : '';
@@ -57,6 +60,15 @@ class BoatsController extends Controller
                 }
 
                 return implode(' ', $labels);
+            });
+            $table->editColumn('mmsi', function ($row) {
+                return $row->mmsi ? $row->mmsi : '';
+            });
+            $table->editColumn('notes', function ($row) {
+                return $row->notes ? $row->notes : '';
+            });
+            $table->editColumn('internalnotes', function ($row) {
+                return $row->internalnotes ? $row->internalnotes : '';
             });
 
             $table->rawColumns(['actions', 'placeholder', 'client']);
@@ -125,7 +137,11 @@ class BoatsController extends Controller
 
     public function massDestroy(MassDestroyBoatRequest $request)
     {
-        Boat::whereIn('id', request('ids'))->delete();
+        $boats = Boat::find(request('ids'));
+
+        foreach ($boats as $boat) {
+            $boat->delete();
+        }
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

@@ -14,6 +14,16 @@
                         @method('PUT')
                         @csrf
                         <div class="form-group">
+                            <label class="required" for="id_boat">{{ trans('cruds.boat.fields.id_boat') }}</label>
+                            <input class="form-control" type="text" name="id_boat" id="id_boat" value="{{ old('id_boat', $boat->id_boat) }}" required>
+                            @if($errors->has('id_boat'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('id_boat') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.id_boat_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label class="required" for="name">{{ trans('cruds.boat.fields.name') }}</label>
                             <input class="form-control" type="text" name="name" id="name" value="{{ old('name', $boat->name) }}" required>
                             @if($errors->has('name'))
@@ -40,6 +50,46 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.boat.fields.client_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="mmsi">{{ trans('cruds.boat.fields.mmsi') }}</label>
+                            <input class="form-control" type="number" name="mmsi" id="mmsi" value="{{ old('mmsi', $boat->mmsi) }}" step="1">
+                            @if($errors->has('mmsi'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('mmsi') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.mmsi_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">{{ trans('cruds.boat.fields.notes') }}</label>
+                            <input class="form-control" type="text" name="notes" id="notes" value="{{ old('notes', $boat->notes) }}">
+                            @if($errors->has('notes'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('notes') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.notes_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="internalnotes">{{ trans('cruds.boat.fields.internalnotes') }}</label>
+                            <input class="form-control" type="text" name="internalnotes" id="internalnotes" value="{{ old('internalnotes', $boat->internalnotes) }}">
+                            @if($errors->has('internalnotes'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('internalnotes') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.internalnotes_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastuse">{{ trans('cruds.boat.fields.lastuse') }}</label>
+                            <input class="form-control date" type="text" name="lastuse" id="lastuse" value="{{ old('lastuse', $boat->lastuse) }}">
+                            @if($errors->has('lastuse'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('lastuse') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.lastuse_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">

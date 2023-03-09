@@ -30,10 +30,25 @@
                                         {{ trans('cruds.boat.fields.id') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.boat.fields.id_boat') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.boat.fields.name') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.boat.fields.client') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.mmsi') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.notes') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.internalnotes') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.lastuse') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -41,6 +56,9 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -57,6 +75,17 @@
                                         </select>
                                     </td>
                                     <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
                                     </td>
                                 </tr>
                             </thead>
@@ -67,12 +96,27 @@
                                             {{ $boat->id ?? '' }}
                                         </td>
                                         <td>
+                                            {{ $boat->id_boat ?? '' }}
+                                        </td>
+                                        <td>
                                             {{ $boat->name ?? '' }}
                                         </td>
                                         <td>
                                             @foreach($boat->clients as $key => $item)
                                                 <span>{{ $item->name }}</span>
                                             @endforeach
+                                        </td>
+                                        <td>
+                                            {{ $boat->mmsi ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $boat->notes ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $boat->internalnotes ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $boat->lastuse ?? '' }}
                                         </td>
                                         <td>
                                             @can('boat_show')

@@ -29,10 +29,25 @@
                         {{ trans('cruds.boat.fields.id') }}
                     </th>
                     <th>
+                        {{ trans('cruds.boat.fields.id_boat') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.boat.fields.name') }}
                     </th>
                     <th>
                         {{ trans('cruds.boat.fields.client') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.boat.fields.mmsi') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.boat.fields.notes') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.boat.fields.internalnotes') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.boat.fields.lastuse') }}
                     </th>
                     <th>
                         &nbsp;
@@ -48,12 +63,26 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($clients as $key => $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
                     </td>
                     <td>
                     </td>
@@ -111,8 +140,13 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
+{ data: 'id_boat', name: 'id_boat' },
 { data: 'name', name: 'name' },
 { data: 'client', name: 'clients.name' },
+{ data: 'mmsi', name: 'mmsi' },
+{ data: 'notes', name: 'notes' },
+{ data: 'internalnotes', name: 'internalnotes' },
+{ data: 'lastuse', name: 'lastuse' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,
