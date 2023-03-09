@@ -24,23 +24,25 @@ class StoreBoatRequest extends FormRequest
                 'max:2147483647',
                 'unique:boats,id_boat',
             ],
+            'type' => [
+                'string',
+                'nullable',
+            ],
             'name' => [
                 'string',
                 'min:1',
                 'max:50',
                 'required',
             ],
+            'mmsi' => [
+                'string',
+                'nullable',
+            ],
             'clients.*' => [
                 'integer',
             ],
             'clients' => [
                 'array',
-            ],
-            'mmsi' => [
-                'nullable',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647',
             ],
             'notes' => [
                 'string',

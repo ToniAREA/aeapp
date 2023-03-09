@@ -50,8 +50,14 @@ class BoatsController extends Controller
             $table->editColumn('id_boat', function ($row) {
                 return $row->id_boat ? $row->id_boat : '';
             });
+            $table->editColumn('type', function ($row) {
+                return $row->type ? $row->type : '';
+            });
             $table->editColumn('name', function ($row) {
                 return $row->name ? $row->name : '';
+            });
+            $table->editColumn('mmsi', function ($row) {
+                return $row->mmsi ? $row->mmsi : '';
             });
             $table->editColumn('client', function ($row) {
                 $labels = [];
@@ -60,9 +66,6 @@ class BoatsController extends Controller
                 }
 
                 return implode(' ', $labels);
-            });
-            $table->editColumn('mmsi', function ($row) {
-                return $row->mmsi ? $row->mmsi : '';
             });
             $table->editColumn('notes', function ($row) {
                 return $row->notes ? $row->notes : '';

@@ -129,8 +129,6 @@ return [
             'deleted_at_helper'    => ' ',
             'client'               => 'Client',
             'client_helper'        => ' ',
-            'mmsi'                 => 'MMSI',
-            'mmsi_helper'          => ' ',
             'notes'                => 'Notes',
             'notes_helper'         => ' ',
             'internalnotes'        => 'Internalnotes',
@@ -139,6 +137,10 @@ return [
             'lastuse_helper'       => ' ',
             'id_boat'              => 'ID Boat',
             'id_boat_helper'       => ' ',
+            'type'                 => 'Type',
+            'type_helper'          => ' ',
+            'mmsi'                 => 'MMSI',
+            'mmsi_helper'          => ' ',
         ],
     ],
     'contentManagement' => [
@@ -492,6 +494,26 @@ return [
     'tasksCalendar' => [
         'title'          => 'Calendar',
         'title_singular' => 'Calendar',
+    ],
+    'marina' => [
+        'title'          => 'Marinas',
+        'title_singular' => 'Marina',
+        'fields'         => [
+            'id'                 => 'ID',
+            'id_helper'          => ' ',
+            'name'               => 'Name',
+            'name_helper'        => 'Marina name',
+            'coordinates'        => 'Coordinates',
+            'coordinates_helper' => ' ',
+            'lastuse'            => 'Lastuse',
+            'lastuse_helper'     => ' ',
+            'created_at'         => 'Created at',
+            'created_at_helper'  => ' ',
+            'updated_at'         => 'Updated at',
+            'updated_at_helper'  => ' ',
+            'deleted_at'         => 'Deleted at',
+            'deleted_at_helper'  => ' ',
+        ],
     ],
 
 ];

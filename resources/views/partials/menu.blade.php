@@ -60,6 +60,16 @@
                 </a>
             </li>
         @endcan
+        @can('marina_access')
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route("admin.marinas.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/marinas") || request()->is("admin/marinas/*") ? "c-active" : "" }}">
+                    <i class="fa-fw fas fa-anchor c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.marina.title') }}
+                </a>
+            </li>
+        @endcan
         @can('work_access')
             <li class="c-sidebar-nav-dropdown {{ request()->is("admin/wlists*") ? "c-show" : "" }} {{ request()->is("admin/wlogs*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">

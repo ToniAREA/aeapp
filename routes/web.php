@@ -113,6 +113,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Tasks Calendar
     Route::resource('tasks-calendars', 'TasksCalendarController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
 
+    // Marinas
+    Route::delete('marinas/destroy', 'MarinasController@massDestroy')->name('marinas.massDestroy');
+    Route::post('marinas/parse-csv-import', 'MarinasController@parseCsvImport')->name('marinas.parseCsvImport');
+    Route::post('marinas/process-csv-import', 'MarinasController@processCsvImport')->name('marinas.processCsvImport');
+    Route::resource('marinas', 'MarinasController');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
     Route::get('messenger', 'MessengerController@index')->name('messenger.index');
@@ -229,6 +235,10 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
 
     // Tasks Calendar
     Route::resource('tasks-calendars', 'TasksCalendarController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // Marinas
+    Route::delete('marinas/destroy', 'MarinasController@massDestroy')->name('marinas.massDestroy');
+    Route::resource('marinas', 'MarinasController');
 
     Route::get('frontend/profile', 'ProfileController@index')->name('profile.index');
     Route::post('frontend/profile', 'ProfileController@update')->name('profile.update');
