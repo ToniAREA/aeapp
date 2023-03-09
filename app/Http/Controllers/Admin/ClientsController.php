@@ -50,6 +50,9 @@ class ClientsController extends Controller
             $table->editColumn('name', function ($row) {
                 return $row->name ? $row->name : '';
             });
+            $table->editColumn('lastname', function ($row) {
+                return $row->lastname ? $row->lastname : '';
+            });
             $table->editColumn('boats', function ($row) {
                 $labels = [];
                 foreach ($row->boats as $boat) {
@@ -57,6 +60,40 @@ class ClientsController extends Controller
                 }
 
                 return implode(' ', $labels);
+            });
+            $table->editColumn('vat', function ($row) {
+                return $row->vat ? $row->vat : '';
+            });
+            $table->editColumn('address', function ($row) {
+                return $row->address ? $row->address : '';
+            });
+            $table->editColumn('country', function ($row) {
+                return $row->country ? $row->country : '';
+            });
+            $table->editColumn('email', function ($row) {
+                return $row->email ? $row->email : '';
+            });
+            $table->editColumn('phone', function ($row) {
+                return $row->phone ? $row->phone : '';
+            });
+            $table->editColumn('mobile', function ($row) {
+                return $row->mobile ? $row->mobile : '';
+            });
+            $table->editColumn('notes', function ($row) {
+                return $row->notes ? $row->notes : '';
+            });
+            $table->editColumn('internalnotes', function ($row) {
+                return $row->internalnotes ? $row->internalnotes : '';
+            });
+            $table->editColumn('defaulter', function ($row) {
+                return $row->defaulter ? Client::DEFAULTER_RADIO[$row->defaulter] : '';
+            });
+
+            $table->editColumn('link_fd', function ($row) {
+                return $row->link_fd ? $row->link_fd : '';
+            });
+            $table->editColumn('coordinates', function ($row) {
+                return $row->coordinates ? $row->coordinates : '';
             });
 
             $table->rawColumns(['actions', 'placeholder', 'boats']);

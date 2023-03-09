@@ -11,18 +11,51 @@ use App\Models\MLog;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class MLogsController extends Controller
 {
     use CsvImportTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('m_log_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $mLogs = MLog::all();
+        if ($request->ajax()) {
+            $query = MLog::query()->select(sprintf('%s.*', (new MLog)->table));
+            $table = Datatables::of($query);
 
-        return view('admin.mLogs.index', compact('mLogs'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'm_log_show';
+                $editGate      = 'm_log_edit';
+                $deleteGate    = 'm_log_delete';
+                $crudRoutePart = 'm-logs';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->editColumn('code', function ($row) {
+                return $row->code ? $row->code : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.mLogs.index');
     }
 
     public function create()

@@ -112,64 +112,24 @@
                                             {{ trans('cruds.wlog.title') }}
                                         </a>
                                     @endcan
-                                    @can('user_management_access')
+                                    @can('task_management_access')
                                         <a class="dropdown-item disabled" href="#">
-                                            {{ trans('cruds.userManagement.title') }}
+                                            {{ trans('cruds.taskManagement.title') }}
                                         </a>
                                     @endcan
-                                    @can('user_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.users.index') }}">
-                                            {{ trans('cruds.user.title') }}
+                                    @can('task_status_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.task-statuses.index') }}">
+                                            {{ trans('cruds.taskStatus.title') }}
                                         </a>
                                     @endcan
-                                    @can('role_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.roles.index') }}">
-                                            {{ trans('cruds.role.title') }}
+                                    @can('task_tag_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.task-tags.index') }}">
+                                            {{ trans('cruds.taskTag.title') }}
                                         </a>
                                     @endcan
-                                    @can('permission_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.permissions.index') }}">
-                                            {{ trans('cruds.permission.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('content_management_access')
-                                        <a class="dropdown-item disabled" href="#">
-                                            {{ trans('cruds.contentManagement.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('content_page_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.content-pages.index') }}">
-                                            {{ trans('cruds.contentPage.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('content_category_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.content-categories.index') }}">
-                                            {{ trans('cruds.contentCategory.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('content_tag_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.content-tags.index') }}">
-                                            {{ trans('cruds.contentTag.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('material_access')
-                                        <a class="dropdown-item disabled" href="#">
-                                            {{ trans('cruds.material.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('m_log_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.m-logs.index') }}">
-                                            {{ trans('cruds.mLog.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('configuration_access')
-                                        <a class="dropdown-item disabled" href="#">
-                                            {{ trans('cruds.configuration.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('priority_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.priorities.index') }}">
-                                            {{ trans('cruds.priority.title') }}
+                                    @can('task_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.tasks.index') }}">
+                                            {{ trans('cruds.task.title') }}
                                         </a>
                                     @endcan
                                     @can('product_management_access')
@@ -192,24 +152,64 @@
                                             {{ trans('cruds.product.title') }}
                                         </a>
                                     @endcan
-                                    @can('task_management_access')
+                                    @can('material_access')
                                         <a class="dropdown-item disabled" href="#">
-                                            {{ trans('cruds.taskManagement.title') }}
+                                            {{ trans('cruds.material.title') }}
                                         </a>
                                     @endcan
-                                    @can('task_status_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.task-statuses.index') }}">
-                                            {{ trans('cruds.taskStatus.title') }}
+                                    @can('m_log_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.m-logs.index') }}">
+                                            {{ trans('cruds.mLog.title') }}
                                         </a>
                                     @endcan
-                                    @can('task_tag_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.task-tags.index') }}">
-                                            {{ trans('cruds.taskTag.title') }}
+                                    @can('content_management_access')
+                                        <a class="dropdown-item disabled" href="#">
+                                            {{ trans('cruds.contentManagement.title') }}
                                         </a>
                                     @endcan
-                                    @can('task_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.tasks.index') }}">
-                                            {{ trans('cruds.task.title') }}
+                                    @can('content_page_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.content-pages.index') }}">
+                                            {{ trans('cruds.contentPage.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('content_category_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.content-categories.index') }}">
+                                            {{ trans('cruds.contentCategory.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('content_tag_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.content-tags.index') }}">
+                                            {{ trans('cruds.contentTag.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('user_management_access')
+                                        <a class="dropdown-item disabled" href="#">
+                                            {{ trans('cruds.userManagement.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('user_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.users.index') }}">
+                                            {{ trans('cruds.user.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('role_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.roles.index') }}">
+                                            {{ trans('cruds.role.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('permission_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.permissions.index') }}">
+                                            {{ trans('cruds.permission.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('configuration_access')
+                                        <a class="dropdown-item disabled" href="#">
+                                            {{ trans('cruds.configuration.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('priority_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.priorities.index') }}">
+                                            {{ trans('cruds.priority.title') }}
                                         </a>
                                     @endcan
 

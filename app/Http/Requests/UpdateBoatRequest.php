@@ -17,6 +17,11 @@ class UpdateBoatRequest extends FormRequest
     public function rules()
     {
         return [
+            'id_boat' => [
+                'string',
+                'required',
+                'unique:boats,id_boat,' . request()->route('boat')->id,
+            ],
             'name' => [
                 'string',
                 'min:1',
@@ -29,6 +34,24 @@ class UpdateBoatRequest extends FormRequest
             'clients' => [
                 'required',
                 'array',
+            ],
+            'mmsi' => [
+                'nullable',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+            ],
+            'notes' => [
+                'string',
+                'nullable',
+            ],
+            'internalnotes' => [
+                'string',
+                'nullable',
+            ],
+            'lastuse' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable',
             ],
         ];
     }

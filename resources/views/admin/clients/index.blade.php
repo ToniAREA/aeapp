@@ -32,7 +32,46 @@
                         {{ trans('cruds.client.fields.name') }}
                     </th>
                     <th>
+                        {{ trans('cruds.client.fields.lastname') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.client.fields.boats') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.vat') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.address') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.country') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.email') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.phone') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.mobile') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.notes') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.internalnotes') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.defaulter') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.lastuse') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.link_fd') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.coordinates') }}
                     </th>
                     <th>
                         &nbsp;
@@ -48,12 +87,55 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($boats as $key => $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <select class="search" strict="true">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach(App\Models\Client::DEFAULTER_RADIO as $key => $item)
+                                <option value="{{ $key }}">{{ $item }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                     </td>
@@ -112,7 +194,20 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'name', name: 'name' },
+{ data: 'lastname', name: 'lastname' },
 { data: 'boats', name: 'boats.name' },
+{ data: 'vat', name: 'vat' },
+{ data: 'address', name: 'address' },
+{ data: 'country', name: 'country' },
+{ data: 'email', name: 'email' },
+{ data: 'phone', name: 'phone' },
+{ data: 'mobile', name: 'mobile' },
+{ data: 'notes', name: 'notes' },
+{ data: 'internalnotes', name: 'internalnotes' },
+{ data: 'defaulter', name: 'defaulter' },
+{ data: 'lastuse', name: 'lastuse' },
+{ data: 'link_fd', name: 'link_fd' },
+{ data: 'coordinates', name: 'coordinates' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

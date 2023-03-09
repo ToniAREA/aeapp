@@ -28,6 +28,14 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.boat.fields.id_boat') }}
+                                    </th>
+                                    <td>
+                                        {{ $boat->id_boat }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.boat.fields.name') }}
                                     </th>
                                     <td>
@@ -42,6 +50,38 @@
                                         @foreach($boat->clients as $key => $client)
                                             <span class="label label-info">{{ $client->name }}</span>
                                         @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.mmsi') }}
+                                    </th>
+                                    <td>
+                                        {{ $boat->mmsi }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.notes') }}
+                                    </th>
+                                    <td>
+                                        {{ $boat->notes }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.internalnotes') }}
+                                    </th>
+                                    <td>
+                                        {{ $boat->internalnotes }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.lastuse') }}
+                                    </th>
+                                    <td>
+                                        {{ $boat->lastuse }}
                                     </td>
                                 </tr>
                             </tbody>
