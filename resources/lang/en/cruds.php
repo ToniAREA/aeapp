@@ -109,6 +109,8 @@ return [
             'link_fd_helper'       => ' ',
             'coordinates'          => 'Coordinates',
             'coordinates_helper'   => ' ',
+            'id_client'            => 'ID Client',
+            'id_client_helper'     => ' ',
         ],
     ],
     'boat' => [
@@ -127,8 +129,6 @@ return [
             'deleted_at_helper'    => ' ',
             'client'               => 'Client',
             'client_helper'        => ' ',
-            'id_boat'              => 'Id Boat',
-            'id_boat_helper'       => 'Boat ID',
             'mmsi'                 => 'MMSI',
             'mmsi_helper'          => ' ',
             'notes'                => 'Notes',
@@ -137,6 +137,8 @@ return [
             'internalnotes_helper' => ' ',
             'lastuse'              => 'Lastuse',
             'lastuse_helper'       => ' ',
+            'id_boat'              => 'ID Boat',
+            'id_boat_helper'       => ' ',
         ],
     ],
     'contentManagement' => [

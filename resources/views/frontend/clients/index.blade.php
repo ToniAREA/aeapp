@@ -30,6 +30,9 @@
                                         {{ trans('cruds.client.fields.id') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.client.fields.id_client') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.client.fields.name') }}
                                     </th>
                                     <th>
@@ -80,6 +83,9 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -147,6 +153,9 @@
                                     <tr data-entry-id="{{ $client->id }}">
                                         <td>
                                             {{ $client->id ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $client->id_client ?? '' }}
                                         </td>
                                         <td>
                                             {{ $client->name ?? '' }}

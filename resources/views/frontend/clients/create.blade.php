@@ -14,6 +14,16 @@
                         @method('POST')
                         @csrf
                         <div class="form-group">
+                            <label class="required" for="id_client">{{ trans('cruds.client.fields.id_client') }}</label>
+                            <input class="form-control" type="number" name="id_client" id="id_client" value="{{ old('id_client', '') }}" step="1" required>
+                            @if($errors->has('id_client'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('id_client') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.client.fields.id_client_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label class="required" for="name">{{ trans('cruds.client.fields.name') }}</label>
                             <input class="form-control" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
                             @if($errors->has('name'))

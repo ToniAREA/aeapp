@@ -10,6 +10,7 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_client')->unique();
             $table->string('name');
             $table->string('lastname')->nullable();
             $table->string('vat')->nullable();

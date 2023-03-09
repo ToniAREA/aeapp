@@ -18,8 +18,10 @@ class UpdateBoatRequest extends FormRequest
     {
         return [
             'id_boat' => [
-                'string',
                 'required',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
                 'unique:boats,id_boat,' . request()->route('boat')->id,
             ],
             'name' => [

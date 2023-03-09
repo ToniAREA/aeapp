@@ -17,6 +17,13 @@ class StoreClientRequest extends FormRequest
     public function rules()
     {
         return [
+            'id_client' => [
+                'required',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+                'unique:clients,id_client',
+            ],
             'name' => [
                 'string',
                 'min:4',
