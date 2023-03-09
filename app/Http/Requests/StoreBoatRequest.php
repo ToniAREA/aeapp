@@ -32,7 +32,6 @@ class StoreBoatRequest extends FormRequest
                 'integer',
             ],
             'clients' => [
-                'required',
                 'array',
             ],
             'mmsi' => [
