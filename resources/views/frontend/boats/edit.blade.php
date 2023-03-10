@@ -102,6 +102,20 @@
                             <span class="help-block">{{ trans('cruds.boat.fields.lastuse_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="marina_id">{{ trans('cruds.boat.fields.marina') }}</label>
+                            <select class="form-control select2" name="marina_id" id="marina_id">
+                                @foreach($marinas as $id => $entry)
+                                    <option value="{{ $id }}" {{ (old('marina_id') ? old('marina_id') : $boat->marina->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('marina'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('marina') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.marina_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <button class="btn btn-danger" type="submit">
                                 {{ trans('global.save') }}
                             </button>

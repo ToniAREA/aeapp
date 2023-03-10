@@ -1,8 +1,8 @@
-@can('boat_create')
+@can('marina_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.boats.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.boat.title_singular') }}
+            <a class="btn btn-success" href="{{ route('admin.marinas.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.marina.title_singular') }}
             </a>
         </div>
     </div>
@@ -10,49 +10,34 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.boat.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.marina.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-clientBoats">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-boatsMarinas">
                 <thead>
                     <tr>
                         <th width="10">
 
                         </th>
                         <th>
-                            {{ trans('cruds.boat.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.id_boat') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.type') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.name') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.mmsi') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.client') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.notes') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.internalnotes') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.lastuse') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.marina') }}
+                            {{ trans('cruds.marina.fields.id') }}
                         </th>
                         <th>
                             {{ trans('cruds.marina.fields.id_marina') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.marina.fields.name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.marina.fields.coordinates') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.marina.fields.lastuse') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.marina.fields.boats') }}
                         </th>
                         <th>
                             &nbsp;
@@ -60,61 +45,46 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($boats as $key => $boat)
-                        <tr data-entry-id="{{ $boat->id }}">
+                    @foreach($marinas as $key => $marina)
+                        <tr data-entry-id="{{ $marina->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $boat->id ?? '' }}
+                                {{ $marina->id ?? '' }}
                             </td>
                             <td>
-                                {{ $boat->id_boat ?? '' }}
+                                {{ $marina->id_marina ?? '' }}
                             </td>
                             <td>
-                                {{ $boat->type ?? '' }}
+                                {{ $marina->name ?? '' }}
                             </td>
                             <td>
-                                {{ $boat->name ?? '' }}
+                                {{ $marina->coordinates ?? '' }}
                             </td>
                             <td>
-                                {{ $boat->mmsi ?? '' }}
+                                {{ $marina->lastuse ?? '' }}
                             </td>
                             <td>
-                                @foreach($boat->clients as $key => $item)
+                                @foreach($marina->boats as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>
                                 @endforeach
                             </td>
                             <td>
-                                {{ $boat->notes ?? '' }}
-                            </td>
-                            <td>
-                                {{ $boat->internalnotes ?? '' }}
-                            </td>
-                            <td>
-                                {{ $boat->lastuse ?? '' }}
-                            </td>
-                            <td>
-                                {{ $boat->marina->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $boat->marina->id_marina ?? '' }}
-                            </td>
-                            <td>
-                                @can('boat_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.boats.show', $boat->id) }}">
+                                @can('marina_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.marinas.show', $marina->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('boat_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.boats.edit', $boat->id) }}">
+                                @can('marina_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.marinas.edit', $marina->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('boat_delete')
-                                    <form action="{{ route('admin.boats.destroy', $boat->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('marina_delete')
+                                    <form action="{{ route('admin.marinas.destroy', $marina->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -136,11 +106,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('boat_delete')
+@can('marina_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.boats.massDestroy') }}",
+    url: "{{ route('admin.marinas.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -171,7 +141,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  let table = $('.datatable-clientBoats:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  let table = $('.datatable-boatsMarinas:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();

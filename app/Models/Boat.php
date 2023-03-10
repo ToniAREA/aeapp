@@ -36,6 +36,7 @@ class Boat extends Model
         'notes',
         'internalnotes',
         'lastuse',
+        'marina_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -56,6 +57,11 @@ class Boat extends Model
         return $this->belongsToMany(Client::class);
     }
 
+    public function boatsMarinas()
+    {
+        return $this->belongsToMany(Marina::class);
+    }
+
     public function clients()
     {
         return $this->belongsToMany(Client::class);
@@ -69,5 +75,10 @@ class Boat extends Model
     public function setLastuseAttribute($value)
     {
         $this->attributes['lastuse'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
+    public function marina()
+    {
+        return $this->belongsTo(Marina::class, 'marina_id');
     }
 }

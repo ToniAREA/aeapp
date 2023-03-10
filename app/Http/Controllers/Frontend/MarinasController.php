@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyMarinaRequest;
 use App\Http\Requests\StoreMarinaRequest;
 use App\Http\Requests\UpdateMarinaRequest;
+use App\Models\Boat;
 use App\Models\Marina;
 use Gate;
 use Illuminate\Http\Request;
@@ -20,21 +21,26 @@ class MarinasController extends Controller
     {
         abort_if(Gate::denies('marina_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $marinas = Marina::all();
+        $marinas = Marina::with(['boats'])->get();
 
-        return view('frontend.marinas.index', compact('marinas'));
+        $boats = Boat::get();
+
+        return view('frontend.marinas.index', compact('boats', 'marinas'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('marina_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('frontend.marinas.create');
+        $boats = Boat::pluck('name', 'id');
+
+        return view('frontend.marinas.create', compact('boats'));
     }
 
     public function store(StoreMarinaRequest $request)
     {
         $marina = Marina::create($request->all());
+        $marina->boats()->sync($request->input('boats', []));
 
         return redirect()->route('frontend.marinas.index');
     }
@@ -43,12 +49,17 @@ class MarinasController extends Controller
     {
         abort_if(Gate::denies('marina_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('frontend.marinas.edit', compact('marina'));
+        $boats = Boat::pluck('name', 'id');
+
+        $marina->load('boats');
+
+        return view('frontend.marinas.edit', compact('boats', 'marina'));
     }
 
     public function update(UpdateMarinaRequest $request, Marina $marina)
     {
         $marina->update($request->all());
+        $marina->boats()->sync($request->input('boats', []));
 
         return redirect()->route('frontend.marinas.index');
     }
@@ -56,6 +67,8 @@ class MarinasController extends Controller
     public function show(Marina $marina)
     {
         abort_if(Gate::denies('marina_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $marina->load('boats', 'marinaBoats');
 
         return view('frontend.marinas.show', compact('marina'));
     }

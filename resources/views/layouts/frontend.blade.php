@@ -97,6 +97,11 @@
                                             {{ trans('cruds.boat.title') }}
                                         </a>
                                     @endcan
+                                    @can('marina_access')
+                                        <a class="dropdown-item" href="{{ route('frontend.marinas.index') }}">
+                                            {{ trans('cruds.marina.title') }}
+                                        </a>
+                                    @endcan
                                     @can('work_access')
                                         <a class="dropdown-item disabled" href="#">
                                             {{ trans('cruds.work.title') }}
@@ -210,11 +215,6 @@
                                     @can('priority_access')
                                         <a class="dropdown-item ml-3" href="{{ route('frontend.priorities.index') }}">
                                             {{ trans('cruds.priority.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('marina_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.marinas.index') }}">
-                                            {{ trans('cruds.marina.title') }}
                                         </a>
                                     @endcan
 

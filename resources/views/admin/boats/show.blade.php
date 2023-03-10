@@ -89,6 +89,14 @@
                             {{ $boat->lastuse }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.boat.fields.marina') }}
+                        </th>
+                        <td>
+                            {{ $boat->marina->name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -115,6 +123,11 @@
                 {{ trans('cruds.client.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#boats_marinas" role="tab" data-toggle="tab">
+                {{ trans('cruds.marina.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="boat_wlists">
@@ -122,6 +135,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="boats_clients">
             @includeIf('admin.boats.relationships.boatsClients', ['clients' => $boat->boatsClients])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="boats_marinas">
+            @includeIf('admin.boats.relationships.boatsMarinas', ['marinas' => $boat->boatsMarinas])
         </div>
     </div>
 </div>
