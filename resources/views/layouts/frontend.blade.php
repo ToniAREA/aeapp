@@ -117,26 +117,6 @@
                                             {{ trans('cruds.wlog.title') }}
                                         </a>
                                     @endcan
-                                    @can('task_management_access')
-                                        <a class="dropdown-item disabled" href="#">
-                                            {{ trans('cruds.taskManagement.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('task_status_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.task-statuses.index') }}">
-                                            {{ trans('cruds.taskStatus.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('task_tag_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.task-tags.index') }}">
-                                            {{ trans('cruds.taskTag.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('task_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.tasks.index') }}">
-                                            {{ trans('cruds.task.title') }}
-                                        </a>
-                                    @endcan
                                     @can('product_management_access')
                                         <a class="dropdown-item disabled" href="#">
                                             {{ trans('cruds.productManagement.title') }}
@@ -215,6 +195,21 @@
                                     @can('priority_access')
                                         <a class="dropdown-item ml-3" href="{{ route('frontend.priorities.index') }}">
                                             {{ trans('cruds.priority.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('faq_management_access')
+                                        <a class="dropdown-item disabled" href="#">
+                                            {{ trans('cruds.faqManagement.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('faq_category_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.faq-categories.index') }}">
+                                            {{ trans('cruds.faqCategory.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('faq_question_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.faq-questions.index') }}">
+                                            {{ trans('cruds.faqQuestion.title') }}
                                         </a>
                                     @endcan
 

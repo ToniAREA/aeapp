@@ -384,94 +384,70 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 94,
-                'title' => 'task_management_access',
-            ],
-            [
-                'id'    => 95,
-                'title' => 'task_status_create',
-            ],
-            [
-                'id'    => 96,
-                'title' => 'task_status_edit',
-            ],
-            [
-                'id'    => 97,
-                'title' => 'task_status_show',
-            ],
-            [
-                'id'    => 98,
-                'title' => 'task_status_delete',
-            ],
-            [
-                'id'    => 99,
-                'title' => 'task_status_access',
-            ],
-            [
-                'id'    => 100,
-                'title' => 'task_tag_create',
-            ],
-            [
-                'id'    => 101,
-                'title' => 'task_tag_edit',
-            ],
-            [
-                'id'    => 102,
-                'title' => 'task_tag_show',
-            ],
-            [
-                'id'    => 103,
-                'title' => 'task_tag_delete',
-            ],
-            [
-                'id'    => 104,
-                'title' => 'task_tag_access',
-            ],
-            [
-                'id'    => 105,
-                'title' => 'task_create',
-            ],
-            [
-                'id'    => 106,
-                'title' => 'task_edit',
-            ],
-            [
-                'id'    => 107,
-                'title' => 'task_show',
-            ],
-            [
-                'id'    => 108,
-                'title' => 'task_delete',
-            ],
-            [
-                'id'    => 109,
-                'title' => 'task_access',
-            ],
-            [
-                'id'    => 110,
-                'title' => 'tasks_calendar_access',
-            ],
-            [
-                'id'    => 111,
                 'title' => 'marina_create',
             ],
             [
-                'id'    => 112,
+                'id'    => 95,
                 'title' => 'marina_edit',
             ],
             [
-                'id'    => 113,
+                'id'    => 96,
                 'title' => 'marina_show',
             ],
             [
-                'id'    => 114,
+                'id'    => 97,
                 'title' => 'marina_delete',
             ],
             [
-                'id'    => 115,
+                'id'    => 98,
                 'title' => 'marina_access',
             ],
             [
-                'id'    => 116,
+                'id'    => 99,
+                'title' => 'faq_management_access',
+            ],
+            [
+                'id'    => 100,
+                'title' => 'faq_category_create',
+            ],
+            [
+                'id'    => 101,
+                'title' => 'faq_category_edit',
+            ],
+            [
+                'id'    => 102,
+                'title' => 'faq_category_show',
+            ],
+            [
+                'id'    => 103,
+                'title' => 'faq_category_delete',
+            ],
+            [
+                'id'    => 104,
+                'title' => 'faq_category_access',
+            ],
+            [
+                'id'    => 105,
+                'title' => 'faq_question_create',
+            ],
+            [
+                'id'    => 106,
+                'title' => 'faq_question_edit',
+            ],
+            [
+                'id'    => 107,
+                'title' => 'faq_question_show',
+            ],
+            [
+                'id'    => 108,
+                'title' => 'faq_question_delete',
+            ],
+            [
+                'id'    => 109,
+                'title' => 'faq_question_access',
+            ],
+            [
+                'id'    => 110,
                 'title' => 'profile_password_edit',
             ],
         ];

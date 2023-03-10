@@ -96,28 +96,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('products/process-csv-import', 'ProductController@processCsvImport')->name('products.processCsvImport');
     Route::resource('products', 'ProductController');
 
-    // Task Status
-    Route::delete('task-statuses/destroy', 'TaskStatusController@massDestroy')->name('task-statuses.massDestroy');
-    Route::resource('task-statuses', 'TaskStatusController');
-
-    // Task Tag
-    Route::delete('task-tags/destroy', 'TaskTagController@massDestroy')->name('task-tags.massDestroy');
-    Route::resource('task-tags', 'TaskTagController');
-
-    // Task
-    Route::delete('tasks/destroy', 'TaskController@massDestroy')->name('tasks.massDestroy');
-    Route::post('tasks/media', 'TaskController@storeMedia')->name('tasks.storeMedia');
-    Route::post('tasks/ckmedia', 'TaskController@storeCKEditorImages')->name('tasks.storeCKEditorImages');
-    Route::resource('tasks', 'TaskController');
-
-    // Tasks Calendar
-    Route::resource('tasks-calendars', 'TasksCalendarController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
-
     // Marinas
     Route::delete('marinas/destroy', 'MarinasController@massDestroy')->name('marinas.massDestroy');
     Route::post('marinas/parse-csv-import', 'MarinasController@parseCsvImport')->name('marinas.parseCsvImport');
     Route::post('marinas/process-csv-import', 'MarinasController@processCsvImport')->name('marinas.processCsvImport');
     Route::resource('marinas', 'MarinasController');
+
+    // Faq Category
+    Route::delete('faq-categories/destroy', 'FaqCategoryController@massDestroy')->name('faq-categories.massDestroy');
+    Route::resource('faq-categories', 'FaqCategoryController');
+
+    // Faq Question
+    Route::delete('faq-questions/destroy', 'FaqQuestionController@massDestroy')->name('faq-questions.massDestroy');
+    Route::resource('faq-questions', 'FaqQuestionController');
 
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
@@ -219,26 +210,17 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     Route::post('products/ckmedia', 'ProductController@storeCKEditorImages')->name('products.storeCKEditorImages');
     Route::resource('products', 'ProductController');
 
-    // Task Status
-    Route::delete('task-statuses/destroy', 'TaskStatusController@massDestroy')->name('task-statuses.massDestroy');
-    Route::resource('task-statuses', 'TaskStatusController');
-
-    // Task Tag
-    Route::delete('task-tags/destroy', 'TaskTagController@massDestroy')->name('task-tags.massDestroy');
-    Route::resource('task-tags', 'TaskTagController');
-
-    // Task
-    Route::delete('tasks/destroy', 'TaskController@massDestroy')->name('tasks.massDestroy');
-    Route::post('tasks/media', 'TaskController@storeMedia')->name('tasks.storeMedia');
-    Route::post('tasks/ckmedia', 'TaskController@storeCKEditorImages')->name('tasks.storeCKEditorImages');
-    Route::resource('tasks', 'TaskController');
-
-    // Tasks Calendar
-    Route::resource('tasks-calendars', 'TasksCalendarController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
-
     // Marinas
     Route::delete('marinas/destroy', 'MarinasController@massDestroy')->name('marinas.massDestroy');
     Route::resource('marinas', 'MarinasController');
+
+    // Faq Category
+    Route::delete('faq-categories/destroy', 'FaqCategoryController@massDestroy')->name('faq-categories.massDestroy');
+    Route::resource('faq-categories', 'FaqCategoryController');
+
+    // Faq Question
+    Route::delete('faq-questions/destroy', 'FaqQuestionController@massDestroy')->name('faq-questions.massDestroy');
+    Route::resource('faq-questions', 'FaqQuestionController');
 
     Route::get('frontend/profile', 'ProfileController@index')->name('profile.index');
     Route::post('frontend/profile', 'ProfileController@update')->name('profile.update');
