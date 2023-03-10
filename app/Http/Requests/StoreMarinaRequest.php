@@ -17,6 +17,11 @@ class StoreMarinaRequest extends FormRequest
     public function rules()
     {
         return [
+            'id_marina' => [
+                'string',
+                'required',
+                'unique:marinas',
+            ],
             'name' => [
                 'string',
                 'required',
@@ -29,6 +34,12 @@ class StoreMarinaRequest extends FormRequest
             'lastuse' => [
                 'date_format:' . config('panel.date_format'),
                 'nullable',
+            ],
+            'boats.*' => [
+                'integer',
+            ],
+            'boats' => [
+                'array',
             ],
         ];
     }

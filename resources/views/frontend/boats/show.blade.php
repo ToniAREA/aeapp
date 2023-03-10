@@ -92,6 +92,14 @@
                                         {{ $boat->lastuse }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.marina') }}
+                                    </th>
+                                    <td>
+                                        {{ $boat->marina->name ?? '' }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

@@ -204,7 +204,7 @@
 
   $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
+    order: [[ 2, 'desc' ]],
     pageLength: 100,
   });
   let table = $('.datatable-boatsClients:not(.ajaxTable)').DataTable({ buttons: dtButtons })

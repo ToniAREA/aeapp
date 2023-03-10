@@ -27,6 +27,7 @@ class Marina extends Model
     ];
 
     protected $fillable = [
+        'id_marina',
         'name',
         'coordinates',
         'lastuse',
@@ -40,6 +41,11 @@ class Marina extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
+    public function marinaBoats()
+    {
+        return $this->hasMany(Boat::class, 'marina_id', 'id');
+    }
+
     public function getLastuseAttribute($value)
     {
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
@@ -48,5 +54,10 @@ class Marina extends Model
     public function setLastuseAttribute($value)
     {
         $this->attributes['lastuse'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
+    public function boats()
+    {
+        return $this->belongsToMany(Boat::class);
     }
 }

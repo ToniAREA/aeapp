@@ -53,6 +53,12 @@
                         {{ trans('cruds.boat.fields.lastuse') }}
                     </th>
                     <th>
+                        {{ trans('cruds.boat.fields.marina') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.marina.fields.id_marina') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -87,6 +93,16 @@
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($marinas as $key => $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                     </td>
@@ -154,6 +170,8 @@
 { data: 'notes', name: 'notes' },
 { data: 'internalnotes', name: 'internalnotes' },
 { data: 'lastuse', name: 'lastuse' },
+{ data: 'marina_name', name: 'marina.name' },
+{ data: 'marina.id_marina', name: 'marina.id_marina' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

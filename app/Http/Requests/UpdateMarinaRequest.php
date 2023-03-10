@@ -17,6 +17,11 @@ class UpdateMarinaRequest extends FormRequest
     public function rules()
     {
         return [
+            'id_marina' => [
+                'string',
+                'required',
+                'unique:marinas,id_marina,' . request()->route('marina')->id,
+            ],
             'name' => [
                 'string',
                 'required',
@@ -29,6 +34,12 @@ class UpdateMarinaRequest extends FormRequest
             'lastuse' => [
                 'date_format:' . config('panel.date_format'),
                 'nullable',
+            ],
+            'boats.*' => [
+                'integer',
+            ],
+            'boats' => [
+                'array',
             ],
         ];
     }

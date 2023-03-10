@@ -9,6 +9,7 @@ use App\Http\Requests\StoreBoatRequest;
 use App\Http\Requests\UpdateBoatRequest;
 use App\Models\Boat;
 use App\Models\Client;
+use App\Models\Marina;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,11 +22,13 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boats = Boat::with(['clients'])->get();
+        $boats = Boat::with(['clients', 'marina'])->get();
 
         $clients = Client::get();
 
-        return view('frontend.boats.index', compact('boats', 'clients'));
+        $marinas = Marina::get();
+
+        return view('frontend.boats.index', compact('boats', 'clients', 'marinas'));
     }
 
     public function create()
@@ -34,7 +37,9 @@ class BoatsController extends Controller
 
         $clients = Client::pluck('name', 'id');
 
-        return view('frontend.boats.create', compact('clients'));
+        $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('frontend.boats.create', compact('clients', 'marinas'));
     }
 
     public function store(StoreBoatRequest $request)
@@ -51,9 +56,11 @@ class BoatsController extends Controller
 
         $clients = Client::pluck('name', 'id');
 
-        $boat->load('clients');
+        $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('frontend.boats.edit', compact('boat', 'clients'));
+        $boat->load('clients', 'marina');
+
+        return view('frontend.boats.edit', compact('boat', 'clients', 'marinas'));
     }
 
     public function update(UpdateBoatRequest $request, Boat $boat)
@@ -68,7 +75,7 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boat->load('clients', 'boatWlists', 'boatsClients');
+        $boat->load('clients', 'marina', 'boatWlists', 'boatsClients');
 
         return view('frontend.boats.show', compact('boat'));
     }
