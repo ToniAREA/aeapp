@@ -212,6 +212,51 @@
                                             {{ trans('cruds.faqQuestion.title') }}
                                         </a>
                                     @endcan
+                                    @can('contact_management_access')
+                                        <a class="dropdown-item disabled" href="#">
+                                            {{ trans('cruds.contactManagement.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('contact_company_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.contact-companies.index') }}">
+                                            {{ trans('cruds.contactCompany.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('contact_contact_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.contact-contacts.index') }}">
+                                            {{ trans('cruds.contactContact.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('expense_management_access')
+                                        <a class="dropdown-item disabled" href="#">
+                                            {{ trans('cruds.expenseManagement.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('expense_category_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.expense-categories.index') }}">
+                                            {{ trans('cruds.expenseCategory.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('income_category_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.income-categories.index') }}">
+                                            {{ trans('cruds.incomeCategory.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('expense_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.expenses.index') }}">
+                                            {{ trans('cruds.expense.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('income_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.incomes.index') }}">
+                                            {{ trans('cruds.income.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('user_alert_access')
+                                        <a class="dropdown-item" href="{{ route('frontend.user-alerts.index') }}">
+                                            {{ trans('cruds.userAlert.title') }}
+                                        </a>
+                                    @endcan
 
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

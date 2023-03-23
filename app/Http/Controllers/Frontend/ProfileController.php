@@ -44,4 +44,21 @@ class ProfileController extends Controller
 
         return redirect()->route('frontend.profile.index')->with('message', __('global.change_password_success'));
     }
+
+    public function toggleTwoFactor(Request $request)
+    {
+        $user = auth()->user();
+
+        if ($user->two_factor) {
+            $message = __('global.two_factor.disabled');
+        } else {
+            $message = __('global.two_factor.enabled');
+        }
+
+        $user->two_factor = ! $user->two_factor;
+
+        $user->save();
+
+        return redirect()->route('frontend.profile.index')->with('message', $message);
+    }
 }
