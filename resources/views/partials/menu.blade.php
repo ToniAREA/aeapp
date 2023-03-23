@@ -314,6 +314,110 @@
                 </ul>
             </li>
         @endcan
+        @can('contact_management_access')
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/contact-companies*") ? "c-show" : "" }} {{ request()->is("admin/contact-contacts*") ? "c-show" : "" }}">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-phone-square c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.contactManagement.title') }}
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    @can('contact_company_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.contact-companies.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/contact-companies") || request()->is("admin/contact-companies/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-building c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.contactCompany.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('contact_contact_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.contact-contacts.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/contact-contacts") || request()->is("admin/contact-contacts/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-user-plus c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.contactContact.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
+        @can('expense_management_access')
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/expense-categories*") ? "c-show" : "" }} {{ request()->is("admin/income-categories*") ? "c-show" : "" }} {{ request()->is("admin/expenses*") ? "c-show" : "" }} {{ request()->is("admin/incomes*") ? "c-show" : "" }} {{ request()->is("admin/expense-reports*") ? "c-show" : "" }}">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-money-bill c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.expenseManagement.title') }}
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    @can('expense_category_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.expense-categories.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/expense-categories") || request()->is("admin/expense-categories/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-list c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.expenseCategory.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('income_category_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.income-categories.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/income-categories") || request()->is("admin/income-categories/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-list c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.incomeCategory.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('expense_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.expenses.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/expenses") || request()->is("admin/expenses/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-arrow-circle-right c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.expense.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('income_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.incomes.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/incomes") || request()->is("admin/incomes/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-arrow-circle-right c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.income.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('expense_report_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.expense-reports.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/expense-reports") || request()->is("admin/expense-reports/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-chart-line c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.expenseReport.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
+        @can('user_alert_access')
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route("admin.user-alerts.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/user-alerts") || request()->is("admin/user-alerts/*") ? "c-active" : "" }}">
+                    <i class="fa-fw fas fa-bell c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.userAlert.title') }}
+                </a>
+            </li>
+        @endcan
         <li class="c-sidebar-nav-item">
             <a href="{{ route("admin.systemCalendar") }}" class="c-sidebar-nav-link {{ request()->is("admin/system-calendar") || request()->is("admin/system-calendar/*") ? "c-active" : "" }}">
                 <i class="c-sidebar-nav-icon fa-fw fas fa-calendar">
