@@ -17,10 +17,6 @@ class UpdateContactContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'company_id' => [
-                'required',
-                'integer',
-            ],
             'contact_first_name' => [
                 'string',
                 'nullable',
@@ -29,23 +25,39 @@ class UpdateContactContactRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'contact_phone_1' => [
-                'string',
-                'nullable',
-            ],
-            'contact_phone_2' => [
-                'string',
-                'nullable',
-            ],
             'contact_email' => [
                 'string',
                 'nullable',
             ],
-            'contact_skype' => [
+            'contact_address' => [
                 'string',
                 'nullable',
             ],
-            'contact_address' => [
+            'nif' => [
+                'string',
+                'nullable',
+            ],
+            'phone' => [
+                'string',
+                'nullable',
+            ],
+            'mobile' => [
+                'string',
+                'nullable',
+            ],
+            'address' => [
+                'string',
+                'nullable',
+            ],
+            'country' => [
+                'string',
+                'nullable',
+            ],
+            'notes' => [
+                'string',
+                'nullable',
+            ],
+            'internalnotes' => [
                 'string',
                 'nullable',
             ],

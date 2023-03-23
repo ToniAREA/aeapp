@@ -76,22 +76,6 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.relatedData') }}
-    </div>
-    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-        <li class="nav-item">
-            <a class="nav-link" href="#marina_boats" role="tab" data-toggle="tab">
-                {{ trans('cruds.boat.title') }}
-            </a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="marina_boats">
-            @includeIf('admin.marinas.relationships.marinaBoats', ['boats' => $marina->marinaBoats])
-        </div>
-    </div>
-</div>
+
 
 @endsection

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyContactContactRequest;
 use App\Http\Requests\StoreContactContactRequest;
 use App\Http\Requests\UpdateContactContactRequest;
-use App\Models\ContactCompany;
 use App\Models\ContactContact;
 use Gate;
 use Illuminate\Http\Request;
@@ -14,11 +14,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ContactContactsController extends Controller
 {
+    use CsvImportTrait;
+
     public function index()
     {
         abort_if(Gate::denies('contact_contact_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $contactContacts = ContactContact::with(['company'])->get();
+        $contactContacts = ContactContact::all();
 
         return view('frontend.contactContacts.index', compact('contactContacts'));
     }
@@ -27,9 +29,7 @@ class ContactContactsController extends Controller
     {
         abort_if(Gate::denies('contact_contact_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $companies = ContactCompany::pluck('company_name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('frontend.contactContacts.create', compact('companies'));
+        return view('frontend.contactContacts.create');
     }
 
     public function store(StoreContactContactRequest $request)
@@ -43,11 +43,7 @@ class ContactContactsController extends Controller
     {
         abort_if(Gate::denies('contact_contact_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $companies = ContactCompany::pluck('company_name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $contactContact->load('company');
-
-        return view('frontend.contactContacts.edit', compact('companies', 'contactContact'));
+        return view('frontend.contactContacts.edit', compact('contactContact'));
     }
 
     public function update(UpdateContactContactRequest $request, ContactContact $contactContact)
@@ -60,8 +56,6 @@ class ContactContactsController extends Controller
     public function show(ContactContact $contactContact)
     {
         abort_if(Gate::denies('contact_contact_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $contactContact->load('company');
 
         return view('frontend.contactContacts.show', compact('contactContact'));
     }

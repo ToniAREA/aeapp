@@ -38,12 +38,6 @@ class StoreBoatRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'clients.*' => [
-                'integer',
-            ],
-            'clients' => [
-                'array',
-            ],
             'notes' => [
                 'string',
                 'nullable',

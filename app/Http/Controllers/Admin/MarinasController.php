@@ -116,7 +116,7 @@ class MarinasController extends Controller
     {
         abort_if(Gate::denies('marina_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $marina->load('boats', 'marinaBoats');
+        $marina->load('boats');
 
         return view('admin.marinas.show', compact('marina'));
     }
