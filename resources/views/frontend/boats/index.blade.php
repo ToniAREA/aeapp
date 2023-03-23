@@ -42,9 +42,6 @@
                                         {{ trans('cruds.boat.fields.mmsi') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.boat.fields.client') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.boat.fields.notes') }}
                                     </th>
                                     <th>
@@ -52,12 +49,6 @@
                                     </th>
                                     <th>
                                         {{ trans('cruds.boat.fields.lastuse') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.boat.fields.marina') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.marina.fields.id_marina') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -82,28 +73,10 @@
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
-                                        <select class="search">
-                                            <option value>{{ trans('global.all') }}</option>
-                                            @foreach($clients as $key => $item)
-                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        <select class="search">
-                                            <option value>{{ trans('global.all') }}</option>
-                                            @foreach($marinas as $key => $item)
-                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
                                     </td>
                                     <td>
                                     </td>
@@ -130,11 +103,6 @@
                                             {{ $boat->mmsi ?? '' }}
                                         </td>
                                         <td>
-                                            @foreach($boat->clients as $key => $item)
-                                                <span>{{ $item->name }}</span>
-                                            @endforeach
-                                        </td>
-                                        <td>
                                             {{ $boat->notes ?? '' }}
                                         </td>
                                         <td>
@@ -142,12 +110,6 @@
                                         </td>
                                         <td>
                                             {{ $boat->lastuse ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $boat->marina->name ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $boat->marina->id_marina ?? '' }}
                                         </td>
                                         <td>
                                             @can('boat_show')

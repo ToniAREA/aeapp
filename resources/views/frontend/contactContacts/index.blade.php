@@ -9,6 +9,10 @@
                         <a class="btn btn-success" href="{{ route('frontend.contact-contacts.create') }}">
                             {{ trans('global.add') }} {{ trans('cruds.contactContact.title_singular') }}
                         </a>
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+                            {{ trans('global.app_csvImport') }}
+                        </button>
+                        @include('csvImport.modal', ['model' => 'ContactContact', 'route' => 'admin.contact-contacts.parseCsvImport'])
                     </div>
                 </div>
             @endcan
@@ -26,32 +30,83 @@
                                         {{ trans('cruds.contactContact.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.company') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.contactContact.fields.contact_first_name') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.contactContact.fields.contact_last_name') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.contact_phone_1') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.contactContact.fields.contact_phone_2') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.contactContact.fields.contact_email') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.contactContact.fields.contact_skype') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.contactContact.fields.contact_address') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.contactContact.fields.nif') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.contactContact.fields.phone') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.contactContact.fields.mobile') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.contactContact.fields.address') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.contactContact.fields.country') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.contactContact.fields.notes') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.contactContact.fields.internalnotes') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                    </td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,28 +116,37 @@
                                             {{ $contactContact->id ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $contactContact->company->company_name ?? '' }}
-                                        </td>
-                                        <td>
                                             {{ $contactContact->contact_first_name ?? '' }}
                                         </td>
                                         <td>
                                             {{ $contactContact->contact_last_name ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $contactContact->contact_phone_1 ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $contactContact->contact_phone_2 ?? '' }}
-                                        </td>
-                                        <td>
                                             {{ $contactContact->contact_email ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $contactContact->contact_skype ?? '' }}
+                                            {{ $contactContact->contact_address ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $contactContact->contact_address ?? '' }}
+                                            {{ $contactContact->nif ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $contactContact->phone ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $contactContact->mobile ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $contactContact->address ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $contactContact->country ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $contactContact->notes ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $contactContact->internalnotes ?? '' }}
                                         </td>
                                         <td>
                                             @can('contact_contact_show')
@@ -165,6 +229,27 @@
           .columns.adjust();
   });
   
+let visibleColumnsIndexes = null;
+$('.datatable thead').on('input', '.search', function () {
+      let strict = $(this).attr('strict') || false
+      let value = strict && this.value ? "^" + this.value + "$" : this.value
+
+      let index = $(this).parent().index()
+      if (visibleColumnsIndexes !== null) {
+        index = visibleColumnsIndexes[index]
+      }
+
+      table
+        .column(index)
+        .search(value, strict)
+        .draw()
+  });
+table.on('column-visibility.dt', function(e, settings, column, state) {
+      visibleColumnsIndexes = []
+      table.columns(":visible").every(function(colIdx) {
+          visibleColumnsIndexes.push(colIdx);
+      });
+  })
 })
 
 </script>
