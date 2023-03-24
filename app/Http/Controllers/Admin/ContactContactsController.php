@@ -52,32 +52,26 @@ class ContactContactsController extends Controller
             $table->editColumn('contact_last_name', function ($row) {
                 return $row->contact_last_name ? $row->contact_last_name : '';
             });
-            $table->editColumn('contact_email', function ($row) {
-                return $row->contact_email ? $row->contact_email : '';
+            $table->editColumn('contact_nif', function ($row) {
+                return $row->contact_nif ? $row->contact_nif : '';
             });
             $table->editColumn('contact_address', function ($row) {
                 return $row->contact_address ? $row->contact_address : '';
             });
-            $table->editColumn('nif', function ($row) {
-                return $row->nif ? $row->nif : '';
+            $table->editColumn('contact_country', function ($row) {
+                return $row->contact_country ? $row->contact_country : '';
             });
-            $table->editColumn('phone', function ($row) {
-                return $row->phone ? $row->phone : '';
+            $table->editColumn('contact_email', function ($row) {
+                return $row->contact_email ? $row->contact_email : '';
             });
-            $table->editColumn('mobile', function ($row) {
-                return $row->mobile ? $row->mobile : '';
+            $table->editColumn('contact_mobile', function ($row) {
+                return $row->contact_mobile ? $row->contact_mobile : '';
             });
-            $table->editColumn('address', function ($row) {
-                return $row->address ? $row->address : '';
+            $table->editColumn('contact_notes', function ($row) {
+                return $row->contact_notes ? $row->contact_notes : '';
             });
-            $table->editColumn('country', function ($row) {
-                return $row->country ? $row->country : '';
-            });
-            $table->editColumn('notes', function ($row) {
-                return $row->notes ? $row->notes : '';
-            });
-            $table->editColumn('internalnotes', function ($row) {
-                return $row->internalnotes ? $row->internalnotes : '';
+            $table->editColumn('contact_internalnotes', function ($row) {
+                return $row->contact_internalnotes ? $row->contact_internalnotes : '';
             });
 
             $table->rawColumns(['actions', 'placeholder']);

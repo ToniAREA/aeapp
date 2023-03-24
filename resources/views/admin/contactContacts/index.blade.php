@@ -35,31 +35,25 @@
                         {{ trans('cruds.contactContact.fields.contact_last_name') }}
                     </th>
                     <th>
-                        {{ trans('cruds.contactContact.fields.contact_email') }}
+                        {{ trans('cruds.contactContact.fields.contact_nif') }}
                     </th>
                     <th>
                         {{ trans('cruds.contactContact.fields.contact_address') }}
                     </th>
                     <th>
-                        {{ trans('cruds.contactContact.fields.nif') }}
+                        {{ trans('cruds.contactContact.fields.contact_country') }}
                     </th>
                     <th>
-                        {{ trans('cruds.contactContact.fields.phone') }}
+                        {{ trans('cruds.contactContact.fields.contact_email') }}
                     </th>
                     <th>
-                        {{ trans('cruds.contactContact.fields.mobile') }}
+                        {{ trans('cruds.contactContact.fields.contact_mobile') }}
                     </th>
                     <th>
-                        {{ trans('cruds.contactContact.fields.address') }}
+                        {{ trans('cruds.contactContact.fields.contact_notes') }}
                     </th>
                     <th>
-                        {{ trans('cruds.contactContact.fields.country') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.contactContact.fields.notes') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.contactContact.fields.internalnotes') }}
+                        {{ trans('cruds.contactContact.fields.contact_internalnotes') }}
                     </th>
                     <th>
                         &nbsp;
@@ -67,12 +61,6 @@
                 </tr>
                 <tr>
                     <td>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -162,15 +150,13 @@
 { data: 'id', name: 'id' },
 { data: 'contact_first_name', name: 'contact_first_name' },
 { data: 'contact_last_name', name: 'contact_last_name' },
-{ data: 'contact_email', name: 'contact_email' },
+{ data: 'contact_nif', name: 'contact_nif' },
 { data: 'contact_address', name: 'contact_address' },
-{ data: 'nif', name: 'nif' },
-{ data: 'phone', name: 'phone' },
-{ data: 'mobile', name: 'mobile' },
-{ data: 'address', name: 'address' },
-{ data: 'country', name: 'country' },
-{ data: 'notes', name: 'notes' },
-{ data: 'internalnotes', name: 'internalnotes' },
+{ data: 'contact_country', name: 'contact_country' },
+{ data: 'contact_email', name: 'contact_email' },
+{ data: 'contact_mobile', name: 'contact_mobile' },
+{ data: 'contact_notes', name: 'contact_notes' },
+{ data: 'contact_internalnotes', name: 'contact_internalnotes' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

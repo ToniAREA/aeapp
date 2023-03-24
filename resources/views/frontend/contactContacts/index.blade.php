@@ -36,31 +36,25 @@
                                         {{ trans('cruds.contactContact.fields.contact_last_name') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.contact_email') }}
+                                        {{ trans('cruds.contactContact.fields.contact_nif') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.contactContact.fields.contact_address') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.nif') }}
+                                        {{ trans('cruds.contactContact.fields.contact_country') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.phone') }}
+                                        {{ trans('cruds.contactContact.fields.contact_email') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.mobile') }}
+                                        {{ trans('cruds.contactContact.fields.contact_mobile') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.address') }}
+                                        {{ trans('cruds.contactContact.fields.contact_notes') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.country') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.contactContact.fields.notes') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.contactContact.fields.internalnotes') }}
+                                        {{ trans('cruds.contactContact.fields.contact_internalnotes') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -68,12 +62,6 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -122,31 +110,25 @@
                                             {{ $contactContact->contact_last_name ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $contactContact->contact_email ?? '' }}
+                                            {{ $contactContact->contact_nif ?? '' }}
                                         </td>
                                         <td>
                                             {{ $contactContact->contact_address ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $contactContact->nif ?? '' }}
+                                            {{ $contactContact->contact_country ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $contactContact->phone ?? '' }}
+                                            {{ $contactContact->contact_email ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $contactContact->mobile ?? '' }}
+                                            {{ $contactContact->contact_mobile ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $contactContact->address ?? '' }}
+                                            {{ $contactContact->contact_notes ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $contactContact->country ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $contactContact->notes ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $contactContact->internalnotes ?? '' }}
+                                            {{ $contactContact->contact_internalnotes ?? '' }}
                                         </td>
                                         <td>
                                             @can('contact_contact_show')

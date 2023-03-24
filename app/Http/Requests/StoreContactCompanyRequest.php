@@ -21,15 +21,23 @@ class StoreContactCompanyRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'company_vat' => [
+                'string',
+                'nullable',
+            ],
             'company_address' => [
                 'string',
                 'nullable',
             ],
-            'company_website' => [
+            'company_email' => [
                 'string',
                 'nullable',
             ],
-            'company_email' => [
+            'company_phone' => [
+                'string',
+                'nullable',
+            ],
+            'company_website' => [
                 'string',
                 'nullable',
             ],

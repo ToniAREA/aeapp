@@ -21,27 +21,22 @@ class ContactContact extends Model
     ];
 
     public static $searchable = [
-        'nif',
-        'phone',
-        'mobile',
-        'address',
-        'country',
-        'notes',
-        'internalnotes',
+        'contact_nif',
+        'contact_mobile',
+        'contact_notes',
+        'contact_internalnotes',
     ];
 
     protected $fillable = [
         'contact_first_name',
         'contact_last_name',
-        'contact_email',
+        'contact_nif',
         'contact_address',
-        'nif',
-        'phone',
-        'mobile',
-        'address',
-        'country',
-        'notes',
-        'internalnotes',
+        'contact_country',
+        'contact_email',
+        'contact_mobile',
+        'contact_notes',
+        'contact_internalnotes',
         'created_at',
         'updated_at',
         'deleted_at',

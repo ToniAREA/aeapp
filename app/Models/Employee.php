@@ -2,21 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ContactCompany extends Model
+class Employee extends Model
 {
-    use SoftDeletes, HasFactory;
+    use SoftDeletes, Auditable, HasFactory;
 
-    public $table = 'contact_companies';
-
-    public static $searchable = [
-        'company_vat',
-        'company_phone',
-    ];
+    public $table = 'employees';
 
     protected $dates = [
         'created_at',
@@ -25,12 +21,7 @@ class ContactCompany extends Model
     ];
 
     protected $fillable = [
-        'company_name',
-        'company_vat',
-        'company_address',
-        'company_email',
-        'company_phone',
-        'company_website',
+        'user_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -39,5 +30,10 @@ class ContactCompany extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

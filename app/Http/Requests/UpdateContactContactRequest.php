@@ -25,7 +25,7 @@ class UpdateContactContactRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'contact_email' => [
+            'contact_nif' => [
                 'string',
                 'nullable',
             ],
@@ -33,31 +33,23 @@ class UpdateContactContactRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'nif' => [
+            'contact_country' => [
                 'string',
                 'nullable',
             ],
-            'phone' => [
+            'contact_email' => [
                 'string',
                 'nullable',
             ],
-            'mobile' => [
+            'contact_mobile' => [
                 'string',
                 'nullable',
             ],
-            'address' => [
+            'contact_notes' => [
                 'string',
                 'nullable',
             ],
-            'country' => [
-                'string',
-                'nullable',
-            ],
-            'notes' => [
-                'string',
-                'nullable',
-            ],
-            'internalnotes' => [
+            'contact_internalnotes' => [
                 'string',
                 'nullable',
             ],

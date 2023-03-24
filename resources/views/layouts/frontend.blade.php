@@ -87,6 +87,11 @@
                                             {{ trans('cruds.appointment.title') }}
                                         </a>
                                     @endcan
+                                    @can('employee_access')
+                                        <a class="dropdown-item" href="{{ route('frontend.employees.index') }}">
+                                            {{ trans('cruds.employee.title') }}
+                                        </a>
+                                    @endcan
                                     @can('client_access')
                                         <a class="dropdown-item" href="{{ route('frontend.clients.index') }}">
                                             {{ trans('cruds.client.title') }}

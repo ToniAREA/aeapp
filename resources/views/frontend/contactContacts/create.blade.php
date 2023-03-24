@@ -34,14 +34,14 @@
                             <span class="help-block">{{ trans('cruds.contactContact.fields.contact_last_name_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="contact_email">{{ trans('cruds.contactContact.fields.contact_email') }}</label>
-                            <input class="form-control" type="text" name="contact_email" id="contact_email" value="{{ old('contact_email', '') }}">
-                            @if($errors->has('contact_email'))
+                            <label for="contact_nif">{{ trans('cruds.contactContact.fields.contact_nif') }}</label>
+                            <input class="form-control" type="text" name="contact_nif" id="contact_nif" value="{{ old('contact_nif', '') }}">
+                            @if($errors->has('contact_nif'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('contact_email') }}
+                                    {{ $errors->first('contact_nif') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.contactContact.fields.contact_email_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.contactContact.fields.contact_nif_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label for="contact_address">{{ trans('cruds.contactContact.fields.contact_address') }}</label>
@@ -54,74 +54,54 @@
                             <span class="help-block">{{ trans('cruds.contactContact.fields.contact_address_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="nif">{{ trans('cruds.contactContact.fields.nif') }}</label>
-                            <input class="form-control" type="text" name="nif" id="nif" value="{{ old('nif', '') }}">
-                            @if($errors->has('nif'))
+                            <label for="contact_country">{{ trans('cruds.contactContact.fields.contact_country') }}</label>
+                            <input class="form-control" type="text" name="contact_country" id="contact_country" value="{{ old('contact_country', '') }}">
+                            @if($errors->has('contact_country'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('nif') }}
+                                    {{ $errors->first('contact_country') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.contactContact.fields.nif_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.contactContact.fields.contact_country_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="phone">{{ trans('cruds.contactContact.fields.phone') }}</label>
-                            <input class="form-control" type="text" name="phone" id="phone" value="{{ old('phone', '') }}">
-                            @if($errors->has('phone'))
+                            <label for="contact_email">{{ trans('cruds.contactContact.fields.contact_email') }}</label>
+                            <input class="form-control" type="text" name="contact_email" id="contact_email" value="{{ old('contact_email', '') }}">
+                            @if($errors->has('contact_email'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('phone') }}
+                                    {{ $errors->first('contact_email') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.contactContact.fields.phone_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.contactContact.fields.contact_email_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="mobile">{{ trans('cruds.contactContact.fields.mobile') }}</label>
-                            <input class="form-control" type="text" name="mobile" id="mobile" value="{{ old('mobile', '') }}">
-                            @if($errors->has('mobile'))
+                            <label for="contact_mobile">{{ trans('cruds.contactContact.fields.contact_mobile') }}</label>
+                            <input class="form-control" type="text" name="contact_mobile" id="contact_mobile" value="{{ old('contact_mobile', '') }}">
+                            @if($errors->has('contact_mobile'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('mobile') }}
+                                    {{ $errors->first('contact_mobile') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.contactContact.fields.mobile_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.contactContact.fields.contact_mobile_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="address">{{ trans('cruds.contactContact.fields.address') }}</label>
-                            <input class="form-control" type="text" name="address" id="address" value="{{ old('address', '') }}">
-                            @if($errors->has('address'))
+                            <label for="contact_notes">{{ trans('cruds.contactContact.fields.contact_notes') }}</label>
+                            <input class="form-control" type="text" name="contact_notes" id="contact_notes" value="{{ old('contact_notes', '') }}">
+                            @if($errors->has('contact_notes'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('address') }}
+                                    {{ $errors->first('contact_notes') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.contactContact.fields.address_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.contactContact.fields.contact_notes_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="country">{{ trans('cruds.contactContact.fields.country') }}</label>
-                            <input class="form-control" type="text" name="country" id="country" value="{{ old('country', '') }}">
-                            @if($errors->has('country'))
+                            <label for="contact_internalnotes">{{ trans('cruds.contactContact.fields.contact_internalnotes') }}</label>
+                            <input class="form-control" type="text" name="contact_internalnotes" id="contact_internalnotes" value="{{ old('contact_internalnotes', '') }}">
+                            @if($errors->has('contact_internalnotes'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('country') }}
+                                    {{ $errors->first('contact_internalnotes') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.contactContact.fields.country_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="notes">{{ trans('cruds.contactContact.fields.notes') }}</label>
-                            <input class="form-control" type="text" name="notes" id="notes" value="{{ old('notes', '') }}">
-                            @if($errors->has('notes'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('notes') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.contactContact.fields.notes_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="internalnotes">{{ trans('cruds.contactContact.fields.internalnotes') }}</label>
-                            <input class="form-control" type="text" name="internalnotes" id="internalnotes" value="{{ old('internalnotes', '') }}">
-                            @if($errors->has('internalnotes'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('internalnotes') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.contactContact.fields.internalnotes_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.contactContact.fields.contact_internalnotes_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">

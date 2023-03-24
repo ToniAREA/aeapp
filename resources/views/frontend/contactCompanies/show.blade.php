@@ -36,6 +36,14 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.contactCompany.fields.company_vat') }}
+                                    </th>
+                                    <td>
+                                        {{ $contactCompany->company_vat }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.contactCompany.fields.company_address') }}
                                     </th>
                                     <td>
@@ -44,18 +52,26 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.contactCompany.fields.company_website') }}
-                                    </th>
-                                    <td>
-                                        {{ $contactCompany->company_website }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.contactCompany.fields.company_email') }}
                                     </th>
                                     <td>
                                         {{ $contactCompany->company_email }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.contactCompany.fields.company_phone') }}
+                                    </th>
+                                    <td>
+                                        {{ $contactCompany->company_phone }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.contactCompany.fields.company_website') }}
+                                    </th>
+                                    <td>
+                                        {{ $contactCompany->company_website }}
                                     </td>
                                 </tr>
                             </tbody>
