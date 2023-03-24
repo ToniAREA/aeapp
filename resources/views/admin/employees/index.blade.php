@@ -1,47 +1,39 @@
 @extends('layouts.admin')
 @section('content')
-@can('contact_company_create')
+@can('employee_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.contact-companies.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.contactCompany.title_singular') }}
+            <a class="btn btn-success" href="{{ route('admin.employees.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.employee.title_singular') }}
             </a>
+            <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+                {{ trans('global.app_csvImport') }}
+            </button>
+            @include('csvImport.modal', ['model' => 'Employee', 'route' => 'admin.employees.parseCsvImport'])
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.contactCompany.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.employee.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-ContactCompany">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-Employee">
                 <thead>
                     <tr>
                         <th width="10">
 
                         </th>
                         <th>
-                            {{ trans('cruds.contactCompany.fields.id') }}
+                            {{ trans('cruds.employee.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.contactCompany.fields.company_name') }}
+                            {{ trans('cruds.employee.fields.user') }}
                         </th>
                         <th>
-                            {{ trans('cruds.contactCompany.fields.company_vat') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.contactCompany.fields.company_address') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.contactCompany.fields.company_email') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.contactCompany.fields.company_phone') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.contactCompany.fields.company_website') }}
+                            {{ trans('cruds.user.fields.email') }}
                         </th>
                         <th>
                             &nbsp;
@@ -54,69 +46,49 @@
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($users as $key => $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </td>
                         <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
                         </td>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($contactCompanies as $key => $contactCompany)
-                        <tr data-entry-id="{{ $contactCompany->id }}">
+                    @foreach($employees as $key => $employee)
+                        <tr data-entry-id="{{ $employee->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $contactCompany->id ?? '' }}
+                                {{ $employee->id ?? '' }}
                             </td>
                             <td>
-                                {{ $contactCompany->company_name ?? '' }}
+                                {{ $employee->user->name ?? '' }}
                             </td>
                             <td>
-                                {{ $contactCompany->company_vat ?? '' }}
+                                {{ $employee->user->email ?? '' }}
                             </td>
                             <td>
-                                {{ $contactCompany->company_address ?? '' }}
-                            </td>
-                            <td>
-                                {{ $contactCompany->company_email ?? '' }}
-                            </td>
-                            <td>
-                                {{ $contactCompany->company_phone ?? '' }}
-                            </td>
-                            <td>
-                                {{ $contactCompany->company_website ?? '' }}
-                            </td>
-                            <td>
-                                @can('contact_company_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.contact-companies.show', $contactCompany->id) }}">
+                                @can('employee_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.employees.show', $employee->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('contact_company_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.contact-companies.edit', $contactCompany->id) }}">
+                                @can('employee_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.employees.edit', $employee->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('contact_company_delete')
-                                    <form action="{{ route('admin.contact-companies.destroy', $contactCompany->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('employee_delete')
+                                    <form action="{{ route('admin.employees.destroy', $employee->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -141,11 +113,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('contact_company_delete')
+@can('employee_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.contact-companies.massDestroy') }}",
+    url: "{{ route('admin.employees.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -176,7 +148,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  let table = $('.datatable-ContactCompany:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  let table = $('.datatable-Employee:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();

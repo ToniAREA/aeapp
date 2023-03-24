@@ -40,6 +40,16 @@
                 </a>
             </li>
         @endcan
+        @can('employee_access')
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route("admin.employees.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/employees") || request()->is("admin/employees/*") ? "c-active" : "" }}">
+                    <i class="fa-fw fas fa-user-friends c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.employee.title') }}
+                </a>
+            </li>
+        @endcan
         @can('client_access')
             <li class="c-sidebar-nav-item">
                 <a href="{{ route("admin.clients.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/clients") || request()->is("admin/clients/*") ? "c-active" : "" }}">

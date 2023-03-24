@@ -109,6 +109,11 @@ class User extends Authenticatable
         });
     }
 
+    public function userEmployees()
+    {
+        return $this->hasMany(Employee::class, 'user_id', 'id');
+    }
+
     public function userUserAlerts()
     {
         return $this->belongsToMany(UserAlert::class);

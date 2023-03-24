@@ -44,10 +44,10 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.contact_email') }}
+                                        {{ trans('cruds.contactContact.fields.contact_nif') }}
                                     </th>
                                     <td>
-                                        {{ $contactContact->contact_email }}
+                                        {{ $contactContact->contact_nif }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -60,58 +60,42 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.nif') }}
+                                        {{ trans('cruds.contactContact.fields.contact_country') }}
                                     </th>
                                     <td>
-                                        {{ $contactContact->nif }}
+                                        {{ $contactContact->contact_country }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.phone') }}
+                                        {{ trans('cruds.contactContact.fields.contact_email') }}
                                     </th>
                                     <td>
-                                        {{ $contactContact->phone }}
+                                        {{ $contactContact->contact_email }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.mobile') }}
+                                        {{ trans('cruds.contactContact.fields.contact_mobile') }}
                                     </th>
                                     <td>
-                                        {{ $contactContact->mobile }}
+                                        {{ $contactContact->contact_mobile }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.address') }}
+                                        {{ trans('cruds.contactContact.fields.contact_notes') }}
                                     </th>
                                     <td>
-                                        {{ $contactContact->address }}
+                                        {{ $contactContact->contact_notes }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.country') }}
+                                        {{ trans('cruds.contactContact.fields.contact_internalnotes') }}
                                     </th>
                                     <td>
-                                        {{ $contactContact->country }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.contactContact.fields.notes') }}
-                                    </th>
-                                    <td>
-                                        {{ $contactContact->notes }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.contactContact.fields.internalnotes') }}
-                                    </th>
-                                    <td>
-                                        {{ $contactContact->internalnotes }}
+                                        {{ $contactContact->contact_internalnotes }}
                                     </td>
                                 </tr>
                             </tbody>

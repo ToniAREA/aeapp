@@ -11,9 +11,11 @@ class CreateContactCompaniesTable extends Migration
         Schema::create('contact_companies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('company_name')->nullable();
+            $table->string('company_vat')->nullable();
             $table->string('company_address')->nullable();
-            $table->string('company_website')->nullable();
             $table->string('company_email')->nullable();
+            $table->string('company_phone')->nullable();
+            $table->string('company_website')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
