@@ -15,6 +15,10 @@ class Wlog extends Model
 
     public $table = 'wlogs';
 
+    public static $searchable = [
+        'description',
+    ];
+
     protected $dates = [
         'date',
         'created_at',
@@ -26,6 +30,9 @@ class Wlog extends Model
         'date',
         'wlist_id',
         'employee_id',
+        'marina_id',
+        'description',
+        'hours',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -59,5 +66,15 @@ class Wlog extends Model
     public function employee()
     {
         return $this->belongsTo(User::class, 'employee_id');
+    }
+
+    public function marina()
+    {
+        return $this->belongsTo(Marina::class, 'marina_id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

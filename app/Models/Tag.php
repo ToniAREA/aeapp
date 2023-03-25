@@ -8,15 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Marina extends Model
+class Tag extends Model
 {
     use SoftDeletes, Auditable, HasFactory;
 
-    public $table = 'marinas';
-
-    public static $searchable = [
-        'name',
-    ];
+    public $table = 'tags';
 
     protected $dates = [
         'created_at',
@@ -25,9 +21,7 @@ class Marina extends Model
     ];
 
     protected $fillable = [
-        'id_marina',
         'name',
-        'coordinates',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -38,18 +32,8 @@ class Marina extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function marinaBoats()
+    public function tagsWlogs()
     {
-        return $this->hasMany(Boat::class, 'marina_id', 'id');
-    }
-
-    public function marinaWlogs()
-    {
-        return $this->hasMany(Wlog::class, 'marina_id', 'id');
-    }
-
-    public function boats()
-    {
-        return $this->belongsToMany(Boat::class);
+        return $this->belongsToMany(Wlog::class);
     }
 }

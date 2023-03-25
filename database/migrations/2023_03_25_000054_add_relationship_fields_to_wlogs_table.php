@@ -13,6 +13,8 @@ class AddRelationshipFieldsToWlogsTable extends Migration
             $table->foreign('wlist_id', 'wlist_fk_7894040')->references('id')->on('wlists');
             $table->unsignedBigInteger('employee_id')->nullable();
             $table->foreign('employee_id', 'employee_fk_8238948')->references('id')->on('users');
+            $table->unsignedBigInteger('marina_id')->nullable();
+            $table->foreign('marina_id', 'marina_fk_8239254')->references('id')->on('marinas');
         });
     }
 }

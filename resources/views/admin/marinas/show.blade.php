@@ -78,10 +78,18 @@
                 {{ trans('cruds.boat.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#marina_wlogs" role="tab" data-toggle="tab">
+                {{ trans('cruds.wlog.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="marina_boats">
             @includeIf('admin.marinas.relationships.marinaBoats', ['boats' => $marina->marinaBoats])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="marina_wlogs">
+            @includeIf('admin.marinas.relationships.marinaWlogs', ['wlogs' => $marina->marinaWlogs])
         </div>
     </div>
 </div>

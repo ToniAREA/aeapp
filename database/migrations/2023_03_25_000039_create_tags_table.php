@@ -4,15 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWlogsTable extends Migration
+class CreateTagsTable extends Migration
 {
     public function up()
     {
-        Schema::create('wlogs', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('date');
-            $table->string('description')->nullable();
-            $table->float('hours', 4, 2)->nullable();
+            $table->string('name')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

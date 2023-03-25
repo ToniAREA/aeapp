@@ -29,6 +29,21 @@ class UpdateWlogRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'description' => [
+                'string',
+                'nullable',
+            ],
+            'hours' => [
+                'numeric',
+                'min:0',
+                'max:24',
+            ],
+            'tags.*' => [
+                'integer',
+            ],
+            'tags' => [
+                'array',
+            ],
         ];
     }
 }

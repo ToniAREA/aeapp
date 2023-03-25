@@ -17,12 +17,13 @@ class WlogsApiController extends Controller
     {
         abort_if(Gate::denies('wlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new WlogResource(Wlog::with(['wlist', 'employee'])->get());
+        return new WlogResource(Wlog::with(['wlist', 'employee', 'marina', 'tags'])->get());
     }
 
     public function store(StoreWlogRequest $request)
     {
         $wlog = Wlog::create($request->all());
+        $wlog->tags()->sync($request->input('tags', []));
 
         return (new WlogResource($wlog))
             ->response()
@@ -33,12 +34,13 @@ class WlogsApiController extends Controller
     {
         abort_if(Gate::denies('wlog_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new WlogResource($wlog->load(['wlist', 'employee']));
+        return new WlogResource($wlog->load(['wlist', 'employee', 'marina', 'tags']));
     }
 
     public function update(UpdateWlogRequest $request, Wlog $wlog)
     {
         $wlog->update($request->all());
+        $wlog->tags()->sync($request->input('tags', []));
 
         return (new WlogResource($wlog))
             ->response()
