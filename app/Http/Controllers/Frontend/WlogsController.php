@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyWlogRequest;
 use App\Http\Requests\StoreWlogRequest;
 use App\Http\Requests\UpdateWlogRequest;
+use App\Models\User;
 use App\Models\Wlist;
 use App\Models\Wlog;
 use Gate;
@@ -21,11 +22,13 @@ class WlogsController extends Controller
     {
         abort_if(Gate::denies('wlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlogs = Wlog::with(['wlist'])->get();
+        $wlogs = Wlog::with(['wlist', 'employee'])->get();
 
         $wlists = Wlist::get();
 
-        return view('frontend.wlogs.index', compact('wlists', 'wlogs'));
+        $users = User::get();
+
+        return view('frontend.wlogs.index', compact('users', 'wlists', 'wlogs'));
     }
 
     public function create()
@@ -34,7 +37,9 @@ class WlogsController extends Controller
 
         $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('frontend.wlogs.create', compact('wlists'));
+        $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('frontend.wlogs.create', compact('employees', 'wlists'));
     }
 
     public function store(StoreWlogRequest $request)
@@ -50,9 +55,11 @@ class WlogsController extends Controller
 
         $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $wlog->load('wlist');
+        $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('frontend.wlogs.edit', compact('wlists', 'wlog'));
+        $wlog->load('wlist', 'employee');
+
+        return view('frontend.wlogs.edit', compact('employees', 'wlists', 'wlog'));
     }
 
     public function update(UpdateWlogRequest $request, Wlog $wlog)
@@ -66,7 +73,7 @@ class WlogsController extends Controller
     {
         abort_if(Gate::denies('wlog_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlog->load('wlist', 'wlogsWlists');
+        $wlog->load('wlist', 'employee', 'wlogsWlists');
 
         return view('frontend.wlogs.show', compact('wlog'));
     }

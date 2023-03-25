@@ -29,16 +29,22 @@
                         {{ trans('cruds.wlist.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.wlist.fields.desciption') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.wlist.fields.wlogs') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.wlist.fields.client') }}
                     </th>
                     <th>
                         {{ trans('cruds.wlist.fields.boat') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.desciption') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.deadline') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.priority') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.wlogs') }}
                     </th>
                     <th>
                         &nbsp;
@@ -49,17 +55,6 @@
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($wlogs as $key => $item)
-                                <option value="{{ $item->date }}">{{ $item->date }}</option>
-                            @endforeach
-                        </select>
                     </td>
                     <td>
                         <select class="search">
@@ -74,6 +69,27 @@
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($boats as $key => $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($priorities as $key => $item)
+                                <option value="{{ $item->level }}">{{ $item->level }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($wlogs as $key => $item)
+                                <option value="{{ $item->date }}">{{ $item->date }}</option>
                             @endforeach
                         </select>
                     </td>
@@ -133,10 +149,12 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'desciption', name: 'desciption' },
-{ data: 'wlogs', name: 'wlogs.date' },
 { data: 'client_name', name: 'client.name' },
 { data: 'boat_name', name: 'boat.name' },
+{ data: 'desciption', name: 'desciption' },
+{ data: 'deadline', name: 'deadline' },
+{ data: 'priority_level', name: 'priority.level' },
+{ data: 'wlogs', name: 'wlogs.date' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

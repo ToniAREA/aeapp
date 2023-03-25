@@ -39,9 +39,6 @@
                                         {{ trans('cruds.marina.fields.coordinates') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.marina.fields.lastuse') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.marina.fields.boats') }}
                                     </th>
                                     <th>
@@ -62,8 +59,6 @@
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
                                     </td>
                                     <td>
                                         <select class="search">
@@ -91,9 +86,6 @@
                                         </td>
                                         <td>
                                             {{ $marina->coordinates ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $marina->lastuse ?? '' }}
                                         </td>
                                         <td>
                                             @foreach($marina->boats as $key => $item)

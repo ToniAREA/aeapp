@@ -19,6 +19,12 @@ class Product extends Model implements HasMedia
 
     protected $appends = [
         'photo',
+        'file',
+    ];
+
+    public static $searchable = [
+        'file',
+        'model',
     ];
 
     protected $dates = [
@@ -30,7 +36,9 @@ class Product extends Model implements HasMedia
     protected $fillable = [
         'name',
         'description',
+        'brand_id',
         'price',
+        'model',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -45,6 +53,11 @@ class Product extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
 
     public function categories()
@@ -67,5 +80,10 @@ class Product extends Model implements HasMedia
         }
 
         return $file;
+    }
+
+    public function getFileAttribute()
+    {
+        return $this->getMedia('file');
     }
 }

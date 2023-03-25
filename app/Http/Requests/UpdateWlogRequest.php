@@ -25,6 +25,10 @@ class UpdateWlogRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'employee_id' => [
+                'required',
+                'integer',
+            ],
         ];
     }
 }

@@ -44,6 +44,14 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.product.fields.brand') }}
+                                    </th>
+                                    <td>
+                                        {{ $product->brand->brand ?? '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.product.fields.price') }}
                                     </th>
                                     <td>
@@ -80,6 +88,26 @@
                                                 <img src="{{ $product->photo->getUrl('thumb') }}">
                                             </a>
                                         @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.product.fields.file') }}
+                                    </th>
+                                    <td>
+                                        @foreach($product->file as $key => $media)
+                                            <a href="{{ $media->getUrl() }}" target="_blank">
+                                                {{ trans('global.view_file') }}
+                                            </a>
+                                        @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.product.fields.model') }}
+                                    </th>
+                                    <td>
+                                        {{ $product->model }}
                                     </td>
                                 </tr>
                             </tbody>

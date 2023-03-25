@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyWlogRequest;
 use App\Http\Requests\StoreWlogRequest;
 use App\Http\Requests\UpdateWlogRequest;
+use App\Models\User;
 use App\Models\Wlist;
 use App\Models\Wlog;
 use Gate;
@@ -23,25 +24,25 @@ class WlogsController extends Controller
         abort_if(Gate::denies('wlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Wlog::with(['wlist'])->select(sprintf('%s.*', (new Wlog())->table));
+            $query = Wlog::with(['wlist', 'employee'])->select(sprintf('%s.*', (new Wlog)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
 
             $table->editColumn('actions', function ($row) {
-                $viewGate = 'wlog_show';
-                $editGate = 'wlog_edit';
-                $deleteGate = 'wlog_delete';
+                $viewGate      = 'wlog_show';
+                $editGate      = 'wlog_edit';
+                $deleteGate    = 'wlog_delete';
                 $crudRoutePart = 'wlogs';
 
                 return view('partials.datatablesActions', compact(
-                'viewGate',
-                'editGate',
-                'deleteGate',
-                'crudRoutePart',
-                'row'
-            ));
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
             });
 
             $table->editColumn('id', function ($row) {
@@ -52,14 +53,23 @@ class WlogsController extends Controller
                 return $row->wlist ? $row->wlist->desciption : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'wlist']);
+            $table->addColumn('employee_name', function ($row) {
+                return $row->employee ? $row->employee->name : '';
+            });
+
+            $table->editColumn('employee.email', function ($row) {
+                return $row->employee ? (is_string($row->employee) ? $row->employee : $row->employee->email) : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'wlist', 'employee']);
 
             return $table->make(true);
         }
 
         $wlists = Wlist::get();
+        $users  = User::get();
 
-        return view('admin.wlogs.index', compact('wlists'));
+        return view('admin.wlogs.index', compact('wlists', 'users'));
     }
 
     public function create()
@@ -68,7 +78,9 @@ class WlogsController extends Controller
 
         $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.wlogs.create', compact('wlists'));
+        $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.wlogs.create', compact('employees', 'wlists'));
     }
 
     public function store(StoreWlogRequest $request)
@@ -84,9 +96,11 @@ class WlogsController extends Controller
 
         $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $wlog->load('wlist');
+        $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.wlogs.edit', compact('wlists', 'wlog'));
+        $wlog->load('wlist', 'employee');
+
+        return view('admin.wlogs.edit', compact('employees', 'wlists', 'wlog'));
     }
 
     public function update(UpdateWlogRequest $request, Wlog $wlog)
@@ -100,7 +114,7 @@ class WlogsController extends Controller
     {
         abort_if(Gate::denies('wlog_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlog->load('wlist', 'wlogsWlists');
+        $wlog->load('wlist', 'employee', 'wlogsWlists');
 
         return view('admin.wlogs.show', compact('wlog'));
     }
@@ -116,7 +130,11 @@ class WlogsController extends Controller
 
     public function massDestroy(MassDestroyWlogRequest $request)
     {
-        Wlog::whereIn('id', request('ids'))->delete();
+        $wlogs = Wlog::find(request('ids'));
+
+        foreach ($wlogs as $wlog) {
+            $wlog->delete();
+        }
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

@@ -35,6 +35,12 @@
                         {{ trans('cruds.wlog.fields.wlist') }}
                     </th>
                     <th>
+                        {{ trans('cruds.wlog.fields.employee') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.email') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -53,6 +59,16 @@
                                 <option value="{{ $item->desciption }}">{{ $item->desciption }}</option>
                             @endforeach
                         </select>
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($users as $key => $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
                     </td>
                     <td>
                     </td>
@@ -112,6 +128,8 @@
 { data: 'id', name: 'id' },
 { data: 'date', name: 'date' },
 { data: 'wlist_desciption', name: 'wlist.desciption' },
+{ data: 'employee_name', name: 'employee.name' },
+{ data: 'employee.email', name: 'employee.email' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

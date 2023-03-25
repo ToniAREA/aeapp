@@ -25,6 +25,10 @@ class StoreWlogRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'employee_id' => [
+                'required',
+                'integer',
+            ],
         ];
     }
 }

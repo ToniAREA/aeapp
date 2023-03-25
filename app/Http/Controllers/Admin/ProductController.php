@@ -8,6 +8,7 @@ use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyProductRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Brand;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductTag;
@@ -26,7 +27,7 @@ class ProductController extends Controller
         abort_if(Gate::denies('product_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Product::with(['categories', 'tags'])->select(sprintf('%s.*', (new Product)->table));
+            $query = Product::with(['brand', 'categories', 'tags'])->select(sprintf('%s.*', (new Product)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -56,6 +57,10 @@ class ProductController extends Controller
             $table->editColumn('description', function ($row) {
                 return $row->description ? $row->description : '';
             });
+            $table->addColumn('brand_brand', function ($row) {
+                return $row->brand ? $row->brand->brand : '';
+            });
+
             $table->editColumn('price', function ($row) {
                 return $row->price ? $row->price : '';
             });
@@ -86,24 +91,44 @@ class ProductController extends Controller
 
                 return '';
             });
+            $table->editColumn('file', function ($row) {
+                if (! $row->file) {
+                    return '';
+                }
+                $links = [];
+                foreach ($row->file as $media) {
+                    $links[] = '<a href="' . $media->getUrl() . '" target="_blank">' . trans('global.downloadFile') . '</a>';
+                }
 
-            $table->rawColumns(['actions', 'placeholder', 'category', 'tag', 'photo']);
+                return implode(', ', $links);
+            });
+            $table->editColumn('model', function ($row) {
+                return $row->model ? $row->model : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'brand', 'category', 'tag', 'photo', 'file']);
 
             return $table->make(true);
         }
 
-        return view('admin.products.index');
+        $brands             = Brand::get();
+        $product_categories = ProductCategory::get();
+        $product_tags       = ProductTag::get();
+
+        return view('admin.products.index', compact('brands', 'product_categories', 'product_tags'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('product_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $brands = Brand::pluck('brand', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $categories = ProductCategory::pluck('name', 'id');
 
         $tags = ProductTag::pluck('name', 'id');
 
-        return view('admin.products.create', compact('categories', 'tags'));
+        return view('admin.products.create', compact('brands', 'categories', 'tags'));
     }
 
     public function store(StoreProductRequest $request)
@@ -113,6 +138,10 @@ class ProductController extends Controller
         $product->tags()->sync($request->input('tags', []));
         if ($request->input('photo', false)) {
             $product->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
+        }
+
+        foreach ($request->input('file', []) as $file) {
+            $product->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('file');
         }
 
         if ($media = $request->input('ck-media', false)) {
@@ -126,13 +155,15 @@ class ProductController extends Controller
     {
         abort_if(Gate::denies('product_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $brands = Brand::pluck('brand', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $categories = ProductCategory::pluck('name', 'id');
 
         $tags = ProductTag::pluck('name', 'id');
 
-        $product->load('categories', 'tags');
+        $product->load('brand', 'categories', 'tags');
 
-        return view('admin.products.edit', compact('categories', 'product', 'tags'));
+        return view('admin.products.edit', compact('brands', 'categories', 'product', 'tags'));
     }
 
     public function update(UpdateProductRequest $request, Product $product)
@@ -151,6 +182,20 @@ class ProductController extends Controller
             $product->photo->delete();
         }
 
+        if (count($product->file) > 0) {
+            foreach ($product->file as $media) {
+                if (! in_array($media->file_name, $request->input('file', []))) {
+                    $media->delete();
+                }
+            }
+        }
+        $media = $product->file->pluck('file_name')->toArray();
+        foreach ($request->input('file', []) as $file) {
+            if (count($media) === 0 || ! in_array($file, $media)) {
+                $product->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('file');
+            }
+        }
+
         return redirect()->route('admin.products.index');
     }
 
@@ -158,7 +203,7 @@ class ProductController extends Controller
     {
         abort_if(Gate::denies('product_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $product->load('categories', 'tags');
+        $product->load('brand', 'categories', 'tags');
 
         return view('admin.products.show', compact('product'));
     }

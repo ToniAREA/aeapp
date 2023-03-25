@@ -31,6 +31,12 @@
                             {{ trans('cruds.wlog.fields.wlist') }}
                         </th>
                         <th>
+                            {{ trans('cruds.wlog.fields.employee') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.email') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -49,6 +55,12 @@
                             </td>
                             <td>
                                 {{ $wlog->wlist->desciption ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlog->employee->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlog->employee->email ?? '' }}
                             </td>
                             <td>
                                 @can('wlog_show')

@@ -31,10 +31,6 @@ class StoreMarinaRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'lastuse' => [
-                'date_format:' . config('panel.date_format'),
-                'nullable',
-            ],
             'boats.*' => [
                 'integer',
             ],

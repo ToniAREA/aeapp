@@ -54,7 +54,7 @@ class PrioritiesController extends Controller
     {
         abort_if(Gate::denies('priority_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $priority->load('priorityToDos');
+        $priority->load('priorityToDos', 'priorityWlists');
 
         return view('admin.priorities.show', compact('priority'));
     }

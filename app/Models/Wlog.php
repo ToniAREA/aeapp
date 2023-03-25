@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use \DateTimeInterface;
+use App\Traits\Auditable;
 use Carbon\Carbon;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Wlog extends Model
 {
-    use SoftDeletes;
-    use HasFactory;
+    use SoftDeletes, Auditable, HasFactory;
 
     public $table = 'wlogs';
 
@@ -25,10 +25,16 @@ class Wlog extends Model
     protected $fillable = [
         'date',
         'wlist_id',
+        'employee_id',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 
     public function wlogsWlists()
     {
@@ -50,8 +56,8 @@ class Wlog extends Model
         return $this->belongsTo(Wlist::class, 'wlist_id');
     }
 
-    protected function serializeDate(DateTimeInterface $date)
+    public function employee()
     {
-        return $date->format('Y-m-d H:i:s');
+        return $this->belongsTo(User::class, 'employee_id');
     }
 }

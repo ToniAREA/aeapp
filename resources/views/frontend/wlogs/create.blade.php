@@ -38,6 +38,20 @@
                             <span class="help-block">{{ trans('cruds.wlog.fields.wlist_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label class="required" for="employee_id">{{ trans('cruds.wlog.fields.employee') }}</label>
+                            <select class="form-control select2" name="employee_id" id="employee_id" required>
+                                @foreach($employees as $id => $entry)
+                                    <option value="{{ $id }}" {{ old('employee_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('employee'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('employee') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.wlog.fields.employee_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <button class="btn btn-danger" type="submit">
                                 {{ trans('global.save') }}
                             </button>

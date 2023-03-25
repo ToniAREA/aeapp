@@ -39,6 +39,14 @@
                             {{ $wlog->wlist->desciption ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.wlog.fields.employee') }}
+                        </th>
+                        <td>
+                            {{ $wlog->employee->name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

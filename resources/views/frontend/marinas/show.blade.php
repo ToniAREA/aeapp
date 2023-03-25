@@ -52,14 +52,6 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.marina.fields.lastuse') }}
-                                    </th>
-                                    <td>
-                                        {{ $marina->lastuse }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.marina.fields.boats') }}
                                     </th>
                                     <td>

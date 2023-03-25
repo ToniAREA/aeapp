@@ -56,12 +56,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('wlists/process-csv-import', 'WlistController@processCsvImport')->name('wlists.processCsvImport');
     Route::resource('wlists', 'WlistController');
 
-    // M Logs
-    Route::delete('m-logs/destroy', 'MLogsController@massDestroy')->name('m-logs.massDestroy');
-    Route::post('m-logs/parse-csv-import', 'MLogsController@parseCsvImport')->name('m-logs.parseCsvImport');
-    Route::post('m-logs/process-csv-import', 'MLogsController@processCsvImport')->name('m-logs.processCsvImport');
-    Route::resource('m-logs', 'MLogsController');
-
     // To Do
     Route::delete('to-dos/destroy', 'ToDoController@massDestroy')->name('to-dos.massDestroy');
     Route::post('to-dos/media', 'ToDoController@storeMedia')->name('to-dos.storeMedia');
@@ -154,6 +148,51 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('employees/process-csv-import', 'EmployeesController@processCsvImport')->name('employees.processCsvImport');
     Route::resource('employees', 'EmployeesController');
 
+    // Asset Category
+    Route::delete('asset-categories/destroy', 'AssetCategoryController@massDestroy')->name('asset-categories.massDestroy');
+    Route::resource('asset-categories', 'AssetCategoryController');
+
+    // Asset Location
+    Route::delete('asset-locations/destroy', 'AssetLocationController@massDestroy')->name('asset-locations.massDestroy');
+    Route::resource('asset-locations', 'AssetLocationController');
+
+    // Asset Status
+    Route::delete('asset-statuses/destroy', 'AssetStatusController@massDestroy')->name('asset-statuses.massDestroy');
+    Route::resource('asset-statuses', 'AssetStatusController');
+
+    // Asset
+    Route::delete('assets/destroy', 'AssetController@massDestroy')->name('assets.massDestroy');
+    Route::post('assets/media', 'AssetController@storeMedia')->name('assets.storeMedia');
+    Route::post('assets/ckmedia', 'AssetController@storeCKEditorImages')->name('assets.storeCKEditorImages');
+    Route::resource('assets', 'AssetController');
+
+    // Assets History
+    Route::resource('assets-histories', 'AssetsHistoryController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // Boats Type
+    Route::delete('boats-types/destroy', 'BoatsTypeController@massDestroy')->name('boats-types.massDestroy');
+    Route::resource('boats-types', 'BoatsTypeController');
+
+    // Mlogs
+    Route::delete('mlogs/destroy', 'MlogsController@massDestroy')->name('mlogs.massDestroy');
+    Route::post('mlogs/parse-csv-import', 'MlogsController@parseCsvImport')->name('mlogs.parseCsvImport');
+    Route::post('mlogs/process-csv-import', 'MlogsController@processCsvImport')->name('mlogs.processCsvImport');
+    Route::resource('mlogs', 'MlogsController');
+
+    // Provider
+    Route::delete('providers/destroy', 'ProviderController@massDestroy')->name('providers.massDestroy');
+    Route::post('providers/media', 'ProviderController@storeMedia')->name('providers.storeMedia');
+    Route::post('providers/ckmedia', 'ProviderController@storeCKEditorImages')->name('providers.storeCKEditorImages');
+    Route::post('providers/parse-csv-import', 'ProviderController@parseCsvImport')->name('providers.parseCsvImport');
+    Route::post('providers/process-csv-import', 'ProviderController@processCsvImport')->name('providers.processCsvImport');
+    Route::resource('providers', 'ProviderController');
+
+    // Brands
+    Route::delete('brands/destroy', 'BrandsController@massDestroy')->name('brands.massDestroy');
+    Route::post('brands/parse-csv-import', 'BrandsController@parseCsvImport')->name('brands.parseCsvImport');
+    Route::post('brands/process-csv-import', 'BrandsController@processCsvImport')->name('brands.processCsvImport');
+    Route::resource('brands', 'BrandsController');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
     Route::get('messenger', 'MessengerController@index')->name('messenger.index');
@@ -220,10 +259,6 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     // Wlist
     Route::delete('wlists/destroy', 'WlistController@massDestroy')->name('wlists.massDestroy');
     Route::resource('wlists', 'WlistController');
-
-    // M Logs
-    Route::delete('m-logs/destroy', 'MLogsController@massDestroy')->name('m-logs.massDestroy');
-    Route::resource('m-logs', 'MLogsController');
 
     // To Do
     Route::delete('to-dos/destroy', 'ToDoController@massDestroy')->name('to-dos.massDestroy');
@@ -298,6 +333,45 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     // Employees
     Route::delete('employees/destroy', 'EmployeesController@massDestroy')->name('employees.massDestroy');
     Route::resource('employees', 'EmployeesController');
+
+    // Asset Category
+    Route::delete('asset-categories/destroy', 'AssetCategoryController@massDestroy')->name('asset-categories.massDestroy');
+    Route::resource('asset-categories', 'AssetCategoryController');
+
+    // Asset Location
+    Route::delete('asset-locations/destroy', 'AssetLocationController@massDestroy')->name('asset-locations.massDestroy');
+    Route::resource('asset-locations', 'AssetLocationController');
+
+    // Asset Status
+    Route::delete('asset-statuses/destroy', 'AssetStatusController@massDestroy')->name('asset-statuses.massDestroy');
+    Route::resource('asset-statuses', 'AssetStatusController');
+
+    // Asset
+    Route::delete('assets/destroy', 'AssetController@massDestroy')->name('assets.massDestroy');
+    Route::post('assets/media', 'AssetController@storeMedia')->name('assets.storeMedia');
+    Route::post('assets/ckmedia', 'AssetController@storeCKEditorImages')->name('assets.storeCKEditorImages');
+    Route::resource('assets', 'AssetController');
+
+    // Assets History
+    Route::resource('assets-histories', 'AssetsHistoryController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // Boats Type
+    Route::delete('boats-types/destroy', 'BoatsTypeController@massDestroy')->name('boats-types.massDestroy');
+    Route::resource('boats-types', 'BoatsTypeController');
+
+    // Mlogs
+    Route::delete('mlogs/destroy', 'MlogsController@massDestroy')->name('mlogs.massDestroy');
+    Route::resource('mlogs', 'MlogsController');
+
+    // Provider
+    Route::delete('providers/destroy', 'ProviderController@massDestroy')->name('providers.massDestroy');
+    Route::post('providers/media', 'ProviderController@storeMedia')->name('providers.storeMedia');
+    Route::post('providers/ckmedia', 'ProviderController@storeCKEditorImages')->name('providers.storeCKEditorImages');
+    Route::resource('providers', 'ProviderController');
+
+    // Brands
+    Route::delete('brands/destroy', 'BrandsController@massDestroy')->name('brands.massDestroy');
+    Route::resource('brands', 'BrandsController');
 
     Route::get('frontend/profile', 'ProfileController@index')->name('profile.index');
     Route::post('frontend/profile', 'ProfileController@update')->name('profile.update');

@@ -11,6 +11,7 @@ class CreateWlistsTable extends Migration
         Schema::create('wlists', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('desciption');
+            $table->date('deadline')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

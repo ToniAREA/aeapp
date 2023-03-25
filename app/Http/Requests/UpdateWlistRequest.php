@@ -17,18 +17,6 @@ class UpdateWlistRequest extends FormRequest
     public function rules()
     {
         return [
-            'desciption' => [
-                'string',
-                'min:5',
-                'max:200',
-                'required',
-            ],
-            'wlogs.*' => [
-                'integer',
-            ],
-            'wlogs' => [
-                'array',
-            ],
             'client_id' => [
                 'required',
                 'integer',
@@ -36,6 +24,22 @@ class UpdateWlistRequest extends FormRequest
             'boat_id' => [
                 'required',
                 'integer',
+            ],
+            'desciption' => [
+                'string',
+                'min:5',
+                'max:200',
+                'required',
+            ],
+            'deadline' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable',
+            ],
+            'wlogs.*' => [
+                'integer',
+            ],
+            'wlogs' => [
+                'array',
             ],
         ];
     }
