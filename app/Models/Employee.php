@@ -20,9 +20,18 @@ class Employee extends Model
         'deleted_at',
     ];
 
+    public static $searchable = [
+        'notes',
+        'internalnotes',
+        'status',
+    ];
+
     protected $fillable = [
         'user_id',
         'id_employee',
+        'notes',
+        'internalnotes',
+        'status',
         'created_at',
         'updated_at',
         'deleted_at',
