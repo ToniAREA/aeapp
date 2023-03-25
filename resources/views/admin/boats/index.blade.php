@@ -38,6 +38,12 @@
                         {{ trans('cruds.boat.fields.name') }}
                     </th>
                     <th>
+                        {{ trans('cruds.boat.fields.marina') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.boat.fields.client') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.boat.fields.mmsi') }}
                     </th>
                     <th>
@@ -67,6 +73,22 @@
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($marinas as $key => $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($clients as $key => $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -138,6 +160,8 @@
 { data: 'id_boat', name: 'id_boat' },
 { data: 'type', name: 'type' },
 { data: 'name', name: 'name' },
+{ data: 'marina_name', name: 'marina.name' },
+{ data: 'client', name: 'clients.name' },
 { data: 'mmsi', name: 'mmsi' },
 { data: 'notes', name: 'notes' },
 { data: 'internalnotes', name: 'internalnotes' },

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Boat extends Model
 {
-    use SoftDeletes, HasFactory;
+    use SoftDeletes, Auditable, HasFactory;
 
     public $table = 'boats';
 
@@ -32,6 +33,7 @@ class Boat extends Model
         'id_boat',
         'type',
         'name',
+        'marina_id',
         'mmsi',
         'notes',
         'internalnotes',
@@ -59,6 +61,16 @@ class Boat extends Model
     public function boatsMarinas()
     {
         return $this->belongsToMany(Marina::class);
+    }
+
+    public function marina()
+    {
+        return $this->belongsTo(Marina::class, 'marina_id');
+    }
+
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class);
     }
 
     public function getLastuseAttribute($value)

@@ -151,6 +151,10 @@ return [
             'type_helper'          => ' ',
             'mmsi'                 => 'MMSI',
             'mmsi_helper'          => ' ',
+            'marina'               => 'Marina',
+            'marina_helper'        => ' ',
+            'client'               => 'Client',
+            'client_helper'        => ' ',
         ],
     ],
     'contentManagement' => [
