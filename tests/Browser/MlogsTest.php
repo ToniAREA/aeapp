@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class MlogsTest extends DuskTestCase
+class MLogsTest extends DuskTestCase
 {
     public function testIndex()
     {
