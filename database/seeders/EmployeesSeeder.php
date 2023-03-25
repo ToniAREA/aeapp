@@ -21,6 +21,13 @@ class EmployeesSeeder extends Seeder
 
         // Insertar los datos en la tabla destino de la nueva base de datos
         foreach ($oldEmployees as $employee) {
+            
+            // Convertir el objeto en una cadena JSON
+            $json = json_encode($employee);
+            // Mostrar la cadena JSON resultante en la consola
+            $this->command->line("Objeto en formato JSON: {$json}");
+            $this->command->line("...");
+
             DB::table('employees')->insert([
                 'id_employee' => $employee->id,
                 'user_id' => $employee->user_id,
