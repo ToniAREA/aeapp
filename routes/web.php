@@ -193,6 +193,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('brands/process-csv-import', 'BrandsController@processCsvImport')->name('brands.processCsvImport');
     Route::resource('brands', 'BrandsController');
 
+    // Tags
+    Route::delete('tags/destroy', 'TagsController@massDestroy')->name('tags.massDestroy');
+    Route::resource('tags', 'TagsController');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
     Route::get('messenger', 'MessengerController@index')->name('messenger.index');
@@ -372,6 +376,10 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     // Brands
     Route::delete('brands/destroy', 'BrandsController@massDestroy')->name('brands.massDestroy');
     Route::resource('brands', 'BrandsController');
+
+    // Tags
+    Route::delete('tags/destroy', 'TagsController@massDestroy')->name('tags.massDestroy');
+    Route::resource('tags', 'TagsController');
 
     Route::get('frontend/profile', 'ProfileController@index')->name('profile.index');
     Route::post('frontend/profile', 'ProfileController@update')->name('profile.update');

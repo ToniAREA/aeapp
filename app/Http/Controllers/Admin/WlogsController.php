@@ -7,6 +7,8 @@ use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyWlogRequest;
 use App\Http\Requests\StoreWlogRequest;
 use App\Http\Requests\UpdateWlogRequest;
+use App\Models\Marina;
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Wlist;
 use App\Models\Wlog;
@@ -24,7 +26,7 @@ class WlogsController extends Controller
         abort_if(Gate::denies('wlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Wlog::with(['wlist', 'employee'])->select(sprintf('%s.*', (new Wlog)->table));
+            $query = Wlog::with(['wlist', 'employee', 'marina', 'tags'])->select(sprintf('%s.*', (new Wlog)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -60,16 +62,36 @@ class WlogsController extends Controller
             $table->editColumn('employee.email', function ($row) {
                 return $row->employee ? (is_string($row->employee) ? $row->employee : $row->employee->email) : '';
             });
+            $table->addColumn('marina_name', function ($row) {
+                return $row->marina ? $row->marina->name : '';
+            });
 
-            $table->rawColumns(['actions', 'placeholder', 'wlist', 'employee']);
+            $table->editColumn('description', function ($row) {
+                return $row->description ? $row->description : '';
+            });
+            $table->editColumn('hours', function ($row) {
+                return $row->hours ? $row->hours : '';
+            });
+            $table->editColumn('tags', function ($row) {
+                $labels = [];
+                foreach ($row->tags as $tag) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $tag->name);
+                }
+
+                return implode(' ', $labels);
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'wlist', 'employee', 'marina', 'tags']);
 
             return $table->make(true);
         }
 
-        $wlists = Wlist::get();
-        $users  = User::get();
+        $wlists  = Wlist::get();
+        $users   = User::get();
+        $marinas = Marina::get();
+        $tags    = Tag::get();
 
-        return view('admin.wlogs.index', compact('wlists', 'users'));
+        return view('admin.wlogs.index', compact('wlists', 'users', 'marinas', 'tags'));
     }
 
     public function create()
@@ -80,12 +102,17 @@ class WlogsController extends Controller
 
         $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.wlogs.create', compact('employees', 'wlists'));
+        $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $tags = Tag::pluck('name', 'id');
+
+        return view('admin.wlogs.create', compact('employees', 'marinas', 'tags', 'wlists'));
     }
 
     public function store(StoreWlogRequest $request)
     {
         $wlog = Wlog::create($request->all());
+        $wlog->tags()->sync($request->input('tags', []));
 
         return redirect()->route('admin.wlogs.index');
     }
@@ -98,14 +125,19 @@ class WlogsController extends Controller
 
         $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $wlog->load('wlist', 'employee');
+        $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.wlogs.edit', compact('employees', 'wlists', 'wlog'));
+        $tags = Tag::pluck('name', 'id');
+
+        $wlog->load('wlist', 'employee', 'marina', 'tags');
+
+        return view('admin.wlogs.edit', compact('employees', 'marinas', 'tags', 'wlists', 'wlog'));
     }
 
     public function update(UpdateWlogRequest $request, Wlog $wlog)
     {
         $wlog->update($request->all());
+        $wlog->tags()->sync($request->input('tags', []));
 
         return redirect()->route('admin.wlogs.index');
     }
@@ -114,7 +146,7 @@ class WlogsController extends Controller
     {
         abort_if(Gate::denies('wlog_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlog->load('wlist', 'employee', 'wlogsWlists');
+        $wlog->load('wlist', 'employee', 'marina', 'tags', 'wlogsWlists');
 
         return view('admin.wlogs.show', compact('wlog'));
     }

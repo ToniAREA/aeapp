@@ -50,6 +50,40 @@
                                         {{ $wlog->employee->name ?? '' }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.wlog.fields.marina') }}
+                                    </th>
+                                    <td>
+                                        {{ $wlog->marina->name ?? '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.wlog.fields.description') }}
+                                    </th>
+                                    <td>
+                                        {{ $wlog->description }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.wlog.fields.hours') }}
+                                    </th>
+                                    <td>
+                                        {{ $wlog->hours }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.wlog.fields.tags') }}
+                                    </th>
+                                    <td>
+                                        @foreach($wlog->tags as $key => $tags)
+                                            <span class="label label-info">{{ $tags->name }}</span>
+                                        @endforeach
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

@@ -37,6 +37,18 @@
                             {{ trans('cruds.user.fields.email') }}
                         </th>
                         <th>
+                            {{ trans('cruds.wlog.fields.marina') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlog.fields.description') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlog.fields.hours') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlog.fields.tags') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -61,6 +73,20 @@
                             </td>
                             <td>
                                 {{ $wlog->employee->email ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlog->marina->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlog->description ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlog->hours ?? '' }}
+                            </td>
+                            <td>
+                                @foreach($wlog->tags as $key => $item)
+                                    <span class="badge badge-info">{{ $item->name }}</span>
+                                @endforeach
                             </td>
                             <td>
                                 @can('wlog_show')

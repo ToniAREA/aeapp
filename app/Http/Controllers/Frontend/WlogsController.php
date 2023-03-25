@@ -7,6 +7,8 @@ use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyWlogRequest;
 use App\Http\Requests\StoreWlogRequest;
 use App\Http\Requests\UpdateWlogRequest;
+use App\Models\Marina;
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Wlist;
 use App\Models\Wlog;
@@ -22,13 +24,17 @@ class WlogsController extends Controller
     {
         abort_if(Gate::denies('wlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlogs = Wlog::with(['wlist', 'employee'])->get();
+        $wlogs = Wlog::with(['wlist', 'employee', 'marina', 'tags'])->get();
 
         $wlists = Wlist::get();
 
         $users = User::get();
 
-        return view('frontend.wlogs.index', compact('users', 'wlists', 'wlogs'));
+        $marinas = Marina::get();
+
+        $tags = Tag::get();
+
+        return view('frontend.wlogs.index', compact('marinas', 'tags', 'users', 'wlists', 'wlogs'));
     }
 
     public function create()
@@ -39,12 +45,17 @@ class WlogsController extends Controller
 
         $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('frontend.wlogs.create', compact('employees', 'wlists'));
+        $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $tags = Tag::pluck('name', 'id');
+
+        return view('frontend.wlogs.create', compact('employees', 'marinas', 'tags', 'wlists'));
     }
 
     public function store(StoreWlogRequest $request)
     {
         $wlog = Wlog::create($request->all());
+        $wlog->tags()->sync($request->input('tags', []));
 
         return redirect()->route('frontend.wlogs.index');
     }
@@ -57,14 +68,19 @@ class WlogsController extends Controller
 
         $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $wlog->load('wlist', 'employee');
+        $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('frontend.wlogs.edit', compact('employees', 'wlists', 'wlog'));
+        $tags = Tag::pluck('name', 'id');
+
+        $wlog->load('wlist', 'employee', 'marina', 'tags');
+
+        return view('frontend.wlogs.edit', compact('employees', 'marinas', 'tags', 'wlists', 'wlog'));
     }
 
     public function update(UpdateWlogRequest $request, Wlog $wlog)
     {
         $wlog->update($request->all());
+        $wlog->tags()->sync($request->input('tags', []));
 
         return redirect()->route('frontend.wlogs.index');
     }
@@ -73,7 +89,7 @@ class WlogsController extends Controller
     {
         abort_if(Gate::denies('wlog_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlog->load('wlist', 'employee', 'wlogsWlists');
+        $wlog->load('wlist', 'employee', 'marina', 'tags', 'wlogsWlists');
 
         return view('frontend.wlogs.show', compact('wlog'));
     }

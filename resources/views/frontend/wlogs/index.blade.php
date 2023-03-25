@@ -42,6 +42,18 @@
                                         {{ trans('cruds.user.fields.email') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.wlog.fields.marina') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlog.fields.description') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlog.fields.hours') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlog.fields.tags') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -72,6 +84,28 @@
                                     <td>
                                     </td>
                                     <td>
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($marinas as $key => $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($tags as $key => $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
                                     </td>
                                 </tr>
                             </thead>
@@ -92,6 +126,20 @@
                                         </td>
                                         <td>
                                             {{ $wlog->employee->email ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlog->marina->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlog->description ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlog->hours ?? '' }}
+                                        </td>
+                                        <td>
+                                            @foreach($wlog->tags as $key => $item)
+                                                <span>{{ $item->name }}</span>
+                                            @endforeach
                                         </td>
                                         <td>
                                             @can('wlog_show')

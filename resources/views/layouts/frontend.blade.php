@@ -127,6 +127,11 @@
                                             {{ trans('cruds.mlog.title') }}
                                         </a>
                                     @endcan
+                                    @can('tag_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.tags.index') }}">
+                                            {{ trans('cruds.tag.title') }}
+                                        </a>
+                                    @endcan
                                     @can('product_management_access')
                                         <a class="dropdown-item disabled" href="#">
                                             {{ trans('cruds.productManagement.title') }}
