@@ -17,11 +17,6 @@ class UpdateMarinaRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_marina' => [
-                'string',
-                'required',
-                'unique:marinas,id_marina,' . request()->route('marina')->id,
-            ],
             'name' => [
                 'string',
                 'required',

@@ -25,9 +25,6 @@
                             {{ trans('cruds.marina.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.marina.fields.id_marina') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.marina.fields.name') }}
                         </th>
                         <th>
@@ -49,9 +46,6 @@
                             </td>
                             <td>
                                 {{ $marina->id ?? '' }}
-                            </td>
-                            <td>
-                                {{ $marina->id_marina ?? '' }}
                             </td>
                             <td>
                                 {{ $marina->name ?? '' }}

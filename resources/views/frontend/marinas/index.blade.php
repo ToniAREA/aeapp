@@ -30,9 +30,6 @@
                                         {{ trans('cruds.marina.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.marina.fields.id_marina') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.marina.fields.name') }}
                                     </th>
                                     <th>
@@ -47,9 +44,6 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -77,9 +71,6 @@
                                     <tr data-entry-id="{{ $marina->id }}">
                                         <td>
                                             {{ $marina->id ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $marina->id_marina ?? '' }}
                                         </td>
                                         <td>
                                             {{ $marina->name ?? '' }}

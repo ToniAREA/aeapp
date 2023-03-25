@@ -10,7 +10,6 @@ class CreateMarinasTable extends Migration
     {
         Schema::create('marinas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('id_marina')->unique();
             $table->string('name')->unique();
             $table->string('coordinates')->nullable();
             $table->timestamps();

@@ -17,11 +17,6 @@ class StoreMarinaRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_marina' => [
-                'string',
-                'required',
-                'unique:marinas',
-            ],
             'name' => [
                 'string',
                 'required',

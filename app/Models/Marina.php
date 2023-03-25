@@ -25,7 +25,6 @@ class Marina extends Model
     ];
 
     protected $fillable = [
-        'id_marina',
         'name',
         'coordinates',
         'created_at',

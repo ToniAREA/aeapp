@@ -25,14 +25,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.marina.fields.id_marina') }}
-                        </th>
-                        <td>
-                            {{ $marina->id_marina }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.marina.fields.name') }}
                         </th>
                         <td>
