@@ -11,18 +11,55 @@ use App\Models\Client;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class AppointmentsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('appointment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $appointments = Appointment::with(['client'])->get();
+        if ($request->ajax()) {
+            $query = Appointment::with(['client'])->select(sprintf('%s.*', (new Appointment)->table));
+            $table = Datatables::of($query);
+
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'appointment_show';
+                $editGate      = 'appointment_edit';
+                $deleteGate    = 'appointment_delete';
+                $crudRoutePart = 'appointments';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->addColumn('client_name', function ($row) {
+                return $row->client ? $row->client->name : '';
+            });
+
+            $table->editColumn('description', function ($row) {
+                return $row->description ? $row->description : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'client']);
+
+            return $table->make(true);
+        }
 
         $clients = Client::get();
 
-        return view('admin.appointments.index', compact('appointments', 'clients'));
+        return view('admin.appointments.index', compact('clients'));
     }
 
     public function create()

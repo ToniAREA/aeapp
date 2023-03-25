@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\Auditable;
-use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +19,6 @@ class Marina extends Model
     ];
 
     protected $dates = [
-        'lastuse',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -30,7 +28,6 @@ class Marina extends Model
         'id_marina',
         'name',
         'coordinates',
-        'lastuse',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -44,16 +41,6 @@ class Marina extends Model
     public function marinaBoats()
     {
         return $this->hasMany(Boat::class, 'marina_id', 'id');
-    }
-
-    public function getLastuseAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
-    }
-
-    public function setLastuseAttribute($value)
-    {
-        $this->attributes['lastuse'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 
     public function boats()

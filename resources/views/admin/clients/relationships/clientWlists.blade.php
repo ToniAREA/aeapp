@@ -25,16 +25,22 @@
                             {{ trans('cruds.wlist.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.wlist.fields.desciption') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.wlogs') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.wlist.fields.client') }}
                         </th>
                         <th>
                             {{ trans('cruds.wlist.fields.boat') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlist.fields.desciption') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlist.fields.deadline') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlist.fields.priority') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlist.fields.wlogs') }}
                         </th>
                         <th>
                             &nbsp;
@@ -51,18 +57,24 @@
                                 {{ $wlist->id ?? '' }}
                             </td>
                             <td>
+                                {{ $wlist->client->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlist->boat->name ?? '' }}
+                            </td>
+                            <td>
                                 {{ $wlist->desciption ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlist->deadline ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlist->priority->level ?? '' }}
                             </td>
                             <td>
                                 @foreach($wlist->wlogs as $key => $item)
                                     <span class="badge badge-info">{{ $item->date }}</span>
                                 @endforeach
-                            </td>
-                            <td>
-                                {{ $wlist->client->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $wlist->boat->name ?? '' }}
                             </td>
                             <td>
                                 @can('wlist_show')

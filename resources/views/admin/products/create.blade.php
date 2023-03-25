@@ -30,6 +30,20 @@
                 <span class="help-block">{{ trans('cruds.product.fields.description_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="brand_id">{{ trans('cruds.product.fields.brand') }}</label>
+                <select class="form-control select2 {{ $errors->has('brand') ? 'is-invalid' : '' }}" name="brand_id" id="brand_id">
+                    @foreach($brands as $id => $entry)
+                        <option value="{{ $id }}" {{ old('brand_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('brand'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('brand') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.product.fields.brand_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="price">{{ trans('cruds.product.fields.price') }}</label>
                 <input class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" type="number" name="price" id="price" value="{{ old('price', '') }}" step="0.01" required>
                 @if($errors->has('price'))
@@ -85,6 +99,27 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.product.fields.photo_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="file">{{ trans('cruds.product.fields.file') }}</label>
+                <div class="needsclick dropzone {{ $errors->has('file') ? 'is-invalid' : '' }}" id="file-dropzone">
+                </div>
+                @if($errors->has('file'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('file') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.product.fields.file_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="model">{{ trans('cruds.product.fields.model') }}</label>
+                <input class="form-control {{ $errors->has('model') ? 'is-invalid' : '' }}" type="text" name="model" id="model" value="{{ old('model', '') }}">
+                @if($errors->has('model'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('model') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.product.fields.model_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
@@ -154,5 +189,61 @@
     }
 }
 
+</script>
+<script>
+    var uploadedFileMap = {}
+Dropzone.options.fileDropzone = {
+    url: '{{ route('admin.products.storeMedia') }}',
+    maxFilesize: 5, // MB
+    addRemoveLinks: true,
+    headers: {
+      'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    },
+    params: {
+      size: 5
+    },
+    success: function (file, response) {
+      $('form').append('<input type="hidden" name="file[]" value="' + response.name + '">')
+      uploadedFileMap[file.name] = response.name
+    },
+    removedfile: function (file) {
+      file.previewElement.remove()
+      var name = ''
+      if (typeof file.file_name !== 'undefined') {
+        name = file.file_name
+      } else {
+        name = uploadedFileMap[file.name]
+      }
+      $('form').find('input[name="file[]"][value="' + name + '"]').remove()
+    },
+    init: function () {
+@if(isset($product) && $product->file)
+          var files =
+            {!! json_encode($product->file) !!}
+              for (var i in files) {
+              var file = files[i]
+              this.options.addedfile.call(this, file)
+              file.previewElement.classList.add('dz-complete')
+              $('form').append('<input type="hidden" name="file[]" value="' + file.file_name + '">')
+            }
+@endif
+    },
+     error: function (file, response) {
+         if ($.type(response) === 'string') {
+             var message = response //dropzone sends it's own error messages in string
+         } else {
+             var message = response.errors.file
+         }
+         file.previewElement.classList.add('dz-error')
+         _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+         _results = []
+         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+             node = _ref[_i]
+             _results.push(node.textContent = message)
+         }
+
+         return _results
+     }
+}
 </script>
 @endsection

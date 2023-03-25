@@ -44,16 +44,6 @@
                             <span class="help-block">{{ trans('cruds.marina.fields.coordinates_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="lastuse">{{ trans('cruds.marina.fields.lastuse') }}</label>
-                            <input class="form-control date" type="text" name="lastuse" id="lastuse" value="{{ old('lastuse') }}">
-                            @if($errors->has('lastuse'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('lastuse') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.marina.fields.lastuse_helper') }}</span>
-                        </div>
-                        <div class="form-group">
                             <label for="boats">{{ trans('cruds.marina.fields.boats') }}</label>
                             <div style="padding-bottom: 4px">
                                 <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>

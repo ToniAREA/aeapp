@@ -105,6 +105,8 @@ class ContactCompanyController extends Controller
     {
         abort_if(Gate::denies('contact_company_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $contactCompany->load('companyProviders');
+
         return view('admin.contactCompanies.show', compact('contactCompany'));
     }
 

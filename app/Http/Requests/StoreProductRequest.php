@@ -36,6 +36,13 @@ class StoreProductRequest extends FormRequest
             'tags' => [
                 'array',
             ],
+            'file' => [
+                'array',
+            ],
+            'model' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

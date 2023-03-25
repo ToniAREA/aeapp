@@ -36,6 +36,12 @@
                                         {{ trans('cruds.wlog.fields.wlist') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.wlog.fields.employee') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.user.fields.email') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -56,6 +62,16 @@
                                         </select>
                                     </td>
                                     <td>
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($users as $key => $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
                                     </td>
                                 </tr>
                             </thead>
@@ -70,6 +86,12 @@
                                         </td>
                                         <td>
                                             {{ $wlog->wlist->desciption ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlog->employee->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlog->employee->email ?? '' }}
                                         </td>
                                         <td>
                                             @can('wlog_show')

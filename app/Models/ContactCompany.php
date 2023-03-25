@@ -41,4 +41,9 @@ class ContactCompany extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function companyProviders()
+    {
+        return $this->hasMany(Provider::class, 'company_id', 'id');
+    }
 }

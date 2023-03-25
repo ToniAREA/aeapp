@@ -36,6 +36,13 @@ class UpdateProductRequest extends FormRequest
             'tags' => [
                 'array',
             ],
+            'file' => [
+                'array',
+            ],
+            'model' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

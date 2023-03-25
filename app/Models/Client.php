@@ -71,6 +71,11 @@ class Client extends Model
         return $this->hasMany(Wlist::class, 'client_id', 'id');
     }
 
+    public function clientAppointments()
+    {
+        return $this->hasMany(Appointment::class, 'client_id', 'id');
+    }
+
     public function clientBoats()
     {
         return $this->belongsToMany(Boat::class);

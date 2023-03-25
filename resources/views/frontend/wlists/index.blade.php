@@ -30,16 +30,22 @@
                                         {{ trans('cruds.wlist.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.wlist.fields.desciption') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.wlist.fields.wlogs') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.wlist.fields.client') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.wlist.fields.boat') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.desciption') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.deadline') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.priority') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.wlogs') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -50,17 +56,6 @@
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                        <select class="search">
-                                            <option value>{{ trans('global.all') }}</option>
-                                            @foreach($wlogs as $key => $item)
-                                                <option value="{{ $item->date }}">{{ $item->date }}</option>
-                                            @endforeach
-                                        </select>
                                     </td>
                                     <td>
                                         <select class="search">
@@ -79,6 +74,27 @@
                                         </select>
                                     </td>
                                     <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($priorities as $key => $item)
+                                                <option value="{{ $item->level }}">{{ $item->level }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($wlogs as $key => $item)
+                                                <option value="{{ $item->date }}">{{ $item->date }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
                                     </td>
                                 </tr>
                             </thead>
@@ -89,18 +105,24 @@
                                             {{ $wlist->id ?? '' }}
                                         </td>
                                         <td>
+                                            {{ $wlist->client->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlist->boat->name ?? '' }}
+                                        </td>
+                                        <td>
                                             {{ $wlist->desciption ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlist->deadline ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlist->priority->level ?? '' }}
                                         </td>
                                         <td>
                                             @foreach($wlist->wlogs as $key => $item)
                                                 <span>{{ $item->date }}</span>
                                             @endforeach
-                                        </td>
-                                        <td>
-                                            {{ $wlist->client->name ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $wlist->boat->name ?? '' }}
                                         </td>
                                         <td>
                                             @can('wlist_show')

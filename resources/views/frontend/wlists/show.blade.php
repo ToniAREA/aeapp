@@ -28,24 +28,6 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.wlist.fields.desciption') }}
-                                    </th>
-                                    <td>
-                                        {{ $wlist->desciption }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.wlist.fields.wlogs') }}
-                                    </th>
-                                    <td>
-                                        @foreach($wlist->wlogs as $key => $wlogs)
-                                            <span class="label label-info">{{ $wlogs->date }}</span>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.wlist.fields.client') }}
                                     </th>
                                     <td>
@@ -58,6 +40,40 @@
                                     </th>
                                     <td>
                                         {{ $wlist->boat->name ?? '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.desciption') }}
+                                    </th>
+                                    <td>
+                                        {{ $wlist->desciption }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.deadline') }}
+                                    </th>
+                                    <td>
+                                        {{ $wlist->deadline }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.priority') }}
+                                    </th>
+                                    <td>
+                                        {{ $wlist->priority->level ?? '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.wlogs') }}
+                                    </th>
+                                    <td>
+                                        @foreach($wlist->wlogs as $key => $wlogs)
+                                            <span class="label label-info">{{ $wlogs->date }}</span>
+                                        @endforeach
                                     </td>
                                 </tr>
                             </tbody>
