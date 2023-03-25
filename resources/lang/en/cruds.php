@@ -457,8 +457,6 @@ return [
             'updated_at_helper'  => ' ',
             'deleted_at'         => 'Deleted at',
             'deleted_at_helper'  => ' ',
-            'id_marina'          => 'ID Marina',
-            'id_marina_helper'   => ' ',
             'boats'              => 'Boats',
             'boats_helper'       => ' ',
         ],
