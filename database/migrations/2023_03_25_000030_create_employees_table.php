@@ -10,6 +10,7 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('id_employee')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

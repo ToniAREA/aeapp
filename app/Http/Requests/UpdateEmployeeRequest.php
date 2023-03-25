@@ -16,6 +16,11 @@ class UpdateEmployeeRequest extends FormRequest
 
     public function rules()
     {
-        return [];
+        return [
+            'id_employee' => [
+                'string',
+                'nullable',
+            ],
+        ];
     }
 }
