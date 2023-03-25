@@ -41,6 +41,11 @@ class Marina extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
+    public function marinaBoats()
+    {
+        return $this->hasMany(Boat::class, 'marina_id', 'id');
+    }
+
     public function getLastuseAttribute($value)
     {
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;

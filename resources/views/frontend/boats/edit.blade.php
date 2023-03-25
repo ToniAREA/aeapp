@@ -44,6 +44,38 @@
                             <span class="help-block">{{ trans('cruds.boat.fields.name_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="marina_id">{{ trans('cruds.boat.fields.marina') }}</label>
+                            <select class="form-control select2" name="marina_id" id="marina_id">
+                                @foreach($marinas as $id => $entry)
+                                    <option value="{{ $id }}" {{ (old('marina_id') ? old('marina_id') : $boat->marina->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('marina'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('marina') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.marina_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="clients">{{ trans('cruds.boat.fields.client') }}</label>
+                            <div style="padding-bottom: 4px">
+                                <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                                <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                            </div>
+                            <select class="form-control select2" name="clients[]" id="clients" multiple>
+                                @foreach($clients as $id => $client)
+                                    <option value="{{ $id }}" {{ (in_array($id, old('clients', [])) || $boat->clients->contains($id)) ? 'selected' : '' }}>{{ $client }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('clients'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('clients') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.client_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label for="mmsi">{{ trans('cruds.boat.fields.mmsi') }}</label>
                             <input class="form-control" type="text" name="mmsi" id="mmsi" value="{{ old('mmsi', $boat->mmsi) }}">
                             @if($errors->has('mmsi'))

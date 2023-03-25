@@ -34,10 +34,13 @@
                             {{ trans('cruds.boat.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.boat.fields.mmsi') }}
+                            {{ trans('cruds.boat.fields.marina') }}
                         </th>
                         <th>
                             {{ trans('cruds.boat.fields.client') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.boat.fields.mmsi') }}
                         </th>
                         <th>
                             {{ trans('cruds.boat.fields.notes') }}
@@ -47,12 +50,6 @@
                         </th>
                         <th>
                             {{ trans('cruds.boat.fields.lastuse') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.marina') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.marina.fields.id_marina') }}
                         </th>
                         <th>
                             &nbsp;
@@ -78,12 +75,15 @@
                                 {{ $boat->name ?? '' }}
                             </td>
                             <td>
-                                {{ $boat->mmsi ?? '' }}
+                                {{ $boat->marina->name ?? '' }}
                             </td>
                             <td>
                                 @foreach($boat->clients as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>
                                 @endforeach
+                            </td>
+                            <td>
+                                {{ $boat->mmsi ?? '' }}
                             </td>
                             <td>
                                 {{ $boat->notes ?? '' }}
@@ -93,12 +93,6 @@
                             </td>
                             <td>
                                 {{ $boat->lastuse ?? '' }}
-                            </td>
-                            <td>
-                                {{ $boat->marina->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $boat->marina->id_marina ?? '' }}
                             </td>
                             <td>
                                 @can('boat_show')
