@@ -34,6 +34,14 @@
                                         {{ $employee->user->name ?? '' }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.employee.fields.id_employee') }}
+                                    </th>
+                                    <td>
+                                        {{ $employee->id_employee }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

@@ -31,6 +31,9 @@
                             {{ trans('cruds.user.fields.email') }}
                         </th>
                         <th>
+                            {{ trans('cruds.employee.fields.id_employee') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -49,6 +52,9 @@
                             </td>
                             <td>
                                 {{ $employee->user->email ?? '' }}
+                            </td>
+                            <td>
+                                {{ $employee->id_employee ?? '' }}
                             </td>
                             <td>
                                 @can('employee_show')
