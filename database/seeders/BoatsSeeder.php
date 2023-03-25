@@ -24,6 +24,7 @@ class BoatsSeeder extends Seeder
                 'id_boat' => $boat->id,
                 'type' => $boat->type,
                 'name' => $boat->name,
+                'marina' => $boat->marina_id,
                 'mmsi' => $boat->mmsi,
                 'notes' => $boat->notes,
                 'internalnotes' => $boat->internalnotes,
