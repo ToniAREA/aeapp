@@ -35,6 +35,36 @@
                 <span class="help-block">{{ trans('cruds.employee.fields.id_employee_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="notes">{{ trans('cruds.employee.fields.notes') }}</label>
+                <input class="form-control {{ $errors->has('notes') ? 'is-invalid' : '' }}" type="text" name="notes" id="notes" value="{{ old('notes', $employee->notes) }}">
+                @if($errors->has('notes'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('notes') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.employee.fields.notes_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="internalnotes">{{ trans('cruds.employee.fields.internalnotes') }}</label>
+                <input class="form-control {{ $errors->has('internalnotes') ? 'is-invalid' : '' }}" type="text" name="internalnotes" id="internalnotes" value="{{ old('internalnotes', $employee->internalnotes) }}">
+                @if($errors->has('internalnotes'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('internalnotes') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.employee.fields.internalnotes_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="status">{{ trans('cruds.employee.fields.status') }}</label>
+                <input class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" type="text" name="status" id="status" value="{{ old('status', $employee->status) }}">
+                @if($errors->has('status'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('status') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.employee.fields.status_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

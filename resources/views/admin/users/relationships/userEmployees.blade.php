@@ -34,6 +34,15 @@
                             {{ trans('cruds.employee.fields.id_employee') }}
                         </th>
                         <th>
+                            {{ trans('cruds.employee.fields.notes') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.employee.fields.internalnotes') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.employee.fields.status') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -55,6 +64,15 @@
                             </td>
                             <td>
                                 {{ $employee->id_employee ?? '' }}
+                            </td>
+                            <td>
+                                {{ $employee->notes ?? '' }}
+                            </td>
+                            <td>
+                                {{ $employee->internalnotes ?? '' }}
+                            </td>
+                            <td>
+                                {{ $employee->status ?? '' }}
                             </td>
                             <td>
                                 @can('employee_show')

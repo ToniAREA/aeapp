@@ -42,6 +42,30 @@
                                         {{ $employee->id_employee }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.employee.fields.notes') }}
+                                    </th>
+                                    <td>
+                                        {{ $employee->notes }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.employee.fields.internalnotes') }}
+                                    </th>
+                                    <td>
+                                        {{ $employee->internalnotes }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.employee.fields.status') }}
+                                    </th>
+                                    <td>
+                                        {{ $employee->status }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

@@ -21,6 +21,18 @@ class StoreEmployeeRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'notes' => [
+                'string',
+                'nullable',
+            ],
+            'internalnotes' => [
+                'string',
+                'nullable',
+            ],
+            'status' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }
