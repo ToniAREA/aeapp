@@ -20,6 +20,13 @@ class ClientsSeeder extends Seeder
 
         // Insertar los datos en la tabla destino de la nueva base de datos
         foreach ($oldClients as $client) {
+
+            // Convertir el objeto en una cadena JSON
+            $json = json_encode($client);
+            // Mostrar la cadena JSON resultante en la consola
+            $this->command->line("Objeto en formato JSON: {$json}");
+            $this->command->line("...");
+
             DB::table('clients')->insert([
                 'id_client' => $client->id,
                 'name' => $client->name,
