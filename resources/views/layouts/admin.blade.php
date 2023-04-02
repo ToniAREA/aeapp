@@ -88,10 +88,8 @@
         </header>
 
         <div class="c-body">
-            <main class="c-main">
-
-
-                <div class="container-fluid">
+            <main class="c-main m-0 p-0">
+                <div class="container-fluid m-0 p-0">
                     @if(session('message'))
                         <div class="row mb-2">
                             <div class="col-lg-12">
@@ -108,12 +106,10 @@
                             </ul>
                         </div>
                     @endif
-                                This is the layout ADMIN.blade
+                    
                     @yield('content')
 
                 </div>
-
-
             </main>
             <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
