@@ -10,7 +10,7 @@
                 <form method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
 
-                    <h1>{{ trans('panel.site_title') }}</h1>
+                    <h1 class="text-center">{{ trans('panel.site_title') }}</h1>
                     <p class="text-muted">{{ trans('global.register') }}</p>
 
                     <div class="input-group mb-3">
