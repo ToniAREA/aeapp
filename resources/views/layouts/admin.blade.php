@@ -108,6 +108,7 @@
                             </ul>
                         </div>
                     @endif
+                                This is the layout ADMIN.blade
                     @yield('content')
 
                 </div>

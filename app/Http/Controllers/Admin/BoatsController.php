@@ -10,7 +10,7 @@ use App\Http\Requests\UpdateBoatRequest;
 use App\Models\Boat;
 use App\Models\Client;
 use App\Models\Marina;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
@@ -98,7 +98,10 @@ class BoatsController extends Controller
 
         $clients = Client::pluck('name', 'id');
 
-        return view('admin.boats.create', compact('clients', 'marinas'));
+        $lastRecord = Boat::latest('id')->first();
+        $lastRecordId = $lastRecord->id_boat;
+
+        return view('admin.boats.create', compact('clients', 'marinas', 'lastRecordId'));
     }
 
     public function store(StoreBoatRequest $request)

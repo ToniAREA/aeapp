@@ -349,6 +349,7 @@
                     </div>
                 </div>
             @endif
+                        This is the layout FRONTEND.blade
             @yield('content')
         </main>
     </div>

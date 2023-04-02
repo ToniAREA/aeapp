@@ -1,5 +1,5 @@
 <div id="sidebar" class="c-sidebar c-sidebar-fixed c-sidebar-lg-show">
-
+    Partial menu.blade
     <div class="c-sidebar-brand d-md-down-none">
         <a class="c-sidebar-brand-full h4" href="#">
             {{ trans('panel.site_title') }}

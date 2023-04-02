@@ -5,13 +5,14 @@
     <div class="card-header">
         {{ trans('global.create') }} {{ trans('cruds.client.title_singular') }}
     </div>
-
     <div class="card-body">
         <form method="POST" action="{{ route("admin.clients.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label class="required" for="id_client">{{ trans('cruds.client.fields.id_client') }}</label>
-                <input class="form-control {{ $errors->has('id_client') ? 'is-invalid' : '' }}" type="number" name="id_client" id="id_client" value="{{ old('id_client', '') }}" step="1" required>
+                <label class="required" for="id_client">{{ trans('cruds.client.fields.id_client') }}</label>{{ $lastRecordId + 1 }}
+
+                <input class="form-control {{ $errors->has('id_client') ? 'is-invalid' : '' }}" type="number" name="id_client" id="id_client" value="{{ old('id_client', $lastRecordId + 1 ) }}" hidden>
+
                 @if($errors->has('id_client'))
                     <div class="invalid-feedback">
                         {{ $errors->first('id_client') }}
@@ -39,7 +40,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.client.fields.lastname_helper') }}</span>
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="boats">{{ trans('cruds.client.fields.boats') }}</label>
                 <div style="padding-bottom: 4px">
                     <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
@@ -56,10 +57,10 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.client.fields.boats_helper') }}</span>
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label for="vat">{{ trans('cruds.client.fields.vat') }}</label>
-                <input class="form-control {{ $errors->has('vat') ? 'is-invalid' : '' }}" type="text" name="vat" id="vat" value="{{ old('vat', '') }}">
+                <input class="form-control {{ $errors->has('vat') ? 'is-invalid' : '' }}" type="text" name="vat" id="vat" value="{{ old('vat', '') }}" pattern="[A-Za-z0-9]{4,20}">
                 @if($errors->has('vat'))
                     <div class="invalid-feedback">
                         {{ $errors->first('vat') }}
@@ -99,7 +100,7 @@
             </div>
             <div class="form-group">
                 <label for="phone">{{ trans('cruds.client.fields.phone') }}</label>
-                <input class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" type="text" name="phone" id="phone" value="{{ old('phone', '') }}">
+                <input class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" type="tel" name="phone" id="phone" value="{{ old('phone', '') }}">
                 @if($errors->has('phone'))
                     <div class="invalid-feedback">
                         {{ $errors->first('phone') }}
@@ -109,7 +110,7 @@
             </div>
             <div class="form-group">
                 <label for="mobile">{{ trans('cruds.client.fields.mobile') }}</label>
-                <input class="form-control {{ $errors->has('mobile') ? 'is-invalid' : '' }}" type="text" name="mobile" id="mobile" value="{{ old('mobile', '') }}">
+                <input class="form-control {{ $errors->has('mobile') ? 'is-invalid' : '' }}" type="tel" name="mobile" id="mobile" value="{{ old('mobile', '') }}">
                 @if($errors->has('mobile'))
                     <div class="invalid-feedback">
                         {{ $errors->first('mobile') }}
@@ -152,7 +153,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.client.fields.defaulter_helper') }}</span>
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="lastuse">{{ trans('cruds.client.fields.lastuse') }}</label>
                 <input class="form-control date {{ $errors->has('lastuse') ? 'is-invalid' : '' }}" type="text" name="lastuse" id="lastuse" value="{{ old('lastuse') }}">
                 @if($errors->has('lastuse'))
@@ -161,7 +162,7 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.client.fields.lastuse_helper') }}</span>
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label for="link_fd">{{ trans('cruds.client.fields.link_fd') }}</label>
                 <input class="form-control {{ $errors->has('link_fd') ? 'is-invalid' : '' }}" type="text" name="link_fd" id="link_fd" value="{{ old('link_fd', '') }}">
@@ -172,7 +173,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.client.fields.link_fd_helper') }}</span>
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="coordinates">{{ trans('cruds.client.fields.coordinates') }}</label>
                 <input class="form-control {{ $errors->has('coordinates') ? 'is-invalid' : '' }}" type="text" name="coordinates" id="coordinates" value="{{ old('coordinates', '') }}">
                 @if($errors->has('coordinates'))
@@ -181,7 +182,7 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.client.fields.coordinates_helper') }}</span>
-            </div>
+            </div> --}}
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
