@@ -75,7 +75,7 @@
             </div> --}}
             <div class="form-group">
                 <label for="mmsi">{{ trans('cruds.boat.fields.mmsi') }}</label>
-                <input class="form-control {{ $errors->has('mmsi') ? 'is-invalid' : '' }}" type="number" name="mmsi" id="mmsi" value="{{ old('mmsi', '') }}" min="0" max="999999999">
+                <input class="form-control {{ $errors->has('mmsi') ? 'is-invalid' : '' }}" type="tel" name="mmsi" id="mmsi" value="{{ old('mmsi', '') }}" min="0" max="999999999">
                 @if($errors->has('mmsi'))
                     <div class="invalid-feedback">
                         {{ $errors->first('mmsi') }}

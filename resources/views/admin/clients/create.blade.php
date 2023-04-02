@@ -165,7 +165,7 @@
             </div> --}}
             <div class="form-group">
                 <label for="link_fd">{{ trans('cruds.client.fields.link_fd') }}</label>
-                <input class="form-control {{ $errors->has('link_fd') ? 'is-invalid' : '' }}" type="text" name="link_fd" id="link_fd" value="{{ old('link_fd', '') }}">
+                <input class="form-control {{ $errors->has('link_fd') ? 'is-invalid' : '' }}" type="url" name="link_fd" id="link_fd" value="{{ old('link_fd', '') }}">
                 @if($errors->has('link_fd'))
                     <div class="invalid-feedback">
                         {{ $errors->first('link_fd') }}
