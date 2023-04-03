@@ -2,8 +2,8 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card mx-4">
-                <div class="card-body p-4">
+            <div class="card mx-3">
+                <div class="card-body">
                     <h1 class="text-center">{{ trans('panel.site_title') }}</h1>
 
                     <p class="text-muted">{{ trans('global.login') }}</p>
@@ -71,18 +71,18 @@
                             </div>
                             <div class="col-6">
                                 <a class="btn btn-warning btn-block text-white" href="{{ route('register') }}">
-                                    Register
+                                    {{ trans('global.register') }}
                                 </a>
                             </div>
                         </div>
 
-                            <div class="text-center mt-3">
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ trans('global.forgot_password') }}
-                                    </a>
-                                @endif
-                            </div>
+                        <div class="text-center mt-3">
+                            @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ trans('global.forgot_password') }}
+                                </a>
+                            @endif
+                        </div>
 
                     </form>
                 </div>
