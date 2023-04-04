@@ -28,12 +28,12 @@
 <body class="c-app">
     @include('partials.menu')
     <div class="c-wrapper">
-        <header class="c-header c-header-fixed px-3">
+        <header class="c-header px-3">
             <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
-                <i class="fas fa-fw fa-bars"></i>
+                <i class="text-white fas fa-fw fa-bars"></i>
             </button>
 
-            <a class="c-header-brand d-lg-none" href="{{ route('login') }}"><h4>{{ trans('panel.site_title') }}</h4></a>
+            <a class="custom-header-brand d-lg-none" href="{{ route("admin.home") }}">{{ trans('panel.site_title') }}</a>
 
             <button class="c-header-toggler mfs-3 d-md-down-none" type="button" responsive="true">
                 <i class="fas fa-fw fa-bars"></i>
@@ -56,7 +56,7 @@
                 <ul class="c-header-nav ml-auto">
                     <li class="c-header-nav-item dropdown notifications-menu">
                         <a href="#" class="c-header-nav-link" data-toggle="dropdown">
-                            <i class="far fa-bell"></i>
+                            <i class="text-white far fa-bell"></i>
                             @php($alertsCount = \Auth::user()->userUserAlerts()->where('read', false)->count())
                                 @if($alertsCount > 0)
                                     <span class="badge badge-warning navbar-badge">

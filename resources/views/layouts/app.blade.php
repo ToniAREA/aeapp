@@ -22,8 +22,8 @@
 </head>
 
 <body class="header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden login-page">
-    <div class="c-app m-0 p-0 flex-row align-items-center">
-        <div class="container m-0 p-0">
+    <div class="c-app flex-row align-items-center">
+        <div class="container">
             @yield("content")
         </div>
     </div>

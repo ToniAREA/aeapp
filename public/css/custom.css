@@ -88,7 +88,7 @@ table.dataTable thead .sorting_desc {
     border-color: #d1dbe1;
 }
 
-.btn-group-xs > .btn,
+.btn-group-xs>.btn,
 .btn-xs {
     padding: 1px 5px;
     font-size: 12px;
@@ -99,16 +99,20 @@ table.dataTable thead .sorting_desc {
 .searchable-title {
     font-weight: bold;
 }
+
 .searchable-fields {
-    padding-left:5px;
+    padding-left: 5px;
 }
+
 .searchable-link {
-    padding:0 5px 0 5px;
+    padding: 0 5px 0 5px;
 }
-.searchable-link:hover   {
+
+.searchable-link:hover {
     cursor: pointer;
     background: #eaeaea;
 }
+
 .select2-results__option {
     padding-left: 0px;
     padding-right: 0px;
@@ -119,8 +123,12 @@ table.dataTable thead .sorting_desc {
     color: red;
 }
 
-.form-check.is-invalid ~ .invalid-feedback {
+.form-check.is-invalid~.invalid-feedback {
     display: block;
+}
+
+.c-sidebar {
+    background-color: #032466;
 }
 
 .c-sidebar-brand .c-sidebar-brand-full:hover {
@@ -130,3 +138,26 @@ table.dataTable thead .sorting_desc {
 .custom-select.form-control-sm {
     padding: 0.25rem 1.5rem;
 }
+
+.c-header {
+    display: flex;
+        justify-content: center;
+        /* Centrar horizontalmente */
+        align-items: center;
+        /* Centrar verticalmente */
+        height: 40px;
+        /* Altura del header */
+        background-color: #032466;
+        /* Color de fondo */
+        box-shadow: 0 2px 4px rgba(10, 47, 142, 0.803);
+        /* Sombra */
+}
+
+.custom-header-brand {
+    text-align: center;
+    color: white;
+    display: inline-block;
+    font-size: larger;
+    font-weight: bold;
+}
+
