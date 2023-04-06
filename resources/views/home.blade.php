@@ -84,20 +84,20 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'workWeek,agendaWeek,month'
+                    right: 'listWeek,workWeek,month'
                 },
                 views: {
                     workWeek: {
                         type: 'agendaWeek',
                         hiddenDays: [0, 6], // Hide Sunday (0) and Saturday (6)
-                        buttonText: 'Work week'
+                        buttonText: 'work week'
                     }
                 },
                 defaultView: 'workWeek', // Set the default view to 'workWeek'
                 minTime: '08:00:00', // Set the minimum time to 8 AM
                 maxTime: '18:00:00' , // Set the maximum time to 6 PM
                 height: 500,
-                
+
             });
         });
     </script>
