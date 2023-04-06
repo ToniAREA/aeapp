@@ -4,35 +4,36 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\CsvImportTrait;
-use App\Http\Requests\MassDestroyMLogRequest;
-use App\Http\Requests\StoreMLogRequest;
-use App\Http\Requests\UpdateMLogRequest;
-use App\Models\MLog;
+use App\Http\Requests\MassDestroyMlogRequest;
+use App\Http\Requests\StoreMlogRequest;
+use App\Http\Requests\UpdateMlogRequest;
+use App\Models\Mlog;
+use App\Models\Wlist;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
 
-class MLogsController extends Controller
+class MlogsController extends Controller
 {
     use CsvImportTrait;
 
     public function index(Request $request)
     {
-        abort_if(Gate::denies('m_log_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('mlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = MLog::query()->select(sprintf('%s.*', (new MLog)->table));
+            $query = Mlog::with(['wlist'])->select(sprintf('%s.*', (new Mlog)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
 
             $table->editColumn('actions', function ($row) {
-                $viewGate      = 'm_log_show';
-                $editGate      = 'm_log_edit';
-                $deleteGate    = 'm_log_delete';
-                $crudRoutePart = 'm-logs';
+                $viewGate      = 'mlog_show';
+                $editGate      = 'mlog_edit';
+                $deleteGate    = 'mlog_delete';
+                $crudRoutePart = 'mlogs';
 
                 return view('partials.datatablesActions', compact(
                     'viewGate',
@@ -46,68 +47,82 @@ class MLogsController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : '';
             });
-            $table->editColumn('code', function ($row) {
-                return $row->code ? $row->code : '';
+            $table->editColumn('id_mlog', function ($row) {
+                return $row->id_mlog ? $row->id_mlog : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder']);
+            $table->addColumn('wlist_desciption', function ($row) {
+                return $row->wlist ? $row->wlist->desciption : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'wlist']);
 
             return $table->make(true);
         }
 
-        return view('admin.mLogs.index');
+        $wlists = Wlist::get();
+
+        return view('admin.mlogs.index', compact('wlists'));
     }
 
     public function create()
     {
-        abort_if(Gate::denies('m_log_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('mlog_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.mLogs.create');
+        $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.mlogs.create', compact('wlists'));
     }
 
-    public function store(StoreMLogRequest $request)
+    public function store(StoreMlogRequest $request)
     {
-        $mLog = MLog::create($request->all());
+        $mlog = Mlog::create($request->all());
 
-        return redirect()->route('admin.m-logs.index');
+        return redirect()->route('admin.mlogs.index');
     }
 
-    public function edit(MLog $mLog)
+    public function edit(Mlog $mlog)
     {
-        abort_if(Gate::denies('m_log_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('mlog_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.mLogs.edit', compact('mLog'));
+        $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $mlog->load('wlist');
+
+        return view('admin.mlogs.edit', compact('mlog', 'wlists'));
     }
 
-    public function update(UpdateMLogRequest $request, MLog $mLog)
+    public function update(UpdateMlogRequest $request, Mlog $mlog)
     {
-        $mLog->update($request->all());
+        $mlog->update($request->all());
 
-        return redirect()->route('admin.m-logs.index');
+        return redirect()->route('admin.mlogs.index');
     }
 
-    public function show(MLog $mLog)
+    public function show(Mlog $mlog)
     {
-        abort_if(Gate::denies('m_log_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('mlog_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.mLogs.show', compact('mLog'));
+        $mlog->load('wlist');
+
+        return view('admin.mlogs.show', compact('mlog'));
     }
 
-    public function destroy(MLog $mLog)
+    public function destroy(Mlog $mlog)
     {
-        abort_if(Gate::denies('m_log_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('mlog_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $mLog->delete();
+        $mlog->delete();
 
         return back();
     }
 
-    public function massDestroy(MassDestroyMLogRequest $request)
+    public function massDestroy(MassDestroyMlogRequest $request)
     {
-        $mLogs = MLog::find(request('ids'));
+        $mlogs = Mlog::find(request('ids'));
 
-        foreach ($mLogs as $mLog) {
-            $mLog->delete();
+        foreach ($mlogs as $mlog) {
+            $mlog->delete();
         }
 
         return response(null, Response::HTTP_NO_CONTENT);
