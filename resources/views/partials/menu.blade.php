@@ -1,8 +1,8 @@
 <div id="sidebar" class="c-sidebar c-sidebar-fixed c-sidebar-lg-show">
 
     <div class="c-sidebar-brand d-md-down-none">
-        <a class="c-sidebar-brand-full h4" href="#">
-            {{ trans('panel.site_title') }}
+        <a class="c-sidebar-brand-full h4" href="{{ route("admin.home") }}">
+            <b>AREA</b>ELECTRONICA
         </a>
     </div>
 

@@ -142,6 +142,7 @@ table.dataTable thead .sorting_desc {
 
 .c-header-brand {
     color: #fff !important;
+    font-size: 18px;
 }
 
 .container-fluid {
