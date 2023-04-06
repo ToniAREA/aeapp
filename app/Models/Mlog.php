@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Mlog extends Model
+class MLog extends Model
 {
-    use SoftDeletes, HasFactory;
+    use SoftDeletes, Auditable, HasFactory;
 
-    public $table = 'mlogs';
+    public $table = 'm_logs';
 
     protected $dates = [
         'created_at',
@@ -20,13 +21,7 @@ class Mlog extends Model
     ];
 
     protected $fillable = [
-        'product_id',
-        'description',
-        'quantity',
-        'price_unit',
-        'discount',
-        'total',
-        'status',
+        'code',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -35,15 +30,5 @@ class Mlog extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
-    }
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class, 'product_id');
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
     }
 }
