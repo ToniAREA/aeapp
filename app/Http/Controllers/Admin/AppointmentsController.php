@@ -22,13 +22,7 @@ class AppointmentsController extends Controller
 
         $appointments = Appointment::with(['client', 'for_roles', 'for_users'])->get();
 
-        $clients = Client::get();
-
-        $roles = Role::get();
-
-        $users = User::get();
-
-        return view('admin.appointments.index', compact('appointments', 'clients', 'roles', 'users'));
+        return view('admin.appointments.index', compact('appointments'));
     }
 
     public function create()

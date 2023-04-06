@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use \DateTimeInterface;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,9 +12,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ContentPage extends Model implements HasMedia
 {
-    use SoftDeletes;
-    use InteractsWithMedia;
-    use HasFactory;
+    use SoftDeletes, InteractsWithMedia, HasFactory;
 
     public $table = 'content_pages';
 
@@ -37,6 +35,11 @@ class ContentPage extends Model implements HasMedia
         'deleted_at',
     ];
 
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
@@ -55,18 +58,13 @@ class ContentPage extends Model implements HasMedia
 
     public function getFeaturedImageAttribute()
     {
-        $file = $this->getMedia('featured_image')->last();
-        if ($file) {
-            $file->url       = $file->getUrl();
-            $file->thumbnail = $file->getUrl('thumb');
-            $file->preview   = $file->getUrl('preview');
-        }
+        $files = $this->getMedia('featured_image');
+        $files->each(function ($item) {
+            $item->url       = $item->getUrl();
+            $item->thumbnail = $item->getUrl('thumb');
+            $item->preview   = $item->getUrl('preview');
+        });
 
-        return $file;
-    }
-
-    protected function serializeDate(DateTimeInterface $date)
-    {
-        return $date->format('Y-m-d H:i:s');
+        return $files;
     }
 }

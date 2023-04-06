@@ -23,9 +23,7 @@ class ClientsController extends Controller
 
         $clients = Client::with(['boats'])->get();
 
-        $boats = Boat::get();
-
-        return view('admin.clients.index', compact('boats', 'clients'));
+        return view('admin.clients.index', compact('clients'));
     }
 
     public function create()

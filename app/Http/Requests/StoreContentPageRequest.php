@@ -33,6 +33,9 @@ class StoreContentPageRequest extends FormRequest
             'tags' => [
                 'array',
             ],
+            'featured_image' => [
+                'array',
+            ],
         ];
     }
 }

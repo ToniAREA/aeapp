@@ -67,6 +67,27 @@
                             <span class="help-block">{{ trans('cruds.provider.fields.company_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="provider_logo">{{ trans('cruds.provider.fields.provider_logo') }}</label>
+                            <div class="needsclick dropzone" id="provider_logo-dropzone">
+                            </div>
+                            @if($errors->has('provider_logo'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('provider_logo') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.provider.fields.provider_logo_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="internal_notes">{{ trans('cruds.provider.fields.internal_notes') }}</label>
+                            <input class="form-control" type="text" name="internal_notes" id="internal_notes" value="{{ old('internal_notes', '') }}">
+                            @if($errors->has('internal_notes'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('internal_notes') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.provider.fields.internal_notes_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <button class="btn btn-danger" type="submit">
                                 {{ trans('global.save') }}
                             </button>
@@ -136,5 +157,60 @@ Dropzone.options.priceListDropzone = {
          return _results
      }
 }
+</script>
+<script>
+    Dropzone.options.providerLogoDropzone = {
+    url: '{{ route('frontend.providers.storeMedia') }}',
+    maxFilesize: 2, // MB
+    acceptedFiles: '.jpeg,.jpg,.png,.gif',
+    maxFiles: 1,
+    addRemoveLinks: true,
+    headers: {
+      'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    },
+    params: {
+      size: 2,
+      width: 4096,
+      height: 4096
+    },
+    success: function (file, response) {
+      $('form').find('input[name="provider_logo"]').remove()
+      $('form').append('<input type="hidden" name="provider_logo" value="' + response.name + '">')
+    },
+    removedfile: function (file) {
+      file.previewElement.remove()
+      if (file.status !== 'error') {
+        $('form').find('input[name="provider_logo"]').remove()
+        this.options.maxFiles = this.options.maxFiles + 1
+      }
+    },
+    init: function () {
+@if(isset($provider) && $provider->provider_logo)
+      var file = {!! json_encode($provider->provider_logo) !!}
+          this.options.addedfile.call(this, file)
+      this.options.thumbnail.call(this, file, file.preview ?? file.preview_url)
+      file.previewElement.classList.add('dz-complete')
+      $('form').append('<input type="hidden" name="provider_logo" value="' + file.file_name + '">')
+      this.options.maxFiles = this.options.maxFiles - 1
+@endif
+    },
+    error: function (file, response) {
+        if ($.type(response) === 'string') {
+            var message = response //dropzone sends it's own error messages in string
+        } else {
+            var message = response.errors.file
+        }
+        file.previewElement.classList.add('dz-error')
+        _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+        _results = []
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            node = _ref[_i]
+            _results.push(node.textContent = message)
+        }
+
+        return _results
+    }
+}
+
 </script>
 @endsection

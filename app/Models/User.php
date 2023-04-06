@@ -119,11 +119,6 @@ class User extends Authenticatable
         return $this->hasMany(Wlog::class, 'employee_id', 'id');
     }
 
-    public function userUserAlerts()
-    {
-        return $this->belongsToMany(UserAlert::class);
-    }
-
     public function forUserToDos()
     {
         return $this->belongsToMany(ToDo::class);

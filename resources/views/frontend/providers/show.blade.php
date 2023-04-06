@@ -64,6 +64,26 @@
                                         {{ $provider->company->company_name ?? '' }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.provider.fields.provider_logo') }}
+                                    </th>
+                                    <td>
+                                        @if($provider->provider_logo)
+                                            <a href="{{ $provider->provider_logo->getUrl() }}" target="_blank" style="display: inline-block">
+                                                <img src="{{ $provider->provider_logo->getUrl('thumb') }}">
+                                            </a>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.provider.fields.internal_notes') }}
+                                    </th>
+                                    <td>
+                                        {{ $provider->internal_notes }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

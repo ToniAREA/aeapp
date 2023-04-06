@@ -30,19 +30,7 @@ class WlistController extends Controller
 
         $wlists = Wlist::with(['client', 'boat', 'priority', 'for_roles', 'for_users', 'wlogs', 'media'])->get();
 
-        $clients = Client::get();
-
-        $boats = Boat::get();
-
-        $priorities = Priority::get();
-
-        $roles = Role::get();
-
-        $users = User::get();
-
-        $wlogs = Wlog::get();
-
-        return view('admin.wlists.index', compact('boats', 'clients', 'priorities', 'roles', 'users', 'wlists', 'wlogs'));
+        return view('admin.wlists.index', compact('wlists'));
     }
 
     public function create()

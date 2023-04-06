@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Http\Resources\Admin\BrandResource;
@@ -13,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BrandsApiController extends Controller
 {
+    use MediaUploadingTrait;
+
     public function index()
     {
         abort_if(Gate::denies('brand_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -24,6 +27,9 @@ class BrandsApiController extends Controller
     {
         $brand = Brand::create($request->all());
         $brand->providers()->sync($request->input('providers', []));
+        if ($request->input('brand_logo', false)) {
+            $brand->addMedia(storage_path('tmp/uploads/' . basename($request->input('brand_logo'))))->toMediaCollection('brand_logo');
+        }
 
         return (new BrandResource($brand))
             ->response()
@@ -41,6 +47,16 @@ class BrandsApiController extends Controller
     {
         $brand->update($request->all());
         $brand->providers()->sync($request->input('providers', []));
+        if ($request->input('brand_logo', false)) {
+            if (! $brand->brand_logo || $request->input('brand_logo') !== $brand->brand_logo->file_name) {
+                if ($brand->brand_logo) {
+                    $brand->brand_logo->delete();
+                }
+                $brand->addMedia(storage_path('tmp/uploads/' . basename($request->input('brand_logo'))))->toMediaCollection('brand_logo');
+            }
+        } elseif ($brand->brand_logo) {
+            $brand->brand_logo->delete();
+        }
 
         return (new BrandResource($brand))
             ->response()

@@ -36,6 +36,15 @@
                             {{ trans('cruds.brand.fields.provider') }}
                         </th>
                         <th>
+                            {{ trans('cruds.brand.fields.brand_logo') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.brand.fields.brand_url') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.brand.fields.internal_notes') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -56,6 +65,19 @@
                                 @foreach($brand->providers as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>
                                 @endforeach
+                            </td>
+                            <td>
+                                @if($brand->brand_logo)
+                                    <a href="{{ $brand->brand_logo->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $brand->brand_logo->getUrl('thumb') }}">
+                                    </a>
+                                @endif
+                            </td>
+                            <td>
+                                {{ $brand->brand_url ?? '' }}
+                            </td>
+                            <td>
+                                {{ $brand->internal_notes ?? '' }}
                             </td>
                             <td>
                                 @can('brand_show')

@@ -17,13 +17,14 @@ class Provider extends Model implements HasMedia
 
     public $table = 'providers';
 
-    protected $appends = [
-        'price_list',
-    ];
-
     public static $searchable = [
         'name',
         'price_list',
+    ];
+
+    protected $appends = [
+        'price_list',
+        'provider_logo',
     ];
 
     protected $dates = [
@@ -35,6 +36,7 @@ class Provider extends Model implements HasMedia
     protected $fillable = [
         'name',
         'company_id',
+        'internal_notes',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -69,5 +71,17 @@ class Provider extends Model implements HasMedia
     public function company()
     {
         return $this->belongsTo(ContactCompany::class, 'company_id');
+    }
+
+    public function getProviderLogoAttribute()
+    {
+        $file = $this->getMedia('provider_logo')->last();
+        if ($file) {
+            $file->url       = $file->getUrl();
+            $file->thumbnail = $file->getUrl('thumb');
+            $file->preview   = $file->getUrl('preview');
+        }
+
+        return $file;
     }
 }

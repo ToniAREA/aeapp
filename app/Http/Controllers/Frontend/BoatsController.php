@@ -24,11 +24,7 @@ class BoatsController extends Controller
 
         $boats = Boat::with(['marina', 'clients'])->get();
 
-        $marinas = Marina::get();
-
-        $clients = Client::get();
-
-        return view('frontend.boats.index', compact('boats', 'clients', 'marinas'));
+        return view('frontend.boats.index', compact('boats'));
     }
 
     public function create()
@@ -75,7 +71,7 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boat->load('marina', 'clients', 'boatWlists', 'boatsClients', 'boatsMarinas', 'boatsTypeBoatsTypes');
+        $boat->load('marina', 'clients', 'boatWlists', 'boatsClients', 'boatsMarinas');
 
         return view('frontend.boats.show', compact('boat'));
     }

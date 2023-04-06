@@ -26,15 +26,7 @@ class WlogsController extends Controller
 
         $wlogs = Wlog::with(['wlist', 'employee', 'marina', 'tags'])->get();
 
-        $wlists = Wlist::get();
-
-        $users = User::get();
-
-        $marinas = Marina::get();
-
-        $tags = Tag::get();
-
-        return view('frontend.wlogs.index', compact('marinas', 'tags', 'users', 'wlists', 'wlogs'));
+        return view('frontend.wlogs.index', compact('wlogs'));
     }
 
     public function create()

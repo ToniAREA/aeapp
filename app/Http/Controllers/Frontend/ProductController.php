@@ -27,13 +27,7 @@ class ProductController extends Controller
 
         $products = Product::with(['brand', 'categories', 'tags', 'media'])->get();
 
-        $brands = Brand::get();
-
-        $product_categories = ProductCategory::get();
-
-        $product_tags = ProductTag::get();
-
-        return view('frontend.products.index', compact('brands', 'product_categories', 'product_tags', 'products'));
+        return view('frontend.products.index', compact('products'));
     }
 
     public function create()

@@ -30,19 +30,7 @@ class WlistController extends Controller
 
         $wlists = Wlist::with(['client', 'boat', 'priority', 'for_roles', 'for_users', 'wlogs', 'media'])->get();
 
-        $clients = Client::get();
-
-        $boats = Boat::get();
-
-        $priorities = Priority::get();
-
-        $roles = Role::get();
-
-        $users = User::get();
-
-        $wlogs = Wlog::get();
-
-        return view('frontend.wlists.index', compact('boats', 'clients', 'priorities', 'roles', 'users', 'wlists', 'wlogs'));
+        return view('frontend.wlists.index', compact('wlists'));
     }
 
     public function create()
@@ -129,7 +117,7 @@ class WlistController extends Controller
     {
         abort_if(Gate::denies('wlist_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users', 'wlogs', 'wlistWlogs', 'wlistMlogs');
+        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users', 'wlogs', 'wlistWlogs');
 
         return view('frontend.wlists.show', compact('wlist'));
     }

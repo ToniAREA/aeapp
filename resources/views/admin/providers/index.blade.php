@@ -42,38 +42,14 @@
                             {{ trans('cruds.provider.fields.company') }}
                         </th>
                         <th>
+                            {{ trans('cruds.provider.fields.provider_logo') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.provider.fields.internal_notes') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <select class="search">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach($brands as $key => $item)
-                                    <option value="{{ $item->brand }}">{{ $item->brand }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            <select class="search">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach($contact_companies as $key => $item)
-                                    <option value="{{ $item->company_name }}">{{ $item->company_name }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                        </td>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,6 +78,16 @@
                             </td>
                             <td>
                                 {{ $provider->company->company_name ?? '' }}
+                            </td>
+                            <td>
+                                @if($provider->provider_logo)
+                                    <a href="{{ $provider->provider_logo->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $provider->provider_logo->getUrl('thumb') }}">
+                                    </a>
+                                @endif
+                            </td>
+                            <td>
+                                {{ $provider->internal_notes ?? '' }}
                             </td>
                             <td>
                                 @can('provider_show')
@@ -183,27 +169,6 @@
           .columns.adjust();
   });
   
-let visibleColumnsIndexes = null;
-$('.datatable thead').on('input', '.search', function () {
-      let strict = $(this).attr('strict') || false
-      let value = strict && this.value ? "^" + this.value + "$" : this.value
-
-      let index = $(this).parent().index()
-      if (visibleColumnsIndexes !== null) {
-        index = visibleColumnsIndexes[index]
-      }
-
-      table
-        .column(index)
-        .search(value, strict)
-        .draw()
-  });
-table.on('column-visibility.dt', function(e, settings, column, state) {
-      visibleColumnsIndexes = []
-      table.columns(":visible").every(function(colIdx) {
-          visibleColumnsIndexes.push(colIdx);
-      });
-  })
 })
 
 </script>

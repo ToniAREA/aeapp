@@ -42,6 +42,37 @@
                             <span class="help-block">{{ trans('cruds.brand.fields.provider_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="brand_logo">{{ trans('cruds.brand.fields.brand_logo') }}</label>
+                            <div class="needsclick dropzone" id="brand_logo-dropzone">
+                            </div>
+                            @if($errors->has('brand_logo'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('brand_logo') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.brand.fields.brand_logo_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="brand_url">{{ trans('cruds.brand.fields.brand_url') }}</label>
+                            <input class="form-control" type="text" name="brand_url" id="brand_url" value="{{ old('brand_url', '') }}">
+                            @if($errors->has('brand_url'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('brand_url') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.brand.fields.brand_url_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="internal_notes">{{ trans('cruds.brand.fields.internal_notes') }}</label>
+                            <input class="form-control" type="text" name="internal_notes" id="internal_notes" value="{{ old('internal_notes', '') }}">
+                            @if($errors->has('internal_notes'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('internal_notes') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.brand.fields.internal_notes_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <button class="btn btn-danger" type="submit">
                                 {{ trans('global.save') }}
                             </button>
@@ -53,4 +84,62 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    Dropzone.options.brandLogoDropzone = {
+    url: '{{ route('frontend.brands.storeMedia') }}',
+    maxFilesize: 2, // MB
+    acceptedFiles: '.jpeg,.jpg,.png,.gif',
+    maxFiles: 1,
+    addRemoveLinks: true,
+    headers: {
+      'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    },
+    params: {
+      size: 2,
+      width: 4096,
+      height: 4096
+    },
+    success: function (file, response) {
+      $('form').find('input[name="brand_logo"]').remove()
+      $('form').append('<input type="hidden" name="brand_logo" value="' + response.name + '">')
+    },
+    removedfile: function (file) {
+      file.previewElement.remove()
+      if (file.status !== 'error') {
+        $('form').find('input[name="brand_logo"]').remove()
+        this.options.maxFiles = this.options.maxFiles + 1
+      }
+    },
+    init: function () {
+@if(isset($brand) && $brand->brand_logo)
+      var file = {!! json_encode($brand->brand_logo) !!}
+          this.options.addedfile.call(this, file)
+      this.options.thumbnail.call(this, file, file.preview ?? file.preview_url)
+      file.previewElement.classList.add('dz-complete')
+      $('form').append('<input type="hidden" name="brand_logo" value="' + file.file_name + '">')
+      this.options.maxFiles = this.options.maxFiles - 1
+@endif
+    },
+    error: function (file, response) {
+        if ($.type(response) === 'string') {
+            var message = response //dropzone sends it's own error messages in string
+        } else {
+            var message = response.errors.file
+        }
+        file.previewElement.classList.add('dz-error')
+        _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+        _results = []
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            node = _ref[_i]
+            _results.push(node.textContent = message)
+        }
+
+        return _results
+    }
+}
+
+</script>
 @endsection
