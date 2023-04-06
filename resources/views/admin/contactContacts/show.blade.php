@@ -106,6 +106,22 @@
     </div>
 </div>
 
-
+<div class="card">
+    <div class="card-header">
+        {{ trans('global.relatedData') }}
+    </div>
+    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="#contact_employees" role="tab" data-toggle="tab">
+                {{ trans('cruds.employee.title') }}
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" role="tabpanel" id="contact_employees">
+            @includeIf('admin.contactContacts.relationships.contactEmployees', ['employees' => $contactContact->contactEmployees])
+        </div>
+    </div>
+</div>
 
 @endsection

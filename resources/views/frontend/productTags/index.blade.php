@@ -9,6 +9,10 @@
                         <a class="btn btn-success" href="{{ route('frontend.product-tags.create') }}">
                             {{ trans('global.add') }} {{ trans('cruds.productTag.title_singular') }}
                         </a>
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+                            {{ trans('global.app_csvImport') }}
+                        </button>
+                        @include('csvImport.modal', ['model' => 'ProductTag', 'route' => 'admin.product-tags.parseCsvImport'])
                     </div>
                 </div>
             @endcan

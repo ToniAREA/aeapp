@@ -2,25 +2,32 @@
 
 namespace App\Http\Requests;
 
-use App\Models\MLog;
+use App\Models\Mlog;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 
-class UpdateMLogRequest extends FormRequest
+class UpdateMlogRequest extends FormRequest
 {
     public function authorize()
     {
-        return Gate::allows('m_log_edit');
+        return Gate::allows('mlog_edit');
     }
 
     public function rules()
     {
         return [
-            'code' => [
+            'id_mlog' => [
                 'string',
-                'max:30',
                 'nullable',
+            ],
+            'date' => [
+                'required',
+                'date_format:' . config('panel.date_format'),
+            ],
+            'wlist_id' => [
+                'required',
+                'integer',
             ],
         ];
     }

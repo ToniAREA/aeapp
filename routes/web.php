@@ -1,9 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-
-Route::view('/', 'main');
+Route::view('/', 'welcome');
 Route::get('userVerification/{token}', 'UserVerificationController@approve')->name('userVerification');
 Auth::routes();
 
@@ -55,6 +52,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Wlist
     Route::delete('wlists/destroy', 'WlistController@massDestroy')->name('wlists.massDestroy');
+    Route::post('wlists/media', 'WlistController@storeMedia')->name('wlists.storeMedia');
+    Route::post('wlists/ckmedia', 'WlistController@storeCKEditorImages')->name('wlists.storeCKEditorImages');
     Route::post('wlists/parse-csv-import', 'WlistController@parseCsvImport')->name('wlists.parseCsvImport');
     Route::post('wlists/process-csv-import', 'WlistController@processCsvImport')->name('wlists.processCsvImport');
     Route::resource('wlists', 'WlistController');
@@ -80,10 +79,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('product-categories/destroy', 'ProductCategoryController@massDestroy')->name('product-categories.massDestroy');
     Route::post('product-categories/media', 'ProductCategoryController@storeMedia')->name('product-categories.storeMedia');
     Route::post('product-categories/ckmedia', 'ProductCategoryController@storeCKEditorImages')->name('product-categories.storeCKEditorImages');
+    Route::post('product-categories/parse-csv-import', 'ProductCategoryController@parseCsvImport')->name('product-categories.parseCsvImport');
+    Route::post('product-categories/process-csv-import', 'ProductCategoryController@processCsvImport')->name('product-categories.processCsvImport');
     Route::resource('product-categories', 'ProductCategoryController');
 
     // Product Tag
     Route::delete('product-tags/destroy', 'ProductTagController@massDestroy')->name('product-tags.massDestroy');
+    Route::post('product-tags/parse-csv-import', 'ProductTagController@parseCsvImport')->name('product-tags.parseCsvImport');
+    Route::post('product-tags/process-csv-import', 'ProductTagController@processCsvImport')->name('product-tags.processCsvImport');
     Route::resource('product-tags', 'ProductTagController');
 
     // Product
@@ -147,6 +150,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Employees
     Route::delete('employees/destroy', 'EmployeesController@massDestroy')->name('employees.massDestroy');
+    Route::post('employees/media', 'EmployeesController@storeMedia')->name('employees.storeMedia');
+    Route::post('employees/ckmedia', 'EmployeesController@storeCKEditorImages')->name('employees.storeCKEditorImages');
     Route::post('employees/parse-csv-import', 'EmployeesController@parseCsvImport')->name('employees.parseCsvImport');
     Route::post('employees/process-csv-import', 'EmployeesController@processCsvImport')->name('employees.processCsvImport');
     Route::resource('employees', 'EmployeesController');
@@ -265,6 +270,8 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
 
     // Wlist
     Route::delete('wlists/destroy', 'WlistController@massDestroy')->name('wlists.massDestroy');
+    Route::post('wlists/media', 'WlistController@storeMedia')->name('wlists.storeMedia');
+    Route::post('wlists/ckmedia', 'WlistController@storeCKEditorImages')->name('wlists.storeCKEditorImages');
     Route::resource('wlists', 'WlistController');
 
     // To Do
@@ -339,6 +346,8 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
 
     // Employees
     Route::delete('employees/destroy', 'EmployeesController@massDestroy')->name('employees.massDestroy');
+    Route::post('employees/media', 'EmployeesController@storeMedia')->name('employees.storeMedia');
+    Route::post('employees/ckmedia', 'EmployeesController@storeCKEditorImages')->name('employees.storeCKEditorImages');
     Route::resource('employees', 'EmployeesController');
 
     // Asset Category

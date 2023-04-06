@@ -30,13 +30,28 @@
                             {{ trans('cruds.employee.fields.id') }}
                         </th>
                         <th>
+                            {{ trans('cruds.employee.fields.id_employee') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.employee.fields.user') }}
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.email') }}
                         </th>
                         <th>
-                            {{ trans('cruds.employee.fields.id_employee') }}
+                            {{ trans('cruds.employee.fields.contact') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.employee.fields.photo') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.employee.fields.status') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.employee.fields.contract_starts') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.employee.fields.contract_ends') }}
                         </th>
                         <th>
                             {{ trans('cruds.employee.fields.notes') }}
@@ -45,42 +60,8 @@
                             {{ trans('cruds.employee.fields.internalnotes') }}
                         </th>
                         <th>
-                            {{ trans('cruds.employee.fields.status') }}
-                        </th>
-                        <th>
                             &nbsp;
                         </th>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <select class="search">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach($users as $key => $item)
-                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                        </td>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,22 +74,38 @@
                                 {{ $employee->id ?? '' }}
                             </td>
                             <td>
+                                {{ $employee->id_employee ?? '' }}
+                            </td>
+                            <td>
                                 {{ $employee->user->name ?? '' }}
                             </td>
                             <td>
                                 {{ $employee->user->email ?? '' }}
                             </td>
                             <td>
-                                {{ $employee->id_employee ?? '' }}
+                                {{ $employee->contact->contact_first_name ?? '' }}
+                            </td>
+                            <td>
+                                @if($employee->photo)
+                                    <a href="{{ $employee->photo->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $employee->photo->getUrl('thumb') }}">
+                                    </a>
+                                @endif
+                            </td>
+                            <td>
+                                {{ $employee->status ?? '' }}
+                            </td>
+                            <td>
+                                {{ $employee->contract_starts ?? '' }}
+                            </td>
+                            <td>
+                                {{ $employee->contract_ends ?? '' }}
                             </td>
                             <td>
                                 {{ $employee->notes ?? '' }}
                             </td>
                             <td>
                                 {{ $employee->internalnotes ?? '' }}
-                            </td>
-                            <td>
-                                {{ $employee->status ?? '' }}
                             </td>
                             <td>
                                 @can('employee_show')
@@ -190,27 +187,6 @@
           .columns.adjust();
   });
   
-let visibleColumnsIndexes = null;
-$('.datatable thead').on('input', '.search', function () {
-      let strict = $(this).attr('strict') || false
-      let value = strict && this.value ? "^" + this.value + "$" : this.value
-
-      let index = $(this).parent().index()
-      if (visibleColumnsIndexes !== null) {
-        index = visibleColumnsIndexes[index]
-      }
-
-      table
-        .column(index)
-        .search(value, strict)
-        .draw()
-  });
-table.on('column-visibility.dt', function(e, settings, column, state) {
-      visibleColumnsIndexes = []
-      table.columns(":visible").every(function(colIdx) {
-          visibleColumnsIndexes.push(colIdx);
-      });
-  })
 })
 
 </script>

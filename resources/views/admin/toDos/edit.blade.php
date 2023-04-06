@@ -56,6 +56,42 @@
                 <span class="help-block">{{ trans('cruds.toDo.fields.priority_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="for_roles">{{ trans('cruds.toDo.fields.for_role') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('for_roles') ? 'is-invalid' : '' }}" name="for_roles[]" id="for_roles" multiple>
+                    @foreach($for_roles as $id => $for_role)
+                        <option value="{{ $id }}" {{ (in_array($id, old('for_roles', [])) || $toDo->for_roles->contains($id)) ? 'selected' : '' }}>{{ $for_role }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('for_roles'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('for_roles') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.toDo.fields.for_role_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="for_users">{{ trans('cruds.toDo.fields.for_user') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('for_users') ? 'is-invalid' : '' }}" name="for_users[]" id="for_users" multiple>
+                    @foreach($for_users as $id => $for_user)
+                        <option value="{{ $id }}" {{ (in_array($id, old('for_users', [])) || $toDo->for_users->contains($id)) ? 'selected' : '' }}>{{ $for_user }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('for_users'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('for_users') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.toDo.fields.for_user_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

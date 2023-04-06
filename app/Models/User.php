@@ -124,6 +124,21 @@ class User extends Authenticatable
         return $this->belongsToMany(UserAlert::class);
     }
 
+    public function forUserToDos()
+    {
+        return $this->belongsToMany(ToDo::class);
+    }
+
+    public function forUserAppointments()
+    {
+        return $this->belongsToMany(Appointment::class);
+    }
+
+    public function forUserWlists()
+    {
+        return $this->belongsToMany(Wlist::class);
+    }
+
     public function getEmailVerifiedAtAttribute($value)
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;

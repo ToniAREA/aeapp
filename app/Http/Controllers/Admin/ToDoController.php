@@ -8,7 +8,9 @@ use App\Http\Requests\MassDestroyToDoRequest;
 use App\Http\Requests\StoreToDoRequest;
 use App\Http\Requests\UpdateToDoRequest;
 use App\Models\Priority;
+use App\Models\Role;
 use App\Models\ToDo;
+use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -22,7 +24,7 @@ class ToDoController extends Controller
     {
         abort_if(Gate::denies('to_do_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $toDos = ToDo::with(['priority', 'media'])->get();
+        $toDos = ToDo::with(['priority', 'for_roles', 'for_users', 'media'])->get();
 
         return view('admin.toDos.index', compact('toDos'));
     }
@@ -33,13 +35,18 @@ class ToDoController extends Controller
 
         $priorities = Priority::pluck('level', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.toDos.create', compact('priorities'));
+        $for_roles = Role::pluck('title', 'id');
+
+        $for_users = User::pluck('name', 'id');
+
+        return view('admin.toDos.create', compact('for_roles', 'for_users', 'priorities'));
     }
 
     public function store(StoreToDoRequest $request)
     {
         $toDo = ToDo::create($request->all());
-
+        $toDo->for_roles()->sync($request->input('for_roles', []));
+        $toDo->for_users()->sync($request->input('for_users', []));
         foreach ($request->input('photo', []) as $file) {
             $toDo->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('photo');
         }
@@ -57,15 +64,20 @@ class ToDoController extends Controller
 
         $priorities = Priority::pluck('level', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $toDo->load('priority');
+        $for_roles = Role::pluck('title', 'id');
 
-        return view('admin.toDos.edit', compact('priorities', 'toDo'));
+        $for_users = User::pluck('name', 'id');
+
+        $toDo->load('priority', 'for_roles', 'for_users');
+
+        return view('admin.toDos.edit', compact('for_roles', 'for_users', 'priorities', 'toDo'));
     }
 
     public function update(UpdateToDoRequest $request, ToDo $toDo)
     {
         $toDo->update($request->all());
-
+        $toDo->for_roles()->sync($request->input('for_roles', []));
+        $toDo->for_users()->sync($request->input('for_users', []));
         if (count($toDo->photo) > 0) {
             foreach ($toDo->photo as $media) {
                 if (! in_array($media->file_name, $request->input('photo', []))) {
@@ -87,7 +99,7 @@ class ToDoController extends Controller
     {
         abort_if(Gate::denies('to_do_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $toDo->load('priority');
+        $toDo->load('priority', 'for_roles', 'for_users');
 
         return view('admin.toDos.show', compact('toDo'));
     }

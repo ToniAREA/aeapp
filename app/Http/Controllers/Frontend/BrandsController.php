@@ -66,7 +66,7 @@ class BrandsController extends Controller
     {
         abort_if(Gate::denies('brand_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $brand->load('providers');
+        $brand->load('providers', 'brandProducts', 'brandProviders');
 
         return view('frontend.brands.show', compact('brand'));
     }

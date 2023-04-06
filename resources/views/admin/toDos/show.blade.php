@@ -59,6 +59,26 @@
                             {{ $toDo->priority->level ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.toDo.fields.for_role') }}
+                        </th>
+                        <td>
+                            @foreach($toDo->for_roles as $key => $for_role)
+                                <span class="label label-info">{{ $for_role->title }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.toDo.fields.for_user') }}
+                        </th>
+                        <td>
+                            @foreach($toDo->for_users as $key => $for_user)
+                                <span class="label label-info">{{ $for_user->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
