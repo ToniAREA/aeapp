@@ -12,44 +12,65 @@
 
     <div class="row m-1">
         <div class="col p-1">
-            <a href="{{ route("admin.clients.index") }}" class=" btn btn-sm btn-outline-dark" style="width: 100%;" role="button"
-                aria-disabled="true"><i class=" fa fa-users" aria-hidden="true"></i><br>CLIENTS
+            <a href="{{ route('admin.clients.index') }}" class=" btn btn-sm btn-outline-dark" style="width: 100%;"
+                role="button" aria-disabled="true"><i class=" fa fa-users" aria-hidden="true"></i><br>CLIENTS
                 <br><span class="px-3 bg-dark rounded-pill text-light">{{ $clients->count() }}</span>
             </a>
         </div>
         <div class="col p-1">
-            <a href="{{ route("admin.boats.index") }}" class=" btn btn-sm btn-outline-dark" style="width: 100%;" role="button"
-                aria-disabled="true"><i class=" fa fa-ship" aria-hidden="true"></i><br>BOATS
+            <a href="{{ route('admin.boats.index') }}" class=" btn btn-sm btn-outline-dark" style="width: 100%;"
+                role="button" aria-disabled="true"><i class=" fa fa-ship" aria-hidden="true"></i><br>BOATS
                 <br><span class="px-3 bg-dark rounded-pill text-light">{{ $boats->count() }}</span>
             </a>
         </div>
         <div class="col p-1">
-            <a href="{{ route("admin.wlists.index") }}" class=" btn btn-sm btn-outline-dark" style="width: 100%;" role="button"
-                aria-disabled="true"><i class=" fa fa-list" aria-hidden="true"></i><br>WORKING
+            <a href="{{ route('admin.wlists.index') }}" class=" btn btn-sm btn-outline-dark" style="width: 100%;"
+                role="button" aria-disabled="true"><i class=" fa fa-list" aria-hidden="true"></i><br>WORKING
                 <br><span class="px-3 bg-dark rounded-pill text-light">88</span>
             </a>
         </div>
         <div class="col p-1">
-            <a href="{{ route("admin.wlogs.index") }}" class=" btn btn-sm btn-outline-danger" style="width: 100%;" role="button"
-                aria-disabled="true"><i class=" fa fa-edit" aria-hidden="true"></i><br>NOT_CH
+            <a href="{{ route('admin.wlogs.index') }}" class=" btn btn-sm btn-outline-danger" style="width: 100%;"
+                role="button" aria-disabled="true"><i class=" fa fa-edit" aria-hidden="true"></i><br>NOT_CH
                 <br><span class="px-3 bg-danger rounded-pill text-light">7</span>
             </a>
         </div>
     </div>
+
     <div class="row m-1">
         <div class="col p-1">
-            <a href="{{ route("admin.clients.create") }}" class=" btn btn-sm btn-outline-dark" style="width: 100%;" role="button"
+            <a href="{{ route('admin.clients.create') }}" class=" btn btn-sm btn-dark" style="width: 100%;" role="button"
                 aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i>ADD CLIENT
             </a>
         </div>
         <div class="col p-1">
-            <a href="{{ route("admin.boats.create") }}" class=" btn btn-sm btn-outline-dark" style="width: 100%;" role="button"
+            <a href="{{ route('admin.boats.create') }}" class=" btn btn-sm btn-dark" style="width: 100%;" role="button"
                 aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i>ADD BOAT
             </a>
         </div>
-        
+    </div>
+
+    <div class="row m-1">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
+
+        <div id='calendar'></div>
     </div>
 @endsection
 @section('scripts')
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
+    <script>
+        $(document).ready(function() {
+            // page is now ready, initialize the calendar...
+            events = {!! json_encode($events) !!};
+            $('#calendar').fullCalendar({
+                // put your options and callbacks here
+                events: events,
+                defaultView: 'agendaWeek',
+
+
+            })
+        });
+    </script>
     @parent
 @endsection
