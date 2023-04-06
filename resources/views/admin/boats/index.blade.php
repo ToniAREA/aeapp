@@ -60,7 +60,7 @@
                             &nbsp;
                         </th>
                     </tr>
-                    <tr>
+                   {{--  <tr>
                         <td>
                         </td>
                         <td>
@@ -104,7 +104,7 @@
                         </td>
                         <td>
                         </td>
-                    </tr>
+                    </tr> --}}
                 </thead>
                 <tbody>
                     @foreach($boats as $key => $boat)

@@ -81,7 +81,8 @@
                             &nbsp;
                         </th>
                     </tr>
-                    <tr>
+                    
+                    {{-- <tr>
                         <td>
                         </td>
                         <td>
@@ -146,7 +147,7 @@
                         </td>
                         <td>
                         </td>
-                    </tr>
+                    </tr> --}}
                 </thead>
                 <tbody>
                     @foreach($clients as $key => $client)

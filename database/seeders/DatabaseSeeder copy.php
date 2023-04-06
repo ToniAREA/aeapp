@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             MarinasSeeder::class,
             ClientsSeeder::class,
             BoatsSeeder::class,
+            BoatTypeSeeder::class,
         ]);
     }
 }
