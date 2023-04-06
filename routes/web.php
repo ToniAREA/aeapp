@@ -181,12 +181,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('boats-types/destroy', 'BoatsTypeController@massDestroy')->name('boats-types.massDestroy');
     Route::resource('boats-types', 'BoatsTypeController');
 
-    // Mlogs
-    Route::delete('mlogs/destroy', 'MlogsController@massDestroy')->name('mlogs.massDestroy');
-    Route::post('mlogs/parse-csv-import', 'MlogsController@parseCsvImport')->name('mlogs.parseCsvImport');
-    Route::post('mlogs/process-csv-import', 'MlogsController@processCsvImport')->name('mlogs.processCsvImport');
-    Route::resource('mlogs', 'MlogsController');
-
     // Provider
     Route::delete('providers/destroy', 'ProviderController@massDestroy')->name('providers.massDestroy');
     Route::post('providers/media', 'ProviderController@storeMedia')->name('providers.storeMedia');
@@ -374,10 +368,6 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     // Boats Type
     Route::delete('boats-types/destroy', 'BoatsTypeController@massDestroy')->name('boats-types.massDestroy');
     Route::resource('boats-types', 'BoatsTypeController');
-
-    // Mlogs
-    Route::delete('mlogs/destroy', 'MlogsController@massDestroy')->name('mlogs.massDestroy');
-    Route::resource('mlogs', 'MlogsController');
 
     // Provider
     Route::delete('providers/destroy', 'ProviderController@massDestroy')->name('providers.massDestroy');

@@ -716,86 +716,66 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 177,
-                'title' => 'mlog_create',
-            ],
-            [
-                'id'    => 178,
-                'title' => 'mlog_edit',
-            ],
-            [
-                'id'    => 179,
-                'title' => 'mlog_show',
-            ],
-            [
-                'id'    => 180,
-                'title' => 'mlog_delete',
-            ],
-            [
-                'id'    => 181,
-                'title' => 'mlog_access',
-            ],
-            [
-                'id'    => 182,
                 'title' => 'provider_create',
             ],
             [
-                'id'    => 183,
+                'id'    => 178,
                 'title' => 'provider_edit',
             ],
             [
-                'id'    => 184,
+                'id'    => 179,
                 'title' => 'provider_show',
             ],
             [
-                'id'    => 185,
+                'id'    => 180,
                 'title' => 'provider_delete',
             ],
             [
-                'id'    => 186,
+                'id'    => 181,
                 'title' => 'provider_access',
             ],
             [
-                'id'    => 187,
+                'id'    => 182,
                 'title' => 'brand_create',
             ],
             [
-                'id'    => 188,
+                'id'    => 183,
                 'title' => 'brand_edit',
             ],
             [
-                'id'    => 189,
+                'id'    => 184,
                 'title' => 'brand_show',
             ],
             [
-                'id'    => 190,
+                'id'    => 185,
                 'title' => 'brand_delete',
             ],
             [
-                'id'    => 191,
+                'id'    => 186,
                 'title' => 'brand_access',
             ],
             [
-                'id'    => 192,
+                'id'    => 187,
                 'title' => 'tag_create',
             ],
             [
-                'id'    => 193,
+                'id'    => 188,
                 'title' => 'tag_edit',
             ],
             [
-                'id'    => 194,
+                'id'    => 189,
                 'title' => 'tag_show',
             ],
             [
-                'id'    => 195,
+                'id'    => 190,
                 'title' => 'tag_delete',
             ],
             [
-                'id'    => 196,
+                'id'    => 191,
                 'title' => 'tag_access',
             ],
             [
-                'id'    => 197,
+                'id'    => 192,
                 'title' => 'profile_password_edit',
             ],
         ];
