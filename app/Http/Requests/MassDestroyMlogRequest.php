@@ -2,16 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Mlog;
+use App\Models\MLog;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 
-class MassDestroyMlogRequest extends FormRequest
+class MassDestroyMLogRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(Gate::denies('mlog_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('m_log_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return true;
     }
@@ -20,7 +20,7 @@ class MassDestroyMlogRequest extends FormRequest
     {
         return [
             'ids'   => 'required|array',
-            'ids.*' => 'exists:mlogs,id',
+            'ids.*' => 'exists:m_logs,id',
         ];
     }
 }
