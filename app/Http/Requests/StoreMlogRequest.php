@@ -2,25 +2,46 @@
 
 namespace App\Http\Requests;
 
-use App\Models\MLog;
+use App\Models\Mlog;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 
-class StoreMLogRequest extends FormRequest
+class StoreMlogRequest extends FormRequest
 {
     public function authorize()
     {
-        return Gate::allows('m_log_create');
+        return Gate::allows('mlog_create');
     }
 
     public function rules()
     {
         return [
-            'code' => [
+            'description' => [
                 'string',
-                'max:30',
                 'nullable',
+            ],
+            'quantity' => [
+                'numeric',
+            ],
+            'price_unit' => [
+                'numeric',
+            ],
+            'discount' => [
+                'numeric',
+            ],
+            'total' => [
+                'numeric',
+            ],
+            'status' => [
+                'string',
+                'nullable',
+            ],
+            'tags.*' => [
+                'integer',
+            ],
+            'tags' => [
+                'array',
             ],
         ];
     }
