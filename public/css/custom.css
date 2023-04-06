@@ -132,7 +132,7 @@ table.dataTable thead .sorting_desc {
 }
 
 .c-header {
-    background-color: #111;
+    background-color: #636f83;
     color: #fff;
 }
 
@@ -151,7 +151,7 @@ table.dataTable thead .sorting_desc {
 }
 
 .c-sidebar {
-    background-color: #111 !important;
+    background-color: #636f83 !important;
 }
 
 .c-body {
@@ -159,5 +159,5 @@ table.dataTable thead .sorting_desc {
 }
 
 .c-app {
-    background-color: #111 !important;
+    background-color: #636f83 !important;
 }
