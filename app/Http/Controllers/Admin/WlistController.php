@@ -129,7 +129,7 @@ class WlistController extends Controller
     {
         abort_if(Gate::denies('wlist_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users', 'wlogs', 'wlistWlogs', 'wlistMlogs');
+        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users', 'wlogs', 'wlistWlogs');
 
         return view('admin.wlists.show', compact('wlist'));
     }

@@ -126,18 +126,10 @@
                 {{ trans('cruds.wlog.title') }}
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#wlist_mlogs" role="tab" data-toggle="tab">
-                {{ trans('cruds.mlog.title') }}
-            </a>
-        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="wlist_wlogs">
             @includeIf('admin.wlists.relationships.wlistWlogs', ['wlogs' => $wlist->wlistWlogs])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="wlist_mlogs">
-            @includeIf('admin.wlists.relationships.wlistMlogs', ['mlogs' => $wlist->wlistMlogs])
         </div>
     </div>
 </div>
