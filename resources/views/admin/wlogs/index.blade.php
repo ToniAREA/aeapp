@@ -19,96 +19,159 @@
     </div>
 
     <div class="card-body">
-        <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-Wlog">
-            <thead>
-                <tr>
-                    <th width="10">
+        <div class="table-responsive">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-Wlog">
+                <thead>
+                    <tr>
+                        <th width="10">
 
-                    </th>
-                    <th>
-                        {{ trans('cruds.wlog.fields.id') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.wlog.fields.date') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.wlog.fields.wlist') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.wlog.fields.employee') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.user.fields.email') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.wlog.fields.marina') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.wlog.fields.description') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.wlog.fields.hours') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.wlog.fields.tags') }}
-                    </th>
-                    <th>
-                        &nbsp;
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($wlists as $key => $item)
-                                <option value="{{ $item->desciption }}">{{ $item->desciption }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($users as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($marinas as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($tags as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-            </thead>
-        </table>
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlog.fields.id') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlog.fields.date') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlog.fields.wlist') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlog.fields.employee') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.email') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlog.fields.marina') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlog.fields.description') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlog.fields.hours') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlog.fields.tags') }}
+                        </th>
+                        <th>
+                            &nbsp;
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($wlists as $key => $item)
+                                    <option value="{{ $item->desciption }}">{{ $item->desciption }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($users as $key => $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($marinas as $key => $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($tags as $key => $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($wlogs as $key => $wlog)
+                        <tr data-entry-id="{{ $wlog->id }}">
+                            <td>
+
+                            </td>
+                            <td>
+                                {{ $wlog->id ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlog->date ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlog->wlist->desciption ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlog->employee->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlog->employee->email ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlog->marina->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlog->description ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlog->hours ?? '' }}
+                            </td>
+                            <td>
+                                @foreach($wlog->tags as $key => $item)
+                                    <span class="badge badge-info">{{ $item->name }}</span>
+                                @endforeach
+                            </td>
+                            <td>
+                                @can('wlog_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.wlogs.show', $wlog->id) }}">
+                                        {{ trans('global.view') }}
+                                    </a>
+                                @endcan
+
+                                @can('wlog_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.wlogs.edit', $wlog->id) }}">
+                                        {{ trans('global.edit') }}
+                                    </a>
+                                @endcan
+
+                                @can('wlog_delete')
+                                    <form action="{{ route('admin.wlogs.destroy', $wlog->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                    </form>
+                                @endcan
+
+                            </td>
+
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -121,14 +184,14 @@
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 @can('wlog_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
+  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.wlogs.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
-          return entry.id
+      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
+          return $(entry).data('entry-id')
       });
 
       if (ids.length === 0) {
@@ -150,31 +213,12 @@
   dtButtons.push(deleteButton)
 @endcan
 
-  let dtOverrideGlobals = {
-    buttons: dtButtons,
-    processing: true,
-    serverSide: true,
-    retrieve: true,
-    aaSorting: [],
-    ajax: "{{ route('admin.wlogs.index') }}",
-    columns: [
-      { data: 'placeholder', name: 'placeholder' },
-{ data: 'id', name: 'id' },
-{ data: 'date', name: 'date' },
-{ data: 'wlist_desciption', name: 'wlist.desciption' },
-{ data: 'employee_name', name: 'employee.name' },
-{ data: 'employee.email', name: 'employee.email' },
-{ data: 'marina_name', name: 'marina.name' },
-{ data: 'description', name: 'description' },
-{ data: 'hours', name: 'hours' },
-{ data: 'tags', name: 'tags.name' },
-{ data: 'actions', name: '{{ trans('global.actions') }}' }
-    ],
+  $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
     pageLength: 100,
-  };
-  let table = $('.datatable-Wlog').DataTable(dtOverrideGlobals);
+  });
+  let table = $('.datatable-Wlog:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
@@ -201,7 +245,7 @@ table.on('column-visibility.dt', function(e, settings, column, state) {
           visibleColumnsIndexes.push(colIdx);
       });
   })
-});
+})
 
 </script>
 @endsection

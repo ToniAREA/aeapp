@@ -31,9 +31,24 @@ class UpdateWlistRequest extends FormRequest
                 'max:200',
                 'required',
             ],
+            'photos' => [
+                'array',
+            ],
             'deadline' => [
                 'date_format:' . config('panel.date_format'),
                 'nullable',
+            ],
+            'for_roles.*' => [
+                'integer',
+            ],
+            'for_roles' => [
+                'array',
+            ],
+            'for_users.*' => [
+                'integer',
+            ],
+            'for_users' => [
+                'array',
             ],
             'wlogs.*' => [
                 'integer',

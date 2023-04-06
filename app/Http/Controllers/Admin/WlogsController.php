@@ -15,83 +15,26 @@ use App\Models\Wlog;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Yajra\DataTables\Facades\DataTables;
 
 class WlogsController extends Controller
 {
     use CsvImportTrait;
 
-    public function index(Request $request)
+    public function index()
     {
         abort_if(Gate::denies('wlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        if ($request->ajax()) {
-            $query = Wlog::with(['wlist', 'employee', 'marina', 'tags'])->select(sprintf('%s.*', (new Wlog)->table));
-            $table = Datatables::of($query);
+        $wlogs = Wlog::with(['wlist', 'employee', 'marina', 'tags'])->get();
 
-            $table->addColumn('placeholder', '&nbsp;');
-            $table->addColumn('actions', '&nbsp;');
+        $wlists = Wlist::get();
 
-            $table->editColumn('actions', function ($row) {
-                $viewGate      = 'wlog_show';
-                $editGate      = 'wlog_edit';
-                $deleteGate    = 'wlog_delete';
-                $crudRoutePart = 'wlogs';
+        $users = User::get();
 
-                return view('partials.datatablesActions', compact(
-                    'viewGate',
-                    'editGate',
-                    'deleteGate',
-                    'crudRoutePart',
-                    'row'
-                ));
-            });
-
-            $table->editColumn('id', function ($row) {
-                return $row->id ? $row->id : '';
-            });
-
-            $table->addColumn('wlist_desciption', function ($row) {
-                return $row->wlist ? $row->wlist->desciption : '';
-            });
-
-            $table->addColumn('employee_name', function ($row) {
-                return $row->employee ? $row->employee->name : '';
-            });
-
-            $table->editColumn('employee.email', function ($row) {
-                return $row->employee ? (is_string($row->employee) ? $row->employee : $row->employee->email) : '';
-            });
-            $table->addColumn('marina_name', function ($row) {
-                return $row->marina ? $row->marina->name : '';
-            });
-
-            $table->editColumn('description', function ($row) {
-                return $row->description ? $row->description : '';
-            });
-            $table->editColumn('hours', function ($row) {
-                return $row->hours ? $row->hours : '';
-            });
-            $table->editColumn('tags', function ($row) {
-                $labels = [];
-                foreach ($row->tags as $tag) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $tag->name);
-                }
-
-                return implode(' ', $labels);
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'wlist', 'employee', 'marina', 'tags']);
-
-            return $table->make(true);
-        }
-
-        $wlists  = Wlist::get();
-        $users   = User::get();
         $marinas = Marina::get();
-        $tags    = Tag::get();
 
-        return view('admin.wlogs.index', compact('wlists', 'users', 'marinas', 'tags'));
+        $tags = Tag::get();
+
+        return view('admin.wlogs.index', compact('marinas', 'tags', 'users', 'wlists', 'wlogs'));
     }
 
     public function create()

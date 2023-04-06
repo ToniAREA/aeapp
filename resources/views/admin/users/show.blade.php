@@ -112,6 +112,21 @@
                 {{ trans('cruds.userAlert.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#for_user_to_dos" role="tab" data-toggle="tab">
+                {{ trans('cruds.toDo.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#for_user_appointments" role="tab" data-toggle="tab">
+                {{ trans('cruds.appointment.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#for_user_wlists" role="tab" data-toggle="tab">
+                {{ trans('cruds.wlist.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="user_employees">
@@ -122,6 +137,15 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="user_user_alerts">
             @includeIf('admin.users.relationships.userUserAlerts', ['userAlerts' => $user->userUserAlerts])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="for_user_to_dos">
+            @includeIf('admin.users.relationships.forUserToDos', ['toDos' => $user->forUserToDos])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="for_user_appointments">
+            @includeIf('admin.users.relationships.forUserAppointments', ['appointments' => $user->forUserAppointments])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="for_user_wlists">
+            @includeIf('admin.users.relationships.forUserWlists', ['wlists' => $user->forUserWlists])
         </div>
     </div>
 </div>

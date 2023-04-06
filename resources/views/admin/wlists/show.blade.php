@@ -49,6 +49,18 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.wlist.fields.photos') }}
+                        </th>
+                        <td>
+                            @foreach($wlist->photos as $key => $media)
+                                <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
+                                    <img src="{{ $media->getUrl('thumb') }}">
+                                </a>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.wlist.fields.deadline') }}
                         </th>
                         <td>
@@ -61,6 +73,26 @@
                         </th>
                         <td>
                             {{ $wlist->priority->level ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.wlist.fields.for_role') }}
+                        </th>
+                        <td>
+                            @foreach($wlist->for_roles as $key => $for_role)
+                                <span class="label label-info">{{ $for_role->title }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.wlist.fields.for_user') }}
+                        </th>
+                        <td>
+                            @foreach($wlist->for_users as $key => $for_user)
+                                <span class="label label-info">{{ $for_user->name }}</span>
+                            @endforeach
                         </td>
                     </tr>
                     <tr>

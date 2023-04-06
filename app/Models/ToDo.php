@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ToDo extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia, HasFactory;
+    use SoftDeletes, InteractsWithMedia, Auditable, HasFactory;
 
     public $table = 'to_dos';
 
@@ -73,5 +74,15 @@ class ToDo extends Model implements HasMedia
     public function priority()
     {
         return $this->belongsTo(Priority::class, 'priority_id');
+    }
+
+    public function for_roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function for_users()
+    {
+        return $this->belongsToMany(User::class);
     }
 }

@@ -62,4 +62,14 @@ class Appointment extends Model
     {
         $this->attributes['when_ends'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
     }
+
+    public function for_roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function for_users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

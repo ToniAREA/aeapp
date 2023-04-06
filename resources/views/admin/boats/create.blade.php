@@ -10,10 +10,8 @@
         <form method="POST" action="{{ route("admin.boats.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label class="required" for="id_boat">{{ trans('cruds.boat.fields.id_boat') }}</label>{{ $lastRecordId + 1 }}
-
-                <input class="form-control {{ $errors->has('id_boat') ? 'is-invalid' : '' }}" type="number" name="id_boat" id="id_boat" value="{{ old('id_boat', $lastRecordId + 1) }}" hidden>
-
+                <label class="required" for="id_boat">{{ trans('cruds.boat.fields.id_boat') }}</label>
+                <input class="form-control {{ $errors->has('id_boat') ? 'is-invalid' : '' }}" type="number" name="id_boat" id="id_boat" value="{{ old('id_boat', '') }}" step="1" required>
                 @if($errors->has('id_boat'))
                     <div class="invalid-feedback">
                         {{ $errors->first('id_boat') }}
@@ -55,7 +53,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.boat.fields.marina_helper') }}</span>
             </div>
-            {{-- <div class="form-group">
+            <div class="form-group">
                 <label for="clients">{{ trans('cruds.boat.fields.client') }}</label>
                 <div style="padding-bottom: 4px">
                     <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
@@ -72,10 +70,10 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.boat.fields.client_helper') }}</span>
-            </div> --}}
+            </div>
             <div class="form-group">
                 <label for="mmsi">{{ trans('cruds.boat.fields.mmsi') }}</label>
-                <input class="form-control {{ $errors->has('mmsi') ? 'is-invalid' : '' }}" type="tel" name="mmsi" id="mmsi" value="{{ old('mmsi', '') }}" min="0" max="999999999">
+                <input class="form-control {{ $errors->has('mmsi') ? 'is-invalid' : '' }}" type="text" name="mmsi" id="mmsi" value="{{ old('mmsi', '') }}">
                 @if($errors->has('mmsi'))
                     <div class="invalid-feedback">
                         {{ $errors->first('mmsi') }}
@@ -103,7 +101,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.boat.fields.internalnotes_helper') }}</span>
             </div>
-            {{-- <div class="form-group">
+            <div class="form-group">
                 <label for="lastuse">{{ trans('cruds.boat.fields.lastuse') }}</label>
                 <input class="form-control date {{ $errors->has('lastuse') ? 'is-invalid' : '' }}" type="text" name="lastuse" id="lastuse" value="{{ old('lastuse') }}">
                 @if($errors->has('lastuse'))
@@ -112,7 +110,7 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.boat.fields.lastuse_helper') }}</span>
-            </div> --}}
+            </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}

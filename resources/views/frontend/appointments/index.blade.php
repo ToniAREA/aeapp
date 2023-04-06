@@ -38,6 +38,12 @@
                                         {{ trans('cruds.appointment.fields.description') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.appointment.fields.for_role') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.appointment.fields.for_user') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -65,6 +71,22 @@
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($roles as $key => $item)
+                                                <option value="{{ $item->title }}">{{ $item->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($users as $key => $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
                                     </td>
                                 </tr>
                             </thead>
@@ -85,6 +107,16 @@
                                         </td>
                                         <td>
                                             {{ $appointment->description ?? '' }}
+                                        </td>
+                                        <td>
+                                            @foreach($appointment->for_roles as $key => $item)
+                                                <span>{{ $item->title }}</span>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach($appointment->for_users as $key => $item)
+                                                <span>{{ $item->name }}</span>
+                                            @endforeach
                                         </td>
                                         <td>
                                             @can('appointment_show')

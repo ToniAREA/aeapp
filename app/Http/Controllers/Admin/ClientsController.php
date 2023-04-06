@@ -9,104 +9,23 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Boat;
 use App\Models\Client;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Yajra\DataTables\Facades\DataTables;
 
 class ClientsController extends Controller
 {
     use CsvImportTrait;
 
-    public function index(Request $request)
+    public function index()
     {
         abort_if(Gate::denies('client_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        if ($request->ajax()) {
-            $query = Client::with(['boats'])->select(sprintf('%s.*', (new Client)->table));
-            $table = Datatables::of($query);
-
-            $table->addColumn('placeholder', '&nbsp;');
-            $table->addColumn('actions', '&nbsp;');
-
-            $table->editColumn('actions', function ($row) {
-                $viewGate      = 'client_show';
-                $editGate      = 'client_edit';
-                $deleteGate    = 'client_delete';
-                $crudRoutePart = 'clients';
-
-                return view('partials.datatablesActions', compact(
-                    'viewGate',
-                    'editGate',
-                    'deleteGate',
-                    'crudRoutePart',
-                    'row'
-                ));
-            });
-
-            $table->editColumn('id', function ($row) {
-                return $row->id ? $row->id : '';
-            });
-            $table->editColumn('id_client', function ($row) {
-                return $row->id_client ? $row->id_client : '';
-            });
-            $table->editColumn('name', function ($row) {
-                return $row->name ? $row->name : '';
-            });
-            $table->editColumn('lastname', function ($row) {
-                return $row->lastname ? $row->lastname : '';
-            });
-            $table->editColumn('boats', function ($row) {
-                $labels = [];
-                foreach ($row->boats as $boat) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $boat->name);
-                }
-
-                return implode(' ', $labels);
-            });
-            $table->editColumn('vat', function ($row) {
-                return $row->vat ? $row->vat : '';
-            });
-            $table->editColumn('address', function ($row) {
-                return $row->address ? $row->address : '';
-            });
-            $table->editColumn('country', function ($row) {
-                return $row->country ? $row->country : '';
-            });
-            $table->editColumn('email', function ($row) {
-                return $row->email ? $row->email : '';
-            });
-            $table->editColumn('phone', function ($row) {
-                return $row->phone ? $row->phone : '';
-            });
-            $table->editColumn('mobile', function ($row) {
-                return $row->mobile ? $row->mobile : '';
-            });
-            $table->editColumn('notes', function ($row) {
-                return $row->notes ? $row->notes : '';
-            });
-            $table->editColumn('internalnotes', function ($row) {
-                return $row->internalnotes ? $row->internalnotes : '';
-            });
-            $table->editColumn('defaulter', function ($row) {
-                return $row->defaulter ? Client::DEFAULTER_RADIO[$row->defaulter] : '';
-            });
-
-            $table->editColumn('link_fd', function ($row) {
-                return $row->link_fd ? $row->link_fd : '';
-            });
-            $table->editColumn('coordinates', function ($row) {
-                return $row->coordinates ? $row->coordinates : '';
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'boats']);
-
-            return $table->make(true);
-        }
+        $clients = Client::with(['boats'])->get();
 
         $boats = Boat::get();
 
-        return view('admin.clients.index', compact('boats'));
+        return view('admin.clients.index', compact('boats', 'clients'));
     }
 
     public function create()
@@ -115,10 +34,7 @@ class ClientsController extends Controller
 
         $boats = Boat::pluck('name', 'id');
 
-        $lastRecord = Client::latest('id')->first();
-        $lastRecordId = $lastRecord->id_client;
-
-        return view('admin.clients.create', compact('boats', 'lastRecordId'));
+        return view('admin.clients.create', compact('boats'));
     }
 
     public function store(StoreClientRequest $request)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Http\Resources\Admin\EmployeeResource;
@@ -13,16 +14,22 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EmployeesApiController extends Controller
 {
+    use MediaUploadingTrait;
+
     public function index()
     {
         abort_if(Gate::denies('employee_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new EmployeeResource(Employee::with(['user'])->get());
+        return new EmployeeResource(Employee::with(['user', 'contact'])->get());
     }
 
     public function store(StoreEmployeeRequest $request)
     {
         $employee = Employee::create($request->all());
+
+        if ($request->input('photo', false)) {
+            $employee->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
+        }
 
         return (new EmployeeResource($employee))
             ->response()
@@ -33,12 +40,23 @@ class EmployeesApiController extends Controller
     {
         abort_if(Gate::denies('employee_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new EmployeeResource($employee->load(['user']));
+        return new EmployeeResource($employee->load(['user', 'contact']));
     }
 
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
         $employee->update($request->all());
+
+        if ($request->input('photo', false)) {
+            if (! $employee->photo || $request->input('photo') !== $employee->photo->file_name) {
+                if ($employee->photo) {
+                    $employee->photo->delete();
+                }
+                $employee->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
+            }
+        } elseif ($employee->photo) {
+            $employee->photo->delete();
+        }
 
         return (new EmployeeResource($employee))
             ->response()

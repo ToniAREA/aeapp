@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyProductCategoryRequest;
 use App\Http\Requests\StoreProductCategoryRequest;
@@ -15,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductCategoryController extends Controller
 {
-    use MediaUploadingTrait;
+    use MediaUploadingTrait, CsvImportTrait;
 
     public function index()
     {

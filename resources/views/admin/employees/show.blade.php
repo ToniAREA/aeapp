@@ -25,6 +25,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.employee.fields.id_employee') }}
+                        </th>
+                        <td>
+                            {{ $employee->id_employee }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.employee.fields.user') }}
                         </th>
                         <td>
@@ -33,10 +41,46 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.employee.fields.id_employee') }}
+                            {{ trans('cruds.employee.fields.contact') }}
                         </th>
                         <td>
-                            {{ $employee->id_employee }}
+                            {{ $employee->contact->contact_first_name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.employee.fields.photo') }}
+                        </th>
+                        <td>
+                            @if($employee->photo)
+                                <a href="{{ $employee->photo->getUrl() }}" target="_blank" style="display: inline-block">
+                                    <img src="{{ $employee->photo->getUrl('thumb') }}">
+                                </a>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.employee.fields.status') }}
+                        </th>
+                        <td>
+                            {{ $employee->status }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.employee.fields.contract_starts') }}
+                        </th>
+                        <td>
+                            {{ $employee->contract_starts }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.employee.fields.contract_ends') }}
+                        </th>
+                        <td>
+                            {{ $employee->contract_ends }}
                         </td>
                     </tr>
                     <tr>
@@ -53,14 +97,6 @@
                         </th>
                         <td>
                             {{ $employee->internalnotes }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.employee.fields.status') }}
-                        </th>
-                        <td>
-                            {{ $employee->status }}
                         </td>
                     </tr>
                 </tbody>
