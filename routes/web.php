@@ -1,6 +1,9 @@
 <?php
 
-Route::view('/', 'welcome');
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+Route::view('/', 'main');
 Route::get('userVerification/{token}', 'UserVerificationController@approve')->name('userVerification');
 Auth::routes();
 
