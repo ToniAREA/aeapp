@@ -156,3 +156,7 @@ table.dataTable thead .sorting_desc {
 .c-body {
     background-color: #d1d1d1 !important;
 }
+
+.c-app {
+    background-color: #111 !important;
+}

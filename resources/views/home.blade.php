@@ -12,21 +12,21 @@
 
     <div class="row m-1">
         <div class="col p-1">
-            <a href="/clients-list" class=" btn btn-sm btn-outline-primary" style="width: 100%;" role="button"
+            <a href="/clients-list" class=" btn btn-sm btn-outline-dark" style="width: 100%;" role="button"
                 aria-disabled="true"><i class=" fa fa-users" aria-hidden="true"></i><br>CLIENTS
-                <br><span class="px-3 bg-primary rounded-pill text-light">500</span>
+                <br><span class="px-3 bg-dark rounded-pill text-light">500</span>
             </a>
         </div>
         <div class="col p-1">
-            <a href="/boats-list" class=" btn btn-sm btn-outline-primary" style="width: 100%;" role="button"
+            <a href="/boats-list" class=" btn btn-sm btn-outline-dark" style="width: 100%;" role="button"
                 aria-disabled="true"><i class=" fa fa-ship" aria-hidden="true"></i><br>BOATS
-                <br><span class="px-3 bg-primary rounded-pill text-light">300</span>
+                <br><span class="px-3 bg-dark rounded-pill text-light">300</span>
             </a>
         </div>
         <div class="col p-1">
-            <a href="/wlist" class=" btn btn-sm btn-outline-primary" style="width: 100%;" role="button"
+            <a href="/wlist" class=" btn btn-sm btn-outline-dark" style="width: 100%;" role="button"
                 aria-disabled="true"><i class=" fa fa-list" aria-hidden="true"></i><br>WORKING
-                <br><span class="px-3 bg-primary rounded-pill text-light">88</span>
+                <br><span class="px-3 bg-dark rounded-pill text-light">88</span>
             </a>
         </div>
         <div class="col p-1">
