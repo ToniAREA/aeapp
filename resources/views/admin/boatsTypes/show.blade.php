@@ -25,12 +25,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.boatsType.fields.boats_type') }}
+                            {{ trans('cruds.boatsType.fields.type') }}
                         </th>
                         <td>
-                            @foreach($boatsType->boats_types as $key => $boats_type)
-                                <span class="label label-info">{{ $boats_type->type }}</span>
-                            @endforeach
+                            {{ $boatsType->type }}
                         </td>
                     </tr>
                 </tbody>

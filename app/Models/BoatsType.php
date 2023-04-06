@@ -21,6 +21,7 @@ class BoatsType extends Model
     ];
 
     protected $fillable = [
+        'type',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -29,10 +30,5 @@ class BoatsType extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
-    }
-
-    public function boats_types()
-    {
-        return $this->belongsToMany(Boat::class);
     }
 }

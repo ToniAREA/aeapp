@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyBoatsTypeRequest;
 use App\Http\Requests\StoreBoatsTypeRequest;
 use App\Http\Requests\UpdateBoatsTypeRequest;
-use App\Models\Boat;
 use App\Models\BoatsType;
 use Gate;
 use Illuminate\Http\Request;
@@ -18,7 +17,7 @@ class BoatsTypeController extends Controller
     {
         abort_if(Gate::denies('boats_type_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boatsTypes = BoatsType::with(['boats_types'])->get();
+        $boatsTypes = BoatsType::all();
 
         return view('frontend.boatsTypes.index', compact('boatsTypes'));
     }
@@ -27,15 +26,12 @@ class BoatsTypeController extends Controller
     {
         abort_if(Gate::denies('boats_type_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boats_types = Boat::pluck('type', 'id');
-
-        return view('frontend.boatsTypes.create', compact('boats_types'));
+        return view('frontend.boatsTypes.create');
     }
 
     public function store(StoreBoatsTypeRequest $request)
     {
         $boatsType = BoatsType::create($request->all());
-        $boatsType->boats_types()->sync($request->input('boats_types', []));
 
         return redirect()->route('frontend.boats-types.index');
     }
@@ -44,17 +40,12 @@ class BoatsTypeController extends Controller
     {
         abort_if(Gate::denies('boats_type_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boats_types = Boat::pluck('type', 'id');
-
-        $boatsType->load('boats_types');
-
-        return view('frontend.boatsTypes.edit', compact('boatsType', 'boats_types'));
+        return view('frontend.boatsTypes.edit', compact('boatsType'));
     }
 
     public function update(UpdateBoatsTypeRequest $request, BoatsType $boatsType)
     {
         $boatsType->update($request->all());
-        $boatsType->boats_types()->sync($request->input('boats_types', []));
 
         return redirect()->route('frontend.boats-types.index');
     }
@@ -62,8 +53,6 @@ class BoatsTypeController extends Controller
     public function show(BoatsType $boatsType)
     {
         abort_if(Gate::denies('boats_type_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $boatsType->load('boats_types');
 
         return view('frontend.boatsTypes.show', compact('boatsType'));
     }

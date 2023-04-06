@@ -10,7 +10,7 @@ class CreateBoatsTypesTable extends Migration
     {
         Schema::create('boats_types', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

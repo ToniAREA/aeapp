@@ -17,11 +17,9 @@ class UpdateBoatsTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'boats_types.*' => [
-                'integer',
-            ],
-            'boats_types' => [
-                'array',
+            'type' => [
+                'string',
+                'nullable',
             ],
         ];
     }
