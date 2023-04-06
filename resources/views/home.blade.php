@@ -93,7 +93,11 @@
                         buttonText: 'Work week'
                     }
                 },
-                defaultView: 'workWeek' // Set the default view to 'workWeek'
+                defaultView: 'workWeek', // Set the default view to 'workWeek'
+                minTime: '08:00:00', // Set the minimum time to 8 AM
+                maxTime: '18:00:00' , // Set the maximum time to 6 PM
+                height: 500,
+                
             });
         });
     </script>
