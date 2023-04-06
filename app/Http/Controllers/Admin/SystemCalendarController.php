@@ -9,28 +9,28 @@ class SystemCalendarController extends Controller
 {
     public $sources = [
         [
+            'model'      => '\App\Models\Employee',
+            'date_field' => 'contract_ends',
+            'field'      => 'id_employee',
+            'prefix'     => 'Employee ENDs',
+            'suffix'     => '',
+            'route'      => 'admin.employees.edit',
+        ],
+        [
             'model'      => '\App\Models\Appointment',
             'date_field' => 'when_starts',
-            'field'      => 'description',
-            'prefix'     => '',
+            'field'      => 'id',
+            'prefix'     => 'Appointment',
             'suffix'     => '',
             'route'      => 'admin.appointments.edit',
         ],
         [
             'model'      => '\App\Models\Wlist',
             'date_field' => 'deadline',
-            'field'      => 'desciption',
-            'prefix'     => '',
+            'field'      => 'id',
+            'prefix'     => 'WorkDeadline',
             'suffix'     => '',
             'route'      => 'admin.wlists.edit',
-        ],
-        [
-            'model'      => '\App\Models\Employee',
-            'date_field' => 'contract_ends',
-            'field'      => 'id_employee',
-            'prefix'     => '',
-            'suffix'     => '',
-            'route'      => 'admin.employees.edit',
         ],
     ];
 
