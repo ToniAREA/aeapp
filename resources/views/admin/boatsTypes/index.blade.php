@@ -26,7 +26,7 @@
                             {{ trans('cruds.boatsType.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.boatsType.fields.boats_type') }}
+                            {{ trans('cruds.boatsType.fields.type') }}
                         </th>
                         <th>
                             &nbsp;
@@ -43,9 +43,7 @@
                                 {{ $boatsType->id ?? '' }}
                             </td>
                             <td>
-                                @foreach($boatsType->boats_types as $key => $item)
-                                    <span class="badge badge-info">{{ $item->type }}</span>
-                                @endforeach
+                                {{ $boatsType->type ?? '' }}
                             </td>
                             <td>
                                 @can('boats_type_show')

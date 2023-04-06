@@ -6,13 +6,13 @@
 
             <div class="card">
                 <div class="card-header">
-                    {{ trans('global.show') }} {{ trans('cruds.mLog.title') }}
+                    {{ trans('global.show') }} {{ trans('cruds.mlog.title') }}
                 </div>
 
                 <div class="card-body">
                     <div class="form-group">
                         <div class="form-group">
-                            <a class="btn btn-default" href="{{ route('frontend.m-logs.index') }}">
+                            <a class="btn btn-default" href="{{ route('frontend.mlogs.index') }}">
                                 {{ trans('global.back_to_list') }}
                             </a>
                         </div>
@@ -20,24 +20,40 @@
                             <tbody>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.mLog.fields.id') }}
+                                        {{ trans('cruds.mlog.fields.id') }}
                                     </th>
                                     <td>
-                                        {{ $mLog->id }}
+                                        {{ $mlog->id }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.mLog.fields.code') }}
+                                        {{ trans('cruds.mlog.fields.id_mlog') }}
                                     </th>
                                     <td>
-                                        {{ $mLog->code }}
+                                        {{ $mlog->id_mlog }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.date') }}
+                                    </th>
+                                    <td>
+                                        {{ $mlog->date }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.wlist') }}
+                                    </th>
+                                    <td>
+                                        {{ $mlog->wlist->desciption ?? '' }}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="form-group">
-                            <a class="btn btn-default" href="{{ route('frontend.m-logs.index') }}">
+                            <a class="btn btn-default" href="{{ route('frontend.mlogs.index') }}">
                                 {{ trans('global.back_to_list') }}
                             </a>
                         </div>

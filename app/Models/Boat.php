@@ -63,11 +63,6 @@ class Boat extends Model
         return $this->belongsToMany(Marina::class);
     }
 
-    public function boatsTypeBoatsTypes()
-    {
-        return $this->belongsToMany(BoatsType::class);
-    }
-
     public function marina()
     {
         return $this->belongsTo(Marina::class, 'marina_id');
