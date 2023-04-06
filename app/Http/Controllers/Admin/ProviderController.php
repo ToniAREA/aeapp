@@ -15,76 +15,22 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
-use Yajra\DataTables\Facades\DataTables;
 
 class ProviderController extends Controller
 {
     use MediaUploadingTrait, CsvImportTrait;
 
-    public function index(Request $request)
+    public function index()
     {
         abort_if(Gate::denies('provider_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        if ($request->ajax()) {
-            $query = Provider::with(['brands', 'company'])->select(sprintf('%s.*', (new Provider)->table));
-            $table = Datatables::of($query);
+        $providers = Provider::with(['brands', 'company', 'media'])->get();
 
-            $table->addColumn('placeholder', '&nbsp;');
-            $table->addColumn('actions', '&nbsp;');
+        $brands = Brand::get();
 
-            $table->editColumn('actions', function ($row) {
-                $viewGate      = 'provider_show';
-                $editGate      = 'provider_edit';
-                $deleteGate    = 'provider_delete';
-                $crudRoutePart = 'providers';
-
-                return view('partials.datatablesActions', compact(
-                    'viewGate',
-                    'editGate',
-                    'deleteGate',
-                    'crudRoutePart',
-                    'row'
-                ));
-            });
-
-            $table->editColumn('id', function ($row) {
-                return $row->id ? $row->id : '';
-            });
-            $table->editColumn('name', function ($row) {
-                return $row->name ? $row->name : '';
-            });
-            $table->editColumn('brand', function ($row) {
-                $labels = [];
-                foreach ($row->brands as $brand) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $brand->brand);
-                }
-
-                return implode(' ', $labels);
-            });
-            $table->editColumn('price_list', function ($row) {
-                if (! $row->price_list) {
-                    return '';
-                }
-                $links = [];
-                foreach ($row->price_list as $media) {
-                    $links[] = '<a href="' . $media->getUrl() . '" target="_blank">' . trans('global.downloadFile') . '</a>';
-                }
-
-                return implode(', ', $links);
-            });
-            $table->addColumn('company_company_name', function ($row) {
-                return $row->company ? $row->company->company_name : '';
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'brand', 'price_list', 'company']);
-
-            return $table->make(true);
-        }
-
-        $brands            = Brand::get();
         $contact_companies = ContactCompany::get();
 
-        return view('admin.providers.index', compact('brands', 'contact_companies'));
+        return view('admin.providers.index', compact('brands', 'contact_companies', 'providers'));
     }
 
     public function create()

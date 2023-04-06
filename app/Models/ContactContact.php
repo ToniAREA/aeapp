@@ -46,4 +46,9 @@ class ContactContact extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function contactEmployees()
+    {
+        return $this->hasMany(Employee::class, 'contact_id', 'id');
+    }
 }

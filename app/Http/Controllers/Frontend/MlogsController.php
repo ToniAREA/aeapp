@@ -4,77 +4,88 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\CsvImportTrait;
-use App\Http\Requests\MassDestroyMLogRequest;
-use App\Http\Requests\StoreMLogRequest;
-use App\Http\Requests\UpdateMLogRequest;
-use App\Models\MLog;
+use App\Http\Requests\MassDestroyMlogRequest;
+use App\Http\Requests\StoreMlogRequest;
+use App\Http\Requests\UpdateMlogRequest;
+use App\Models\Mlog;
+use App\Models\Wlist;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class MLogsController extends Controller
+class MlogsController extends Controller
 {
     use CsvImportTrait;
 
     public function index()
     {
-        abort_if(Gate::denies('m_log_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('mlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $mLogs = MLog::all();
+        $mlogs = Mlog::with(['wlist'])->get();
 
-        return view('frontend.mLogs.index', compact('mLogs'));
+        $wlists = Wlist::get();
+
+        return view('frontend.mlogs.index', compact('mlogs', 'wlists'));
     }
 
     public function create()
     {
-        abort_if(Gate::denies('m_log_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('mlog_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('frontend.mLogs.create');
+        $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('frontend.mlogs.create', compact('wlists'));
     }
 
-    public function store(StoreMLogRequest $request)
+    public function store(StoreMlogRequest $request)
     {
-        $mLog = MLog::create($request->all());
+        $mlog = Mlog::create($request->all());
 
-        return redirect()->route('frontend.m-logs.index');
+        return redirect()->route('frontend.mlogs.index');
     }
 
-    public function edit(MLog $mLog)
+    public function edit(Mlog $mlog)
     {
-        abort_if(Gate::denies('m_log_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('mlog_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('frontend.mLogs.edit', compact('mLog'));
+        $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $mlog->load('wlist');
+
+        return view('frontend.mlogs.edit', compact('mlog', 'wlists'));
     }
 
-    public function update(UpdateMLogRequest $request, MLog $mLog)
+    public function update(UpdateMlogRequest $request, Mlog $mlog)
     {
-        $mLog->update($request->all());
+        $mlog->update($request->all());
 
-        return redirect()->route('frontend.m-logs.index');
+        return redirect()->route('frontend.mlogs.index');
     }
 
-    public function show(MLog $mLog)
+    public function show(Mlog $mlog)
     {
-        abort_if(Gate::denies('m_log_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('mlog_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('frontend.mLogs.show', compact('mLog'));
+        $mlog->load('wlist');
+
+        return view('frontend.mlogs.show', compact('mlog'));
     }
 
-    public function destroy(MLog $mLog)
+    public function destroy(Mlog $mlog)
     {
-        abort_if(Gate::denies('m_log_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('mlog_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $mLog->delete();
+        $mlog->delete();
 
         return back();
     }
 
-    public function massDestroy(MassDestroyMLogRequest $request)
+    public function massDestroy(MassDestroyMlogRequest $request)
     {
-        $mLogs = MLog::find(request('ids'));
+        $mlogs = Mlog::find(request('ids'));
 
-        foreach ($mLogs as $mLog) {
-            $mLog->delete();
+        foreach ($mlogs as $mlog) {
+            $mlog->delete();
         }
 
         return response(null, Response::HTTP_NO_CONTENT);

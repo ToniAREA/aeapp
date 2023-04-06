@@ -63,7 +63,7 @@ class RolesController extends Controller
     {
         abort_if(Gate::denies('role_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $role->load('permissions');
+        $role->load('permissions', 'forRoleToDos', 'forRoleAppointments', 'forRoleWlists');
 
         return view('admin.roles.show', compact('role'));
     }
@@ -79,7 +79,11 @@ class RolesController extends Controller
 
     public function massDestroy(MassDestroyRoleRequest $request)
     {
-        Role::whereIn('id', request('ids'))->delete();
+        $roles = Role::find(request('ids'));
+
+        foreach ($roles as $role) {
+            $role->delete();
+        }
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

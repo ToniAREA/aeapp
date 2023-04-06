@@ -25,22 +25,34 @@
                             {{ trans('cruds.employee.fields.id') }}
                         </th>
                         <th>
+                            {{ trans('cruds.employee.fields.id_employee') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.employee.fields.user') }}
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.email') }}
                         </th>
                         <th>
-                            {{ trans('cruds.employee.fields.id_employee') }}
+                            {{ trans('cruds.employee.fields.contact') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.employee.fields.photo') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.employee.fields.status') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.employee.fields.contract_starts') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.employee.fields.contract_ends') }}
                         </th>
                         <th>
                             {{ trans('cruds.employee.fields.notes') }}
                         </th>
                         <th>
                             {{ trans('cruds.employee.fields.internalnotes') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.employee.fields.status') }}
                         </th>
                         <th>
                             &nbsp;
@@ -57,22 +69,38 @@
                                 {{ $employee->id ?? '' }}
                             </td>
                             <td>
+                                {{ $employee->id_employee ?? '' }}
+                            </td>
+                            <td>
                                 {{ $employee->user->name ?? '' }}
                             </td>
                             <td>
                                 {{ $employee->user->email ?? '' }}
                             </td>
                             <td>
-                                {{ $employee->id_employee ?? '' }}
+                                {{ $employee->contact->contact_first_name ?? '' }}
+                            </td>
+                            <td>
+                                @if($employee->photo)
+                                    <a href="{{ $employee->photo->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $employee->photo->getUrl('thumb') }}">
+                                    </a>
+                                @endif
+                            </td>
+                            <td>
+                                {{ $employee->status ?? '' }}
+                            </td>
+                            <td>
+                                {{ $employee->contract_starts ?? '' }}
+                            </td>
+                            <td>
+                                {{ $employee->contract_ends ?? '' }}
                             </td>
                             <td>
                                 {{ $employee->notes ?? '' }}
                             </td>
                             <td>
                                 {{ $employee->internalnotes ?? '' }}
-                            </td>
-                            <td>
-                                {{ $employee->status ?? '' }}
                             </td>
                             <td>
                                 @can('employee_show')

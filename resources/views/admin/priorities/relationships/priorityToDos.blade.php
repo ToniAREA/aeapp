@@ -37,6 +37,12 @@
                             {{ trans('cruds.toDo.fields.priority') }}
                         </th>
                         <th>
+                            {{ trans('cruds.toDo.fields.for_role') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.toDo.fields.for_user') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -65,6 +71,16 @@
                             </td>
                             <td>
                                 {{ $toDo->priority->level ?? '' }}
+                            </td>
+                            <td>
+                                @foreach($toDo->for_roles as $key => $item)
+                                    <span class="badge badge-info">{{ $item->title }}</span>
+                                @endforeach
+                            </td>
+                            <td>
+                                @foreach($toDo->for_users as $key => $item)
+                                    <span class="badge badge-info">{{ $item->name }}</span>
+                                @endforeach
                             </td>
                             <td>
                                 @can('to_do_show')

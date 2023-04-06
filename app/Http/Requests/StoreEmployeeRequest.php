@@ -21,15 +21,23 @@ class StoreEmployeeRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'status' => [
+                'string',
+                'nullable',
+            ],
+            'contract_starts' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable',
+            ],
+            'contract_ends' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable',
+            ],
             'notes' => [
                 'string',
                 'nullable',
             ],
             'internalnotes' => [
-                'string',
-                'nullable',
-            ],
-            'status' => [
                 'string',
                 'nullable',
             ],

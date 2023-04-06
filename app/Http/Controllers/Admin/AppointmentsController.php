@@ -8,58 +8,27 @@ use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
 use App\Models\Appointment;
 use App\Models\Client;
+use App\Models\Role;
+use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Yajra\DataTables\Facades\DataTables;
 
 class AppointmentsController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         abort_if(Gate::denies('appointment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        if ($request->ajax()) {
-            $query = Appointment::with(['client'])->select(sprintf('%s.*', (new Appointment)->table));
-            $table = Datatables::of($query);
-
-            $table->addColumn('placeholder', '&nbsp;');
-            $table->addColumn('actions', '&nbsp;');
-
-            $table->editColumn('actions', function ($row) {
-                $viewGate      = 'appointment_show';
-                $editGate      = 'appointment_edit';
-                $deleteGate    = 'appointment_delete';
-                $crudRoutePart = 'appointments';
-
-                return view('partials.datatablesActions', compact(
-                    'viewGate',
-                    'editGate',
-                    'deleteGate',
-                    'crudRoutePart',
-                    'row'
-                ));
-            });
-
-            $table->editColumn('id', function ($row) {
-                return $row->id ? $row->id : '';
-            });
-            $table->addColumn('client_name', function ($row) {
-                return $row->client ? $row->client->name : '';
-            });
-
-            $table->editColumn('description', function ($row) {
-                return $row->description ? $row->description : '';
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'client']);
-
-            return $table->make(true);
-        }
+        $appointments = Appointment::with(['client', 'for_roles', 'for_users'])->get();
 
         $clients = Client::get();
 
-        return view('admin.appointments.index', compact('clients'));
+        $roles = Role::get();
+
+        $users = User::get();
+
+        return view('admin.appointments.index', compact('appointments', 'clients', 'roles', 'users'));
     }
 
     public function create()
@@ -68,12 +37,18 @@ class AppointmentsController extends Controller
 
         $clients = Client::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.appointments.create', compact('clients'));
+        $for_roles = Role::pluck('title', 'id');
+
+        $for_users = User::pluck('name', 'id');
+
+        return view('admin.appointments.create', compact('clients', 'for_roles', 'for_users'));
     }
 
     public function store(StoreAppointmentRequest $request)
     {
         $appointment = Appointment::create($request->all());
+        $appointment->for_roles()->sync($request->input('for_roles', []));
+        $appointment->for_users()->sync($request->input('for_users', []));
 
         return redirect()->route('admin.appointments.index');
     }
@@ -84,14 +59,20 @@ class AppointmentsController extends Controller
 
         $clients = Client::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $appointment->load('client');
+        $for_roles = Role::pluck('title', 'id');
 
-        return view('admin.appointments.edit', compact('appointment', 'clients'));
+        $for_users = User::pluck('name', 'id');
+
+        $appointment->load('client', 'for_roles', 'for_users');
+
+        return view('admin.appointments.edit', compact('appointment', 'clients', 'for_roles', 'for_users'));
     }
 
     public function update(UpdateAppointmentRequest $request, Appointment $appointment)
     {
         $appointment->update($request->all());
+        $appointment->for_roles()->sync($request->input('for_roles', []));
+        $appointment->for_users()->sync($request->input('for_users', []));
 
         return redirect()->route('admin.appointments.index');
     }
@@ -100,7 +81,7 @@ class AppointmentsController extends Controller
     {
         abort_if(Gate::denies('appointment_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $appointment->load('client');
+        $appointment->load('client', 'for_roles', 'for_users');
 
         return view('admin.appointments.show', compact('appointment'));
     }

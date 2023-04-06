@@ -19,135 +19,222 @@
     </div>
 
     <div class="card-body">
-        <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-Client">
-            <thead>
-                <tr>
-                    <th width="10">
+        <div class="table-responsive">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-Client">
+                <thead>
+                    <tr>
+                        <th width="10">
 
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.id') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.id_client') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.name') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.lastname') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.boats') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.vat') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.address') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.country') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.email') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.phone') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.mobile') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.notes') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.internalnotes') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.defaulter') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.lastuse') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.link_fd') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.client.fields.coordinates') }}
-                    </th>
-                    <th>
-                        &nbsp;
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($boats as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <select class="search" strict="true">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach(App\Models\Client::DEFAULTER_RADIO as $key => $item)
-                                <option value="{{ $key }}">{{ $item }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-            </thead>
-        </table>
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.id') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.id_client') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.lastname') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.boats') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.vat') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.address') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.country') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.email') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.phone') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.mobile') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.notes') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.internalnotes') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.defaulter') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.lastuse') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.link_fd') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.coordinates') }}
+                        </th>
+                        <th>
+                            &nbsp;
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <select class="search">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach($boats as $key => $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <select class="search" strict="true">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach(App\Models\Client::DEFAULTER_RADIO as $key => $item)
+                                    <option value="{{ $item }}">{{ $item }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($clients as $key => $client)
+                        <tr data-entry-id="{{ $client->id }}">
+                            <td>
+
+                            </td>
+                            <td>
+                                {{ $client->id ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->id_client ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->lastname ?? '' }}
+                            </td>
+                            <td>
+                                @foreach($client->boats as $key => $item)
+                                    <span class="badge badge-info">{{ $item->name }}</span>
+                                @endforeach
+                            </td>
+                            <td>
+                                {{ $client->vat ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->address ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->country ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->email ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->phone ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->mobile ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->notes ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->internalnotes ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\Client::DEFAULTER_RADIO[$client->defaulter] ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->lastuse ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->link_fd ?? '' }}
+                            </td>
+                            <td>
+                                {{ $client->coordinates ?? '' }}
+                            </td>
+                            <td>
+                                @can('client_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.clients.show', $client->id) }}">
+                                        {{ trans('global.view') }}
+                                    </a>
+                                @endcan
+
+                                @can('client_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.clients.edit', $client->id) }}">
+                                        {{ trans('global.edit') }}
+                                    </a>
+                                @endcan
+
+                                @can('client_delete')
+                                    <form action="{{ route('admin.clients.destroy', $client->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                    </form>
+                                @endcan
+
+                            </td>
+
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -160,14 +247,14 @@
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 @can('client_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
+  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.clients.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
-          return entry.id
+      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
+          return $(entry).data('entry-id')
       });
 
       if (ids.length === 0) {
@@ -189,39 +276,12 @@
   dtButtons.push(deleteButton)
 @endcan
 
-  let dtOverrideGlobals = {
-    buttons: dtButtons,
-    processing: true,
-    serverSide: true,
-    retrieve: true,
-    aaSorting: [],
-    ajax: "{{ route('admin.clients.index') }}",
-    columns: [
-      { data: 'placeholder', name: 'placeholder' },
-{ data: 'id', name: 'id' },
-{ data: 'id_client', name: 'id_client' },
-{ data: 'name', name: 'name' },
-{ data: 'lastname', name: 'lastname' },
-{ data: 'boats', name: 'boats.name' },
-{ data: 'vat', name: 'vat' },
-{ data: 'address', name: 'address' },
-{ data: 'country', name: 'country' },
-{ data: 'email', name: 'email' },
-{ data: 'phone', name: 'phone' },
-{ data: 'mobile', name: 'mobile' },
-{ data: 'notes', name: 'notes' },
-{ data: 'internalnotes', name: 'internalnotes' },
-{ data: 'defaulter', name: 'defaulter' },
-{ data: 'lastuse', name: 'lastuse' },
-{ data: 'link_fd', name: 'link_fd' },
-{ data: 'coordinates', name: 'coordinates' },
-{ data: 'actions', name: '{{ trans('global.actions') }}' }
-    ],
+  $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
     order: [[ 2, 'desc' ]],
     pageLength: 100,
-  };
-  let table = $('.datatable-Client').DataTable(dtOverrideGlobals);
+  });
+  let table = $('.datatable-Client:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
@@ -248,7 +308,7 @@ table.on('column-visibility.dt', function(e, settings, column, state) {
           visibleColumnsIndexes.push(colIdx);
       });
   })
-});
+})
 
 </script>
 @endsection

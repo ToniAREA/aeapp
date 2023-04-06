@@ -34,10 +34,19 @@
                             {{ trans('cruds.wlist.fields.desciption') }}
                         </th>
                         <th>
+                            {{ trans('cruds.wlist.fields.photos') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.wlist.fields.deadline') }}
                         </th>
                         <th>
                             {{ trans('cruds.wlist.fields.priority') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlist.fields.for_role') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlist.fields.for_user') }}
                         </th>
                         <th>
                             {{ trans('cruds.wlist.fields.wlogs') }}
@@ -66,10 +75,27 @@
                                 {{ $wlist->desciption ?? '' }}
                             </td>
                             <td>
+                                @foreach($wlist->photos as $key => $media)
+                                    <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $media->getUrl('thumb') }}">
+                                    </a>
+                                @endforeach
+                            </td>
+                            <td>
                                 {{ $wlist->deadline ?? '' }}
                             </td>
                             <td>
                                 {{ $wlist->priority->level ?? '' }}
+                            </td>
+                            <td>
+                                @foreach($wlist->for_roles as $key => $item)
+                                    <span class="badge badge-info">{{ $item->title }}</span>
+                                @endforeach
+                            </td>
+                            <td>
+                                @foreach($wlist->for_users as $key => $item)
+                                    <span class="badge badge-info">{{ $item->name }}</span>
+                                @endforeach
                             </td>
                             <td>
                                 @foreach($wlist->wlogs as $key => $item)

@@ -37,6 +37,12 @@
                             {{ trans('cruds.appointment.fields.description') }}
                         </th>
                         <th>
+                            {{ trans('cruds.appointment.fields.for_role') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.appointment.fields.for_user') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -61,6 +67,16 @@
                             </td>
                             <td>
                                 {{ $appointment->description ?? '' }}
+                            </td>
+                            <td>
+                                @foreach($appointment->for_roles as $key => $item)
+                                    <span class="badge badge-info">{{ $item->title }}</span>
+                                @endforeach
+                            </td>
+                            <td>
+                                @foreach($appointment->for_users as $key => $item)
+                                    <span class="badge badge-info">{{ $item->name }}</span>
+                                @endforeach
                             </td>
                             <td>
                                 @can('appointment_show')
