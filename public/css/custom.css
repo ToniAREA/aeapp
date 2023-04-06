@@ -130,3 +130,29 @@ table.dataTable thead .sorting_desc {
 .custom-select.form-control-sm {
     padding: 0.25rem 1.5rem;
 }
+
+.c-header {
+    background-color: #111;
+    color: #fff;
+}
+
+.c-header-toggler {
+    color: #fff !important;
+}
+
+.c-header-brand {
+    color: #fff !important;
+}
+
+.container-fluid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.c-sidebar {
+    background-color: #111 !important;
+}
+
+.c-body {
+    background-color: #d1d1d1 !important;
+}
