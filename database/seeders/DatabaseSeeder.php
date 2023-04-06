@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BoatsType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +15,12 @@ class DatabaseSeeder extends Seeder
             PermissionRoleTableSeeder::class,
             UsersTableSeeder::class,
             RoleUserTableSeeder::class,
-            AssetStatusTableSeeder::class,
+            PriorityTableSeeder::class,
+            EmployeesSeeder::class,
+            MarinasSeeder::class,
+            ClientsSeeder::class,
+            BoatsSeeder::class,
+            BoatTypeSeeder::class,            
         ]);
     }
 }
