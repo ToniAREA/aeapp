@@ -40,12 +40,12 @@
     <div class="row m-1">
         <div class="col p-1">
             <a href="{{ route('admin.clients.create') }}" class=" btn btn-sm btn-dark" style="width: 100%;" role="button"
-                aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i>ADD CLIENT
+                aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i> CLIENT
             </a>
         </div>
         <div class="col p-1">
             <a href="{{ route('admin.boats.create') }}" class=" btn btn-sm btn-dark" style="width: 100%;" role="button"
-                aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i>ADD BOAT
+                aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i> BOAT
             </a>
         </div>
     </div>
@@ -55,6 +55,20 @@
 
         <div id='calendar'></div>
     </div>
+
+     <div class="row m-1">
+        <div class="col p-1">
+            <a href="{{ route('admin.to-dos.create') }}" class=" btn btn-sm btn-dark" style="width: 100%;" role="button"
+                aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i>TO DO
+            </a>
+        </div>
+        <div class="col p-1">
+            <a href="{{ route('admin.appointments.create') }}" class=" btn btn-sm btn-dark" style="width: 100%;" role="button"
+                aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i>APPOINTMENT
+            </a>
+        </div>
+    </div>
+
 @endsection
 @section('scripts')
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
@@ -63,13 +77,24 @@
         $(document).ready(function() {
             // page is now ready, initialize the calendar...
             events = {!! json_encode($events) !!};
+            // Initialize the FullCalendar plugin
             $('#calendar').fullCalendar({
-                // put your options and callbacks here
+                // Put your options and callbacks here
                 events: events,
-                defaultView: 'agendaWeek',
-
-
-            })
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'workWeek,agendaWeek,month'
+                },
+                views: {
+                    workWeek: {
+                        type: 'agendaWeek',
+                        hiddenDays: [0, 6], // Hide Sunday (0) and Saturday (6)
+                        buttonText: 'Work week'
+                    }
+                },
+                defaultView: 'workWeek' // Set the default view to 'workWeek'
+            });
         });
     </script>
     @parent
