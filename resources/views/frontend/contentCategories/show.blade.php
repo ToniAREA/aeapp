@@ -42,6 +42,18 @@
                                         {{ $contentCategory->slug }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.contentCategory.fields.photo') }}
+                                    </th>
+                                    <td>
+                                        @if($contentCategory->photo)
+                                            <a href="{{ $contentCategory->photo->getUrl() }}" target="_blank" style="display: inline-block">
+                                                <img src="{{ $contentCategory->photo->getUrl('thumb') }}">
+                                            </a>
+                                        @endif
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

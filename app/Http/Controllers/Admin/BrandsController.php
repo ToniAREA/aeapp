@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\CsvImportTrait;
+use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyBrandRequest;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
@@ -11,17 +12,18 @@ use App\Models\Brand;
 use App\Models\Provider;
 use Gate;
 use Illuminate\Http\Request;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
 class BrandsController extends Controller
 {
-    use CsvImportTrait;
+    use MediaUploadingTrait, CsvImportTrait;
 
     public function index()
     {
         abort_if(Gate::denies('brand_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $brands = Brand::with(['providers'])->get();
+        $brands = Brand::with(['providers', 'media'])->get();
 
         return view('admin.brands.index', compact('brands'));
     }
@@ -39,6 +41,13 @@ class BrandsController extends Controller
     {
         $brand = Brand::create($request->all());
         $brand->providers()->sync($request->input('providers', []));
+        if ($request->input('brand_logo', false)) {
+            $brand->addMedia(storage_path('tmp/uploads/' . basename($request->input('brand_logo'))))->toMediaCollection('brand_logo');
+        }
+
+        if ($media = $request->input('ck-media', false)) {
+            Media::whereIn('id', $media)->update(['model_id' => $brand->id]);
+        }
 
         return redirect()->route('admin.brands.index');
     }
@@ -58,6 +67,16 @@ class BrandsController extends Controller
     {
         $brand->update($request->all());
         $brand->providers()->sync($request->input('providers', []));
+        if ($request->input('brand_logo', false)) {
+            if (! $brand->brand_logo || $request->input('brand_logo') !== $brand->brand_logo->file_name) {
+                if ($brand->brand_logo) {
+                    $brand->brand_logo->delete();
+                }
+                $brand->addMedia(storage_path('tmp/uploads/' . basename($request->input('brand_logo'))))->toMediaCollection('brand_logo');
+            }
+        } elseif ($brand->brand_logo) {
+            $brand->brand_logo->delete();
+        }
 
         return redirect()->route('admin.brands.index');
     }
@@ -89,5 +108,17 @@ class BrandsController extends Controller
         }
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function storeCKEditorImages(Request $request)
+    {
+        abort_if(Gate::denies('brand_create') && Gate::denies('brand_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $model         = new Brand();
+        $model->id     = $request->input('crud_id', 0);
+        $model->exists = true;
+        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
+
+        return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }
 }

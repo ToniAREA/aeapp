@@ -26,11 +26,7 @@ class ProviderController extends Controller
 
         $providers = Provider::with(['brands', 'company', 'media'])->get();
 
-        $brands = Brand::get();
-
-        $contact_companies = ContactCompany::get();
-
-        return view('admin.providers.index', compact('brands', 'contact_companies', 'providers'));
+        return view('admin.providers.index', compact('providers'));
     }
 
     public function create()
@@ -50,6 +46,10 @@ class ProviderController extends Controller
         $provider->brands()->sync($request->input('brands', []));
         foreach ($request->input('price_list', []) as $file) {
             $provider->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('price_list');
+        }
+
+        if ($request->input('provider_logo', false)) {
+            $provider->addMedia(storage_path('tmp/uploads/' . basename($request->input('provider_logo'))))->toMediaCollection('provider_logo');
         }
 
         if ($media = $request->input('ck-media', false)) {
@@ -88,6 +88,17 @@ class ProviderController extends Controller
             if (count($media) === 0 || ! in_array($file, $media)) {
                 $provider->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('price_list');
             }
+        }
+
+        if ($request->input('provider_logo', false)) {
+            if (! $provider->provider_logo || $request->input('provider_logo') !== $provider->provider_logo->file_name) {
+                if ($provider->provider_logo) {
+                    $provider->provider_logo->delete();
+                }
+                $provider->addMedia(storage_path('tmp/uploads/' . basename($request->input('provider_logo'))))->toMediaCollection('provider_logo');
+            }
+        } elseif ($provider->provider_logo) {
+            $provider->provider_logo->delete();
         }
 
         return redirect()->route('admin.providers.index');

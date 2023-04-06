@@ -54,6 +54,8 @@ class TagsController extends Controller
     {
         abort_if(Gate::denies('tag_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $tag->load('tagsWlogs');
+
         return view('frontend.tags.show', compact('tag'));
     }
 

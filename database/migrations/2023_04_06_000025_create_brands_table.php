@@ -4,13 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFaqCategoriesTable extends Migration
+class CreateBrandsTable extends Migration
 {
     public function up()
     {
-        Schema::create('faq_categories', function (Blueprint $table) {
+        Schema::create('brands', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('category')->nullable();
+            $table->string('brand')->unique();
+            $table->string('brand_url')->nullable();
+            $table->string('internal_notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

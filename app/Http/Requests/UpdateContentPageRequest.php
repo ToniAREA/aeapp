@@ -33,6 +33,9 @@ class UpdateContentPageRequest extends FormRequest
             'tags' => [
                 'array',
             ],
+            'featured_image' => [
+                'array',
+            ],
         ];
     }
 }

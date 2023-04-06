@@ -12,7 +12,6 @@
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
         "yajra/laravel-datatables-oracle": "^9.19",
-        "laraveldaily/laravel-charts": "^0.1.29",
         "nuovo/spreadsheet-reader": "^0.5.11",
         "spatie/laravel-medialibrary": "^10.0.7"
     },

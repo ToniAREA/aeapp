@@ -31,6 +31,10 @@ class ProviderApiController extends Controller
             $provider->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('price_list');
         }
 
+        if ($request->input('provider_logo', false)) {
+            $provider->addMedia(storage_path('tmp/uploads/' . basename($request->input('provider_logo'))))->toMediaCollection('provider_logo');
+        }
+
         return (new ProviderResource($provider))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
@@ -59,6 +63,17 @@ class ProviderApiController extends Controller
             if (count($media) === 0 || ! in_array($file, $media)) {
                 $provider->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('price_list');
             }
+        }
+
+        if ($request->input('provider_logo', false)) {
+            if (! $provider->provider_logo || $request->input('provider_logo') !== $provider->provider_logo->file_name) {
+                if ($provider->provider_logo) {
+                    $provider->provider_logo->delete();
+                }
+                $provider->addMedia(storage_path('tmp/uploads/' . basename($request->input('provider_logo'))))->toMediaCollection('provider_logo');
+            }
+        } elseif ($provider->provider_logo) {
+            $provider->provider_logo->delete();
         }
 
         return (new ProviderResource($provider))

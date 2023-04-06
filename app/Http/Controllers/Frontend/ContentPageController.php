@@ -44,8 +44,8 @@ class ContentPageController extends Controller
         $contentPage = ContentPage::create($request->all());
         $contentPage->categories()->sync($request->input('categories', []));
         $contentPage->tags()->sync($request->input('tags', []));
-        if ($request->input('featured_image', false)) {
-            $contentPage->addMedia(storage_path('tmp/uploads/' . basename($request->input('featured_image'))))->toMediaCollection('featured_image');
+        foreach ($request->input('featured_image', []) as $file) {
+            $contentPage->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('featured_image');
         }
 
         if ($media = $request->input('ck-media', false)) {
@@ -73,15 +73,18 @@ class ContentPageController extends Controller
         $contentPage->update($request->all());
         $contentPage->categories()->sync($request->input('categories', []));
         $contentPage->tags()->sync($request->input('tags', []));
-        if ($request->input('featured_image', false)) {
-            if (! $contentPage->featured_image || $request->input('featured_image') !== $contentPage->featured_image->file_name) {
-                if ($contentPage->featured_image) {
-                    $contentPage->featured_image->delete();
+        if (count($contentPage->featured_image) > 0) {
+            foreach ($contentPage->featured_image as $media) {
+                if (! in_array($media->file_name, $request->input('featured_image', []))) {
+                    $media->delete();
                 }
-                $contentPage->addMedia(storage_path('tmp/uploads/' . basename($request->input('featured_image'))))->toMediaCollection('featured_image');
             }
-        } elseif ($contentPage->featured_image) {
-            $contentPage->featured_image->delete();
+        }
+        $media = $contentPage->featured_image->pluck('file_name')->toArray();
+        foreach ($request->input('featured_image', []) as $file) {
+            if (count($media) === 0 || ! in_array($file, $media)) {
+                $contentPage->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('featured_image');
+            }
         }
 
         return redirect()->route('frontend.content-pages.index');

@@ -44,6 +44,34 @@
                                         @endforeach
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.brand.fields.brand_logo') }}
+                                    </th>
+                                    <td>
+                                        @if($brand->brand_logo)
+                                            <a href="{{ $brand->brand_logo->getUrl() }}" target="_blank" style="display: inline-block">
+                                                <img src="{{ $brand->brand_logo->getUrl('thumb') }}">
+                                            </a>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.brand.fields.brand_url') }}
+                                    </th>
+                                    <td>
+                                        {{ $brand->brand_url }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.brand.fields.internal_notes') }}
+                                    </th>
+                                    <td>
+                                        {{ $brand->internal_notes }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

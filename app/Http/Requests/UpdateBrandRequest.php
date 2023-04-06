@@ -28,6 +28,14 @@ class UpdateBrandRequest extends FormRequest
             'providers' => [
                 'array',
             ],
+            'brand_url' => [
+                'string',
+                'nullable',
+            ],
+            'internal_notes' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

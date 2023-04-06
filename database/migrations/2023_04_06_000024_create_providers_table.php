@@ -4,13 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBrandsTable extends Migration
+class CreateProvidersTable extends Migration
 {
     public function up()
     {
-        Schema::create('brands', function (Blueprint $table) {
+        Schema::create('providers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('brand')->unique();
+            $table->string('name');
+            $table->string('internal_notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

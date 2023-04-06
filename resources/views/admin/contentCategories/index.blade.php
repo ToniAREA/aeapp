@@ -32,6 +32,9 @@
                             {{ trans('cruds.contentCategory.fields.slug') }}
                         </th>
                         <th>
+                            {{ trans('cruds.contentCategory.fields.photo') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -50,6 +53,13 @@
                             </td>
                             <td>
                                 {{ $contentCategory->slug ?? '' }}
+                            </td>
+                            <td>
+                                @if($contentCategory->photo)
+                                    <a href="{{ $contentCategory->photo->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $contentCategory->photo->getUrl('thumb') }}">
+                                    </a>
+                                @endif
                             </td>
                             <td>
                                 @can('content_category_show')

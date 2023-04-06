@@ -25,26 +25,68 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.mlog.fields.id_mlog') }}
+                            {{ trans('cruds.mlog.fields.product') }}
                         </th>
                         <td>
-                            {{ $mlog->id_mlog }}
+                            {{ $mlog->product->name ?? '' }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.mlog.fields.date') }}
+                            {{ trans('cruds.mlog.fields.description') }}
                         </th>
                         <td>
-                            {{ $mlog->date }}
+                            {{ $mlog->description }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.mlog.fields.wlist') }}
+                            {{ trans('cruds.mlog.fields.quantity') }}
                         </th>
                         <td>
-                            {{ $mlog->wlist->desciption ?? '' }}
+                            {{ $mlog->quantity }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.mlog.fields.price_unit') }}
+                        </th>
+                        <td>
+                            {{ $mlog->price_unit }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.mlog.fields.discount') }}
+                        </th>
+                        <td>
+                            {{ $mlog->discount }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.mlog.fields.total') }}
+                        </th>
+                        <td>
+                            {{ $mlog->total }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.mlog.fields.status') }}
+                        </th>
+                        <td>
+                            {{ $mlog->status }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.mlog.fields.tags') }}
+                        </th>
+                        <td>
+                            @foreach($mlog->tags as $key => $tags)
+                                <span class="label label-info">{{ $tags->name }}</span>
+                            @endforeach
                         </td>
                     </tr>
                 </tbody>

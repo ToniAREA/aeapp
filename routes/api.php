@@ -28,13 +28,11 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::post('employees/media', 'EmployeesApiController@storeMedia')->name('employees.storeMedia');
     Route::apiResource('employees', 'EmployeesApiController');
 
-    // Assets History
-    Route::apiResource('assets-histories', 'AssetsHistoryApiController', ['except' => ['store', 'show', 'update', 'destroy']]);
-
     // Provider
     Route::post('providers/media', 'ProviderApiController@storeMedia')->name('providers.storeMedia');
     Route::apiResource('providers', 'ProviderApiController');
 
     // Brands
+    Route::post('brands/media', 'BrandsApiController@storeMedia')->name('brands.storeMedia');
     Route::apiResource('brands', 'BrandsApiController');
 });

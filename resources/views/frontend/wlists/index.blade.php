@@ -60,70 +60,6 @@
                                         &nbsp;
                                     </th>
                                 </tr>
-                                <tr>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                        <select class="search">
-                                            <option value>{{ trans('global.all') }}</option>
-                                            @foreach($clients as $key => $item)
-                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select class="search">
-                                            <option value>{{ trans('global.all') }}</option>
-                                            @foreach($boats as $key => $item)
-                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        <select class="search">
-                                            <option value>{{ trans('global.all') }}</option>
-                                            @foreach($priorities as $key => $item)
-                                                <option value="{{ $item->level }}">{{ $item->level }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select class="search">
-                                            <option value>{{ trans('global.all') }}</option>
-                                            @foreach($roles as $key => $item)
-                                                <option value="{{ $item->title }}">{{ $item->title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select class="search">
-                                            <option value>{{ trans('global.all') }}</option>
-                                            @foreach($users as $key => $item)
-                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select class="search">
-                                            <option value>{{ trans('global.all') }}</option>
-                                            @foreach($wlogs as $key => $item)
-                                                <option value="{{ $item->date }}">{{ $item->date }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
                             </thead>
                             <tbody>
                                 @foreach($wlists as $key => $wlist)
@@ -249,27 +185,6 @@
           .columns.adjust();
   });
   
-let visibleColumnsIndexes = null;
-$('.datatable thead').on('input', '.search', function () {
-      let strict = $(this).attr('strict') || false
-      let value = strict && this.value ? "^" + this.value + "$" : this.value
-
-      let index = $(this).parent().index()
-      if (visibleColumnsIndexes !== null) {
-        index = visibleColumnsIndexes[index]
-      }
-
-      table
-        .column(index)
-        .search(value, strict)
-        .draw()
-  });
-table.on('column-visibility.dt', function(e, settings, column, state) {
-      visibleColumnsIndexes = []
-      table.columns(":visible").every(function(colIdx) {
-          visibleColumnsIndexes.push(colIdx);
-      });
-  })
 })
 
 </script>

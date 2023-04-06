@@ -30,6 +30,10 @@ class StoreProviderRequest extends FormRequest
             'price_list' => [
                 'array',
             ],
+            'internal_notes' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

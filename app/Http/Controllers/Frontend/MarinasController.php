@@ -23,9 +23,7 @@ class MarinasController extends Controller
 
         $marinas = Marina::with(['boats'])->get();
 
-        $boats = Boat::get();
-
-        return view('frontend.marinas.index', compact('boats', 'marinas'));
+        return view('frontend.marinas.index', compact('marinas'));
     }
 
     public function create()

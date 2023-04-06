@@ -75,11 +75,11 @@
                                         {{ trans('cruds.contentPage.fields.featured_image') }}
                                     </th>
                                     <td>
-                                        @if($contentPage->featured_image)
-                                            <a href="{{ $contentPage->featured_image->getUrl() }}" target="_blank" style="display: inline-block">
-                                                <img src="{{ $contentPage->featured_image->getUrl('thumb') }}">
+                                        @foreach($contentPage->featured_image as $key => $media)
+                                            <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
+                                                <img src="{{ $media->getUrl('thumb') }}">
                                             </a>
-                                        @endif
+                                        @endforeach
                                     </td>
                                 </tr>
                             </tbody>
