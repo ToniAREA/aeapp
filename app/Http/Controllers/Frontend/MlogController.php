@@ -10,7 +10,7 @@ use App\Http\Requests\UpdateMlogRequest;
 use App\Models\Mlog;
 use App\Models\Product;
 use App\Models\Tag;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

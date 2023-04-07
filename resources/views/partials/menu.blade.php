@@ -12,7 +12,7 @@
 
             </select>
         </li>
-        <li class="c-sidebar-nav-item">
+       {{--  <li class="c-sidebar-nav-item">
             <a href="{{ route("admin.home") }}" class="c-sidebar-nav-link">
                 <i class="c-sidebar-nav-icon fas fa-fw fa-tachometer-alt">
 
@@ -39,7 +39,7 @@
                     {{ trans('cruds.appointment.title') }}
                 </a>
             </li>
-        @endcan
+         @endcan--}}
         @can('employee_access')
             <li class="c-sidebar-nav-item">
                 <a href="{{ route("admin.employees.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/employees") || request()->is("admin/employees/*") ? "c-active" : "" }}">
@@ -352,14 +352,14 @@
                 </ul>
             </li>
         @endcan
-        <li class="c-sidebar-nav-item">
+        {{-- <li class="c-sidebar-nav-item">
             <a href="{{ route("admin.systemCalendar") }}" class="c-sidebar-nav-link {{ request()->is("admin/system-calendar") || request()->is("admin/system-calendar/*") ? "c-active" : "" }}">
                 <i class="c-sidebar-nav-icon fa-fw fas fa-calendar">
 
                 </i>
                 {{ trans('global.systemCalendar') }}
             </a>
-        </li>
+        </li> --}}
         @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
             @can('profile_password_edit')
                 <li class="c-sidebar-nav-item">
@@ -371,7 +371,7 @@
                 </li>
             @endcan
         @endif
-        <li class="c-sidebar-nav-item">
+        <li class="c-sidebar-nav-item" style="padding:3px;">
             <a href="#" class="c-sidebar-nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                 <i class="c-sidebar-nav-icon fas fa-fw fa-sign-out-alt">
 

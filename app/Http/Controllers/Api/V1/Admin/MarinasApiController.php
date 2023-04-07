@@ -7,7 +7,7 @@ use App\Http\Requests\StoreMarinaRequest;
 use App\Http\Requests\UpdateMarinaRequest;
 use App\Http\Resources\Admin\MarinaResource;
 use App\Models\Marina;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 @can('mlog_create')
-    <div style="margin-bottom: 10px;" class="row">
+    <div style="padding:3px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('admin.mlogs.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.mlog.title_singular') }}

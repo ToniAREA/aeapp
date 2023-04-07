@@ -7,7 +7,7 @@ use App\Http\Requests\StoreWlogRequest;
 use App\Http\Requests\UpdateWlogRequest;
 use App\Http\Resources\Admin\WlogResource;
 use App\Models\Wlog;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

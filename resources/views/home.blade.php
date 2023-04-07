@@ -56,19 +56,46 @@
         <div id='calendar'></div>
     </div>
 
-     <div class="row m-1">
+    <div class="row m-1">
         <div class="col p-1">
             <a href="{{ route('admin.to-dos.create') }}" class=" btn btn-sm btn-dark" style="width: 100%;" role="button"
                 aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i>TO DO
             </a>
         </div>
         <div class="col p-1">
-            <a href="{{ route('admin.appointments.create') }}" class=" btn btn-sm btn-dark" style="width: 100%;" role="button"
-                aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i>APPOINTMENT
+            <a href="{{ route('admin.appointments.create') }}" class=" btn btn-sm btn-dark" style="width: 100%;"
+                role="button" aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i>APPOINTMENT
             </a>
         </div>
     </div>
 
+    <div class="card text-bg-secondary mb-2">
+        <div class="m-1 card-header text-secondary text-center">
+            <b>WORKS GOING ON</b>
+        </div>
+        <div class="p-1 row text-center">
+            @foreach ($workingOn as $boat)
+                <div class="col-6 col-md-4 col-xl-2 mb-1">
+                    <a href="#"
+                        class="d-block btn btn-outline-dark">{{ $boat->type . ' ' . $boat->name }}</a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+     <div class="card text-bg-secondary mb-2">
+        <div class="m-1 card-header text-secondary text-center">
+            <b>CLIENTS WAITING</b>
+        </div>
+        <div class="p-1 row text-center">
+            @foreach ($waiting as $wait)
+                <div class="col-6 col-md-4 col-xl-2 mb-1">
+                    <a href="#"
+                        class="d-block btn btn-outline-dark">{{ $wait->name }}</a>
+                </div>
+            @endforeach
+        </div>
+    </div>
 @endsection
 @section('scripts')
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
@@ -95,7 +122,7 @@
                 },
                 defaultView: 'workWeek', // Set the default view to 'workWeek'
                 minTime: '08:00:00', // Set the minimum time to 8 AM
-                maxTime: '18:00:00' , // Set the maximum time to 6 PM
+                maxTime: '18:00:00', // Set the maximum time to 6 PM
                 height: 500,
 
             });

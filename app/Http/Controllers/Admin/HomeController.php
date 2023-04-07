@@ -38,6 +38,8 @@ class HomeController
     {
         $clients = Client::get();
         $boats = Boat::get();
+        $workingOn = Boat::orderBy('id', 'desc')->take(10)->get();
+        $waiting = Client::orderBy('id', 'desc')->take(5)->get();
 
         $events = [];
         foreach ($this->sources as $source) {
@@ -56,6 +58,6 @@ class HomeController
             }
         }
 
-        return view('home', compact('clients','boats', 'events'));
+        return view('home', compact('clients','boats', 'events', 'workingOn', 'waiting'));
     }
 }

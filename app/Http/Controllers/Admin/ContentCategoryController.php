@@ -8,7 +8,7 @@ use App\Http\Requests\MassDestroyContentCategoryRequest;
 use App\Http\Requests\StoreContentCategoryRequest;
 use App\Http\Requests\UpdateContentCategoryRequest;
 use App\Models\ContentCategory;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;

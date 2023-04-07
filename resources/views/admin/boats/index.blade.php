@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 @can('boat_create')
-    <div style="margin-bottom: 10px;" class="row">
+    <div style="padding:3px;w" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('admin.boats.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.boat.title_singular') }}

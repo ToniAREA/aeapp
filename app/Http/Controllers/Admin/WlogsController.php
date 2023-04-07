@@ -12,7 +12,7 @@ use App\Models\Tag;
 use App\Models\User;
 use App\Models\Wlist;
 use App\Models\Wlog;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -11,7 +11,7 @@ use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\ContactContact;
 use App\Models\Employee;
 use App\Models\User;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
