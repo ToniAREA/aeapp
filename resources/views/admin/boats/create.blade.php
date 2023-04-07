@@ -2,16 +2,17 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header">
-        {{ trans('global.create') }} {{ trans('cruds.boat.title_singular') }}
+
+    <div class="card-header border p-1 m-1">
+        <b>{{ strtoupper(trans('global.create')) }} {{ strtoupper(trans('cruds.boat.title_singular')) }}</b> ID#{{ $lastRecordId + 1 }}
     </div>
 
-    <div class="card-body">
+    <div class="card-body p-1 m-1">
         <form method="POST" action="{{ route("admin.boats.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label class="required" for="id_boat">{{ trans('cruds.boat.fields.id_boat') }}</label>
-                <input class="form-control {{ $errors->has('id_boat') ? 'is-invalid' : '' }}" type="number" name="id_boat" id="id_boat" value="{{ old('id_boat', '') }}" step="1" required>
+                
+                <input class="form-control {{ $errors->has('id_boat') ? 'is-invalid' : '' }}" type="number" name="id_boat" id="id_boat" value="{{ old('id_boat', $lastRecordId + 1) }}" hidden>
                 @if($errors->has('id_boat'))
                     <div class="invalid-feedback">
                         {{ $errors->first('id_boat') }}

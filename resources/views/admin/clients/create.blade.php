@@ -2,16 +2,16 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header">
-        {{ trans('global.create') }} {{ trans('cruds.client.title_singular') }}
+
+     <div class="card-header border p-1 m-1">
+        <b>{{ strtoupper(trans('global.create')) }} {{ strtoupper(trans('cruds.client.title_singular')) }}</b> ID#{{ $lastRecordId + 1 }}
     </div>
 
-    <div class="card-body">
+    <div class="card-body p-1 m-1">
         <form method="POST" action="{{ route("admin.clients.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label class="required" for="id_client">{{ trans('cruds.client.fields.id_client') }}</label>
-                <input class="form-control {{ $errors->has('id_client') ? 'is-invalid' : '' }}" type="number" name="id_client" id="id_client" value="{{ old('id_client', '') }}" step="1" required>
+                <input class="form-control {{ $errors->has('id_client') ? 'is-invalid' : '' }}" type="number" name="id_client" id="id_client" value="{{ old('id_client', $lastRecordId + 1) }}" hidden>
                 @if($errors->has('id_client'))
                     <div class="invalid-feedback">
                         {{ $errors->first('id_client') }}
