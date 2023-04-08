@@ -27,6 +27,8 @@
         rel="stylesheet" />
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     @yield('styles')
+    @livewireStyles
+
 </head>
 
 <body class="c-app ">
@@ -38,7 +40,7 @@
                 <i class="fas fa-fw fa-bars"></i>
             </button>
 
-            <a class="c-header-brand d-lg-none" href="{{ route("admin.home") }}"><b>AREA</b>ELECTRONICA</a>
+            <a class="c-header-brand d-lg-none" href="{{ route('admin.home') }}"><b>AREA</b>ELECTRONICA</a>
 
             <button class="c-header-toggler mfs-3 d-md-down-none" type="button" responsive="true">
                 <i class="fas fa-fw fa-bars"></i>
@@ -55,7 +57,8 @@
                             @foreach (config('panel.available_languages') as $langLocale => $langName)
                                 <a class="dropdown-item"
                                     href="{{ url()->current() }}?change_language={{ $langLocale }}">{{ strtoupper($langLocale) }}
-                                    ({{ $langName }})</a>
+                                    ({{ $langName }})
+                                </a>
                             @endforeach
                         </div>
                     </li>
@@ -119,6 +122,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+
     <script>
         $(function() {
             let copyButtonTrans = '{{ trans('global.datatables.copy') }}'
@@ -309,6 +313,8 @@
         });
     </script>
     @yield('scripts')
+    @livewireScripts
+
 </body>
 
 </html>

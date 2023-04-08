@@ -29,6 +29,7 @@ class Client extends Model
 
     public static $searchable = [
         'id_client',
+        'name',
         'lastname',
         'vat',
         'address',

@@ -1,13 +1,16 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            @livewire('search-clients')
+    <div class="c-card">
+        <div class="c-card-header">
+            <b>{{ strtoupper(trans('cruds.client.title'))}}</b>
+        </div>
+
+        <div class="c-card-body">
+             @livewire('search-clients')
         </div>
     </div>
 
     <div class="c-card">
-
         <div class="c-card-header">
             <b>{{ strtoupper(trans('cruds.client.title_singular')) . ' ' . strtoupper(trans('global.list')) }}</b>
         </div>
