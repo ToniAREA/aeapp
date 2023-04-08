@@ -1,24 +1,31 @@
 @extends('layouts.admin')
 @section('content')
-@can('wlog_create')
-    <div style="padding:3px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.wlogs.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.wlog.title_singular') }}
-            </a>
-            <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
-                {{ trans('global.app_csvImport') }}
-            </button>
-            @include('csvImport.modal', ['model' => 'Wlog', 'route' => 'admin.wlogs.parseCsvImport'])
-        </div>
-    </div>
-@endcan
-<div class="card">
-    <div class="card-header">
-        {{ trans('cruds.wlog.title_singular') }} {{ trans('global.list') }}
+
+<div class="c-card">
+    <div class="c-card-header">
+        <b>{{ strtoupper(trans('cruds.wlog.title_singular')) }} {{ strtoupper(trans('global.list')) }}</b>
     </div>
 
-    <div class="card-body">
+    <div class="c-card-body">
+         <div class="d-flex justify-content-between">
+
+                @can('wlog_create')
+                    <a class="btn btn-outline-success btn-custom flex-fill"
+                        href="{{ route('admin.wlogs.create') }}">{{ trans('global.add') }}
+                        {{ trans('cruds.wlog.title_singular') }}</a>
+
+                    <button class="btn btn-outline-warning btn-custom flex-fill" data-toggle="modal"
+                        data-target="#csvImportModal">{{ trans('global.app_csvImport') }}</button>
+
+                    @include('csvImport.modal', [
+                        'model' => 'Wlog',
+                        'route' => 'admin.wlogs.parseCsvImport',
+                    ])
+
+                @endcan
+
+            </div>
+            <br>
         <div class="table-responsive">
             <table class=" table table-bordered table-striped table-hover datatable datatable-Wlog">
                 <thead>

@@ -161,6 +161,39 @@ table.dataTable thead .sorting_desc {
     font-size: 18px;
 }
 
+.c-card {
+    overflow: hidden;
+    padding: 4px;
+}
+
+.c-card-header {
+    background-color: #efefef;
+    border-color: #343a40;
+    border-radius: 1rem 1rem 0 0;
+    color: rgb(120, 120, 120);
+    padding: 5px 15px 5px 15px;
+    margin: 0 5px 0 5px;
+    text-align: center;
+}
+
+.c-card-body {
+    background-color: #fff !important;
+    border-radius: 0 0 1rem 1rem;
+    padding:5px 5px 10px 5px;
+    margin: 0 5px 0 5px;
+}
+
+ .btn-custom {
+    transition: background-color 0.3s ease;
+    margin: 2px;
+    padding: 1px;
+ }
+
+ .btn-custom:hover {
+/*     background-color: #007bff;
+ */    color: white;
+ }
+
 .container-fluid {
     padding-left: 0px !important;
     padding-right: 0px !important;

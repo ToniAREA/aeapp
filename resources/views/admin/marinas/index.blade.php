@@ -13,12 +13,12 @@
         </div>
     </div>
 @endcan
-<div class="card">
-    <div class="card-header">
-        {{ trans('cruds.marina.title_singular') }} {{ trans('global.list') }}
+<div class="c-card">
+    <div class="c-card-header">
+        <b>{{ strtoupper(trans('cruds.marina.title_singular')) }} {{ strtoupper(trans('global.list')) }}</b>
     </div>
 
-    <div class="card-body">
+    <div class="c-card-body">
         <div class="table-responsive">
             <table class=" table table-bordered table-striped table-hover datatable datatable-Marina">
                 <thead>
