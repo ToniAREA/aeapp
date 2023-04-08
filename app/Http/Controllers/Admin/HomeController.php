@@ -38,10 +38,10 @@ class HomeController
 
     public function index()
     {
-        $clients = Client::get();
-        $boats = Boat::get();
-        $wlists = Wlist::get();
-        $wlogs = Wlog::get();
+        $clients_count = Client::count();
+        $boats_count = Boat::count();
+        $wlists_count = Wlist::count();
+        $wlogs_count = Wlog::count();
 
         $workingOn = Boat::orderBy('id', 'desc')->take(10)->get();
         $waiting = Client::orderBy('id', 'desc')->take(5)->get();
@@ -63,6 +63,6 @@ class HomeController
             }
         }
 
-        return view('home', compact('clients','boats', 'events', 'workingOn', 'waiting', 'wlists', 'wlogs'));
+        return view('home', compact('clients_count','boats_count', 'wlists_count', 'wlogs_count', 'events', 'workingOn', 'waiting'));
     }
 }
