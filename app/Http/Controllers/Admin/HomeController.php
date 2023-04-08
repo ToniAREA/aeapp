@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Boat;
 use App\Models\Client;
+use App\Models\Wlist;
+use App\Models\Wlog;
 
 class HomeController
 {
@@ -38,6 +40,9 @@ class HomeController
     {
         $clients = Client::get();
         $boats = Boat::get();
+        $wlists = Wlist::get();
+        $wlogs = Wlog::get();
+
         $workingOn = Boat::orderBy('id', 'desc')->take(10)->get();
         $waiting = Client::orderBy('id', 'desc')->take(5)->get();
 
@@ -58,6 +63,6 @@ class HomeController
             }
         }
 
-        return view('home', compact('clients','boats', 'events', 'workingOn', 'waiting'));
+        return view('home', compact('clients','boats', 'events', 'workingOn', 'waiting', 'wlists', 'wlogs'));
     }
 }
