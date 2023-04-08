@@ -110,7 +110,7 @@
                 events: events,
                 header: {
                     left: 'prev,next today',
-                    center: 'title',
+                    /* center: 'title', */
                     right: 'listWeek,workWeek,month'
                 },
                 views: {

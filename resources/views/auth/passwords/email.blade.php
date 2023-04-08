@@ -4,9 +4,20 @@
         <div class="col-md-6">
             <div class="card mx-4">
                 <div class="card-body p-4">
-                    <h1 class="text-center">{{ trans('panel.site_title') }}</h1>
 
-                    <p class="text-muted">{{ trans('global.reset_password') }}</p>
+                    <div class="logo-container">
+                            @php
+                                $logoPath = public_path('images/logos/logo.png');
+                            @endphp
+
+                            @if (file_exists($logoPath))
+                                <img src="{{ asset('images/logos/logo.png') }}" alt="Logo" class="logo" />
+                            @else
+                                <h1 class="text-center">{{ trans('panel.site_title') }}</h1>
+                            @endif
+                        </div>
+
+                    {{-- <p class="text-muted">{{ trans('global.reset_password') }}</p> --}}
 
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">

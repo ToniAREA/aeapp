@@ -9,8 +9,19 @@
                     <form method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
-                        <h1 class="text-center">{{ trans('panel.site_title') }}</h1>
-                        <p class="text-muted">{{ trans('global.register') }}</p>
+                        <div class="logo-container">
+                            @php
+                                $logoPath = public_path('images/logos/logo.png');
+                            @endphp
+
+                            @if (file_exists($logoPath))
+                                <img src="{{ asset('images/logos/logo.png') }}" alt="Logo" class="logo" />
+                            @else
+                                <h1 class="text-center">{{ trans('panel.site_title') }}</h1>
+                            @endif
+                        </div>
+
+                        {{-- <p class="text-muted">{{ trans('global.register') }}</p> --}}
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -77,6 +88,9 @@
                         <div class="text-center mt-3">
                             <a class="btn btn-link" href="{{ route('login') }}">
                                 {{ trans('global.have_an_account') }}
+                            </a><br>
+                            <a class="btn btn-link" href="{{ url('/') }}">
+                                {{ trans('global.getmeout') }}
                             </a>
                         </div>
                     </form>

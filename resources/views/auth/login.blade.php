@@ -4,9 +4,20 @@
         <div class="col-md-6">
             <div class="card mx-3">
                 <div class="card-body">
-                    <h1 class="text-center">{{ trans('panel.site_title') }}</h1>
 
-                    <p class="text-muted">{{ trans('global.login') }}</p>
+                    <div class="logo-container">
+                            @php
+                                $logoPath = public_path('images/logos/logo.png');
+                            @endphp
+
+                            @if (file_exists($logoPath))
+                                <img src="{{ asset('images/logos/logo.png') }}" alt="Logo" class="logo" />
+                            @else
+                                <h1 class="text-center">{{ trans('panel.site_title') }}</h1>
+                            @endif
+                        </div>
+
+                    {{-- <p class="text-muted">{{ trans('global.login') }}</p> --}}
 
                     @if (session('message'))
                         <div class="alert alert-info" role="alert">
@@ -80,8 +91,12 @@
                             @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ trans('global.forgot_password') }}
-                                </a>
+                                </a><br>
                             @endif
+
+                            <a class="btn btn-link" href="{{ url('/') }}">
+                                {{ trans('global.getmeout') }}
+                            </a>
                         </div>
 
                     </form>
