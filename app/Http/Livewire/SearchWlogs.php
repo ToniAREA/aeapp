@@ -4,9 +4,9 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Client;
+use App\Models\Wlog;
 
-class SearchClients extends Component
+class SearchWlogs extends Component
 {
     use WithPagination;
 
@@ -14,8 +14,8 @@ class SearchClients extends Component
     public function render()
     {
         $searchTerm = '%' . $this->searchTerm . '%';
-        return view('livewire.search-clients', [
-            'resoults' => Client::where('name', 'like', $searchTerm)->orderBy('updated_at', 'desc')->paginate(10)
+        return view('livewire.search-wlogs', [
+            'resoults' => Wlog::where('id', 'like', $searchTerm)->orderBy('updated_at', 'desc')->paginate(10)
         ]);
     }
 }

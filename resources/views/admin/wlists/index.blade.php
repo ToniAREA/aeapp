@@ -2,6 +2,16 @@
 @section('content')
     <div class="c-card">
         <div class="c-card-header">
+            <b>{{ strtoupper(trans('cruds.wlist.title')) }}</b>
+        </div>
+
+        <div class="c-card-body">
+            @livewire('search-wlists')
+        </div>
+    </div>
+    
+    <div class="c-card">
+        <div class="c-card-header">
             <b>{{ strtoupper(trans('cruds.wlist.title_singular')) }} {{ strtoupper(trans('global.list')) }}</b>
         </div>
 

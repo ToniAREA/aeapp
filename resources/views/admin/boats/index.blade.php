@@ -1,6 +1,15 @@
 @extends('layouts.admin')
 @section('content')
-   
+    <div class="c-card">
+        <div class="c-card-header">
+            <b>{{ strtoupper(trans('cruds.boat.title')) }}</b>
+        </div>
+
+        <div class="c-card-body">
+            @livewire('search-boats')
+        </div>
+    </div>
+
     <div class="c-card">
         <div class="c-card-header">
             <b>{{ strtoupper(trans('cruds.boat.title_singular')) }} {{ strtoupper(trans('global.list')) }}</b>

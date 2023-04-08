@@ -1,5 +1,14 @@
 @extends('layouts.admin')
 @section('content')
+<div class="c-card">
+        <div class="c-card-header">
+            <b>{{ strtoupper(trans('cruds.marina.title')) }}</b>
+        </div>
+
+        <div class="c-card-body">
+            @livewire('search-marinas')
+        </div>
+    </div>
 @can('marina_create')
     <div style="padding:3px;" class="row">
         <div class="col-lg-12">
