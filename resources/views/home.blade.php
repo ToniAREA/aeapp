@@ -30,16 +30,16 @@
             </a>
         </div>
         <div class="col p-1">
-            <a href="{{ route('admin.wlogs.index') }}" class=" btn btn-sm @if ($wlogs->count() > 1)
-                btn-outline-danger
+            <a href="{{ route('admin.wlogs.index') }}"
+                class=" btn btn-sm @if ($wlogs->count() > 1) btn-outline-danger
             @else
-                btn-outline-dark
-            @endif" style="width: 100%;" role="button" aria-disabled="true"><i class=" fa fa-edit" aria-hidden="true"></i><br>NOT_CH
-                <br><span class="px-3 @if ($wlogs->count() > 1)
-                bg-danger
+                btn-outline-dark @endif"
+                style="width: 100%;" role="button" aria-disabled="true"><i class=" fa fa-edit"
+                    aria-hidden="true"></i><br>NOT_CH
+                <br><span
+                    class="px-3 @if ($wlogs->count() > 1) bg-danger
             @else
-                bg-dark
-            @endif rounded-pill text-light">{{ $wlogs->count() }}</span>
+                bg-dark @endif rounded-pill text-light">{{ $wlogs->count() }}</span>
             </a>
         </div>
     </div>
@@ -83,27 +83,30 @@
         <div class="p-1 row text-center">
             @foreach ($workingOn as $boat)
                 <div class="col-6 col-md-4 col-xl-2 mb-1">
-                    <a href="#"
-                        class="d-block btn btn-outline-dark">{{ $boat->type . ' ' . $boat->name }}</a>
+                    <a href="#" class="d-block btn btn-outline-dark">{{ $boat->type . ' ' . $boat->name }}</a>
                 </div>
             @endforeach
         </div>
     </div>
 
-     <div class="card text-bg-secondary mb-2">
+    <div class="card text-bg-secondary mb-2">
         <div class="m-1 card-header text-secondary text-center">
             <b>CLIENTS WAITING</b>
         </div>
         <div class="p-1 row text-center">
             @foreach ($waiting as $wait)
                 <div class="col-6 col-md-4 col-xl-2 mb-1">
-                    <a href="#"
-                        class="d-block btn btn-outline-dark">{{ $wait->name }}</a>
+                    <a href="#" class="d-block btn btn-outline-dark">{{ $wait->name }}</a>
                 </div>
             @endforeach
         </div>
     </div>
+
+    @foreach ($events as $event)
+        {{ $event->starts . ': ' . $event->title }}
+    @endforeach
 @endsection
+
 @section('scripts')
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
@@ -115,6 +118,7 @@
             $('#calendar').fullCalendar({
                 // Put your options and callbacks here
                 events: events,
+
                 header: {
                     left: 'prev,next today',
                     /* center: 'title', */
@@ -131,6 +135,7 @@
                 minTime: '08:00:00', // Set the minimum time to 8 AM
                 maxTime: '18:00:00', // Set the maximum time to 6 PM
                 height: 500,
+                nowIndicator: true,
 
             });
         });
