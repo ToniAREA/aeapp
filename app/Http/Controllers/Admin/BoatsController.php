@@ -36,7 +36,13 @@ class BoatsController extends Controller
         $clients = Client::pluck('name', 'id');
 
         $lastRecord = Boat::latest('id')->first();
-        $lastRecordId = $lastRecord->id_boat;
+        if ($lastRecord) {
+            // There is a latest record, proceed with your logic
+            $lastRecordId = $lastRecord->id_client;
+        } else {
+            // The database is empty, handle this case accordingly
+            $lastRecord = 1;
+        }
 
         return view('admin.boats.create', compact('clients', 'marinas', 'lastRecordId'));
     }
