@@ -29,8 +29,8 @@ class HomeController
         [
             'model'      => '\App\Models\Wlist',
             'date_field' => 'deadline',
-            'field'      => 'id',
-            'prefix'     => 'WorkDeadline',
+            'field'      => 'client',
+            'prefix'     => 'DL: ',
             'suffix'     => '',
             'route'      => 'admin.wlists.edit',
         ],

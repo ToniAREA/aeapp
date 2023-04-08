@@ -36,9 +36,9 @@ class BoatsController extends Controller
         $clients = Client::pluck('name', 'id');
 
         $lastRecord = Boat::latest('id')->first();
-        if ($lastRecord) {
+        if ($lastRecord->id_boat >= 1) {
             // There is a latest record, proceed with your logic
-            $lastRecordId = $lastRecord->id_client;
+            $lastRecordId = $lastRecord->id_boat;
         } else {
             // The database is empty, handle this case accordingly
             $lastRecordId = 0;

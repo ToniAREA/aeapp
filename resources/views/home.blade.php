@@ -102,9 +102,9 @@
         </div>
     </div>
 
-    @foreach ($events as $event)
+   {{--  @foreach ($events as $event)
         {{ $event->starts . ': ' . $event->title }}
-    @endforeach
+    @endforeach --}}
 @endsection
 
 @section('scripts')
