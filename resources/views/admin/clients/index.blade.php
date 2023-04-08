@@ -1,5 +1,11 @@
 @extends('layouts.admin')
 @section('content')
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            @livewire('search-clients')
+        </div>
+    </div>
+
     <div class="c-card">
 
         <div class="c-card-header">
@@ -21,7 +27,6 @@
                         'model' => 'Client',
                         'route' => 'admin.clients.parseCsvImport',
                     ])
-
                 @endcan
 
             </div>

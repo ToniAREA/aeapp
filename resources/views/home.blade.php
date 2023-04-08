@@ -122,7 +122,7 @@
                 header: {
                     left: 'prev,next today',
                     /* center: 'title', */
-                    right: 'listWeek,workWeek,month'
+                    right: 'workWeek,month'
                 },
                 views: {
                     workWeek: {
