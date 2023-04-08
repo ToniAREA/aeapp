@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             RoleUserTableSeeder::class,
             PriorityTableSeeder::class,
-            EmployeesSeeder::class,
+            BoatTypeSeeder::class,
+            /* EmployeesSeeder::class,
             MarinasSeeder::class,
             ClientsSeeder::class,
-            BoatsSeeder::class,
-            BoatTypeSeeder::class,
+            BoatsSeeder::class, */
         ]);
     }
 }
