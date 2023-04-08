@@ -38,7 +38,7 @@ class ClientsController extends Controller
             $lastRecordId = $lastRecord->id_client;
         } else {
             // The database is empty, handle this case accordingly
-            $lastRecord = 1;
+            $lastRecordId = 1;
         }
         
 
