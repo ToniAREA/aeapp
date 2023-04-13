@@ -45,66 +45,11 @@
     </div>
 
     <div class="row m-1">
-        <div class="col p-1">
-            <a href="{{ route('admin.clients.create') }}" class=" btn btn-sm btn-dark" style="width: 100%;" role="button"
-                aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i> CLIENT
-            </a>
-        </div>
-        <div class="col p-1">
-            <a href="{{ route('admin.boats.create') }}" class=" btn btn-sm btn-dark" style="width: 100%;" role="button"
-                aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i> BOAT
-            </a>
-        </div>
-    </div>
-
-    <div class="row m-1">
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
 
         <div id='calendar' class="p-1"></div>
     </div>
 
-    <div class="row m-1">
-        <div class="col p-1">
-            <a href="{{ route('admin.to-dos.create') }}" class=" btn btn-sm btn-dark" style="width: 100%;" role="button"
-                aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i>TO DO
-            </a>
-        </div>
-        <div class="col p-1">
-            <a href="{{ route('admin.appointments.create') }}" class=" btn btn-sm btn-dark" style="width: 100%;"
-                role="button" aria-disabled="true"><i class=" fa fa-plus" aria-hidden="true"></i>APPOINTMENT
-            </a>
-        </div>
-    </div>
-
-    <div class="card text-bg-secondary mb-2">
-        <div class="m-1 card-header text-secondary text-center">
-            <b>WORKS GOING ON</b>
-        </div>
-        <div class="p-1 row text-center">
-            @foreach ($workingOn as $boat)
-                <div class="col-6 col-md-4 col-xl-2 mb-1">
-                    <a href="#" class="d-block btn btn-outline-dark">{{ $boat->type . ' ' . $boat->name }}</a>
-                </div>
-            @endforeach
-        </div>
-    </div>
-
-    <div class="card text-bg-secondary mb-2">
-        <div class="m-1 card-header text-secondary text-center">
-            <b>CLIENTS WAITING</b>
-        </div>
-        <div class="p-1 row text-center">
-            @foreach ($waiting as $wait)
-                <div class="col-6 col-md-4 col-xl-2 mb-1">
-                    <a href="#" class="d-block btn btn-outline-dark">{{ $wait->name }}</a>
-                </div>
-            @endforeach
-        </div>
-    </div>
-
-   {{--  @foreach ($events as $event)
-        {{ $event->starts . ': ' . $event->title }}
-    @endforeach --}}
 @endsection
 
 @section('scripts')
