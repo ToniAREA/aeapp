@@ -15,7 +15,10 @@ class SearchClients extends Component
     {
         $searchTerm = '%' . $this->searchTerm . '%';
         return view('livewire.search-clients', [
-            'resoults' => Client::where('name', 'like', $searchTerm)->orderBy('updated_at', 'desc')->paginate(10)
+            'resoults' => Client::
+            where('name', 'like', $searchTerm)->
+            orWhere('lastname', 'like', $searchTerm)->
+            orderBy('updated_at', 'desc')->paginate(10)
         ]);
     }
 }

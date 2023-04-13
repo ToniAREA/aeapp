@@ -60,7 +60,7 @@
     <div class="row m-1">
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
 
-        <div id='calendar'></div>
+        <div id='calendar' class="p-1"></div>
     </div>
 
     <div class="row m-1">
@@ -122,19 +122,23 @@
                 header: {
                     left: 'prev,next today',
                     /* center: 'title', */
-                    right: 'workWeek,month'
+                    right: 'day,workWeek,month'
                 },
                 views: {
                     workWeek: {
                         type: 'agendaWeek',
                         hiddenDays: [0, 6], // Hide Sunday (0) and Saturday (6)
                         buttonText: 'work week'
+                    },
+                    day: {
+                        type: 'agendaDay',
+                        buttonText: 'day'
                     }
                 },
                 defaultView: 'workWeek', // Set the default view to 'workWeek'
                 minTime: '08:00:00', // Set the minimum time to 8 AM
                 maxTime: '18:00:00', // Set the maximum time to 6 PM
-                height: 500,
+                height: 400,
                 nowIndicator: true,
 
             });

@@ -179,15 +179,15 @@ table.dataTable thead .sorting_desc {
 .c-card-body {
     background-color: #fff !important;
     border-radius: 0 0 1rem 1rem;
-    padding:5px 5px 10px 5px;
+    padding: 5px 5px 10px 5px;
     margin: 0 5px 0 5px;
 }
 
- .btn-custom {
+.btn-custom {
     transition: background-color 0.3s ease;
     margin: 2px;
     padding: 1px;
- }
+}
 
 .container-fluid {
     padding-left: 0px !important;
@@ -215,4 +215,20 @@ table.dataTable thead .sorting_desc {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.badge-icon {
+    float: right;
+    background-color: lightgray;
+    color: #777;
+    font-size: 0.7rem;
+    padding: 1px 8px;
+    margin: 2px;
+    border-radius: 20px;
+    align-items: center;
+    display: inline-flex;
+}
+
+.badge-icon i {
+    margin-left: 5px;
 }

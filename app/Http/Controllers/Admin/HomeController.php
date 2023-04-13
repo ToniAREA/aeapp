@@ -16,7 +16,7 @@ class HomeController
             'field'      => 'id_employee',
             'prefix'     => 'Employee ENDs',
             'suffix'     => '',
-            'route'      => 'admin.employees.edit',
+            'route'      => 'admin.employees.show',
         ],
         [
             'model'      => '\App\Models\Appointment',
@@ -24,7 +24,7 @@ class HomeController
             'field'      => 'id',
             'prefix'     => 'Appointment',
             'suffix'     => '',
-            'route'      => 'admin.appointments.edit',
+            'route'      => 'admin.appointments.show',
         ],
         [
             'model'      => '\App\Models\Wlist',
@@ -32,7 +32,7 @@ class HomeController
             'field'      => 'client',
             'prefix'     => 'DL: ',
             'suffix'     => '',
-            'route'      => 'admin.wlists.edit',
+            'route'      => 'admin.wlists.show',
         ],
     ];
 

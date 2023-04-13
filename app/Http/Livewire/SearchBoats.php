@@ -15,7 +15,11 @@ class SearchBoats extends Component
     {
         $searchTerm = '%' . $this->searchTerm . '%';
         return view('livewire.search-boats', [
-            'resoults' => Boat::where('name', 'like', $searchTerm)->orderBy('updated_at', 'desc')->paginate(10)
+            'resoults' => 
+            Boat::
+            where('name', 'like', $searchTerm)->
+            orderBy('updated_at', 'desc')->
+            paginate(10)
         ]);
     }
 }

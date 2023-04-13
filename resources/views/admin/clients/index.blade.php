@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="c-card">
+    <div class="c-card col-12 col-md-6">
         <div class="c-card-header">
             <b>{{ strtoupper(trans('cruds.client.title'))}}</b>
         </div>
