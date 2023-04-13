@@ -5,9 +5,12 @@
             <li class="list-group-item p-1">
                 @can('wlist_show')
                     <a class="text-muted" href="{{ route('admin.wlists.show', $wlist->id) }}">
-                        @endcan{{ '('.$wlist->client->name.') '.strtoupper($wlist->boat->type) . ' '.strtoupper($wlist->boat->name) .': '. $wlist->desciption}}
+                    @endcan
+                    {{ '(' . $wlist->client->name . ') ' . strtoupper($wlist->boat->type) . ' ' . strtoupper($wlist->boat->name) . ': ' . $wlist->desciption }}
+                    @can('wlist_show')
                     </a>
-                </li>
-            @endforeach
-        </ul>
-    </div>
+                @endcan
+            </li>
+        @endforeach
+    </ul>
+</div>
