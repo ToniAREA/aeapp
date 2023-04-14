@@ -49,6 +49,7 @@ class Marina extends Model
 
     public function boats()
     {
-        return $this->belongsToMany(Boat::class);
+        /* return $this->belongsToMany(Boat::class); */
+        return $this->hasMany(Boat::class);
     }
 }

@@ -65,7 +65,7 @@
                 events: events,
 
                 header: {
-                    left: 'prev,next today',
+                    left: 'prev,today,next',
                     /* center: 'title', */
                     right: 'day,workWeek,month'
                 },

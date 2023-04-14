@@ -73,6 +73,11 @@ class BoatsController extends Controller
         $boat->update($request->all());
         $boat->clients()->sync($request->input('clients', []));
 
+        // Asignar la marina al barco
+        $marina_id = $request->input('marina_id');
+        $boat->marina()->associate($marina_id);
+        $boat->save();
+
         return redirect()->route('admin.boats.index');
     }
 
