@@ -36,9 +36,9 @@ class BoatsController extends Controller
         $clients = Client::pluck('name', 'id');
 
         $lastRecord = Boat::latest('id')->first();
-        if ($lastRecord->id_boat >= 1) {
+        if ($lastRecord) {
             // There is a latest record, proceed with your logic
-            $lastRecordId = $lastRecord->id_boat;
+            $lastRecordId = $lastRecord->id_client;
         } else {
             // The database is empty, handle this case accordingly
             $lastRecordId = 0;
@@ -74,9 +74,9 @@ class BoatsController extends Controller
         $boat->clients()->sync($request->input('clients', []));
 
         // Asignar la marina al barco
-        $marina_id = $request->input('marina_id');
+        /* $marina_id = $request->input('marina_id');
         $boat->marina()->associate($marina_id);
-        $boat->save();
+        $boat->save(); */
 
         return redirect()->route('admin.boats.index');
     }

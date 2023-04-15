@@ -48,7 +48,7 @@
                 <span class="help-block">{{ trans('cruds.marina.fields.boats_helper') }}</span>
             </div>
             <div class="form-group">
-                <button class="btn btn-danger" type="submit">
+                <button class="btn btn-danger btn-block" type="submit">
                     {{ trans('global.save') }}
                 </button>
             </div>

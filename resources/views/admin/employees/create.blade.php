@@ -2,16 +2,16 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header">
-        {{ trans('global.create') }} {{ trans('cruds.employee.title_singular') }}
+
+    <div class="card-header border p-1 m-1">
+        <b>{{ strtoupper(trans('global.create')) }} {{ strtoupper(trans('cruds.employee.title_singular')) }}</b> ID#{{ $lastRecordId + 1 }}
     </div>
 
-    <div class="card-body">
+    <div class="card-body p-1 m-1">
         <form method="POST" action="{{ route("admin.employees.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="id_employee">{{ trans('cruds.employee.fields.id_employee') }}</label>
-                <input class="form-control {{ $errors->has('id_employee') ? 'is-invalid' : '' }}" type="text" name="id_employee" id="id_employee" value="{{ old('id_employee', '') }}">
+                <input class="form-control {{ $errors->has('id_employee') ? 'is-invalid' : '' }}" type="text" name="id_employee" id="id_employee" value="{{ old('id_employee', $lastRecordId + 1) }}" hidden>
                 @if($errors->has('id_employee'))
                     <div class="invalid-feedback">
                         {{ $errors->first('id_employee') }}
@@ -109,15 +109,13 @@
                 <span class="help-block">{{ trans('cruds.employee.fields.internalnotes_helper') }}</span>
             </div>
             <div class="form-group">
-                <button class="btn btn-danger" type="submit">
+                <button class="btn btn-danger btn-block" type="submit">
                     {{ trans('global.save') }}
                 </button>
             </div>
         </form>
     </div>
 </div>
-
-
 
 @endsection
 

@@ -58,10 +58,10 @@ class Boat extends Model
         return $this->belongsToMany(Client::class);
     }
 
-    public function boatsMarinas()
+   /*  public function boatsMarinas()
     {
         return $this->belongsToMany(Marina::class);
-    }
+    } */
 
     public function marina()
     {

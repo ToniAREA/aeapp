@@ -37,7 +37,16 @@ class EmployeesController extends Controller
 
         $contacts = ContactContact::pluck('contact_first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.employees.create', compact('contacts', 'users'));
+        $lastRecord = Employee::latest('id')->first();
+        if ($lastRecord) {
+            // There is a latest record, proceed with your logic
+            $lastRecordId = $lastRecord->id_client;
+        } else {
+            // The database is empty, handle this case accordingly
+            $lastRecordId = 0;
+        }
+
+        return view('admin.employees.create', compact('contacts', 'users', 'lastRecordId'));
     }
 
     public function store(StoreEmployeeRequest $request)

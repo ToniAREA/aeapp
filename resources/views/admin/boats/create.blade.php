@@ -11,7 +11,6 @@
             <form method="POST" action="{{ route('admin.boats.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-
                     <input class="form-control {{ $errors->has('id_boat') ? 'is-invalid' : '' }}" type="number" name="id_boat"
                         id="id_boat" value="{{ old('id_boat', $lastRecordId + 1) }}" hidden>
                     @if ($errors->has('id_boat'))
