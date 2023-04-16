@@ -7,7 +7,7 @@ use App\Http\Requests\StoreWlogRequest;
 use App\Http\Requests\UpdateWlogRequest;
 use App\Http\Resources\Admin\WlogResource;
 use App\Models\Wlog;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,7 +17,7 @@ class WlogsApiController extends Controller
     {
         abort_if(Gate::denies('wlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new WlogResource(Wlog::with(['wlist', 'employee', 'marina', 'tags'])->get());
+        return new WlogResource(Wlog::with(['wlist', 'employee', 'marina', 'tags', 'proforma_number'])->get());
     }
 
     public function store(StoreWlogRequest $request)
@@ -34,7 +34,7 @@ class WlogsApiController extends Controller
     {
         abort_if(Gate::denies('wlog_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new WlogResource($wlog->load(['wlist', 'employee', 'marina', 'tags']));
+        return new WlogResource($wlog->load(['wlist', 'employee', 'marina', 'tags', 'proforma_number']));
     }
 
     public function update(UpdateWlogRequest $request, Wlog $wlog)

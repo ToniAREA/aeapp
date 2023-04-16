@@ -44,6 +44,26 @@
                             <span class="help-block">{{ trans('cruds.boat.fields.name_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="imo">{{ trans('cruds.boat.fields.imo') }}</label>
+                            <input class="form-control" type="text" name="imo" id="imo" value="{{ old('imo', '') }}">
+                            @if($errors->has('imo'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('imo') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.imo_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="mmsi">{{ trans('cruds.boat.fields.mmsi') }}</label>
+                            <input class="form-control" type="text" name="mmsi" id="mmsi" value="{{ old('mmsi', '') }}">
+                            @if($errors->has('mmsi'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('mmsi') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.mmsi_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label for="marina_id">{{ trans('cruds.boat.fields.marina') }}</label>
                             <select class="form-control select2" name="marina_id" id="marina_id">
                                 @foreach($marinas as $id => $entry)
@@ -74,16 +94,6 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.boat.fields.client_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="mmsi">{{ trans('cruds.boat.fields.mmsi') }}</label>
-                            <input class="form-control" type="text" name="mmsi" id="mmsi" value="{{ old('mmsi', '') }}">
-                            @if($errors->has('mmsi'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('mmsi') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.boat.fields.mmsi_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label for="notes">{{ trans('cruds.boat.fields.notes') }}</label>

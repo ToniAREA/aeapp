@@ -1,16 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="c-card col-12 col-md-6">
-        <div class="c-card-header">
-            <b>{{ strtoupper(trans('cruds.marina.title')) }}</b>
-        </div>
-
-        <div class="c-card-body">
-            @livewire('search-marinas')
-        </div>
-    </div>
 @can('marina_create')
-    <div style="padding:3px;" class="row">
+    <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('admin.marinas.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.marina.title_singular') }}
@@ -22,12 +13,12 @@
         </div>
     </div>
 @endcan
-<div class="c-card">
-    <div class="c-card-header">
-        <b>{{ strtoupper(trans('cruds.marina.title_singular')) }} {{ strtoupper(trans('global.list')) }}</b>
+<div class="card">
+    <div class="card-header">
+        {{ trans('cruds.marina.title_singular') }} {{ trans('global.list') }}
     </div>
 
-    <div class="c-card-body">
+    <div class="card-body">
         <div class="table-responsive">
             <table class=" table table-bordered table-striped table-hover datatable datatable-Marina">
                 <thead>
@@ -39,13 +30,13 @@
                             {{ trans('cruds.marina.fields.id') }}
                         </th>
                         <th>
+                            {{ trans('cruds.marina.fields.id_marina') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.marina.fields.name') }}
                         </th>
                         <th>
                             {{ trans('cruds.marina.fields.coordinates') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.marina.fields.boats') }}
                         </th>
                         <th>
                             &nbsp;
@@ -62,15 +53,13 @@
                                 {{ $marina->id ?? '' }}
                             </td>
                             <td>
+                                {{ $marina->id_marina ?? '' }}
+                            </td>
+                            <td>
                                 {{ $marina->name ?? '' }}
                             </td>
                             <td>
                                 {{ $marina->coordinates ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($marina->boats as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
                             </td>
                             <td>
                                 @can('marina_show')

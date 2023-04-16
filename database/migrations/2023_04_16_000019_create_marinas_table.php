@@ -4,15 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAppointmentsTable extends Migration
+class CreateMarinasTable extends Migration
 {
     public function up()
     {
-        Schema::create('appointments', function (Blueprint $table) {
+        Schema::create('marinas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->datetime('when_starts');
-            $table->datetime('when_ends');
-            $table->string('description');
+            $table->integer('id_marina')->nullable();
+            $table->string('name')->unique();
+            $table->string('coordinates')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

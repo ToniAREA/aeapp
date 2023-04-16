@@ -7,7 +7,7 @@ use App\Http\Requests\StoreMarinaRequest;
 use App\Http\Requests\UpdateMarinaRequest;
 use App\Http\Resources\Admin\MarinaResource;
 use App\Models\Marina;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,13 +17,12 @@ class MarinasApiController extends Controller
     {
         abort_if(Gate::denies('marina_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new MarinaResource(Marina::with(['boats'])->get());
+        return new MarinaResource(Marina::all());
     }
 
     public function store(StoreMarinaRequest $request)
     {
         $marina = Marina::create($request->all());
-        $marina->boats()->sync($request->input('boats', []));
 
         return (new MarinaResource($marina))
             ->response()
@@ -34,13 +33,12 @@ class MarinasApiController extends Controller
     {
         abort_if(Gate::denies('marina_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new MarinaResource($marina->load(['boats']));
+        return new MarinaResource($marina);
     }
 
     public function update(UpdateMarinaRequest $request, Marina $marina)
     {
         $marina->update($request->all());
-        $marina->boats()->sync($request->input('boats', []));
 
         return (new MarinaResource($marina))
             ->response()

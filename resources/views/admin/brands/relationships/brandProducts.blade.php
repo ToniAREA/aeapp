@@ -1,140 +1,140 @@
-@can('product_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.products.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.product.title_singular') }}
-            </a>
+<div class="m-3">
+    @can('product_create')
+        <div style="margin-bottom: 10px;" class="row">
+            <div class="col-lg-12">
+                <a class="btn btn-success" href="{{ route('admin.products.create') }}">
+                    {{ trans('global.add') }} {{ trans('cruds.product.title_singular') }}
+                </a>
+            </div>
         </div>
-    </div>
-@endcan
+    @endcan
+    <div class="card">
+        <div class="card-header">
+            {{ trans('cruds.product.title_singular') }} {{ trans('global.list') }}
+        </div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('cruds.product.title_singular') }} {{ trans('global.list') }}
-    </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class=" table table-bordered table-striped table-hover datatable datatable-brandProducts">
+                    <thead>
+                        <tr>
+                            <th width="10">
 
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-brandProducts">
-                <thead>
-                    <tr>
-                        <th width="10">
-
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.name') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.description') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.brand') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.price') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.category') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.tag') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.photo') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.file') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.model') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($products as $key => $product)
-                        <tr data-entry-id="{{ $product->id }}">
-                            <td>
-
-                            </td>
-                            <td>
-                                {{ $product->id ?? '' }}
-                            </td>
-                            <td>
-                                {{ $product->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $product->description ?? '' }}
-                            </td>
-                            <td>
-                                {{ $product->brand->brand ?? '' }}
-                            </td>
-                            <td>
-                                {{ $product->price ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($product->categories as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                @foreach($product->tags as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                @if($product->photo)
-                                    <a href="{{ $product->photo->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $product->photo->getUrl('thumb') }}">
-                                    </a>
-                                @endif
-                            </td>
-                            <td>
-                                @foreach($product->file as $key => $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank">
-                                        {{ trans('global.view_file') }}
-                                    </a>
-                                @endforeach
-                            </td>
-                            <td>
-                                {{ $product->model ?? '' }}
-                            </td>
-                            <td>
-                                @can('product_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.products.show', $product->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
-
-                                @can('product_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.products.edit', $product->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
-
-                                @can('product_delete')
-                                    <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
-
-                            </td>
-
+                            </th>
+                            <th>
+                                {{ trans('cruds.product.fields.id') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.product.fields.name') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.product.fields.description') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.product.fields.brand') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.product.fields.price') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.product.fields.category') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.product.fields.tag') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.product.fields.photo') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.product.fields.file') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.product.fields.model') }}
+                            </th>
+                            <th>
+                                &nbsp;
+                            </th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($products as $key => $product)
+                            <tr data-entry-id="{{ $product->id }}">
+                                <td>
+
+                                </td>
+                                <td>
+                                    {{ $product->id ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $product->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $product->description ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $product->brand->brand ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $product->price ?? '' }}
+                                </td>
+                                <td>
+                                    @foreach($product->categories as $key => $item)
+                                        <span class="badge badge-info">{{ $item->name }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach($product->tags as $key => $item)
+                                        <span class="badge badge-info">{{ $item->name }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @if($product->photo)
+                                        <a href="{{ $product->photo->getUrl() }}" target="_blank" style="display: inline-block">
+                                            <img src="{{ $product->photo->getUrl('thumb') }}">
+                                        </a>
+                                    @endif
+                                </td>
+                                <td>
+                                    @foreach($product->file as $key => $media)
+                                        <a href="{{ $media->getUrl() }}" target="_blank">
+                                            {{ trans('global.view_file') }}
+                                        </a>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    {{ $product->model ?? '' }}
+                                </td>
+                                <td>
+                                    @can('product_show')
+                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.products.show', $product->id) }}">
+                                            {{ trans('global.view') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('product_edit')
+                                        <a class="btn btn-xs btn-info" href="{{ route('admin.products.edit', $product->id) }}">
+                                            {{ trans('global.edit') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('product_delete')
+                                        <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        </form>
+                                    @endcan
+
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-
 @section('scripts')
 @parent
 <script>

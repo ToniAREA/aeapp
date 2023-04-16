@@ -7,7 +7,7 @@ use App\Http\Requests\MassDestroyAssetStatusRequest;
 use App\Http\Requests\StoreAssetStatusRequest;
 use App\Http\Requests\UpdateAssetStatusRequest;
 use App\Models\AssetStatus;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

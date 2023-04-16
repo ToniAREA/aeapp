@@ -95,16 +95,6 @@
                             @endforeach
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.wlist.fields.wlogs') }}
-                        </th>
-                        <td>
-                            @foreach($wlist->wlogs as $key => $wlogs)
-                                <span class="label label-info">{{ $wlogs->date }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -126,10 +116,26 @@
                 {{ trans('cruds.wlog.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#wlist_mlogs" role="tab" data-toggle="tab">
+                {{ trans('cruds.mlog.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#wlists_proformas" role="tab" data-toggle="tab">
+                {{ trans('cruds.proforma.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="wlist_wlogs">
             @includeIf('admin.wlists.relationships.wlistWlogs', ['wlogs' => $wlist->wlistWlogs])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="wlist_mlogs">
+            @includeIf('admin.wlists.relationships.wlistMlogs', ['mlogs' => $wlist->wlistMlogs])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="wlists_proformas">
+            @includeIf('admin.wlists.relationships.wlistsProformas', ['proformas' => $wlist->wlistsProformas])
         </div>
     </div>
 </div>

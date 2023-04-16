@@ -14,9 +14,7 @@
                 <label class="required" for="date">{{ trans('cruds.wlog.fields.date') }}</label>
                 <input class="form-control date {{ $errors->has('date') ? 'is-invalid' : '' }}" type="text" name="date" id="date" value="{{ old('date', $wlog->date) }}" required>
                 @if($errors->has('date'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('date') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('date') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlog.fields.date_helper') }}</span>
             </div>
@@ -28,9 +26,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('wlist'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('wlist') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('wlist') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlog.fields.wlist_helper') }}</span>
             </div>
@@ -42,9 +38,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('employee'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('employee') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('employee') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlog.fields.employee_helper') }}</span>
             </div>
@@ -56,9 +50,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('marina'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('marina') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('marina') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlog.fields.marina_helper') }}</span>
             </div>
@@ -66,9 +58,7 @@
                 <label for="description">{{ trans('cruds.wlog.fields.description') }}</label>
                 <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" type="text" name="description" id="description" value="{{ old('description', $wlog->description) }}">
                 @if($errors->has('description'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('description') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('description') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlog.fields.description_helper') }}</span>
             </div>
@@ -76,9 +66,7 @@
                 <label for="hours">{{ trans('cruds.wlog.fields.hours') }}</label>
                 <input class="form-control {{ $errors->has('hours') ? 'is-invalid' : '' }}" type="number" name="hours" id="hours" value="{{ old('hours', $wlog->hours) }}" step="0.01" max="24">
                 @if($errors->has('hours'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('hours') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('hours') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlog.fields.hours_helper') }}</span>
             </div>
@@ -94,11 +82,21 @@
                     @endforeach
                 </select>
                 @if($errors->has('tags'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('tags') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('tags') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlog.fields.tags_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="proforma_number_id">{{ trans('cruds.wlog.fields.proforma_number') }}</label>
+                <select class="form-control select2 {{ $errors->has('proforma_number') ? 'is-invalid' : '' }}" name="proforma_number_id" id="proforma_number_id">
+                    @foreach($proforma_numbers as $id => $entry)
+                        <option value="{{ $id }}" {{ (old('proforma_number_id') ? old('proforma_number_id') : $wlog->proforma_number->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('proforma_number'))
+                    <span class="text-danger">{{ $errors->first('proforma_number') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.wlog.fields.proforma_number_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

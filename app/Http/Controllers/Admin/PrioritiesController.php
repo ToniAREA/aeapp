@@ -7,7 +7,7 @@ use App\Http\Requests\MassDestroyPriorityRequest;
 use App\Http\Requests\StorePriorityRequest;
 use App\Http\Requests\UpdatePriorityRequest;
 use App\Models\Priority;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -13,6 +13,7 @@ class CreateBoatsTable extends Migration
             $table->integer('id_boat')->unique();
             $table->string('type')->nullable();
             $table->string('name');
+            $table->string('imo')->nullable();
             $table->string('mmsi')->nullable();
             $table->string('notes')->nullable();
             $table->string('internalnotes')->nullable();

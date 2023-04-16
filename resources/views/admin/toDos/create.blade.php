@@ -13,9 +13,7 @@
                 <label for="task">{{ trans('cruds.toDo.fields.task') }}</label>
                 <input class="form-control {{ $errors->has('task') ? 'is-invalid' : '' }}" type="text" name="task" id="task" value="{{ old('task', '') }}">
                 @if($errors->has('task'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('task') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('task') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.toDo.fields.task_helper') }}</span>
             </div>
@@ -24,9 +22,7 @@
                 <div class="needsclick dropzone {{ $errors->has('photo') ? 'is-invalid' : '' }}" id="photo-dropzone">
                 </div>
                 @if($errors->has('photo'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('photo') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('photo') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.toDo.fields.photo_helper') }}</span>
             </div>
@@ -34,9 +30,7 @@
                 <label for="deadline">{{ trans('cruds.toDo.fields.deadline') }}</label>
                 <input class="form-control date {{ $errors->has('deadline') ? 'is-invalid' : '' }}" type="text" name="deadline" id="deadline" value="{{ old('deadline') }}">
                 @if($errors->has('deadline'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('deadline') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('deadline') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.toDo.fields.deadline_helper') }}</span>
             </div>
@@ -48,9 +42,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('priority'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('priority') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('priority') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.toDo.fields.priority_helper') }}</span>
             </div>
@@ -66,9 +58,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('for_roles'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('for_roles') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('for_roles') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.toDo.fields.for_role_helper') }}</span>
             </div>
@@ -84,9 +74,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('for_users'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('for_users') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('for_users') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.toDo.fields.for_user_helper') }}</span>
             </div>

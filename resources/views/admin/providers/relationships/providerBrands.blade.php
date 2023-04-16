@@ -1,110 +1,110 @@
-@can('brand_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.brands.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.brand.title_singular') }}
-            </a>
+<div class="m-3">
+    @can('brand_create')
+        <div style="margin-bottom: 10px;" class="row">
+            <div class="col-lg-12">
+                <a class="btn btn-success" href="{{ route('admin.brands.create') }}">
+                    {{ trans('global.add') }} {{ trans('cruds.brand.title_singular') }}
+                </a>
+            </div>
         </div>
-    </div>
-@endcan
+    @endcan
+    <div class="card">
+        <div class="card-header">
+            {{ trans('cruds.brand.title_singular') }} {{ trans('global.list') }}
+        </div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('cruds.brand.title_singular') }} {{ trans('global.list') }}
-    </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class=" table table-bordered table-striped table-hover datatable datatable-providerBrands">
+                    <thead>
+                        <tr>
+                            <th width="10">
 
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-providerBrands">
-                <thead>
-                    <tr>
-                        <th width="10">
-
-                        </th>
-                        <th>
-                            {{ trans('cruds.brand.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.brand.fields.brand') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.brand.fields.provider') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.brand.fields.brand_logo') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.brand.fields.brand_url') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.brand.fields.internal_notes') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($brands as $key => $brand)
-                        <tr data-entry-id="{{ $brand->id }}">
-                            <td>
-
-                            </td>
-                            <td>
-                                {{ $brand->id ?? '' }}
-                            </td>
-                            <td>
-                                {{ $brand->brand ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($brand->providers as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                @if($brand->brand_logo)
-                                    <a href="{{ $brand->brand_logo->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $brand->brand_logo->getUrl('thumb') }}">
-                                    </a>
-                                @endif
-                            </td>
-                            <td>
-                                {{ $brand->brand_url ?? '' }}
-                            </td>
-                            <td>
-                                {{ $brand->internal_notes ?? '' }}
-                            </td>
-                            <td>
-                                @can('brand_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.brands.show', $brand->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
-
-                                @can('brand_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.brands.edit', $brand->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
-
-                                @can('brand_delete')
-                                    <form action="{{ route('admin.brands.destroy', $brand->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
-
-                            </td>
-
+                            </th>
+                            <th>
+                                {{ trans('cruds.brand.fields.id') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.brand.fields.brand') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.brand.fields.provider') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.brand.fields.brand_logo') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.brand.fields.brand_url') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.brand.fields.internal_notes') }}
+                            </th>
+                            <th>
+                                &nbsp;
+                            </th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($brands as $key => $brand)
+                            <tr data-entry-id="{{ $brand->id }}">
+                                <td>
+
+                                </td>
+                                <td>
+                                    {{ $brand->id ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $brand->brand ?? '' }}
+                                </td>
+                                <td>
+                                    @foreach($brand->providers as $key => $item)
+                                        <span class="badge badge-info">{{ $item->name }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @if($brand->brand_logo)
+                                        <a href="{{ $brand->brand_logo->getUrl() }}" target="_blank" style="display: inline-block">
+                                            <img src="{{ $brand->brand_logo->getUrl('thumb') }}">
+                                        </a>
+                                    @endif
+                                </td>
+                                <td>
+                                    {{ $brand->brand_url ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $brand->internal_notes ?? '' }}
+                                </td>
+                                <td>
+                                    @can('brand_show')
+                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.brands.show', $brand->id) }}">
+                                            {{ trans('global.view') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('brand_edit')
+                                        <a class="btn btn-xs btn-info" href="{{ route('admin.brands.edit', $brand->id) }}">
+                                            {{ trans('global.edit') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('brand_delete')
+                                        <form action="{{ route('admin.brands.destroy', $brand->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        </form>
+                                    @endcan
+
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-
 @section('scripts')
 @parent
 <script>

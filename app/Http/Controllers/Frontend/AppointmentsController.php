@@ -10,7 +10,7 @@ use App\Models\Appointment;
 use App\Models\Client;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

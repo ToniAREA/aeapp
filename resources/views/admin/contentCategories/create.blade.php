@@ -13,9 +13,7 @@
                 <label class="required" for="name">{{ trans('cruds.contentCategory.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
                 @if($errors->has('name'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('name') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('name') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contentCategory.fields.name_helper') }}</span>
             </div>
@@ -23,9 +21,7 @@
                 <label for="slug">{{ trans('cruds.contentCategory.fields.slug') }}</label>
                 <input class="form-control {{ $errors->has('slug') ? 'is-invalid' : '' }}" type="text" name="slug" id="slug" value="{{ old('slug', '') }}">
                 @if($errors->has('slug'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('slug') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('slug') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contentCategory.fields.slug_helper') }}</span>
             </div>
@@ -34,9 +30,7 @@
                 <div class="needsclick dropzone {{ $errors->has('photo') ? 'is-invalid' : '' }}" id="photo-dropzone">
                 </div>
                 @if($errors->has('photo'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('photo') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('photo') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contentCategory.fields.photo_helper') }}</span>
             </div>

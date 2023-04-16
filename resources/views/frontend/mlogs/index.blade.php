@@ -3,76 +3,162 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            @can('m_log_create')
+            @can('mlog_create')
                 <div style="margin-bottom: 10px;" class="row">
                     <div class="col-lg-12">
-                        <a class="btn btn-success" href="{{ route('frontend.m-logs.create') }}">
-                            {{ trans('global.add') }} {{ trans('cruds.mLog.title_singular') }}
+                        <a class="btn btn-success" href="{{ route('frontend.mlogs.create') }}">
+                            {{ trans('global.add') }} {{ trans('cruds.mlog.title_singular') }}
                         </a>
                         <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
                             {{ trans('global.app_csvImport') }}
                         </button>
-                        @include('csvImport.modal', ['model' => 'MLog', 'route' => 'admin.m-logs.parseCsvImport'])
+                        @include('csvImport.modal', ['model' => 'Mlog', 'route' => 'admin.mlogs.parseCsvImport'])
                     </div>
                 </div>
             @endcan
             <div class="card">
                 <div class="card-header">
-                    {{ trans('cruds.mLog.title_singular') }} {{ trans('global.list') }}
+                    {{ trans('cruds.mlog.title_singular') }} {{ trans('global.list') }}
                 </div>
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class=" table table-bordered table-striped table-hover datatable datatable-MLog">
+                        <table class=" table table-bordered table-striped table-hover datatable datatable-Mlog">
                             <thead>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.mLog.fields.id') }}
+                                        {{ trans('cruds.mlog.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.mLog.fields.code') }}
+                                        {{ trans('cruds.mlog.fields.id_mlog') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.client') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.lastname') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.boat') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.type') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.wlist') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.product') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.product.fields.description') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.description') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.quantity') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.price_unit') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.discount') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.total') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.status') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.tags') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.proforma_number') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.proforma.fields.description') }}
                                     </th>
                                     <th>
                                         &nbsp;
                                     </th>
                                 </tr>
-                                <tr>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
                             </thead>
                             <tbody>
-                                @foreach($mLogs as $key => $mLog)
-                                    <tr data-entry-id="{{ $mLog->id }}">
+                                @foreach($mlogs as $key => $mlog)
+                                    <tr data-entry-id="{{ $mlog->id }}">
                                         <td>
-                                            {{ $mLog->id ?? '' }}
+                                            {{ $mlog->id ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $mLog->code ?? '' }}
+                                            {{ $mlog->id_mlog ?? '' }}
                                         </td>
                                         <td>
-                                            @can('m_log_show')
-                                                <a class="btn btn-xs btn-primary" href="{{ route('frontend.m-logs.show', $mLog->id) }}">
+                                            {{ $mlog->client->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->client->lastname ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->boat->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->boat->type ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->wlist->desciption ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->product->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->product->description ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->description ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->quantity ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->price_unit ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->discount ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->total ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->status ?? '' }}
+                                        </td>
+                                        <td>
+                                            @foreach($mlog->tags as $key => $item)
+                                                <span>{{ $item->name }}</span>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            {{ $mlog->proforma_number->proforma_number ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->proforma_number->description ?? '' }}
+                                        </td>
+                                        <td>
+                                            @can('mlog_show')
+                                                <a class="btn btn-xs btn-primary" href="{{ route('frontend.mlogs.show', $mlog->id) }}">
                                                     {{ trans('global.view') }}
                                                 </a>
                                             @endcan
 
-                                            @can('m_log_edit')
-                                                <a class="btn btn-xs btn-info" href="{{ route('frontend.m-logs.edit', $mLog->id) }}">
+                                            @can('mlog_edit')
+                                                <a class="btn btn-xs btn-info" href="{{ route('frontend.mlogs.edit', $mlog->id) }}">
                                                     {{ trans('global.edit') }}
                                                 </a>
                                             @endcan
 
-                                            @can('m_log_delete')
-                                                <form action="{{ route('frontend.m-logs.destroy', $mLog->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            @can('mlog_delete')
+                                                <form action="{{ route('frontend.mlogs.destroy', $mlog->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -98,11 +184,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('m_log_delete')
+@can('mlog_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('frontend.m-logs.massDestroy') }}",
+    url: "{{ route('frontend.mlogs.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -133,33 +219,12 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  let table = $('.datatable-MLog:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  let table = $('.datatable-Mlog:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
   
-let visibleColumnsIndexes = null;
-$('.datatable thead').on('input', '.search', function () {
-      let strict = $(this).attr('strict') || false
-      let value = strict && this.value ? "^" + this.value + "$" : this.value
-
-      let index = $(this).parent().index()
-      if (visibleColumnsIndexes !== null) {
-        index = visibleColumnsIndexes[index]
-      }
-
-      table
-        .column(index)
-        .search(value, strict)
-        .draw()
-  });
-table.on('column-visibility.dt', function(e, settings, column, state) {
-      visibleColumnsIndexes = []
-      table.columns(":visible").every(function(colIdx) {
-          visibleColumnsIndexes.push(colIdx);
-      });
-  })
 })
 
 </script>

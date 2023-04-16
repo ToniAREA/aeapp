@@ -1,9 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-
-Route::view('/', 'main');
+Route::view('/', 'welcome');
 Route::get('userVerification/{token}', 'UserVerificationController@approve')->name('userVerification');
 Auth::routes();
 
@@ -158,6 +155,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('mlogs/process-csv-import', 'MlogController@processCsvImport')->name('mlogs.processCsvImport');
     Route::resource('mlogs', 'MlogController');
 
+    // Proforma
+    Route::delete('proformas/destroy', 'ProformaController@massDestroy')->name('proformas.massDestroy');
+    Route::post('proformas/parse-csv-import', 'ProformaController@parseCsvImport')->name('proformas.parseCsvImport');
+    Route::post('proformas/process-csv-import', 'ProformaController@processCsvImport')->name('proformas.processCsvImport');
+    Route::resource('proformas', 'ProformaController');
+
+    // Claim
+    Route::delete('claims/destroy', 'ClaimController@massDestroy')->name('claims.massDestroy');
+    Route::resource('claims', 'ClaimController');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
 });
@@ -291,6 +298,14 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     // Mlog
     Route::delete('mlogs/destroy', 'MlogController@massDestroy')->name('mlogs.massDestroy');
     Route::resource('mlogs', 'MlogController');
+
+    // Proforma
+    Route::delete('proformas/destroy', 'ProformaController@massDestroy')->name('proformas.massDestroy');
+    Route::resource('proformas', 'ProformaController');
+
+    // Claim
+    Route::delete('claims/destroy', 'ClaimController@massDestroy')->name('claims.massDestroy');
+    Route::resource('claims', 'ClaimController');
 
     Route::get('frontend/profile', 'ProfileController@index')->name('profile.index');
     Route::post('frontend/profile', 'ProfileController@update')->name('profile.update');

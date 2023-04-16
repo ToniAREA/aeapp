@@ -36,6 +36,26 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.appointment.fields.for_role') }}
+                                    </th>
+                                    <td>
+                                        @foreach($appointment->for_roles as $key => $for_role)
+                                            <span class="label label-info">{{ $for_role->title }}</span>
+                                        @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.appointment.fields.for_user') }}
+                                    </th>
+                                    <td>
+                                        @foreach($appointment->for_users as $key => $for_user)
+                                            <span class="label label-info">{{ $for_user->name }}</span>
+                                        @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.appointment.fields.when_starts') }}
                                     </th>
                                     <td>
@@ -56,26 +76,6 @@
                                     </th>
                                     <td>
                                         {{ $appointment->description }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.appointment.fields.for_role') }}
-                                    </th>
-                                    <td>
-                                        @foreach($appointment->for_roles as $key => $for_role)
-                                            <span class="label label-info">{{ $for_role->title }}</span>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.appointment.fields.for_user') }}
-                                    </th>
-                                    <td>
-                                        @foreach($appointment->for_users as $key => $for_user)
-                                            <span class="label label-info">{{ $for_user->name }}</span>
-                                        @endforeach
                                     </td>
                                 </tr>
                             </tbody>

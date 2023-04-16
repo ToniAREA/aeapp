@@ -7,9 +7,8 @@ use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyMarinaRequest;
 use App\Http\Requests\StoreMarinaRequest;
 use App\Http\Requests\UpdateMarinaRequest;
-use App\Models\Boat;
 use App\Models\Marina;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,7 +20,7 @@ class MarinasController extends Controller
     {
         abort_if(Gate::denies('marina_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $marinas = Marina::with(['boats'])->get();
+        $marinas = Marina::all();
 
         return view('admin.marinas.index', compact('marinas'));
     }
@@ -30,15 +29,12 @@ class MarinasController extends Controller
     {
         abort_if(Gate::denies('marina_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boats = Boat::pluck('name', 'id');
-
-        return view('admin.marinas.create', compact('boats'));
+        return view('admin.marinas.create');
     }
 
     public function store(StoreMarinaRequest $request)
     {
         $marina = Marina::create($request->all());
-        $marina->boats()->sync($request->input('boats', []));
 
         return redirect()->route('admin.marinas.index');
     }
@@ -47,17 +43,12 @@ class MarinasController extends Controller
     {
         abort_if(Gate::denies('marina_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boats = Boat::pluck('name', 'id');
-
-        $marina->load('boats');
-
-        return view('admin.marinas.edit', compact('boats', 'marina'));
+        return view('admin.marinas.edit', compact('marina'));
     }
 
     public function update(UpdateMarinaRequest $request, Marina $marina)
     {
         $marina->update($request->all());
-        $marina->boats()->sync($request->input('boats', []));
 
         return redirect()->route('admin.marinas.index');
     }
@@ -66,7 +57,7 @@ class MarinasController extends Controller
     {
         abort_if(Gate::denies('marina_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $marina->load('boats', 'marinaBoats', 'marinaWlogs');
+        $marina->load('marinaBoats', 'marinaWlogs');
 
         return view('admin.marinas.show', compact('marina'));
     }

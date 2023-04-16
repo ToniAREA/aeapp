@@ -8,7 +8,7 @@ use App\Http\Requests\MassDestroyAssetLocationRequest;
 use App\Http\Requests\StoreAssetLocationRequest;
 use App\Http\Requests\UpdateAssetLocationRequest;
 use App\Models\AssetLocation;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;

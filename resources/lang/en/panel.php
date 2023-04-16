@@ -2,4 +2,5 @@
 
 return [
     'site_title' => 'AEAPP',
+
 ];

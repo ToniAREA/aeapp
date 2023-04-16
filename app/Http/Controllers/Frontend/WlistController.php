@@ -14,8 +14,7 @@ use App\Models\Priority;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Wlist;
-use App\Models\Wlog;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +27,7 @@ class WlistController extends Controller
     {
         abort_if(Gate::denies('wlist_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlists = Wlist::with(['client', 'boat', 'priority', 'for_roles', 'for_users', 'wlogs', 'media'])->get();
+        $wlists = Wlist::with(['client', 'boat', 'priority', 'for_roles', 'for_users', 'media'])->get();
 
         return view('frontend.wlists.index', compact('wlists'));
     }
@@ -47,9 +46,7 @@ class WlistController extends Controller
 
         $for_users = User::pluck('name', 'id');
 
-        $wlogs = Wlog::pluck('date', 'id');
-
-        return view('frontend.wlists.create', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities', 'wlogs'));
+        return view('frontend.wlists.create', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities'));
     }
 
     public function store(StoreWlistRequest $request)
@@ -57,7 +54,6 @@ class WlistController extends Controller
         $wlist = Wlist::create($request->all());
         $wlist->for_roles()->sync($request->input('for_roles', []));
         $wlist->for_users()->sync($request->input('for_users', []));
-        $wlist->wlogs()->sync($request->input('wlogs', []));
         foreach ($request->input('photos', []) as $file) {
             $wlist->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('photos');
         }
@@ -83,11 +79,9 @@ class WlistController extends Controller
 
         $for_users = User::pluck('name', 'id');
 
-        $wlogs = Wlog::pluck('date', 'id');
+        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users');
 
-        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users', 'wlogs');
-
-        return view('frontend.wlists.edit', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities', 'wlist', 'wlogs'));
+        return view('frontend.wlists.edit', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities', 'wlist'));
     }
 
     public function update(UpdateWlistRequest $request, Wlist $wlist)
@@ -95,7 +89,6 @@ class WlistController extends Controller
         $wlist->update($request->all());
         $wlist->for_roles()->sync($request->input('for_roles', []));
         $wlist->for_users()->sync($request->input('for_users', []));
-        $wlist->wlogs()->sync($request->input('wlogs', []));
         if (count($wlist->photos) > 0) {
             foreach ($wlist->photos as $media) {
                 if (! in_array($media->file_name, $request->input('photos', []))) {
@@ -117,7 +110,7 @@ class WlistController extends Controller
     {
         abort_if(Gate::denies('wlist_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users', 'wlogs', 'wlistWlogs');
+        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users', 'wlistWlogs');
 
         return view('frontend.wlists.show', compact('wlist'));
     }

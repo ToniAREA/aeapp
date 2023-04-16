@@ -1,130 +1,136 @@
-@can('boat_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.boats.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.boat.title_singular') }}
-            </a>
+<div class="m-3">
+    @can('boat_create')
+        <div style="margin-bottom: 10px;" class="row">
+            <div class="col-lg-12">
+                <a class="btn btn-success" href="{{ route('admin.boats.create') }}">
+                    {{ trans('global.add') }} {{ trans('cruds.boat.title_singular') }}
+                </a>
+            </div>
         </div>
-    </div>
-@endcan
+    @endcan
+    <div class="card">
+        <div class="card-header">
+            {{ trans('cruds.boat.title_singular') }} {{ trans('global.list') }}
+        </div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('cruds.boat.title_singular') }} {{ trans('global.list') }}
-    </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class=" table table-bordered table-striped table-hover datatable datatable-clientBoats">
+                    <thead>
+                        <tr>
+                            <th width="10">
 
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-clientBoats">
-                <thead>
-                    <tr>
-                        <th width="10">
-
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.id_boat') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.type') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.name') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.marina') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.client') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.mmsi') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.notes') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.internalnotes') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.lastuse') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($boats as $key => $boat)
-                        <tr data-entry-id="{{ $boat->id }}">
-                            <td>
-
-                            </td>
-                            <td>
-                                {{ $boat->id ?? '' }}
-                            </td>
-                            <td>
-                                {{ $boat->id_boat ?? '' }}
-                            </td>
-                            <td>
-                                {{ $boat->type ?? '' }}
-                            </td>
-                            <td>
-                                {{ $boat->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $boat->marina->name ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($boat->clients as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                {{ $boat->mmsi ?? '' }}
-                            </td>
-                            <td>
-                                {{ $boat->notes ?? '' }}
-                            </td>
-                            <td>
-                                {{ $boat->internalnotes ?? '' }}
-                            </td>
-                            <td>
-                                {{ $boat->lastuse ?? '' }}
-                            </td>
-                            <td>
-                                @can('boat_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.boats.show', $boat->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
-
-                                @can('boat_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.boats.edit', $boat->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
-
-                                @can('boat_delete')
-                                    <form action="{{ route('admin.boats.destroy', $boat->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
-
-                            </td>
-
+                            </th>
+                            <th>
+                                {{ trans('cruds.boat.fields.id') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.boat.fields.id_boat') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.boat.fields.type') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.boat.fields.name') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.boat.fields.imo') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.boat.fields.mmsi') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.boat.fields.marina') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.boat.fields.client') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.boat.fields.notes') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.boat.fields.internalnotes') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.boat.fields.lastuse') }}
+                            </th>
+                            <th>
+                                &nbsp;
+                            </th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($boats as $key => $boat)
+                            <tr data-entry-id="{{ $boat->id }}">
+                                <td>
+
+                                </td>
+                                <td>
+                                    {{ $boat->id ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $boat->id_boat ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $boat->type ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $boat->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $boat->imo ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $boat->mmsi ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $boat->marina->name ?? '' }}
+                                </td>
+                                <td>
+                                    @foreach($boat->clients as $key => $item)
+                                        <span class="badge badge-info">{{ $item->name }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    {{ $boat->notes ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $boat->internalnotes ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $boat->lastuse ?? '' }}
+                                </td>
+                                <td>
+                                    @can('boat_show')
+                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.boats.show', $boat->id) }}">
+                                            {{ trans('global.view') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('boat_edit')
+                                        <a class="btn btn-xs btn-info" href="{{ route('admin.boats.edit', $boat->id) }}">
+                                            {{ trans('global.edit') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('boat_delete')
+                                        <form action="{{ route('admin.boats.destroy', $boat->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        </form>
+                                    @endcan
+
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-
 @section('scripts')
 @parent
 <script>

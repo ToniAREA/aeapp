@@ -14,9 +14,7 @@ trait Auditable
         });
 
         static::updated(function (Model $model) {
-            $model->attributes = array_merge($model->getChanges(), ['id' => $model->id]);
-
-            self::audit('audit:updated', $model);
+            self::audit('audit:updated', $model, $model->getChanges());
         });
 
         static::deleted(function (Model $model) {
@@ -24,14 +22,14 @@ trait Auditable
         });
     }
 
-    protected static function audit($description, $model)
+    protected static function audit($description, $model, $changes = [])
     {
         AuditLog::create([
             'description'  => $description,
             'subject_id'   => $model->id ?? null,
             'subject_type' => sprintf('%s#%s', get_class($model), $model->id) ?? null,
             'user_id'      => auth()->id() ?? null,
-            'properties'   => $model ?? null,
+            'properties'   => $changes ?: $model,
             'host'         => request()->ip() ?? null,
         ]);
     }

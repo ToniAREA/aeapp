@@ -29,8 +29,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/css/perfect-scrollbar.min.css" rel="stylesheet" />
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     @yield('styles')
-    @livewireStyles
-
 </head>
 
 <body>
@@ -79,21 +77,6 @@
 
                                     <a class="dropdown-item" href="{{ route('frontend.profile.index') }}">{{ __('My profile') }}</a>
 
-                                    @can('to_do_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.to-dos.index') }}">
-                                            {{ trans('cruds.toDo.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('appointment_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.appointments.index') }}">
-                                            {{ trans('cruds.appointment.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('employee_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.employees.index') }}">
-                                            {{ trans('cruds.employee.title') }}
-                                        </a>
-                                    @endcan
                                     @can('client_access')
                                         <a class="dropdown-item" href="{{ route('frontend.clients.index') }}">
                                             {{ trans('cruds.client.title') }}
@@ -124,34 +107,39 @@
                                             {{ trans('cruds.wlog.title') }}
                                         </a>
                                     @endcan
-                                    @can('tag_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.tags.index') }}">
-                                            {{ trans('cruds.tag.title') }}
-                                        </a>
-                                    @endcan
                                     @can('mlog_access')
                                         <a class="dropdown-item ml-3" href="{{ route('frontend.mlogs.index') }}">
                                             {{ trans('cruds.mlog.title') }}
                                         </a>
                                     @endcan
+                                    @can('proforma_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.proformas.index') }}">
+                                            {{ trans('cruds.proforma.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('claim_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.claims.index') }}">
+                                            {{ trans('cruds.claim.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('tag_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.tags.index') }}">
+                                            {{ trans('cruds.tag.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('to_do_access')
+                                        <a class="dropdown-item" href="{{ route('frontend.to-dos.index') }}">
+                                            {{ trans('cruds.toDo.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('appointment_access')
+                                        <a class="dropdown-item" href="{{ route('frontend.appointments.index') }}">
+                                            {{ trans('cruds.appointment.title') }}
+                                        </a>
+                                    @endcan
                                     @can('product_management_access')
                                         <a class="dropdown-item disabled" href="#">
                                             {{ trans('cruds.productManagement.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('product_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.products.index') }}">
-                                            {{ trans('cruds.product.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('product_category_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.product-categories.index') }}">
-                                            {{ trans('cruds.productCategory.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('product_tag_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.product-tags.index') }}">
-                                            {{ trans('cruds.productTag.title') }}
                                         </a>
                                     @endcan
                                     @can('provider_access')
@@ -164,14 +152,24 @@
                                             {{ trans('cruds.brand.title') }}
                                         </a>
                                     @endcan
+                                    @can('product_category_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.product-categories.index') }}">
+                                            {{ trans('cruds.productCategory.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('product_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.products.index') }}">
+                                            {{ trans('cruds.product.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('product_tag_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.product-tags.index') }}">
+                                            {{ trans('cruds.productTag.title') }}
+                                        </a>
+                                    @endcan
                                     @can('contact_management_access')
                                         <a class="dropdown-item disabled" href="#">
                                             {{ trans('cruds.contactManagement.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('contact_company_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.contact-companies.index') }}">
-                                            {{ trans('cruds.contactCompany.title') }}
                                         </a>
                                     @endcan
                                     @can('contact_contact_access')
@@ -179,19 +177,24 @@
                                             {{ trans('cruds.contactContact.title') }}
                                         </a>
                                     @endcan
+                                    @can('contact_company_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.contact-companies.index') }}">
+                                            {{ trans('cruds.contactCompany.title') }}
+                                        </a>
+                                    @endcan
                                     @can('content_management_access')
                                         <a class="dropdown-item disabled" href="#">
                                             {{ trans('cruds.contentManagement.title') }}
                                         </a>
                                     @endcan
-                                    @can('content_page_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.content-pages.index') }}">
-                                            {{ trans('cruds.contentPage.title') }}
-                                        </a>
-                                    @endcan
                                     @can('content_category_access')
                                         <a class="dropdown-item ml-3" href="{{ route('frontend.content-categories.index') }}">
                                             {{ trans('cruds.contentCategory.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('content_page_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.content-pages.index') }}">
+                                            {{ trans('cruds.contentPage.title') }}
                                         </a>
                                     @endcan
                                     @can('content_tag_access')
@@ -207,6 +210,11 @@
                                     @can('user_access')
                                         <a class="dropdown-item ml-3" href="{{ route('frontend.users.index') }}">
                                             {{ trans('cruds.user.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('employee_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.employees.index') }}">
+                                            {{ trans('cruds.employee.title') }}
                                         </a>
                                     @endcan
                                     @can('role_access')
@@ -302,6 +310,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 @yield('scripts')
-@livewireScripts
 
 </html>

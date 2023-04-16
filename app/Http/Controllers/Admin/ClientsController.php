@@ -9,7 +9,7 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Boat;
 use App\Models\Client;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -32,17 +32,7 @@ class ClientsController extends Controller
 
         $boats = Boat::pluck('name', 'id');
 
-        $lastRecord = Client::latest('id')->first();
-        if ($lastRecord) {
-            // There is a latest record, proceed with your logic
-            $lastRecordId = $lastRecord->id_client;
-        } else {
-            // The database is empty, handle this case accordingly
-            $lastRecordId = 0;
-        }
-        
-
-        return view('admin.clients.create', compact('boats', 'lastRecordId'));
+        return view('admin.clients.create', compact('boats'));
     }
 
     public function store(StoreClientRequest $request)
@@ -76,7 +66,7 @@ class ClientsController extends Controller
     {
         abort_if(Gate::denies('client_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $client->load('boats', 'clientWlists', 'clientAppointments', 'clientBoats');
+        $client->load('boats', 'clientWlists', 'clientAppointments', 'clientMlogs', 'clientProformas', 'clientBoats');
 
         return view('admin.clients.show', compact('client'));
     }

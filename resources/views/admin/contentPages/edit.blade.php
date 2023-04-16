@@ -14,9 +14,7 @@
                 <label class="required" for="title">{{ trans('cruds.contentPage.fields.title') }}</label>
                 <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $contentPage->title) }}" required>
                 @if($errors->has('title'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('title') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('title') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contentPage.fields.title_helper') }}</span>
             </div>
@@ -32,9 +30,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('categories'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('categories') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('categories') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contentPage.fields.category_helper') }}</span>
             </div>
@@ -50,9 +46,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('tags'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('tags') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('tags') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contentPage.fields.tag_helper') }}</span>
             </div>
@@ -60,9 +54,7 @@
                 <label for="page_text">{{ trans('cruds.contentPage.fields.page_text') }}</label>
                 <textarea class="form-control ckeditor {{ $errors->has('page_text') ? 'is-invalid' : '' }}" name="page_text" id="page_text">{!! old('page_text', $contentPage->page_text) !!}</textarea>
                 @if($errors->has('page_text'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('page_text') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('page_text') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contentPage.fields.page_text_helper') }}</span>
             </div>
@@ -70,9 +62,7 @@
                 <label for="excerpt">{{ trans('cruds.contentPage.fields.excerpt') }}</label>
                 <textarea class="form-control {{ $errors->has('excerpt') ? 'is-invalid' : '' }}" name="excerpt" id="excerpt">{{ old('excerpt', $contentPage->excerpt) }}</textarea>
                 @if($errors->has('excerpt'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('excerpt') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('excerpt') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contentPage.fields.excerpt_helper') }}</span>
             </div>
@@ -81,9 +71,7 @@
                 <div class="needsclick dropzone {{ $errors->has('featured_image') ? 'is-invalid' : '' }}" id="featured_image-dropzone">
                 </div>
                 @if($errors->has('featured_image'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('featured_image') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('featured_image') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contentPage.fields.featured_image_helper') }}</span>
             </div>

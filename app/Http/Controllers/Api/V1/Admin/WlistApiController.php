@@ -8,7 +8,7 @@ use App\Http\Requests\StoreWlistRequest;
 use App\Http\Requests\UpdateWlistRequest;
 use App\Http\Resources\Admin\WlistResource;
 use App\Models\Wlist;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,7 +20,7 @@ class WlistApiController extends Controller
     {
         abort_if(Gate::denies('wlist_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new WlistResource(Wlist::with(['client', 'boat', 'priority', 'for_roles', 'for_users', 'wlogs'])->get());
+        return new WlistResource(Wlist::with(['client', 'boat', 'priority', 'for_roles', 'for_users'])->get());
     }
 
     public function store(StoreWlistRequest $request)
@@ -28,7 +28,6 @@ class WlistApiController extends Controller
         $wlist = Wlist::create($request->all());
         $wlist->for_roles()->sync($request->input('for_roles', []));
         $wlist->for_users()->sync($request->input('for_users', []));
-        $wlist->wlogs()->sync($request->input('wlogs', []));
         foreach ($request->input('photos', []) as $file) {
             $wlist->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('photos');
         }
@@ -42,7 +41,7 @@ class WlistApiController extends Controller
     {
         abort_if(Gate::denies('wlist_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new WlistResource($wlist->load(['client', 'boat', 'priority', 'for_roles', 'for_users', 'wlogs']));
+        return new WlistResource($wlist->load(['client', 'boat', 'priority', 'for_roles', 'for_users']));
     }
 
     public function update(UpdateWlistRequest $request, Wlist $wlist)
@@ -50,7 +49,6 @@ class WlistApiController extends Controller
         $wlist->update($request->all());
         $wlist->for_roles()->sync($request->input('for_roles', []));
         $wlist->for_users()->sync($request->input('for_users', []));
-        $wlist->wlogs()->sync($request->input('wlogs', []));
         if (count($wlist->photos) > 0) {
             foreach ($wlist->photos as $media) {
                 if (! in_array($media->file_name, $request->input('photos', []))) {

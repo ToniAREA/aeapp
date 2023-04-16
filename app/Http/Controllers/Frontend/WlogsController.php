@@ -8,11 +8,12 @@ use App\Http\Requests\MassDestroyWlogRequest;
 use App\Http\Requests\StoreWlogRequest;
 use App\Http\Requests\UpdateWlogRequest;
 use App\Models\Marina;
+use App\Models\Proforma;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Wlist;
 use App\Models\Wlog;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -24,7 +25,7 @@ class WlogsController extends Controller
     {
         abort_if(Gate::denies('wlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlogs = Wlog::with(['wlist', 'employee', 'marina', 'tags'])->get();
+        $wlogs = Wlog::with(['wlist', 'employee', 'marina', 'tags', 'proforma_number'])->get();
 
         return view('frontend.wlogs.index', compact('wlogs'));
     }
@@ -41,7 +42,9 @@ class WlogsController extends Controller
 
         $tags = Tag::pluck('name', 'id');
 
-        return view('frontend.wlogs.create', compact('employees', 'marinas', 'tags', 'wlists'));
+        $proforma_numbers = Proforma::pluck('proforma_number', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('frontend.wlogs.create', compact('employees', 'marinas', 'proforma_numbers', 'tags', 'wlists'));
     }
 
     public function store(StoreWlogRequest $request)
@@ -64,9 +67,11 @@ class WlogsController extends Controller
 
         $tags = Tag::pluck('name', 'id');
 
-        $wlog->load('wlist', 'employee', 'marina', 'tags');
+        $proforma_numbers = Proforma::pluck('proforma_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('frontend.wlogs.edit', compact('employees', 'marinas', 'tags', 'wlists', 'wlog'));
+        $wlog->load('wlist', 'employee', 'marina', 'tags', 'proforma_number');
+
+        return view('frontend.wlogs.edit', compact('employees', 'marinas', 'proforma_numbers', 'tags', 'wlists', 'wlog'));
     }
 
     public function update(UpdateWlogRequest $request, Wlog $wlog)
@@ -81,7 +86,7 @@ class WlogsController extends Controller
     {
         abort_if(Gate::denies('wlog_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlog->load('wlist', 'employee', 'marina', 'tags', 'wlogsWlists');
+        $wlog->load('wlist', 'employee', 'marina', 'tags', 'proforma_number');
 
         return view('frontend.wlogs.show', compact('wlog'));
     }
