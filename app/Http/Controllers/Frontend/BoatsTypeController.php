@@ -7,7 +7,7 @@ use App\Http\Requests\MassDestroyBoatsTypeRequest;
 use App\Http\Requests\StoreBoatsTypeRequest;
 use App\Http\Requests\UpdateBoatsTypeRequest;
 use App\Models\BoatsType;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

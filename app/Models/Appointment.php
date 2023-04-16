@@ -7,11 +7,10 @@ use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Appointment extends Model
 {
-    use SoftDeletes, Auditable, HasFactory;
+    use Auditable, HasFactory;
 
     public $table = 'appointments';
 
@@ -43,6 +42,16 @@ class Appointment extends Model
         return $this->belongsTo(Client::class, 'client_id');
     }
 
+    public function for_roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function for_users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     public function getWhenStartsAttribute($value)
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
@@ -61,15 +70,5 @@ class Appointment extends Model
     public function setWhenEndsAttribute($value)
     {
         $this->attributes['when_ends'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
-    }
-
-    public function for_roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
-
-    public function for_users()
-    {
-        return $this->belongsToMany(User::class);
     }
 }

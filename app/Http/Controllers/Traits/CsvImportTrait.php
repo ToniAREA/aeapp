@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Traits;
 
-use \SpreadsheetReader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use SpreadsheetReader;
 
 trait CsvImportTrait
 {
@@ -21,7 +21,7 @@ trait CsvImportTrait
             $fields = array_flip(array_filter($fields));
 
             $modelName = $request->input('modelName', false);
-            $model     = 'App\\Models\\' . $modelName;
+            $model     = "App\Models\\" . $modelName;
 
             $reader = new SpreadsheetReader($path);
             $insert = [];
@@ -79,14 +79,14 @@ trait CsvImportTrait
         $i = 0;
         while ($reader->next() !== false && $i < 5) {
             $lines[] = $reader->current();
-            ++$i;
+            $i++;
         }
 
         $filename = Str::random(10) . '.csv';
         $file->storeAs('csv_import', $filename);
 
         $modelName     = $request->input('model', false);
-        $fullModelName = 'App\\Models\\' . $modelName;
+        $fullModelName = "App\Models\\" . $modelName;
 
         $model     = new $fullModelName();
         $fillables = $model->getFillable();

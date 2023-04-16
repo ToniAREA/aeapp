@@ -13,9 +13,7 @@
                 <label for="type">{{ trans('cruds.boatsType.fields.type') }}</label>
                 <input class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}" type="text" name="type" id="type" value="{{ old('type', '') }}">
                 @if($errors->has('type'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('type') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('type') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.boatsType.fields.type_helper') }}</span>
             </div>

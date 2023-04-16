@@ -1,39 +1,24 @@
 @extends('layouts.admin')
 @section('content')
-<div class="c-card">
-        <div class="c-card-header">
-            <b>{{ strtoupper(trans('cruds.wlog.title')) }}</b>
-        </div>
-
-        <div class="c-card-body">
-            @livewire('search-wlogs')
+@can('wlog_create')
+    <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-success" href="{{ route('admin.wlogs.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.wlog.title_singular') }}
+            </a>
+            <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+                {{ trans('global.app_csvImport') }}
+            </button>
+            @include('csvImport.modal', ['model' => 'Wlog', 'route' => 'admin.wlogs.parseCsvImport'])
         </div>
     </div>
-<div class="c-card">
-    <div class="c-card-header">
-        <b>{{ strtoupper(trans('cruds.wlog.title_singular')) }} {{ strtoupper(trans('global.list')) }}</b>
+@endcan
+<div class="card">
+    <div class="card-header">
+        {{ trans('cruds.wlog.title_singular') }} {{ trans('global.list') }}
     </div>
 
-    <div class="c-card-body">
-         <div class="d-flex justify-content-between">
-
-                @can('wlog_create')
-                    <a class="btn btn-outline-success btn-custom flex-fill"
-                        href="{{ route('admin.wlogs.create') }}">{{ trans('global.add') }}
-                        {{ trans('cruds.wlog.title_singular') }}</a>
-
-                    <button class="btn btn-outline-warning btn-custom flex-fill" data-toggle="modal"
-                        data-target="#csvImportModal">{{ trans('global.app_csvImport') }}</button>
-
-                    @include('csvImport.modal', [
-                        'model' => 'Wlog',
-                        'route' => 'admin.wlogs.parseCsvImport',
-                    ])
-
-                @endcan
-
-            </div>
-            <br>
+    <div class="card-body">
         <div class="table-responsive">
             <table class=" table table-bordered table-striped table-hover datatable datatable-Wlog">
                 <thead>
@@ -67,6 +52,12 @@
                         </th>
                         <th>
                             {{ trans('cruds.wlog.fields.tags') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.wlog.fields.proforma_number') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.proforma.fields.description') }}
                         </th>
                         <th>
                             &nbsp;
@@ -107,6 +98,12 @@
                                 @foreach($wlog->tags as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>
                                 @endforeach
+                            </td>
+                            <td>
+                                {{ $wlog->proforma_number->proforma_number ?? '' }}
+                            </td>
+                            <td>
+                                {{ $wlog->proforma_number->description ?? '' }}
                             </td>
                             <td>
                                 @can('wlog_show')

@@ -9,7 +9,7 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Boat;
 use App\Models\Client;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -66,7 +66,7 @@ class ClientsController extends Controller
     {
         abort_if(Gate::denies('client_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $client->load('boats', 'clientWlists', 'clientAppointments', 'clientBoats');
+        $client->load('boats', 'clientWlists', 'clientAppointments', 'clientMlogs', 'clientProformas', 'clientBoats');
 
         return view('frontend.clients.show', compact('client'));
     }

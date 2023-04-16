@@ -8,7 +8,7 @@ use App\Http\Requests\MassDestroyProductTagRequest;
 use App\Http\Requests\StoreProductTagRequest;
 use App\Http\Requests\UpdateProductTagRequest;
 use App\Models\ProductTag;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

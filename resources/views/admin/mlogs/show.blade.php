@@ -25,6 +25,38 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.mlog.fields.id_mlog') }}
+                        </th>
+                        <td>
+                            {{ $mlog->id_mlog }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.mlog.fields.client') }}
+                        </th>
+                        <td>
+                            {{ $mlog->client->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.mlog.fields.boat') }}
+                        </th>
+                        <td>
+                            {{ $mlog->boat->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.mlog.fields.wlist') }}
+                        </th>
+                        <td>
+                            {{ $mlog->wlist->desciption ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.mlog.fields.product') }}
                         </th>
                         <td>
@@ -87,6 +119,14 @@
                             @foreach($mlog->tags as $key => $tags)
                                 <span class="label label-info">{{ $tags->name }}</span>
                             @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.mlog.fields.proforma_number') }}
+                        </th>
+                        <td>
+                            {{ $mlog->proforma_number->proforma_number ?? '' }}
                         </td>
                     </tr>
                 </tbody>

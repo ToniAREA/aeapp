@@ -25,6 +25,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.marina.fields.id_marina') }}
+                        </th>
+                        <td>
+                            {{ $marina->id_marina }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.marina.fields.name') }}
                         </th>
                         <td>
@@ -37,16 +45,6 @@
                         </th>
                         <td>
                             {{ $marina->coordinates }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.marina.fields.boats') }}
-                        </th>
-                        <td>
-                            @foreach($marina->boats as $key => $boats)
-                                <span class="label label-info">{{ $boats->name }}</span>
-                            @endforeach
                         </td>
                     </tr>
                 </tbody>

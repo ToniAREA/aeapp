@@ -13,9 +13,7 @@
                 <label class="required" for="name">{{ trans('cruds.provider.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
                 @if($errors->has('name'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('name') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('name') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.provider.fields.name_helper') }}</span>
             </div>
@@ -31,9 +29,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('brands'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('brands') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('brands') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.provider.fields.brand_helper') }}</span>
             </div>
@@ -42,9 +38,7 @@
                 <div class="needsclick dropzone {{ $errors->has('price_list') ? 'is-invalid' : '' }}" id="price_list-dropzone">
                 </div>
                 @if($errors->has('price_list'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('price_list') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('price_list') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.provider.fields.price_list_helper') }}</span>
             </div>
@@ -56,9 +50,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('company'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('company') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('company') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.provider.fields.company_helper') }}</span>
             </div>
@@ -67,9 +59,7 @@
                 <div class="needsclick dropzone {{ $errors->has('provider_logo') ? 'is-invalid' : '' }}" id="provider_logo-dropzone">
                 </div>
                 @if($errors->has('provider_logo'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('provider_logo') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('provider_logo') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.provider.fields.provider_logo_helper') }}</span>
             </div>
@@ -77,9 +67,7 @@
                 <label for="internal_notes">{{ trans('cruds.provider.fields.internal_notes') }}</label>
                 <input class="form-control {{ $errors->has('internal_notes') ? 'is-invalid' : '' }}" type="text" name="internal_notes" id="internal_notes" value="{{ old('internal_notes', '') }}">
                 @if($errors->has('internal_notes'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('internal_notes') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('internal_notes') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.provider.fields.internal_notes_helper') }}</span>
             </div>

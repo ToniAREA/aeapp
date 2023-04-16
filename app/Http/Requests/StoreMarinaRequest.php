@@ -17,6 +17,12 @@ class StoreMarinaRequest extends FormRequest
     public function rules()
     {
         return [
+            'id_marina' => [
+                'nullable',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+            ],
             'name' => [
                 'string',
                 'required',
@@ -25,12 +31,6 @@ class StoreMarinaRequest extends FormRequest
             'coordinates' => [
                 'string',
                 'nullable',
-            ],
-            'boats.*' => [
-                'integer',
-            ],
-            'boats' => [
-                'array',
             ],
         ];
     }

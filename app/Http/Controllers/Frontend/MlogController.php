@@ -7,10 +7,14 @@ use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyMlogRequest;
 use App\Http\Requests\StoreMlogRequest;
 use App\Http\Requests\UpdateMlogRequest;
+use App\Models\Boat;
+use App\Models\Client;
 use App\Models\Mlog;
 use App\Models\Product;
+use App\Models\Proforma;
 use App\Models\Tag;
-use Illuminate\Support\Facades\Gate;
+use App\Models\Wlist;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,7 +26,7 @@ class MlogController extends Controller
     {
         abort_if(Gate::denies('mlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $mlogs = Mlog::with(['product', 'tags'])->get();
+        $mlogs = Mlog::with(['client', 'boat', 'wlist', 'product', 'tags', 'proforma_number'])->get();
 
         return view('frontend.mlogs.index', compact('mlogs'));
     }
@@ -31,11 +35,19 @@ class MlogController extends Controller
     {
         abort_if(Gate::denies('mlog_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $clients = Client::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $boats = Boat::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $products = Product::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $tags = Tag::pluck('name', 'id');
 
-        return view('frontend.mlogs.create', compact('products', 'tags'));
+        $proforma_numbers = Proforma::pluck('proforma_number', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('frontend.mlogs.create', compact('boats', 'clients', 'products', 'proforma_numbers', 'tags', 'wlists'));
     }
 
     public function store(StoreMlogRequest $request)
@@ -50,13 +62,21 @@ class MlogController extends Controller
     {
         abort_if(Gate::denies('mlog_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $clients = Client::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $boats = Boat::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $products = Product::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $tags = Tag::pluck('name', 'id');
 
-        $mlog->load('product', 'tags');
+        $proforma_numbers = Proforma::pluck('proforma_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('frontend.mlogs.edit', compact('mlog', 'products', 'tags'));
+        $mlog->load('client', 'boat', 'wlist', 'product', 'tags', 'proforma_number');
+
+        return view('frontend.mlogs.edit', compact('boats', 'clients', 'mlog', 'products', 'proforma_numbers', 'tags', 'wlists'));
     }
 
     public function update(UpdateMlogRequest $request, Mlog $mlog)
@@ -71,7 +91,7 @@ class MlogController extends Controller
     {
         abort_if(Gate::denies('mlog_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $mlog->load('product', 'tags');
+        $mlog->load('client', 'boat', 'wlist', 'product', 'tags', 'proforma_number');
 
         return view('frontend.mlogs.show', compact('mlog'));
     }

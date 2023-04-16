@@ -4,16 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateToDosTable extends Migration
+class CreateAppointmentsTable extends Migration
 {
     public function up()
     {
-        Schema::create('to_dos', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('task')->nullable();
-            $table->date('deadline')->nullable();
+            $table->datetime('when_starts');
+            $table->datetime('when_ends');
+            $table->string('description');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 }

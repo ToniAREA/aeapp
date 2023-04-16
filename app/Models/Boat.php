@@ -33,8 +33,9 @@ class Boat extends Model
         'id_boat',
         'type',
         'name',
-        'marina_id',
+        'imo',
         'mmsi',
+        'marina_id',
         'notes',
         'internalnotes',
         'lastuse',
@@ -53,15 +54,15 @@ class Boat extends Model
         return $this->hasMany(Wlist::class, 'boat_id', 'id');
     }
 
+    public function boatMlogs()
+    {
+        return $this->hasMany(Mlog::class, 'boat_id', 'id');
+    }
+
     public function boatsClients()
     {
         return $this->belongsToMany(Client::class);
     }
-
-   /*  public function boatsMarinas()
-    {
-        return $this->belongsToMany(Marina::class);
-    } */
 
     public function marina()
     {

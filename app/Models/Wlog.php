@@ -33,6 +33,7 @@ class Wlog extends Model
         'marina_id',
         'description',
         'hours',
+        'proforma_number_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -41,11 +42,6 @@ class Wlog extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
-    }
-
-    public function wlogsWlists()
-    {
-        return $this->belongsToMany(Wlist::class);
     }
 
     public function getDateAttribute($value)
@@ -76,5 +72,10 @@ class Wlog extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function proforma_number()
+    {
+        return $this->belongsTo(Proforma::class, 'proforma_number_id');
     }
 }

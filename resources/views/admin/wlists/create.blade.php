@@ -17,9 +17,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('client'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('client') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('client') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlist.fields.client_helper') }}</span>
             </div>
@@ -31,9 +29,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('boat'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('boat') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('boat') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlist.fields.boat_helper') }}</span>
             </div>
@@ -41,9 +37,7 @@
                 <label class="required" for="desciption">{{ trans('cruds.wlist.fields.desciption') }}</label>
                 <input class="form-control {{ $errors->has('desciption') ? 'is-invalid' : '' }}" type="text" name="desciption" id="desciption" value="{{ old('desciption', '') }}" required>
                 @if($errors->has('desciption'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('desciption') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('desciption') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlist.fields.desciption_helper') }}</span>
             </div>
@@ -52,9 +46,7 @@
                 <div class="needsclick dropzone {{ $errors->has('photos') ? 'is-invalid' : '' }}" id="photos-dropzone">
                 </div>
                 @if($errors->has('photos'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('photos') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('photos') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlist.fields.photos_helper') }}</span>
             </div>
@@ -62,9 +54,7 @@
                 <label for="deadline">{{ trans('cruds.wlist.fields.deadline') }}</label>
                 <input class="form-control date {{ $errors->has('deadline') ? 'is-invalid' : '' }}" type="text" name="deadline" id="deadline" value="{{ old('deadline') }}">
                 @if($errors->has('deadline'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('deadline') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('deadline') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlist.fields.deadline_helper') }}</span>
             </div>
@@ -76,9 +66,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('priority'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('priority') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('priority') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlist.fields.priority_helper') }}</span>
             </div>
@@ -94,9 +82,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('for_roles'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('for_roles') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('for_roles') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlist.fields.for_role_helper') }}</span>
             </div>
@@ -112,29 +98,9 @@
                     @endforeach
                 </select>
                 @if($errors->has('for_users'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('for_users') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('for_users') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlist.fields.for_user_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="wlogs">{{ trans('cruds.wlist.fields.wlogs') }}</label>
-                <div style="padding-bottom: 4px">
-                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                </div>
-                <select class="form-control select2 {{ $errors->has('wlogs') ? 'is-invalid' : '' }}" name="wlogs[]" id="wlogs" multiple>
-                    @foreach($wlogs as $id => $wlog)
-                        <option value="{{ $id }}" {{ in_array($id, old('wlogs', [])) ? 'selected' : '' }}>{{ $wlog }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('wlogs'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('wlogs') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.wlist.fields.wlogs_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

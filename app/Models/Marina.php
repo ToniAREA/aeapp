@@ -25,6 +25,7 @@ class Marina extends Model
     ];
 
     protected $fillable = [
+        'id_marina',
         'name',
         'coordinates',
         'created_at',
@@ -45,11 +46,5 @@ class Marina extends Model
     public function marinaWlogs()
     {
         return $this->hasMany(Wlog::class, 'marina_id', 'id');
-    }
-
-    public function boats()
-    {
-        /* return $this->belongsToMany(Boat::class); */
-        return $this->hasMany(Boat::class);
     }
 }

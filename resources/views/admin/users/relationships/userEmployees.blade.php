@@ -1,138 +1,138 @@
-@can('employee_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.employees.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.employee.title_singular') }}
-            </a>
+<div class="m-3">
+    @can('employee_create')
+        <div style="margin-bottom: 10px;" class="row">
+            <div class="col-lg-12">
+                <a class="btn btn-success" href="{{ route('admin.employees.create') }}">
+                    {{ trans('global.add') }} {{ trans('cruds.employee.title_singular') }}
+                </a>
+            </div>
         </div>
-    </div>
-@endcan
+    @endcan
+    <div class="card">
+        <div class="card-header">
+            {{ trans('cruds.employee.title_singular') }} {{ trans('global.list') }}
+        </div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('cruds.employee.title_singular') }} {{ trans('global.list') }}
-    </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class=" table table-bordered table-striped table-hover datatable datatable-userEmployees">
+                    <thead>
+                        <tr>
+                            <th width="10">
 
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-userEmployees">
-                <thead>
-                    <tr>
-                        <th width="10">
-
-                        </th>
-                        <th>
-                            {{ trans('cruds.employee.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.employee.fields.id_employee') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.employee.fields.user') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.email') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.employee.fields.contact') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.employee.fields.photo') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.employee.fields.status') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.employee.fields.contract_starts') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.employee.fields.contract_ends') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.employee.fields.notes') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.employee.fields.internalnotes') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($employees as $key => $employee)
-                        <tr data-entry-id="{{ $employee->id }}">
-                            <td>
-
-                            </td>
-                            <td>
-                                {{ $employee->id ?? '' }}
-                            </td>
-                            <td>
-                                {{ $employee->id_employee ?? '' }}
-                            </td>
-                            <td>
-                                {{ $employee->user->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $employee->user->email ?? '' }}
-                            </td>
-                            <td>
-                                {{ $employee->contact->contact_first_name ?? '' }}
-                            </td>
-                            <td>
-                                @if($employee->photo)
-                                    <a href="{{ $employee->photo->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $employee->photo->getUrl('thumb') }}">
-                                    </a>
-                                @endif
-                            </td>
-                            <td>
-                                {{ $employee->status ?? '' }}
-                            </td>
-                            <td>
-                                {{ $employee->contract_starts ?? '' }}
-                            </td>
-                            <td>
-                                {{ $employee->contract_ends ?? '' }}
-                            </td>
-                            <td>
-                                {{ $employee->notes ?? '' }}
-                            </td>
-                            <td>
-                                {{ $employee->internalnotes ?? '' }}
-                            </td>
-                            <td>
-                                @can('employee_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.employees.show', $employee->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
-
-                                @can('employee_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.employees.edit', $employee->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
-
-                                @can('employee_delete')
-                                    <form action="{{ route('admin.employees.destroy', $employee->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
-
-                            </td>
-
+                            </th>
+                            <th>
+                                {{ trans('cruds.employee.fields.id') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.employee.fields.id_employee') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.employee.fields.user') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.email') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.employee.fields.contact') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.employee.fields.photo') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.employee.fields.status') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.employee.fields.contract_starts') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.employee.fields.contract_ends') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.employee.fields.notes') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.employee.fields.internalnotes') }}
+                            </th>
+                            <th>
+                                &nbsp;
+                            </th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($employees as $key => $employee)
+                            <tr data-entry-id="{{ $employee->id }}">
+                                <td>
+
+                                </td>
+                                <td>
+                                    {{ $employee->id ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $employee->id_employee ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $employee->user->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $employee->user->email ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $employee->contact->contact_first_name ?? '' }}
+                                </td>
+                                <td>
+                                    @if($employee->photo)
+                                        <a href="{{ $employee->photo->getUrl() }}" target="_blank" style="display: inline-block">
+                                            <img src="{{ $employee->photo->getUrl('thumb') }}">
+                                        </a>
+                                    @endif
+                                </td>
+                                <td>
+                                    {{ $employee->status ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $employee->contract_starts ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $employee->contract_ends ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $employee->notes ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $employee->internalnotes ?? '' }}
+                                </td>
+                                <td>
+                                    @can('employee_show')
+                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.employees.show', $employee->id) }}">
+                                            {{ trans('global.view') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('employee_edit')
+                                        <a class="btn btn-xs btn-info" href="{{ route('admin.employees.edit', $employee->id) }}">
+                                            {{ trans('global.edit') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('employee_delete')
+                                        <form action="{{ route('admin.employees.destroy', $employee->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        </form>
+                                    @endcan
+
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-
 @section('scripts')
 @parent
 <script>

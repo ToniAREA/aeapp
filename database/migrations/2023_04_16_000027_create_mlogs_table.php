@@ -10,6 +10,7 @@ class CreateMlogsTable extends Migration
     {
         Schema::create('mlogs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_mlog')->nullable();
             $table->string('description')->nullable();
             $table->float('quantity', 9, 2)->nullable();
             $table->float('price_unit', 9, 2)->nullable();

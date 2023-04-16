@@ -34,15 +34,19 @@ class StoreBoatRequest extends FormRequest
                 'max:50',
                 'required',
             ],
+            'imo' => [
+                'string',
+                'nullable',
+            ],
+            'mmsi' => [
+                'string',
+                'nullable',
+            ],
             'clients.*' => [
                 'integer',
             ],
             'clients' => [
                 'array',
-            ],
-            'mmsi' => [
-                'string',
-                'nullable',
             ],
             'notes' => [
                 'string',

@@ -13,9 +13,7 @@
                 <label for="company_name">{{ trans('cruds.contactCompany.fields.company_name') }}</label>
                 <input class="form-control {{ $errors->has('company_name') ? 'is-invalid' : '' }}" type="text" name="company_name" id="company_name" value="{{ old('company_name', '') }}">
                 @if($errors->has('company_name'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('company_name') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('company_name') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contactCompany.fields.company_name_helper') }}</span>
             </div>
@@ -23,9 +21,7 @@
                 <label for="company_vat">{{ trans('cruds.contactCompany.fields.company_vat') }}</label>
                 <input class="form-control {{ $errors->has('company_vat') ? 'is-invalid' : '' }}" type="text" name="company_vat" id="company_vat" value="{{ old('company_vat', '') }}">
                 @if($errors->has('company_vat'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('company_vat') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('company_vat') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contactCompany.fields.company_vat_helper') }}</span>
             </div>
@@ -33,9 +29,7 @@
                 <label for="company_address">{{ trans('cruds.contactCompany.fields.company_address') }}</label>
                 <input class="form-control {{ $errors->has('company_address') ? 'is-invalid' : '' }}" type="text" name="company_address" id="company_address" value="{{ old('company_address', '') }}">
                 @if($errors->has('company_address'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('company_address') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('company_address') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contactCompany.fields.company_address_helper') }}</span>
             </div>
@@ -43,9 +37,7 @@
                 <label for="company_email">{{ trans('cruds.contactCompany.fields.company_email') }}</label>
                 <input class="form-control {{ $errors->has('company_email') ? 'is-invalid' : '' }}" type="text" name="company_email" id="company_email" value="{{ old('company_email', '') }}">
                 @if($errors->has('company_email'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('company_email') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('company_email') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contactCompany.fields.company_email_helper') }}</span>
             </div>
@@ -53,9 +45,7 @@
                 <label for="company_phone">{{ trans('cruds.contactCompany.fields.company_phone') }}</label>
                 <input class="form-control {{ $errors->has('company_phone') ? 'is-invalid' : '' }}" type="text" name="company_phone" id="company_phone" value="{{ old('company_phone', '') }}">
                 @if($errors->has('company_phone'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('company_phone') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('company_phone') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contactCompany.fields.company_phone_helper') }}</span>
             </div>
@@ -63,9 +53,7 @@
                 <label for="company_website">{{ trans('cruds.contactCompany.fields.company_website') }}</label>
                 <input class="form-control {{ $errors->has('company_website') ? 'is-invalid' : '' }}" type="text" name="company_website" id="company_website" value="{{ old('company_website', '') }}">
                 @if($errors->has('company_website'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('company_website') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('company_website') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.contactCompany.fields.company_website_helper') }}</span>
             </div>

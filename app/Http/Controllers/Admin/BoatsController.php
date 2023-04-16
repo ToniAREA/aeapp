@@ -10,7 +10,7 @@ use App\Http\Requests\UpdateBoatRequest;
 use App\Models\Boat;
 use App\Models\Client;
 use App\Models\Marina;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -35,16 +35,7 @@ class BoatsController extends Controller
 
         $clients = Client::pluck('name', 'id');
 
-        $lastRecord = Boat::latest('id')->first();
-        if ($lastRecord) {
-            // There is a latest record, proceed with your logic
-            $lastRecordId = $lastRecord->id_client;
-        } else {
-            // The database is empty, handle this case accordingly
-            $lastRecordId = 0;
-        }
-
-        return view('admin.boats.create', compact('clients', 'marinas', 'lastRecordId'));
+        return view('admin.boats.create', compact('clients', 'marinas'));
     }
 
     public function store(StoreBoatRequest $request)
@@ -73,11 +64,6 @@ class BoatsController extends Controller
         $boat->update($request->all());
         $boat->clients()->sync($request->input('clients', []));
 
-        // Asignar la marina al barco
-        /* $marina_id = $request->input('marina_id');
-        $boat->marina()->associate($marina_id);
-        $boat->save(); */
-
         return redirect()->route('admin.boats.index');
     }
 
@@ -85,7 +71,7 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boat->load('marina', 'clients', 'boatWlists', 'boatsClients', 'boatsMarinas');
+        $boat->load('marina', 'clients', 'boatWlists', 'boatMlogs', 'boatsClients');
 
         return view('admin.boats.show', compact('boat'));
     }

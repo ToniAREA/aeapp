@@ -544,6 +544,46 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 134,
+                'title' => 'proforma_create',
+            ],
+            [
+                'id'    => 135,
+                'title' => 'proforma_edit',
+            ],
+            [
+                'id'    => 136,
+                'title' => 'proforma_show',
+            ],
+            [
+                'id'    => 137,
+                'title' => 'proforma_delete',
+            ],
+            [
+                'id'    => 138,
+                'title' => 'proforma_access',
+            ],
+            [
+                'id'    => 139,
+                'title' => 'claim_create',
+            ],
+            [
+                'id'    => 140,
+                'title' => 'claim_edit',
+            ],
+            [
+                'id'    => 141,
+                'title' => 'claim_show',
+            ],
+            [
+                'id'    => 142,
+                'title' => 'claim_delete',
+            ],
+            [
+                'id'    => 143,
+                'title' => 'claim_access',
+            ],
+            [
+                'id'    => 144,
                 'title' => 'profile_password_edit',
             ],
         ];

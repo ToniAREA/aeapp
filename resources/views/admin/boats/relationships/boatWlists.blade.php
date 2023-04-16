@@ -1,138 +1,130 @@
-@can('wlist_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.wlists.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.wlist.title_singular') }}
-            </a>
+<div class="m-3">
+    @can('wlist_create')
+        <div style="margin-bottom: 10px;" class="row">
+            <div class="col-lg-12">
+                <a class="btn btn-success" href="{{ route('admin.wlists.create') }}">
+                    {{ trans('global.add') }} {{ trans('cruds.wlist.title_singular') }}
+                </a>
+            </div>
         </div>
-    </div>
-@endcan
+    @endcan
+    <div class="card">
+        <div class="card-header">
+            {{ trans('cruds.wlist.title_singular') }} {{ trans('global.list') }}
+        </div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('cruds.wlist.title_singular') }} {{ trans('global.list') }}
-    </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class=" table table-bordered table-striped table-hover datatable datatable-boatWlists">
+                    <thead>
+                        <tr>
+                            <th width="10">
 
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-boatWlists">
-                <thead>
-                    <tr>
-                        <th width="10">
-
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.client') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.boat') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.desciption') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.photos') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.deadline') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.priority') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.for_role') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.for_user') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.wlogs') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($wlists as $key => $wlist)
-                        <tr data-entry-id="{{ $wlist->id }}">
-                            <td>
-
-                            </td>
-                            <td>
-                                {{ $wlist->id ?? '' }}
-                            </td>
-                            <td>
-                                {{ $wlist->client->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $wlist->boat->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $wlist->desciption ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($wlist->photos as $key => $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $media->getUrl('thumb') }}">
-                                    </a>
-                                @endforeach
-                            </td>
-                            <td>
-                                {{ $wlist->deadline ?? '' }}
-                            </td>
-                            <td>
-                                {{ $wlist->priority->level ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($wlist->for_roles as $key => $item)
-                                    <span class="badge badge-info">{{ $item->title }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                @foreach($wlist->for_users as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                @foreach($wlist->wlogs as $key => $item)
-                                    <span class="badge badge-info">{{ $item->date }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                @can('wlist_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.wlists.show', $wlist->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
-
-                                @can('wlist_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.wlists.edit', $wlist->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
-
-                                @can('wlist_delete')
-                                    <form action="{{ route('admin.wlists.destroy', $wlist->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
-
-                            </td>
-
+                            </th>
+                            <th>
+                                {{ trans('cruds.wlist.fields.id') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.wlist.fields.client') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.wlist.fields.boat') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.wlist.fields.desciption') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.wlist.fields.photos') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.wlist.fields.deadline') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.wlist.fields.priority') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.wlist.fields.for_role') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.wlist.fields.for_user') }}
+                            </th>
+                            <th>
+                                &nbsp;
+                            </th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($wlists as $key => $wlist)
+                            <tr data-entry-id="{{ $wlist->id }}">
+                                <td>
+
+                                </td>
+                                <td>
+                                    {{ $wlist->id ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $wlist->client->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $wlist->boat->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $wlist->desciption ?? '' }}
+                                </td>
+                                <td>
+                                    @foreach($wlist->photos as $key => $media)
+                                        <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
+                                            <img src="{{ $media->getUrl('thumb') }}">
+                                        </a>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    {{ $wlist->deadline ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $wlist->priority->level ?? '' }}
+                                </td>
+                                <td>
+                                    @foreach($wlist->for_roles as $key => $item)
+                                        <span class="badge badge-info">{{ $item->title }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach($wlist->for_users as $key => $item)
+                                        <span class="badge badge-info">{{ $item->name }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @can('wlist_show')
+                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.wlists.show', $wlist->id) }}">
+                                            {{ trans('global.view') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('wlist_edit')
+                                        <a class="btn btn-xs btn-info" href="{{ route('admin.wlists.edit', $wlist->id) }}">
+                                            {{ trans('global.edit') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('wlist_delete')
+                                        <form action="{{ route('admin.wlists.destroy', $wlist->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        </form>
+                                    @endcan
+
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-
 @section('scripts')
 @parent
 <script>

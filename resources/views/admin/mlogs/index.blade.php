@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 @can('mlog_create')
-    <div style="padding:3px;" class="row">
+    <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('admin.mlogs.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.mlog.title_singular') }}
@@ -28,6 +28,24 @@
                         </th>
                         <th>
                             {{ trans('cruds.mlog.fields.id') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.mlog.fields.id_mlog') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.mlog.fields.client') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.client.fields.lastname') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.mlog.fields.boat') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.boat.fields.type') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.mlog.fields.wlist') }}
                         </th>
                         <th>
                             {{ trans('cruds.mlog.fields.product') }}
@@ -57,6 +75,12 @@
                             {{ trans('cruds.mlog.fields.tags') }}
                         </th>
                         <th>
+                            {{ trans('cruds.mlog.fields.proforma_number') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.proforma.fields.description') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -69,6 +93,24 @@
                             </td>
                             <td>
                                 {{ $mlog->id ?? '' }}
+                            </td>
+                            <td>
+                                {{ $mlog->id_mlog ?? '' }}
+                            </td>
+                            <td>
+                                {{ $mlog->client->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $mlog->client->lastname ?? '' }}
+                            </td>
+                            <td>
+                                {{ $mlog->boat->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $mlog->boat->type ?? '' }}
+                            </td>
+                            <td>
+                                {{ $mlog->wlist->desciption ?? '' }}
                             </td>
                             <td>
                                 {{ $mlog->product->name ?? '' }}
@@ -98,6 +140,12 @@
                                 @foreach($mlog->tags as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>
                                 @endforeach
+                            </td>
+                            <td>
+                                {{ $mlog->proforma_number->proforma_number ?? '' }}
+                            </td>
+                            <td>
+                                {{ $mlog->proforma_number->description ?? '' }}
                             </td>
                             <td>
                                 @can('mlog_show')

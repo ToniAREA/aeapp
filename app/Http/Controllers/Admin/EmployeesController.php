@@ -11,7 +11,7 @@ use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\ContactContact;
 use App\Models\Employee;
 use App\Models\User;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,16 +37,7 @@ class EmployeesController extends Controller
 
         $contacts = ContactContact::pluck('contact_first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $lastRecord = Employee::latest('id')->first();
-        if ($lastRecord) {
-            // There is a latest record, proceed with your logic
-            $lastRecordId = $lastRecord->id_client;
-        } else {
-            // The database is empty, handle this case accordingly
-            $lastRecordId = 0;
-        }
-
-        return view('admin.employees.create', compact('contacts', 'users', 'lastRecordId'));
+        return view('admin.employees.create', compact('contacts', 'users'));
     }
 
     public function store(StoreEmployeeRequest $request)

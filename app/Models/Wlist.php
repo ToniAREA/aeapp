@@ -56,6 +56,16 @@ class Wlist extends Model implements HasMedia
         return $this->hasMany(Wlog::class, 'wlist_id', 'id');
     }
 
+    public function wlistMlogs()
+    {
+        return $this->hasMany(Mlog::class, 'wlist_id', 'id');
+    }
+
+    public function wlistsProformas()
+    {
+        return $this->belongsToMany(Proforma::class);
+    }
+
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id');
@@ -101,10 +111,5 @@ class Wlist extends Model implements HasMedia
     public function for_users()
     {
         return $this->belongsToMany(User::class);
-    }
-
-    public function wlogs()
-    {
-        return $this->belongsToMany(Wlog::class);
     }
 }

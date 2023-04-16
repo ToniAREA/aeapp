@@ -39,13 +39,16 @@
                                         {{ trans('cruds.boat.fields.name') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.boat.fields.imo') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.mmsi') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.boat.fields.marina') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.boat.fields.client') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.boat.fields.mmsi') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.boat.fields.notes') }}
@@ -77,15 +80,18 @@
                                             {{ $boat->name ?? '' }}
                                         </td>
                                         <td>
+                                            {{ $boat->imo ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $boat->mmsi ?? '' }}
+                                        </td>
+                                        <td>
                                             {{ $boat->marina->name ?? '' }}
                                         </td>
                                         <td>
                                             @foreach($boat->clients as $key => $item)
                                                 <span>{{ $item->name }}</span>
                                             @endforeach
-                                        </td>
-                                        <td>
-                                            {{ $boat->mmsi ?? '' }}
                                         </td>
                                         <td>
                                             {{ $boat->notes ?? '' }}

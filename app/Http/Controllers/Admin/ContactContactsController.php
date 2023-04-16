@@ -8,7 +8,7 @@ use App\Http\Requests\MassDestroyContactContactRequest;
 use App\Http\Requests\StoreContactContactRequest;
 use App\Http\Requests\UpdateContactContactRequest;
 use App\Models\ContactContact;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

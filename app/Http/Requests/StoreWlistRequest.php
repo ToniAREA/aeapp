@@ -50,12 +50,6 @@ class StoreWlistRequest extends FormRequest
             'for_users' => [
                 'array',
             ],
-            'wlogs.*' => [
-                'integer',
-            ],
-            'wlogs' => [
-                'array',
-            ],
         ];
     }
 }

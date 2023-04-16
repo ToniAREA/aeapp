@@ -14,9 +14,7 @@
                 <label for="level">{{ trans('cruds.priority.fields.level') }}</label>
                 <input class="form-control {{ $errors->has('level') ? 'is-invalid' : '' }}" type="text" name="level" id="level" value="{{ old('level', $priority->level) }}">
                 @if($errors->has('level'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('level') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('level') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.priority.fields.level_helper') }}</span>
             </div>

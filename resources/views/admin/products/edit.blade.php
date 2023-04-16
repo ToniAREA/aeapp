@@ -14,9 +14,7 @@
                 <label class="required" for="name">{{ trans('cruds.product.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $product->name) }}" required>
                 @if($errors->has('name'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('name') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('name') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.product.fields.name_helper') }}</span>
             </div>
@@ -24,9 +22,7 @@
                 <label for="description">{{ trans('cruds.product.fields.description') }}</label>
                 <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{{ old('description', $product->description) }}</textarea>
                 @if($errors->has('description'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('description') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('description') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.product.fields.description_helper') }}</span>
             </div>
@@ -38,9 +34,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('brand'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('brand') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('brand') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.product.fields.brand_helper') }}</span>
             </div>
@@ -48,9 +42,7 @@
                 <label class="required" for="price">{{ trans('cruds.product.fields.price') }}</label>
                 <input class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" type="number" name="price" id="price" value="{{ old('price', $product->price) }}" step="0.01" required>
                 @if($errors->has('price'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('price') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('price') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.product.fields.price_helper') }}</span>
             </div>
@@ -66,9 +58,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('categories'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('categories') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('categories') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.product.fields.category_helper') }}</span>
             </div>
@@ -84,9 +74,7 @@
                     @endforeach
                 </select>
                 @if($errors->has('tags'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('tags') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('tags') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.product.fields.tag_helper') }}</span>
             </div>
@@ -95,9 +83,7 @@
                 <div class="needsclick dropzone {{ $errors->has('photo') ? 'is-invalid' : '' }}" id="photo-dropzone">
                 </div>
                 @if($errors->has('photo'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('photo') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('photo') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.product.fields.photo_helper') }}</span>
             </div>
@@ -106,9 +92,7 @@
                 <div class="needsclick dropzone {{ $errors->has('file') ? 'is-invalid' : '' }}" id="file-dropzone">
                 </div>
                 @if($errors->has('file'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('file') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('file') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.product.fields.file_helper') }}</span>
             </div>
@@ -116,9 +100,7 @@
                 <label for="model">{{ trans('cruds.product.fields.model') }}</label>
                 <input class="form-control {{ $errors->has('model') ? 'is-invalid' : '' }}" type="text" name="model" id="model" value="{{ old('model', $product->model) }}">
                 @if($errors->has('model'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('model') }}
-                    </div>
+                    <span class="text-danger">{{ $errors->first('model') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.product.fields.model_helper') }}</span>
             </div>

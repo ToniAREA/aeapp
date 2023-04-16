@@ -118,4 +118,5 @@ return [
     'exceeds_maximum_number'         => 'The :attribute exceeds maximum model length',
     'db_column'                      => 'The :attribute may only contain ISO basic Latin alphabet letters, numbers, dash and cannot start with number.',
     'attributes'                     => [],
+
 ];

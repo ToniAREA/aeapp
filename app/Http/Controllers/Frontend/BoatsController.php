@@ -10,7 +10,7 @@ use App\Http\Requests\UpdateBoatRequest;
 use App\Models\Boat;
 use App\Models\Client;
 use App\Models\Marina;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -71,7 +71,7 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boat->load('marina', 'clients', 'boatWlists', 'boatsClients', 'boatsMarinas');
+        $boat->load('marina', 'clients', 'boatWlists', 'boatMlogs', 'boatsClients');
 
         return view('frontend.boats.show', compact('boat'));
     }

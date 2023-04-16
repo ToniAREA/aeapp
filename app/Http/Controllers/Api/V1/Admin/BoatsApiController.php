@@ -7,7 +7,7 @@ use App\Http\Requests\StoreBoatRequest;
 use App\Http\Requests\UpdateBoatRequest;
 use App\Http\Resources\Admin\BoatResource;
 use App\Models\Boat;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
