@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyBoatRequest;
 use App\Http\Requests\StoreBoatRequest;
 use App\Http\Requests\UpdateBoatRequest;
 use App\Models\Boat;
+use App\Models\BoatsType;
 use App\Models\Client;
 use App\Models\Marina;
 use Gate;
@@ -22,7 +23,7 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boats = Boat::with(['marina', 'clients'])->get();
+        $boats = Boat::with(['boat_type', 'marina', 'clients'])->get();
 
         return view('admin.boats.index', compact('boats'));
     }
@@ -31,11 +32,13 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $boat_types = BoatsType::pluck('type', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $clients = Client::pluck('name', 'id');
+        $clients = Client::pluck('id_client', 'id');
 
-        return view('admin.boats.create', compact('clients', 'marinas'));
+        return view('admin.boats.create', compact('boat_types', 'clients', 'marinas'));
     }
 
     public function store(StoreBoatRequest $request)
@@ -50,13 +53,15 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $boat_types = BoatsType::pluck('type', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $clients = Client::pluck('name', 'id');
+        $clients = Client::pluck('id_client', 'id');
 
-        $boat->load('marina', 'clients');
+        $boat->load('boat_type', 'marina', 'clients');
 
-        return view('admin.boats.edit', compact('boat', 'clients', 'marinas'));
+        return view('admin.boats.edit', compact('boat', 'boat_types', 'clients', 'marinas'));
     }
 
     public function update(UpdateBoatRequest $request, Boat $boat)
@@ -71,7 +76,7 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boat->load('marina', 'clients', 'boatWlists', 'boatMlogs', 'boatsClients');
+        $boat->load('boat_type', 'marina', 'clients', 'boatWlists', 'boatMlogs', 'boatAppointments', 'boatsClients', 'boatsProformas');
 
         return view('admin.boats.show', compact('boat'));
     }

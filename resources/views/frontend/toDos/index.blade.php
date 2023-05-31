@@ -44,6 +44,9 @@
                                         {{ trans('cruds.toDo.fields.for_user') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.toDo.fields.notes') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -79,6 +82,9 @@
                                             @foreach($toDo->for_users as $key => $item)
                                                 <span>{{ $item->name }}</span>
                                             @endforeach
+                                        </td>
+                                        <td>
+                                            {{ $toDo->notes ?? '' }}
                                         </td>
                                         <td>
                                             @can('to_do_show')

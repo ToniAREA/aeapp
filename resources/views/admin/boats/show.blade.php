@@ -33,10 +33,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.boat.fields.type') }}
+                            {{ trans('cruds.boat.fields.boat_type') }}
                         </th>
                         <td>
-                            {{ $boat->type }}
+                            {{ $boat->boat_type->type ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -77,7 +77,7 @@
                         </th>
                         <td>
                             @foreach($boat->clients as $key => $client)
-                                <span class="label label-info">{{ $client->name }}</span>
+                                <span class="label label-info">{{ $client->id_client }}</span>
                             @endforeach
                         </td>
                     </tr>
@@ -99,10 +99,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.boat.fields.lastuse') }}
+                            {{ trans('cruds.boat.fields.coordinates') }}
                         </th>
                         <td>
-                            {{ $boat->lastuse }}
+                            {{ $boat->coordinates }}
                         </td>
                     </tr>
                 </tbody>
@@ -132,8 +132,18 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#boat_appointments" role="tab" data-toggle="tab">
+                {{ trans('cruds.appointment.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#boats_clients" role="tab" data-toggle="tab">
                 {{ trans('cruds.client.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#boats_proformas" role="tab" data-toggle="tab">
+                {{ trans('cruds.proforma.title') }}
             </a>
         </li>
     </ul>
@@ -144,8 +154,14 @@
         <div class="tab-pane" role="tabpanel" id="boat_mlogs">
             @includeIf('admin.boats.relationships.boatMlogs', ['mlogs' => $boat->boatMlogs])
         </div>
+        <div class="tab-pane" role="tabpanel" id="boat_appointments">
+            @includeIf('admin.boats.relationships.boatAppointments', ['appointments' => $boat->boatAppointments])
+        </div>
         <div class="tab-pane" role="tabpanel" id="boats_clients">
             @includeIf('admin.boats.relationships.boatsClients', ['clients' => $boat->boatsClients])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="boats_proformas">
+            @includeIf('admin.boats.relationships.boatsProformas', ['proformas' => $boat->boatsProformas])
         </div>
     </div>
 </div>

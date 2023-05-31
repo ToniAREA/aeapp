@@ -45,6 +45,10 @@ class StoreToDoRequest extends FormRequest
             'for_users' => [
                 'array',
             ],
+            'notes' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

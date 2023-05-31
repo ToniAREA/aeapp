@@ -29,6 +29,15 @@
                                         {{ trans('cruds.appointment.fields.client') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.appointment.fields.boat') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.type') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.appointment.fields.wlists') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.appointment.fields.for_role') }}
                                     </th>
                                     <th>
@@ -44,6 +53,15 @@
                                         {{ trans('cruds.appointment.fields.description') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.appointment.fields.priority') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.appointment.fields.coordinates') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.appointment.fields.status') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -55,7 +73,18 @@
                                             {{ $appointment->id ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $appointment->client->name ?? '' }}
+                                            {{ $appointment->client->id_client ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $appointment->boat->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $appointment->boat->type ?? '' }}
+                                        </td>
+                                        <td>
+                                            @foreach($appointment->wlists as $key => $item)
+                                                <span>{{ $item->description }}</span>
+                                            @endforeach
                                         </td>
                                         <td>
                                             @foreach($appointment->for_roles as $key => $item)
@@ -75,6 +104,15 @@
                                         </td>
                                         <td>
                                             {{ $appointment->description ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $appointment->priority->level ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $appointment->coordinates ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $appointment->status ?? '' }}
                                         </td>
                                         <td>
                                             @can('appointment_show')

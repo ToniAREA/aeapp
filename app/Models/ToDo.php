@@ -32,6 +32,7 @@ class ToDo extends Model implements HasMedia
         'task',
         'deadline',
         'priority_id',
+        'notes',
         'created_at',
         'updated_at',
         'deleted_at',

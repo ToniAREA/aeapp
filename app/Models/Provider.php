@@ -19,12 +19,11 @@ class Provider extends Model implements HasMedia
 
     public static $searchable = [
         'name',
-        'price_list',
     ];
 
     protected $appends = [
-        'price_list',
         'provider_logo',
+        'price_lists',
     ];
 
     protected $dates = [
@@ -36,6 +35,7 @@ class Provider extends Model implements HasMedia
     protected $fillable = [
         'name',
         'company_id',
+        'notes',
         'internal_notes',
         'created_at',
         'updated_at',
@@ -53,19 +53,9 @@ class Provider extends Model implements HasMedia
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
     }
 
-    public function providerBrands()
+    public function providersBrands()
     {
         return $this->belongsToMany(Brand::class);
-    }
-
-    public function brands()
-    {
-        return $this->belongsToMany(Brand::class);
-    }
-
-    public function getPriceListAttribute()
-    {
-        return $this->getMedia('price_list');
     }
 
     public function company()
@@ -83,5 +73,15 @@ class Provider extends Model implements HasMedia
         }
 
         return $file;
+    }
+
+    public function brands()
+    {
+        return $this->belongsToMany(Brand::class);
+    }
+
+    public function getPriceListsAttribute()
+    {
+        return $this->getMedia('price_lists');
     }
 }

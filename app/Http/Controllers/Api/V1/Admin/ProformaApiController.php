@@ -17,13 +17,15 @@ class ProformaApiController extends Controller
     {
         abort_if(Gate::denies('proforma_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ProformaResource(Proforma::with(['client', 'wlists'])->get());
+        return new ProformaResource(Proforma::with(['client', 'boats', 'wlists', 'tags'])->get());
     }
 
     public function store(StoreProformaRequest $request)
     {
         $proforma = Proforma::create($request->all());
+        $proforma->boats()->sync($request->input('boats', []));
         $proforma->wlists()->sync($request->input('wlists', []));
+        $proforma->tags()->sync($request->input('tags', []));
 
         return (new ProformaResource($proforma))
             ->response()
@@ -34,13 +36,15 @@ class ProformaApiController extends Controller
     {
         abort_if(Gate::denies('proforma_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ProformaResource($proforma->load(['client', 'wlists']));
+        return new ProformaResource($proforma->load(['client', 'boats', 'wlists', 'tags']));
     }
 
     public function update(UpdateProformaRequest $request, Proforma $proforma)
     {
         $proforma->update($request->all());
+        $proforma->boats()->sync($request->input('boats', []));
         $proforma->wlists()->sync($request->input('wlists', []));
+        $proforma->tags()->sync($request->input('tags', []));
 
         return (new ProformaResource($proforma))
             ->response()

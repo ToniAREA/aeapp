@@ -17,20 +17,26 @@ class UpdateProformaRequest extends FormRequest
     public function rules()
     {
         return [
-            'date' => [
-                'date_format:' . config('panel.date_format'),
-                'nullable',
-            ],
             'proforma_number' => [
                 'string',
                 'required',
                 'unique:proformas,proforma_number,' . request()->route('proforma')->id,
+            ],
+            'boats.*' => [
+                'integer',
+            ],
+            'boats' => [
+                'array',
             ],
             'wlists.*' => [
                 'integer',
             ],
             'wlists' => [
                 'array',
+            ],
+            'date' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable',
             ],
             'description' => [
                 'string',
@@ -39,11 +45,26 @@ class UpdateProformaRequest extends FormRequest
             'total_amount' => [
                 'numeric',
             ],
+            'currency' => [
+                'string',
+                'max:3',
+                'nullable',
+            ],
             'claims' => [
                 'nullable',
                 'integer',
                 'min:-2147483648',
                 'max:2147483647',
+            ],
+            'tags.*' => [
+                'integer',
+            ],
+            'tags' => [
+                'array',
+            ],
+            'link' => [
+                'string',
+                'nullable',
             ],
         ];
     }

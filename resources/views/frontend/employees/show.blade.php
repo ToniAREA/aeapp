@@ -102,6 +102,14 @@
                                         {{ $employee->internalnotes }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.employee.fields.link') }}
+                                    </th>
+                                    <td>
+                                        {{ $employee->link }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

@@ -29,6 +29,9 @@
                             {{ trans('cruds.contentPage.fields.title') }}
                         </th>
                         <th>
+                            {{ trans('cruds.contentPage.fields.slug') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.contentPage.fields.category') }}
                         </th>
                         <th>
@@ -56,6 +59,9 @@
                             </td>
                             <td>
                                 {{ $contentPage->title ?? '' }}
+                            </td>
+                            <td>
+                                {{ $contentPage->slug ?? '' }}
                             </td>
                             <td>
                                 @foreach($contentPage->categories as $key => $item)

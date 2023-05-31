@@ -18,13 +18,13 @@ class Product extends Model implements HasMedia
     public $table = 'products';
 
     protected $appends = [
-        'photo',
+        'photos',
         'file',
     ];
 
     public static $searchable = [
-        'file',
         'model',
+        'file',
     ];
 
     protected $dates = [
@@ -34,11 +34,12 @@ class Product extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'name',
-        'description',
         'brand_id',
-        'price',
         'model',
+        'name',
+        'product_slug',
+        'description',
+        'price',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -60,31 +61,31 @@ class Product extends Model implements HasMedia
         return $this->hasMany(Mlog::class, 'product_id', 'id');
     }
 
-    public function brand()
-    {
-        return $this->belongsTo(Brand::class, 'brand_id');
-    }
-
     public function categories()
     {
         return $this->belongsToMany(ProductCategory::class);
     }
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
+
+    public function getPhotosAttribute()
+    {
+        $files = $this->getMedia('photos');
+        $files->each(function ($item) {
+            $item->url       = $item->getUrl();
+            $item->thumbnail = $item->getUrl('thumb');
+            $item->preview   = $item->getUrl('preview');
+        });
+
+        return $files;
+    }
+
     public function tags()
     {
         return $this->belongsToMany(ProductTag::class);
-    }
-
-    public function getPhotoAttribute()
-    {
-        $file = $this->getMedia('photo')->last();
-        if ($file) {
-            $file->url       = $file->getUrl();
-            $file->thumbnail = $file->getUrl('thumb');
-            $file->preview   = $file->getUrl('preview');
-        }
-
-        return $file;
     }
 
     public function getFileAttribute()

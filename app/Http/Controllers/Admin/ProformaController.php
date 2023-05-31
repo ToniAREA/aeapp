@@ -7,8 +7,10 @@ use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyProformaRequest;
 use App\Http\Requests\StoreProformaRequest;
 use App\Http\Requests\UpdateProformaRequest;
+use App\Models\Boat;
 use App\Models\Client;
 use App\Models\Proforma;
+use App\Models\Tag;
 use App\Models\Wlist;
 use Gate;
 use Illuminate\Http\Request;
@@ -22,7 +24,7 @@ class ProformaController extends Controller
     {
         abort_if(Gate::denies('proforma_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $proformas = Proforma::with(['client', 'wlists'])->get();
+        $proformas = Proforma::with(['client', 'boats', 'wlists', 'tags'])->get();
 
         return view('admin.proformas.index', compact('proformas'));
     }
@@ -31,17 +33,23 @@ class ProformaController extends Controller
     {
         abort_if(Gate::denies('proforma_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $clients = Client::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $clients = Client::pluck('id_client', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $wlists = Wlist::pluck('desciption', 'id');
+        $boats = Boat::pluck('name', 'id');
 
-        return view('admin.proformas.create', compact('clients', 'wlists'));
+        $wlists = Wlist::pluck('description', 'id');
+
+        $tags = Tag::pluck('name', 'id');
+
+        return view('admin.proformas.create', compact('boats', 'clients', 'tags', 'wlists'));
     }
 
     public function store(StoreProformaRequest $request)
     {
         $proforma = Proforma::create($request->all());
+        $proforma->boats()->sync($request->input('boats', []));
         $proforma->wlists()->sync($request->input('wlists', []));
+        $proforma->tags()->sync($request->input('tags', []));
 
         return redirect()->route('admin.proformas.index');
     }
@@ -50,19 +58,25 @@ class ProformaController extends Controller
     {
         abort_if(Gate::denies('proforma_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $clients = Client::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $clients = Client::pluck('id_client', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $wlists = Wlist::pluck('desciption', 'id');
+        $boats = Boat::pluck('name', 'id');
 
-        $proforma->load('client', 'wlists');
+        $wlists = Wlist::pluck('description', 'id');
 
-        return view('admin.proformas.edit', compact('clients', 'proforma', 'wlists'));
+        $tags = Tag::pluck('name', 'id');
+
+        $proforma->load('client', 'boats', 'wlists', 'tags');
+
+        return view('admin.proformas.edit', compact('boats', 'clients', 'proforma', 'tags', 'wlists'));
     }
 
     public function update(UpdateProformaRequest $request, Proforma $proforma)
     {
         $proforma->update($request->all());
+        $proforma->boats()->sync($request->input('boats', []));
         $proforma->wlists()->sync($request->input('wlists', []));
+        $proforma->tags()->sync($request->input('tags', []));
 
         return redirect()->route('admin.proformas.index');
     }
@@ -71,7 +85,7 @@ class ProformaController extends Controller
     {
         abort_if(Gate::denies('proforma_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $proforma->load('client', 'wlists', 'proformaNumberWlogs', 'proformaNumberMlogs', 'proformaNumberClaims');
+        $proforma->load('client', 'boats', 'wlists', 'tags', 'proformaNumberWlogs', 'proformaNumberMlogs', 'proformaNumberClaims', 'proformaNumberPayments');
 
         return view('admin.proformas.show', compact('proforma'));
     }

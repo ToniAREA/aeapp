@@ -38,14 +38,22 @@
                             <span class="help-block">{{ trans('cruds.proforma.fields.client_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="date">{{ trans('cruds.proforma.fields.date') }}</label>
-                            <input class="form-control date" type="text" name="date" id="date" value="{{ old('date', $proforma->date) }}">
-                            @if($errors->has('date'))
+                            <label for="boats">{{ trans('cruds.proforma.fields.boats') }}</label>
+                            <div style="padding-bottom: 4px">
+                                <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                                <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                            </div>
+                            <select class="form-control select2" name="boats[]" id="boats" multiple>
+                                @foreach($boats as $id => $boat)
+                                    <option value="{{ $id }}" {{ (in_array($id, old('boats', [])) || $proforma->boats->contains($id)) ? 'selected' : '' }}>{{ $boat }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('boats'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('date') }}
+                                    {{ $errors->first('boats') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.proforma.fields.date_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.proforma.fields.boats_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label for="wlists">{{ trans('cruds.proforma.fields.wlists') }}</label>
@@ -66,6 +74,16 @@
                             <span class="help-block">{{ trans('cruds.proforma.fields.wlists_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="date">{{ trans('cruds.proforma.fields.date') }}</label>
+                            <input class="form-control date" type="text" name="date" id="date" value="{{ old('date', $proforma->date) }}">
+                            @if($errors->has('date'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('date') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.proforma.fields.date_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label for="description">{{ trans('cruds.proforma.fields.description') }}</label>
                             <input class="form-control" type="text" name="description" id="description" value="{{ old('description', $proforma->description) }}">
                             @if($errors->has('description'))
@@ -84,6 +102,16 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.proforma.fields.total_amount_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="currency">{{ trans('cruds.proforma.fields.currency') }}</label>
+                            <input class="form-control" type="text" name="currency" id="currency" value="{{ old('currency', $proforma->currency) }}">
+                            @if($errors->has('currency'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('currency') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.proforma.fields.currency_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <div>
@@ -120,6 +148,34 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.proforma.fields.claims_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="tags">{{ trans('cruds.proforma.fields.tags') }}</label>
+                            <div style="padding-bottom: 4px">
+                                <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                                <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                            </div>
+                            <select class="form-control select2" name="tags[]" id="tags" multiple>
+                                @foreach($tags as $id => $tag)
+                                    <option value="{{ $id }}" {{ (in_array($id, old('tags', [])) || $proforma->tags->contains($id)) ? 'selected' : '' }}>{{ $tag }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('tags'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('tags') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.proforma.fields.tags_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="link">{{ trans('cruds.proforma.fields.link') }}</label>
+                            <input class="form-control" type="text" name="link" id="link" value="{{ old('link', $proforma->link) }}">
+                            @if($errors->has('link'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('link') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.proforma.fields.link_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">

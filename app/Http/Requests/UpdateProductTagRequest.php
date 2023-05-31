@@ -20,6 +20,7 @@ class UpdateProductTagRequest extends FormRequest
             'name' => [
                 'string',
                 'required',
+                'unique:product_tags,name,' . request()->route('product_tag')->id,
             ],
         ];
     }

@@ -33,8 +33,10 @@ class ContactContact extends Model
         'contact_nif',
         'contact_address',
         'contact_country',
-        'contact_email',
         'contact_mobile',
+        'contact_mobile_2',
+        'contact_email',
+        'social_link',
         'contact_notes',
         'contact_internalnotes',
         'created_at',
@@ -50,5 +52,10 @@ class ContactContact extends Model
     public function contactEmployees()
     {
         return $this->hasMany(Employee::class, 'contact_id', 'id');
+    }
+
+    public function contactsClients()
+    {
+        return $this->belongsToMany(Client::class);
     }
 }

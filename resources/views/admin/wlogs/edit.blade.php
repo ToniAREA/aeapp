@@ -11,16 +11,8 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label class="required" for="date">{{ trans('cruds.wlog.fields.date') }}</label>
-                <input class="form-control date {{ $errors->has('date') ? 'is-invalid' : '' }}" type="text" name="date" id="date" value="{{ old('date', $wlog->date) }}" required>
-                @if($errors->has('date'))
-                    <span class="text-danger">{{ $errors->first('date') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.wlog.fields.date_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="wlist_id">{{ trans('cruds.wlog.fields.wlist') }}</label>
-                <select class="form-control select2 {{ $errors->has('wlist') ? 'is-invalid' : '' }}" name="wlist_id" id="wlist_id" required>
+                <label for="wlist_id">{{ trans('cruds.wlog.fields.wlist') }}</label>
+                <select class="form-control select2 {{ $errors->has('wlist') ? 'is-invalid' : '' }}" name="wlist_id" id="wlist_id">
                     @foreach($wlists as $id => $entry)
                         <option value="{{ $id }}" {{ (old('wlist_id') ? old('wlist_id') : $wlog->wlist->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
                     @endforeach
@@ -29,6 +21,14 @@
                     <span class="text-danger">{{ $errors->first('wlist') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlog.fields.wlist_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="date">{{ trans('cruds.wlog.fields.date') }}</label>
+                <input class="form-control date {{ $errors->has('date') ? 'is-invalid' : '' }}" type="text" name="date" id="date" value="{{ old('date', $wlog->date) }}" required>
+                @if($errors->has('date'))
+                    <span class="text-danger">{{ $errors->first('date') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.wlog.fields.date_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="employee_id">{{ trans('cruds.wlog.fields.employee') }}</label>
@@ -97,6 +97,17 @@
                     <span class="text-danger">{{ $errors->first('proforma_number') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlog.fields.proforma_number_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <div class="form-check {{ $errors->has('invoiced_line') ? 'is-invalid' : '' }}">
+                    <input type="hidden" name="invoiced_line" value="0">
+                    <input class="form-check-input" type="checkbox" name="invoiced_line" id="invoiced_line" value="1" {{ $wlog->invoiced_line || old('invoiced_line', 0) === 1 ? 'checked' : '' }}>
+                    <label class="form-check-label" for="invoiced_line">{{ trans('cruds.wlog.fields.invoiced_line') }}</label>
+                </div>
+                @if($errors->has('invoiced_line'))
+                    <span class="text-danger">{{ $errors->first('invoiced_line') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.wlog.fields.invoiced_line_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

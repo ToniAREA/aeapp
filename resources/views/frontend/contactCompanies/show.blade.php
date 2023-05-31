@@ -28,6 +28,14 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.contactCompany.fields.defaulter') }}
+                                    </th>
+                                    <td>
+                                        <input type="checkbox" disabled="disabled" {{ $contactCompany->defaulter ? 'checked' : '' }}>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.contactCompany.fields.company_name') }}
                                     </th>
                                     <td>
@@ -52,10 +60,10 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.contactCompany.fields.company_email') }}
+                                        {{ trans('cruds.contactCompany.fields.company_mobile') }}
                                     </th>
                                     <td>
-                                        {{ $contactCompany->company_email }}
+                                        {{ $contactCompany->company_mobile }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -68,10 +76,26 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.contactCompany.fields.company_email') }}
+                                    </th>
+                                    <td>
+                                        {{ $contactCompany->company_email }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.contactCompany.fields.company_website') }}
                                     </th>
                                     <td>
                                         {{ $contactCompany->company_website }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.contactCompany.fields.company_social_link') }}
+                                    </th>
+                                    <td>
+                                        {{ $contactCompany->company_social_link }}
                                     </td>
                                 </tr>
                             </tbody>

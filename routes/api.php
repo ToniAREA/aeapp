@@ -54,4 +54,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Claim
     Route::apiResource('claims', 'ClaimApiController');
+
+    // Payment
+    Route::apiResource('payments', 'PaymentApiController');
 });

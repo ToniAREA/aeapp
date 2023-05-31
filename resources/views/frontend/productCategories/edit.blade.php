@@ -24,6 +24,16 @@
                             <span class="help-block">{{ trans('cruds.productCategory.fields.name_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="category_slug">{{ trans('cruds.productCategory.fields.category_slug') }}</label>
+                            <input class="form-control" type="text" name="category_slug" id="category_slug" value="{{ old('category_slug', $productCategory->category_slug) }}">
+                            @if($errors->has('category_slug'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('category_slug') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.productCategory.fields.category_slug_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label for="description">{{ trans('cruds.productCategory.fields.description') }}</label>
                             <textarea class="form-control" name="description" id="description">{{ old('description', $productCategory->description) }}</textarea>
                             @if($errors->has('description'))

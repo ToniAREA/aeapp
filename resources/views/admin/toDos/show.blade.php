@@ -79,6 +79,14 @@
                             @endforeach
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.toDo.fields.notes') }}
+                        </th>
+                        <td>
+                            {{ $toDo->notes }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

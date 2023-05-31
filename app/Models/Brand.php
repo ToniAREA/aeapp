@@ -30,6 +30,7 @@ class Brand extends Model implements HasMedia
     protected $fillable = [
         'brand',
         'brand_url',
+        'notes',
         'internal_notes',
         'created_at',
         'updated_at',
@@ -52,12 +53,7 @@ class Brand extends Model implements HasMedia
         return $this->hasMany(Product::class, 'brand_id', 'id');
     }
 
-    public function brandProviders()
-    {
-        return $this->belongsToMany(Provider::class);
-    }
-
-    public function providers()
+    public function brandsProviders()
     {
         return $this->belongsToMany(Provider::class);
     }
@@ -72,5 +68,10 @@ class Brand extends Model implements HasMedia
         }
 
         return $file;
+    }
+
+    public function providers()
+    {
+        return $this->belongsToMany(Provider::class);
     }
 }

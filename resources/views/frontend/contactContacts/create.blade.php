@@ -64,6 +64,26 @@
                             <span class="help-block">{{ trans('cruds.contactContact.fields.contact_country_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="contact_mobile">{{ trans('cruds.contactContact.fields.contact_mobile') }}</label>
+                            <input class="form-control" type="text" name="contact_mobile" id="contact_mobile" value="{{ old('contact_mobile', '') }}">
+                            @if($errors->has('contact_mobile'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('contact_mobile') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.contactContact.fields.contact_mobile_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_mobile_2">{{ trans('cruds.contactContact.fields.contact_mobile_2') }}</label>
+                            <input class="form-control" type="text" name="contact_mobile_2" id="contact_mobile_2" value="{{ old('contact_mobile_2', '') }}">
+                            @if($errors->has('contact_mobile_2'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('contact_mobile_2') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.contactContact.fields.contact_mobile_2_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label for="contact_email">{{ trans('cruds.contactContact.fields.contact_email') }}</label>
                             <input class="form-control" type="text" name="contact_email" id="contact_email" value="{{ old('contact_email', '') }}">
                             @if($errors->has('contact_email'))
@@ -74,14 +94,14 @@
                             <span class="help-block">{{ trans('cruds.contactContact.fields.contact_email_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="contact_mobile">{{ trans('cruds.contactContact.fields.contact_mobile') }}</label>
-                            <input class="form-control" type="text" name="contact_mobile" id="contact_mobile" value="{{ old('contact_mobile', '') }}">
-                            @if($errors->has('contact_mobile'))
+                            <label for="social_link">{{ trans('cruds.contactContact.fields.social_link') }}</label>
+                            <input class="form-control" type="text" name="social_link" id="social_link" value="{{ old('social_link', '') }}">
+                            @if($errors->has('social_link'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('contact_mobile') }}
+                                    {{ $errors->first('social_link') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.contactContact.fields.contact_mobile_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.contactContact.fields.social_link_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label for="contact_notes">{{ trans('cruds.contactContact.fields.contact_notes') }}</label>

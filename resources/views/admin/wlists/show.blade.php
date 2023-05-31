@@ -28,7 +28,7 @@
                             {{ trans('cruds.wlist.fields.client') }}
                         </th>
                         <td>
-                            {{ $wlist->client->name ?? '' }}
+                            {{ $wlist->client->id_client ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -41,10 +41,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.wlist.fields.desciption') }}
+                            {{ trans('cruds.wlist.fields.order_type') }}
                         </th>
                         <td>
-                            {{ $wlist->desciption }}
+                            {{ App\Models\Wlist::ORDER_TYPE_RADIO[$wlist->order_type] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.wlist.fields.description') }}
+                        </th>
+                        <td>
+                            {{ $wlist->description }}
                         </td>
                     </tr>
                     <tr>
@@ -95,6 +103,40 @@
                             @endforeach
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.wlist.fields.status') }}
+                        </th>
+                        <td>
+                            {{ $wlist->status }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.wlist.fields.url_invoice') }}
+                        </th>
+                        <td>
+                            {{ $wlist->url_invoice }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.wlist.fields.notes') }}
+                        </th>
+                        <td>
+                            {{ $wlist->notes }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.wlist.fields.tags') }}
+                        </th>
+                        <td>
+                            @foreach($wlist->tags as $key => $tags)
+                                <span class="label label-info">{{ $tags->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -122,6 +164,11 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#wlists_appointments" role="tab" data-toggle="tab">
+                {{ trans('cruds.appointment.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#wlists_proformas" role="tab" data-toggle="tab">
                 {{ trans('cruds.proforma.title') }}
             </a>
@@ -133,6 +180,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="wlist_mlogs">
             @includeIf('admin.wlists.relationships.wlistMlogs', ['mlogs' => $wlist->wlistMlogs])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="wlists_appointments">
+            @includeIf('admin.wlists.relationships.wlistsAppointments', ['appointments' => $wlist->wlistsAppointments])
         </div>
         <div class="tab-pane" role="tabpanel" id="wlists_proformas">
             @includeIf('admin.wlists.relationships.wlistsProformas', ['proformas' => $wlist->wlistsProformas])

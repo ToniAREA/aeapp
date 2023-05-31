@@ -36,16 +36,6 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.brand.fields.provider') }}
-                                    </th>
-                                    <td>
-                                        @foreach($brand->providers as $key => $provider)
-                                            <span class="label label-info">{{ $provider->name }}</span>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.brand.fields.brand_logo') }}
                                     </th>
                                     <td>
@@ -62,6 +52,24 @@
                                     </th>
                                     <td>
                                         {{ $brand->brand_url }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.brand.fields.providers') }}
+                                    </th>
+                                    <td>
+                                        @foreach($brand->providers as $key => $providers)
+                                            <span class="label label-info">{{ $providers->name }}</span>
+                                        @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.brand.fields.notes') }}
+                                    </th>
+                                    <td>
+                                        {{ $brand->notes }}
                                     </td>
                                 </tr>
                                 <tr>

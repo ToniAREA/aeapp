@@ -36,9 +36,6 @@
                                         {{ trans('cruds.mlog.fields.client') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.client.fields.lastname') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.mlog.fields.boat') }}
                                     </th>
                                     <th>
@@ -46,6 +43,9 @@
                                     </th>
                                     <th>
                                         {{ trans('cruds.mlog.fields.wlist') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.status') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.mlog.fields.product') }}
@@ -81,6 +81,9 @@
                                         {{ trans('cruds.proforma.fields.description') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.mlog.fields.invoiced_line') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -95,10 +98,7 @@
                                             {{ $mlog->id_mlog ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $mlog->client->name ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $mlog->client->lastname ?? '' }}
+                                            {{ $mlog->client->id_client ?? '' }}
                                         </td>
                                         <td>
                                             {{ $mlog->boat->name ?? '' }}
@@ -107,7 +107,10 @@
                                             {{ $mlog->boat->type ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $mlog->wlist->desciption ?? '' }}
+                                            {{ $mlog->wlist->description ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $mlog->wlist->status ?? '' }}
                                         </td>
                                         <td>
                                             {{ $mlog->product->name ?? '' }}
@@ -143,6 +146,10 @@
                                         </td>
                                         <td>
                                             {{ $mlog->proforma_number->description ?? '' }}
+                                        </td>
+                                        <td>
+                                            <span style="display:none">{{ $mlog->invoiced_line ?? '' }}</span>
+                                            <input type="checkbox" disabled="disabled" {{ $mlog->invoiced_line ? 'checked' : '' }}>
                                         </td>
                                         <td>
                                             @can('mlog_show')

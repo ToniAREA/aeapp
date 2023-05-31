@@ -29,6 +29,9 @@
                             {{ trans('cruds.priority.fields.level') }}
                         </th>
                         <th>
+                            {{ trans('cruds.priority.fields.weight') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -44,6 +47,9 @@
                             </td>
                             <td>
                                 {{ $priority->level ?? '' }}
+                            </td>
+                            <td>
+                                {{ $priority->weight ?? '' }}
                             </td>
                             <td>
                                 @can('priority_show')

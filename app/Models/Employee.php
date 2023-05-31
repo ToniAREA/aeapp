@@ -45,6 +45,7 @@ class Employee extends Model implements HasMedia
         'contract_ends',
         'notes',
         'internalnotes',
+        'link',
         'created_at',
         'updated_at',
         'deleted_at',

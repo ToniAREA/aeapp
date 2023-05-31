@@ -68,6 +68,22 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.contactContact.fields.contact_mobile') }}
+                                    </th>
+                                    <td>
+                                        {{ $contactContact->contact_mobile }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.contactContact.fields.contact_mobile_2') }}
+                                    </th>
+                                    <td>
+                                        {{ $contactContact->contact_mobile_2 }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.contactContact.fields.contact_email') }}
                                     </th>
                                     <td>
@@ -76,10 +92,10 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.contact_mobile') }}
+                                        {{ trans('cruds.contactContact.fields.social_link') }}
                                     </th>
                                     <td>
-                                        {{ $contactContact->contact_mobile }}
+                                        {{ $contactContact->social_link }}
                                     </td>
                                 </tr>
                                 <tr>

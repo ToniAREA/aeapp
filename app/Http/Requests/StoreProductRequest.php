@@ -17,18 +17,29 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
-                'string',
-                'required',
-            ],
-            'price' => [
-                'required',
-            ],
             'categories.*' => [
                 'integer',
             ],
             'categories' => [
                 'array',
+            ],
+            'model' => [
+                'string',
+                'nullable',
+            ],
+            'name' => [
+                'string',
+                'required',
+            ],
+            'product_slug' => [
+                'string',
+                'nullable',
+            ],
+            'photos' => [
+                'array',
+            ],
+            'price' => [
+                'required',
             ],
             'tags.*' => [
                 'integer',
@@ -38,10 +49,6 @@ class StoreProductRequest extends FormRequest
             ],
             'file' => [
                 'array',
-            ],
-            'model' => [
-                'string',
-                'nullable',
             ],
         ];
     }

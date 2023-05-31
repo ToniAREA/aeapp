@@ -34,6 +34,14 @@
                                         {{ $priority->level }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.priority.fields.weight') }}
+                                    </th>
+                                    <td>
+                                        {{ $priority->weight }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

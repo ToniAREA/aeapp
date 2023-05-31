@@ -20,6 +20,7 @@ class StoreContentTagRequest extends FormRequest
             'name' => [
                 'string',
                 'required',
+                'unique:content_tags',
             ],
             'slug' => [
                 'string',

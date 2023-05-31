@@ -27,8 +27,12 @@ class UpdateProviderRequest extends FormRequest
             'brands' => [
                 'array',
             ],
-            'price_list' => [
+            'price_lists' => [
                 'array',
+            ],
+            'notes' => [
+                'string',
+                'nullable',
             ],
             'internal_notes' => [
                 'string',

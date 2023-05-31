@@ -14,6 +14,19 @@
                         @method('PUT')
                         @csrf
                         <div class="form-group">
+                            <div>
+                                <input type="hidden" name="defaulter" value="0">
+                                <input type="checkbox" name="defaulter" id="defaulter" value="1" {{ $contactCompany->defaulter || old('defaulter', 0) === 1 ? 'checked' : '' }}>
+                                <label for="defaulter">{{ trans('cruds.contactCompany.fields.defaulter') }}</label>
+                            </div>
+                            @if($errors->has('defaulter'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('defaulter') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.contactCompany.fields.defaulter_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label for="company_name">{{ trans('cruds.contactCompany.fields.company_name') }}</label>
                             <input class="form-control" type="text" name="company_name" id="company_name" value="{{ old('company_name', $contactCompany->company_name) }}">
                             @if($errors->has('company_name'))
@@ -44,14 +57,14 @@
                             <span class="help-block">{{ trans('cruds.contactCompany.fields.company_address_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="company_email">{{ trans('cruds.contactCompany.fields.company_email') }}</label>
-                            <input class="form-control" type="text" name="company_email" id="company_email" value="{{ old('company_email', $contactCompany->company_email) }}">
-                            @if($errors->has('company_email'))
+                            <label for="company_mobile">{{ trans('cruds.contactCompany.fields.company_mobile') }}</label>
+                            <input class="form-control" type="text" name="company_mobile" id="company_mobile" value="{{ old('company_mobile', $contactCompany->company_mobile) }}">
+                            @if($errors->has('company_mobile'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('company_email') }}
+                                    {{ $errors->first('company_mobile') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.contactCompany.fields.company_email_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.contactCompany.fields.company_mobile_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label for="company_phone">{{ trans('cruds.contactCompany.fields.company_phone') }}</label>
@@ -64,6 +77,16 @@
                             <span class="help-block">{{ trans('cruds.contactCompany.fields.company_phone_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="company_email">{{ trans('cruds.contactCompany.fields.company_email') }}</label>
+                            <input class="form-control" type="text" name="company_email" id="company_email" value="{{ old('company_email', $contactCompany->company_email) }}">
+                            @if($errors->has('company_email'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('company_email') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.contactCompany.fields.company_email_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label for="company_website">{{ trans('cruds.contactCompany.fields.company_website') }}</label>
                             <input class="form-control" type="text" name="company_website" id="company_website" value="{{ old('company_website', $contactCompany->company_website) }}">
                             @if($errors->has('company_website'))
@@ -72,6 +95,16 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.contactCompany.fields.company_website_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="company_social_link">{{ trans('cruds.contactCompany.fields.company_social_link') }}</label>
+                            <input class="form-control" type="text" name="company_social_link" id="company_social_link" value="{{ old('company_social_link', $contactCompany->company_social_link) }}">
+                            @if($errors->has('company_social_link'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('company_social_link') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.contactCompany.fields.company_social_link_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">

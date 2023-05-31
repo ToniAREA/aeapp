@@ -20,6 +20,7 @@ class UpdateContentTagRequest extends FormRequest
             'name' => [
                 'string',
                 'required',
+                'unique:content_tags,name,' . request()->route('content_tag')->id,
             ],
             'slug' => [
                 'string',

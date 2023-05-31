@@ -45,10 +45,16 @@
                                         {{ trans('cruds.contactContact.fields.contact_country') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.contactContact.fields.contact_mobile') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.contactContact.fields.contact_mobile_2') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.contactContact.fields.contact_email') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.contact_mobile') }}
+                                        {{ trans('cruds.contactContact.fields.social_link') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.contactContact.fields.contact_notes') }}
@@ -83,10 +89,16 @@
                                             {{ $contactContact->contact_country ?? '' }}
                                         </td>
                                         <td>
+                                            {{ $contactContact->contact_mobile ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $contactContact->contact_mobile_2 ?? '' }}
+                                        </td>
+                                        <td>
                                             {{ $contactContact->contact_email ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $contactContact->contact_mobile ?? '' }}
+                                            {{ $contactContact->social_link ?? '' }}
                                         </td>
                                         <td>
                                             {{ $contactContact->contact_notes ?? '' }}

@@ -60,6 +60,9 @@
                             {{ trans('cruds.employee.fields.internalnotes') }}
                         </th>
                         <th>
+                            {{ trans('cruds.employee.fields.link') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -106,6 +109,9 @@
                             </td>
                             <td>
                                 {{ $employee->internalnotes ?? '' }}
+                            </td>
+                            <td>
+                                {{ $employee->link ?? '' }}
                             </td>
                             <td>
                                 @can('employee_show')

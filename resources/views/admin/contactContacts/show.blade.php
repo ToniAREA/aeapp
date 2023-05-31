@@ -65,6 +65,22 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.contactContact.fields.contact_mobile') }}
+                        </th>
+                        <td>
+                            {{ $contactContact->contact_mobile }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.contactContact.fields.contact_mobile_2') }}
+                        </th>
+                        <td>
+                            {{ $contactContact->contact_mobile_2 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.contactContact.fields.contact_email') }}
                         </th>
                         <td>
@@ -73,10 +89,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.contactContact.fields.contact_mobile') }}
+                            {{ trans('cruds.contactContact.fields.social_link') }}
                         </th>
                         <td>
-                            {{ $contactContact->contact_mobile }}
+                            {{ $contactContact->social_link }}
                         </td>
                     </tr>
                     <tr>
@@ -116,10 +132,18 @@
                 {{ trans('cruds.employee.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#contacts_clients" role="tab" data-toggle="tab">
+                {{ trans('cruds.client.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="contact_employees">
             @includeIf('admin.contactContacts.relationships.contactEmployees', ['employees' => $contactContact->contactEmployees])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="contacts_clients">
+            @includeIf('admin.contactContacts.relationships.contactsClients', ['clients' => $contactContact->contactsClients])
         </div>
     </div>
 </div>

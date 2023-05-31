@@ -30,10 +30,13 @@
                                         {{ trans('cruds.wlog.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.wlog.fields.date') }}
+                                        {{ trans('cruds.wlog.fields.wlist') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.wlog.fields.wlist') }}
+                                        {{ trans('cruds.wlist.fields.status') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlog.fields.date') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.wlog.fields.employee') }}
@@ -54,6 +57,15 @@
                                         {{ trans('cruds.wlog.fields.tags') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.wlog.fields.proforma_number') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.proforma.fields.description') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlog.fields.invoiced_line') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -65,10 +77,13 @@
                                             {{ $wlog->id ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $wlog->date ?? '' }}
+                                            {{ $wlog->wlist->description ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $wlog->wlist->desciption ?? '' }}
+                                            {{ $wlog->wlist->status ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlog->date ?? '' }}
                                         </td>
                                         <td>
                                             {{ $wlog->employee->name ?? '' }}
@@ -89,6 +104,16 @@
                                             @foreach($wlog->tags as $key => $item)
                                                 <span>{{ $item->name }}</span>
                                             @endforeach
+                                        </td>
+                                        <td>
+                                            {{ $wlog->proforma_number->proforma_number ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlog->proforma_number->description ?? '' }}
+                                        </td>
+                                        <td>
+                                            <span style="display:none">{{ $wlog->invoiced_line ?? '' }}</span>
+                                            <input type="checkbox" disabled="disabled" {{ $wlog->invoiced_line ? 'checked' : '' }}>
                                         </td>
                                         <td>
                                             @can('wlog_show')

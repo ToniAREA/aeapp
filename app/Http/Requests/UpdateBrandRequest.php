@@ -22,13 +22,17 @@ class UpdateBrandRequest extends FormRequest
                 'required',
                 'unique:brands,brand,' . request()->route('brand')->id,
             ],
+            'brand_url' => [
+                'string',
+                'nullable',
+            ],
             'providers.*' => [
                 'integer',
             ],
             'providers' => [
                 'array',
             ],
-            'brand_url' => [
+            'notes' => [
                 'string',
                 'nullable',
             ],

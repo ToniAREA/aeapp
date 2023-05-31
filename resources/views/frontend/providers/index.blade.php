@@ -33,16 +33,19 @@
                                         {{ trans('cruds.provider.fields.name') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.provider.fields.brand') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.provider.fields.price_list') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.provider.fields.company') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.provider.fields.provider_logo') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.provider.fields.brands') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.provider.fields.price_lists') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.provider.fields.notes') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.provider.fields.internal_notes') }}
@@ -62,18 +65,6 @@
                                             {{ $provider->name ?? '' }}
                                         </td>
                                         <td>
-                                            @foreach($provider->brands as $key => $item)
-                                                <span>{{ $item->brand }}</span>
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            @foreach($provider->price_list as $key => $media)
-                                                <a href="{{ $media->getUrl() }}" target="_blank">
-                                                    {{ trans('global.view_file') }}
-                                                </a>
-                                            @endforeach
-                                        </td>
-                                        <td>
                                             {{ $provider->company->company_name ?? '' }}
                                         </td>
                                         <td>
@@ -82,6 +73,21 @@
                                                     <img src="{{ $provider->provider_logo->getUrl('thumb') }}">
                                                 </a>
                                             @endif
+                                        </td>
+                                        <td>
+                                            @foreach($provider->brands as $key => $item)
+                                                <span>{{ $item->brand }}</span>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach($provider->price_lists as $key => $media)
+                                                <a href="{{ $media->getUrl() }}" target="_blank">
+                                                    {{ trans('global.view_file') }}
+                                                </a>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            {{ $provider->notes ?? '' }}
                                         </td>
                                         <td>
                                             {{ $provider->internal_notes ?? '' }}

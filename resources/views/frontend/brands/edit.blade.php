@@ -24,24 +24,6 @@
                             <span class="help-block">{{ trans('cruds.brand.fields.brand_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="providers">{{ trans('cruds.brand.fields.provider') }}</label>
-                            <div style="padding-bottom: 4px">
-                                <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                                <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                            </div>
-                            <select class="form-control select2" name="providers[]" id="providers" multiple>
-                                @foreach($providers as $id => $provider)
-                                    <option value="{{ $id }}" {{ (in_array($id, old('providers', [])) || $brand->providers->contains($id)) ? 'selected' : '' }}>{{ $provider }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('providers'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('providers') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.brand.fields.provider_helper') }}</span>
-                        </div>
-                        <div class="form-group">
                             <label for="brand_logo">{{ trans('cruds.brand.fields.brand_logo') }}</label>
                             <div class="needsclick dropzone" id="brand_logo-dropzone">
                             </div>
@@ -61,6 +43,34 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.brand.fields.brand_url_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="providers">{{ trans('cruds.brand.fields.providers') }}</label>
+                            <div style="padding-bottom: 4px">
+                                <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                                <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                            </div>
+                            <select class="form-control select2" name="providers[]" id="providers" multiple>
+                                @foreach($providers as $id => $provider)
+                                    <option value="{{ $id }}" {{ (in_array($id, old('providers', [])) || $brand->providers->contains($id)) ? 'selected' : '' }}>{{ $provider }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('providers'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('providers') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.brand.fields.providers_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">{{ trans('cruds.brand.fields.notes') }}</label>
+                            <input class="form-control" type="text" name="notes" id="notes" value="{{ old('notes', $brand->notes) }}">
+                            @if($errors->has('notes'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('notes') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.brand.fields.notes_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label for="internal_notes">{{ trans('cruds.brand.fields.internal_notes') }}</label>

@@ -30,6 +30,9 @@
                                         {{ trans('cruds.contactCompany.fields.id') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.contactCompany.fields.defaulter') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.contactCompany.fields.company_name') }}
                                     </th>
                                     <th>
@@ -39,13 +42,19 @@
                                         {{ trans('cruds.contactCompany.fields.company_address') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.contactCompany.fields.company_email') }}
+                                        {{ trans('cruds.contactCompany.fields.company_mobile') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.contactCompany.fields.company_phone') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.contactCompany.fields.company_email') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.contactCompany.fields.company_website') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.contactCompany.fields.company_social_link') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -59,6 +68,10 @@
                                             {{ $contactCompany->id ?? '' }}
                                         </td>
                                         <td>
+                                            <span style="display:none">{{ $contactCompany->defaulter ?? '' }}</span>
+                                            <input type="checkbox" disabled="disabled" {{ $contactCompany->defaulter ? 'checked' : '' }}>
+                                        </td>
+                                        <td>
                                             {{ $contactCompany->company_name ?? '' }}
                                         </td>
                                         <td>
@@ -68,13 +81,19 @@
                                             {{ $contactCompany->company_address ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $contactCompany->company_email ?? '' }}
+                                            {{ $contactCompany->company_mobile ?? '' }}
                                         </td>
                                         <td>
                                             {{ $contactCompany->company_phone ?? '' }}
                                         </td>
                                         <td>
+                                            {{ $contactCompany->company_email ?? '' }}
+                                        </td>
+                                        <td>
                                             {{ $contactCompany->company_website ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $contactCompany->company_social_link ?? '' }}
                                         </td>
                                         <td>
                                             @can('contact_company_show')

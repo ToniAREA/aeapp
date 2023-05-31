@@ -62,8 +62,8 @@
                     </li>
                 @endcan
                 @can('work_access')
-                    <li class="nav-item has-treeview {{ request()->is("admin/wlists*") ? "menu-open" : "" }} {{ request()->is("admin/wlogs*") ? "menu-open" : "" }} {{ request()->is("admin/mlogs*") ? "menu-open" : "" }} {{ request()->is("admin/proformas*") ? "menu-open" : "" }} {{ request()->is("admin/claims*") ? "menu-open" : "" }} {{ request()->is("admin/tags*") ? "menu-open" : "" }}">
-                        <a class="nav-link nav-dropdown-toggle {{ request()->is("admin/wlists*") ? "active" : "" }} {{ request()->is("admin/wlogs*") ? "active" : "" }} {{ request()->is("admin/mlogs*") ? "active" : "" }} {{ request()->is("admin/proformas*") ? "active" : "" }} {{ request()->is("admin/claims*") ? "active" : "" }} {{ request()->is("admin/tags*") ? "active" : "" }}" href="#">
+                    <li class="nav-item has-treeview {{ request()->is("admin/wlists*") ? "menu-open" : "" }} {{ request()->is("admin/wlogs*") ? "menu-open" : "" }} {{ request()->is("admin/mlogs*") ? "menu-open" : "" }} {{ request()->is("admin/appointments*") ? "menu-open" : "" }}">
+                        <a class="nav-link nav-dropdown-toggle {{ request()->is("admin/wlists*") ? "active" : "" }} {{ request()->is("admin/wlogs*") ? "active" : "" }} {{ request()->is("admin/mlogs*") ? "active" : "" }} {{ request()->is("admin/appointments*") ? "active" : "" }}" href="#">
                             <i class="fa-fw nav-icon fas fa-briefcase">
 
                             </i>
@@ -109,6 +109,33 @@
                                     </a>
                                 </li>
                             @endcan
+                            @can('appointment_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.appointments.index") }}" class="nav-link {{ request()->is("admin/appointments") || request()->is("admin/appointments/*") ? "active" : "" }}">
+                                        <i class="fa-fw nav-icon fas fa-calendar-check">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.appointment.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+                @can('billing_access')
+                    <li class="nav-item has-treeview {{ request()->is("admin/proformas*") ? "menu-open" : "" }} {{ request()->is("admin/claims*") ? "menu-open" : "" }} {{ request()->is("admin/payments*") ? "menu-open" : "" }}">
+                        <a class="nav-link nav-dropdown-toggle {{ request()->is("admin/proformas*") ? "active" : "" }} {{ request()->is("admin/claims*") ? "active" : "" }} {{ request()->is("admin/payments*") ? "active" : "" }}" href="#">
+                            <i class="fa-fw nav-icon far fa-money-bill-alt">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.billing.title') }}
+                                <i class="right fa fa-fw fa-angle-left nav-icon"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
                             @can('proforma_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.proformas.index") }}" class="nav-link {{ request()->is("admin/proformas") || request()->is("admin/proformas/*") ? "active" : "" }}">
@@ -133,14 +160,14 @@
                                     </a>
                                 </li>
                             @endcan
-                            @can('tag_access')
+                            @can('payment_access')
                                 <li class="nav-item">
-                                    <a href="{{ route("admin.tags.index") }}" class="nav-link {{ request()->is("admin/tags") || request()->is("admin/tags/*") ? "active" : "" }}">
-                                        <i class="fa-fw nav-icon fas fa-tags">
+                                    <a href="{{ route("admin.payments.index") }}" class="nav-link {{ request()->is("admin/payments") || request()->is("admin/payments/*") ? "active" : "" }}">
+                                        <i class="fa-fw nav-icon fab fa-cc-visa">
 
                                         </i>
                                         <p>
-                                            {{ trans('cruds.tag.title') }}
+                                            {{ trans('cruds.payment.title') }}
                                         </p>
                                     </a>
                                 </li>
@@ -156,18 +183,6 @@
                             </i>
                             <p>
                                 {{ trans('cruds.toDo.title') }}
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-                @can('appointment_access')
-                    <li class="nav-item">
-                        <a href="{{ route("admin.appointments.index") }}" class="nav-link {{ request()->is("admin/appointments") || request()->is("admin/appointments/*") ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-calendar-check">
-
-                            </i>
-                            <p>
-                                {{ trans('cruds.appointment.title') }}
                             </p>
                         </a>
                     </li>
@@ -413,8 +428,8 @@
                     </li>
                 @endcan
                 @can('configuration_access')
-                    <li class="nav-item has-treeview {{ request()->is("admin/priorities*") ? "menu-open" : "" }} {{ request()->is("admin/boats-types*") ? "menu-open" : "" }}">
-                        <a class="nav-link nav-dropdown-toggle {{ request()->is("admin/priorities*") ? "active" : "" }} {{ request()->is("admin/boats-types*") ? "active" : "" }}" href="#">
+                    <li class="nav-item has-treeview {{ request()->is("admin/boats-types*") ? "menu-open" : "" }} {{ request()->is("admin/tags*") ? "menu-open" : "" }} {{ request()->is("admin/priorities*") ? "menu-open" : "" }}">
+                        <a class="nav-link nav-dropdown-toggle {{ request()->is("admin/boats-types*") ? "active" : "" }} {{ request()->is("admin/tags*") ? "active" : "" }} {{ request()->is("admin/priorities*") ? "active" : "" }}" href="#">
                             <i class="fa-fw nav-icon fas fa-cogs">
 
                             </i>
@@ -424,6 +439,30 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            @can('boats_type_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.boats-types.index") }}" class="nav-link {{ request()->is("admin/boats-types") || request()->is("admin/boats-types/*") ? "active" : "" }}">
+                                        <i class="fa-fw nav-icon fas fa-ship">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.boatsType.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('tag_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.tags.index") }}" class="nav-link {{ request()->is("admin/tags") || request()->is("admin/tags/*") ? "active" : "" }}">
+                                        <i class="fa-fw nav-icon fas fa-tags">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.tag.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
                             @can('priority_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.priorities.index") }}" class="nav-link {{ request()->is("admin/priorities") || request()->is("admin/priorities/*") ? "active" : "" }}">
@@ -432,18 +471,6 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.priority.title') }}
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('boats_type_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.boats-types.index") }}" class="nav-link {{ request()->is("admin/boats-types") || request()->is("admin/boats-types/*") ? "active" : "" }}">
-                                        <i class="fa-fw nav-icon fas fa-list">
-
-                                        </i>
-                                        <p>
-                                            {{ trans('cruds.boatsType.title') }}
                                         </p>
                                     </a>
                                 </li>

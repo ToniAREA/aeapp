@@ -25,11 +25,9 @@ class StoreWlistRequest extends FormRequest
                 'required',
                 'integer',
             ],
-            'desciption' => [
+            'description' => [
                 'string',
-                'min:5',
-                'max:200',
-                'required',
+                'nullable',
             ],
             'photos' => [
                 'array',
@@ -48,6 +46,24 @@ class StoreWlistRequest extends FormRequest
                 'integer',
             ],
             'for_users' => [
+                'array',
+            ],
+            'status' => [
+                'string',
+                'nullable',
+            ],
+            'url_invoice' => [
+                'string',
+                'nullable',
+            ],
+            'notes' => [
+                'string',
+                'nullable',
+            ],
+            'tags.*' => [
+                'integer',
+            ],
+            'tags' => [
                 'array',
             ],
         ];

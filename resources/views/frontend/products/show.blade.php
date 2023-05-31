@@ -28,18 +28,12 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.product.fields.name') }}
+                                        {{ trans('cruds.product.fields.category') }}
                                     </th>
                                     <td>
-                                        {{ $product->name }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.product.fields.description') }}
-                                    </th>
-                                    <td>
-                                        {{ $product->description }}
+                                        @foreach($product->categories as $key => $category)
+                                            <span class="label label-info">{{ $category->name }}</span>
+                                        @endforeach
                                     </td>
                                 </tr>
                                 <tr>
@@ -52,20 +46,54 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.product.fields.price') }}
+                                        {{ trans('cruds.product.fields.model') }}
                                     </th>
                                     <td>
-                                        {{ $product->price }}
+                                        {{ $product->model }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.product.fields.category') }}
+                                        {{ trans('cruds.product.fields.name') }}
                                     </th>
                                     <td>
-                                        @foreach($product->categories as $key => $category)
-                                            <span class="label label-info">{{ $category->name }}</span>
+                                        {{ $product->name }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.product.fields.product_slug') }}
+                                    </th>
+                                    <td>
+                                        {{ $product->product_slug }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.product.fields.description') }}
+                                    </th>
+                                    <td>
+                                        {{ $product->description }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.product.fields.photos') }}
+                                    </th>
+                                    <td>
+                                        @foreach($product->photos as $key => $media)
+                                            <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
+                                                <img src="{{ $media->getUrl('thumb') }}">
+                                            </a>
                                         @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.product.fields.price') }}
+                                    </th>
+                                    <td>
+                                        {{ $product->price }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -80,18 +108,6 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.product.fields.photo') }}
-                                    </th>
-                                    <td>
-                                        @if($product->photo)
-                                            <a href="{{ $product->photo->getUrl() }}" target="_blank" style="display: inline-block">
-                                                <img src="{{ $product->photo->getUrl('thumb') }}">
-                                            </a>
-                                        @endif
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.product.fields.file') }}
                                     </th>
                                     <td>
@@ -100,14 +116,6 @@
                                                 {{ trans('global.view_file') }}
                                             </a>
                                         @endforeach
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.product.fields.model') }}
-                                    </th>
-                                    <td>
-                                        {{ $product->model }}
                                     </td>
                                 </tr>
                             </tbody>

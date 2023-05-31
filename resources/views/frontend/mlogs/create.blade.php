@@ -172,6 +172,19 @@
                             <span class="help-block">{{ trans('cruds.mlog.fields.proforma_number_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <div>
+                                <input type="hidden" name="invoiced_line" value="0">
+                                <input type="checkbox" name="invoiced_line" id="invoiced_line" value="1" {{ old('invoiced_line', 0) == 1 ? 'checked' : '' }}>
+                                <label for="invoiced_line">{{ trans('cruds.mlog.fields.invoiced_line') }}</label>
+                            </div>
+                            @if($errors->has('invoiced_line'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('invoiced_line') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.mlog.fields.invoiced_line_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <button class="btn btn-danger" type="submit">
                                 {{ trans('global.save') }}
                             </button>

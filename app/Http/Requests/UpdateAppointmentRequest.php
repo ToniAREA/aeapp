@@ -21,17 +21,11 @@ class UpdateAppointmentRequest extends FormRequest
                 'required',
                 'integer',
             ],
-            'when_starts' => [
-                'required',
-                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
+            'wlists.*' => [
+                'integer',
             ],
-            'when_ends' => [
-                'required',
-                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
-            ],
-            'description' => [
-                'string',
-                'required',
+            'wlists' => [
+                'array',
             ],
             'for_roles.*' => [
                 'integer',
@@ -44,6 +38,26 @@ class UpdateAppointmentRequest extends FormRequest
             ],
             'for_users' => [
                 'array',
+            ],
+            'when_starts' => [
+                'required',
+                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
+            ],
+            'when_ends' => [
+                'required',
+                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
+            ],
+            'description' => [
+                'string',
+                'required',
+            ],
+            'coordinates' => [
+                'string',
+                'nullable',
+            ],
+            'status' => [
+                'string',
+                'nullable',
             ],
         ];
     }

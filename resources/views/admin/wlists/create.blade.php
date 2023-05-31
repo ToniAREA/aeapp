@@ -34,12 +34,25 @@
                 <span class="help-block">{{ trans('cruds.wlist.fields.boat_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="desciption">{{ trans('cruds.wlist.fields.desciption') }}</label>
-                <input class="form-control {{ $errors->has('desciption') ? 'is-invalid' : '' }}" type="text" name="desciption" id="desciption" value="{{ old('desciption', '') }}" required>
-                @if($errors->has('desciption'))
-                    <span class="text-danger">{{ $errors->first('desciption') }}</span>
+                <label>{{ trans('cruds.wlist.fields.order_type') }}</label>
+                @foreach(App\Models\Wlist::ORDER_TYPE_RADIO as $key => $label)
+                    <div class="form-check {{ $errors->has('order_type') ? 'is-invalid' : '' }}">
+                        <input class="form-check-input" type="radio" id="order_type_{{ $key }}" name="order_type" value="{{ $key }}" {{ old('order_type', '') === (string) $key ? 'checked' : '' }}>
+                        <label class="form-check-label" for="order_type_{{ $key }}">{{ $label }}</label>
+                    </div>
+                @endforeach
+                @if($errors->has('order_type'))
+                    <span class="text-danger">{{ $errors->first('order_type') }}</span>
                 @endif
-                <span class="help-block">{{ trans('cruds.wlist.fields.desciption_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.wlist.fields.order_type_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="description">{{ trans('cruds.wlist.fields.description') }}</label>
+                <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" type="text" name="description" id="description" value="{{ old('description', '') }}">
+                @if($errors->has('description'))
+                    <span class="text-danger">{{ $errors->first('description') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.wlist.fields.description_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="photos">{{ trans('cruds.wlist.fields.photos') }}</label>
@@ -101,6 +114,46 @@
                     <span class="text-danger">{{ $errors->first('for_users') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlist.fields.for_user_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="status">{{ trans('cruds.wlist.fields.status') }}</label>
+                <input class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" type="text" name="status" id="status" value="{{ old('status', '') }}">
+                @if($errors->has('status'))
+                    <span class="text-danger">{{ $errors->first('status') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.wlist.fields.status_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="url_invoice">{{ trans('cruds.wlist.fields.url_invoice') }}</label>
+                <input class="form-control {{ $errors->has('url_invoice') ? 'is-invalid' : '' }}" type="text" name="url_invoice" id="url_invoice" value="{{ old('url_invoice', '') }}">
+                @if($errors->has('url_invoice'))
+                    <span class="text-danger">{{ $errors->first('url_invoice') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.wlist.fields.url_invoice_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="notes">{{ trans('cruds.wlist.fields.notes') }}</label>
+                <input class="form-control {{ $errors->has('notes') ? 'is-invalid' : '' }}" type="text" name="notes" id="notes" value="{{ old('notes', '') }}">
+                @if($errors->has('notes'))
+                    <span class="text-danger">{{ $errors->first('notes') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.wlist.fields.notes_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="tags">{{ trans('cruds.wlist.fields.tags') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('tags') ? 'is-invalid' : '' }}" name="tags[]" id="tags" multiple>
+                    @foreach($tags as $id => $tag)
+                        <option value="{{ $id }}" {{ in_array($id, old('tags', [])) ? 'selected' : '' }}>{{ $tag }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('tags'))
+                    <span class="text-danger">{{ $errors->first('tags') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.wlist.fields.tags_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

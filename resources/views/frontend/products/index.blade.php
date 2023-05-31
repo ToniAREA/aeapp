@@ -30,31 +30,34 @@
                                         {{ trans('cruds.product.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.product.fields.name') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.product.fields.description') }}
+                                        {{ trans('cruds.product.fields.category') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.product.fields.brand') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.product.fields.price') }}
+                                        {{ trans('cruds.product.fields.model') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.product.fields.category') }}
+                                        {{ trans('cruds.product.fields.name') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.product.fields.product_slug') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.product.fields.description') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.product.fields.photos') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.product.fields.price') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.product.fields.tag') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.product.fields.photo') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.product.fields.file') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.product.fields.model') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -68,21 +71,34 @@
                                             {{ $product->id ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $product->name ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $product->description ?? '' }}
+                                            @foreach($product->categories as $key => $item)
+                                                <span>{{ $item->name }}</span>
+                                            @endforeach
                                         </td>
                                         <td>
                                             {{ $product->brand->brand ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $product->price ?? '' }}
+                                            {{ $product->model ?? '' }}
                                         </td>
                                         <td>
-                                            @foreach($product->categories as $key => $item)
-                                                <span>{{ $item->name }}</span>
+                                            {{ $product->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $product->product_slug ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $product->description ?? '' }}
+                                        </td>
+                                        <td>
+                                            @foreach($product->photos as $key => $media)
+                                                <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
+                                                    <img src="{{ $media->getUrl('thumb') }}">
+                                                </a>
                                             @endforeach
+                                        </td>
+                                        <td>
+                                            {{ $product->price ?? '' }}
                                         </td>
                                         <td>
                                             @foreach($product->tags as $key => $item)
@@ -90,21 +106,11 @@
                                             @endforeach
                                         </td>
                                         <td>
-                                            @if($product->photo)
-                                                <a href="{{ $product->photo->getUrl() }}" target="_blank" style="display: inline-block">
-                                                    <img src="{{ $product->photo->getUrl('thumb') }}">
-                                                </a>
-                                            @endif
-                                        </td>
-                                        <td>
                                             @foreach($product->file as $key => $media)
                                                 <a href="{{ $media->getUrl() }}" target="_blank">
                                                     {{ trans('global.view_file') }}
                                                 </a>
                                             @endforeach
-                                        </td>
-                                        <td>
-                                            {{ $product->model ?? '' }}
                                         </td>
                                         <td>
                                             @can('product_show')

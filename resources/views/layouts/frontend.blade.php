@@ -112,6 +112,16 @@
                                             {{ trans('cruds.mlog.title') }}
                                         </a>
                                     @endcan
+                                    @can('appointment_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.appointments.index') }}">
+                                            {{ trans('cruds.appointment.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('billing_access')
+                                        <a class="dropdown-item disabled" href="#">
+                                            {{ trans('cruds.billing.title') }}
+                                        </a>
+                                    @endcan
                                     @can('proforma_access')
                                         <a class="dropdown-item ml-3" href="{{ route('frontend.proformas.index') }}">
                                             {{ trans('cruds.proforma.title') }}
@@ -122,19 +132,14 @@
                                             {{ trans('cruds.claim.title') }}
                                         </a>
                                     @endcan
-                                    @can('tag_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.tags.index') }}">
-                                            {{ trans('cruds.tag.title') }}
+                                    @can('payment_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.payments.index') }}">
+                                            {{ trans('cruds.payment.title') }}
                                         </a>
                                     @endcan
                                     @can('to_do_access')
                                         <a class="dropdown-item" href="{{ route('frontend.to-dos.index') }}">
                                             {{ trans('cruds.toDo.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('appointment_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.appointments.index') }}">
-                                            {{ trans('cruds.appointment.title') }}
                                         </a>
                                     @endcan
                                     @can('product_management_access')
@@ -232,14 +237,19 @@
                                             {{ trans('cruds.configuration.title') }}
                                         </a>
                                     @endcan
-                                    @can('priority_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.priorities.index') }}">
-                                            {{ trans('cruds.priority.title') }}
-                                        </a>
-                                    @endcan
                                     @can('boats_type_access')
                                         <a class="dropdown-item ml-3" href="{{ route('frontend.boats-types.index') }}">
                                             {{ trans('cruds.boatsType.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('tag_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.tags.index') }}">
+                                            {{ trans('cruds.tag.title') }}
+                                        </a>
+                                    @endcan
+                                    @can('priority_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.priorities.index') }}">
+                                            {{ trans('cruds.priority.title') }}
                                         </a>
                                     @endcan
 

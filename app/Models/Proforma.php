@@ -23,14 +23,16 @@ class Proforma extends Model
     ];
 
     protected $fillable = [
+        'proforma_number',
         'client_id',
         'date',
-        'proforma_number',
         'description',
         'total_amount',
+        'currency',
         'sent',
         'paid',
         'claims',
+        'link',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -56,9 +58,24 @@ class Proforma extends Model
         return $this->hasMany(Claim::class, 'proforma_number_id', 'id');
     }
 
+    public function proformaNumberPayments()
+    {
+        return $this->hasMany(Payment::class, 'proforma_number_id', 'id');
+    }
+
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id');
+    }
+
+    public function boats()
+    {
+        return $this->belongsToMany(Boat::class);
+    }
+
+    public function wlists()
+    {
+        return $this->belongsToMany(Wlist::class);
     }
 
     public function getDateAttribute($value)
@@ -71,8 +88,8 @@ class Proforma extends Model
         $this->attributes['date'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 
-    public function wlists()
+    public function tags()
     {
-        return $this->belongsToMany(Wlist::class);
+        return $this->belongsToMany(Tag::class);
     }
 }

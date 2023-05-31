@@ -26,12 +26,15 @@ class ContactCompany extends Model
     ];
 
     protected $fillable = [
+        'defaulter',
         'company_name',
         'company_vat',
         'company_address',
-        'company_email',
+        'company_mobile',
         'company_phone',
+        'company_email',
         'company_website',
+        'company_social_link',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -45,5 +48,10 @@ class ContactCompany extends Model
     public function companyProviders()
     {
         return $this->hasMany(Provider::class, 'company_id', 'id');
+    }
+
+    public function companyClients()
+    {
+        return $this->hasMany(Client::class, 'company_id', 'id');
     }
 }

@@ -36,28 +36,6 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.provider.fields.brand') }}
-                                    </th>
-                                    <td>
-                                        @foreach($provider->brands as $key => $brand)
-                                            <span class="label label-info">{{ $brand->brand }}</span>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.provider.fields.price_list') }}
-                                    </th>
-                                    <td>
-                                        @foreach($provider->price_list as $key => $media)
-                                            <a href="{{ $media->getUrl() }}" target="_blank">
-                                                {{ trans('global.view_file') }}
-                                            </a>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.provider.fields.company') }}
                                     </th>
                                     <td>
@@ -74,6 +52,36 @@
                                                 <img src="{{ $provider->provider_logo->getUrl('thumb') }}">
                                             </a>
                                         @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.provider.fields.brands') }}
+                                    </th>
+                                    <td>
+                                        @foreach($provider->brands as $key => $brands)
+                                            <span class="label label-info">{{ $brands->brand }}</span>
+                                        @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.provider.fields.price_lists') }}
+                                    </th>
+                                    <td>
+                                        @foreach($provider->price_lists as $key => $media)
+                                            <a href="{{ $media->getUrl() }}" target="_blank">
+                                                {{ trans('global.view_file') }}
+                                            </a>
+                                        @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.provider.fields.notes') }}
+                                    </th>
+                                    <td>
+                                        {{ $provider->notes }}
                                     </td>
                                 </tr>
                                 <tr>
