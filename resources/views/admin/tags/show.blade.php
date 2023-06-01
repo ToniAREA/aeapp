@@ -52,10 +52,18 @@
                 {{ trans('cruds.wlog.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tags_wlists" role="tab" data-toggle="tab">
+                {{ trans('cruds.wlist.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="tags_wlogs">
             @includeIf('admin.tags.relationships.tagsWlogs', ['wlogs' => $tag->tagsWlogs])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="tags_wlists">
+            @includeIf('admin.tags.relationships.tagsWlists', ['wlists' => $tag->tagsWlists])
         </div>
     </div>
 </div>

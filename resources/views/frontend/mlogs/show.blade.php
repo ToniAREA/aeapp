@@ -39,7 +39,7 @@
                                         {{ trans('cruds.mlog.fields.client') }}
                                     </th>
                                     <td>
-                                        {{ $mlog->client->name ?? '' }}
+                                        {{ $mlog->client->id_client ?? '' }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -55,7 +55,7 @@
                                         {{ trans('cruds.mlog.fields.wlist') }}
                                     </th>
                                     <td>
-                                        {{ $mlog->wlist->desciption ?? '' }}
+                                        {{ $mlog->wlist->description ?? '' }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -130,6 +130,14 @@
                                     </th>
                                     <td>
                                         {{ $mlog->proforma_number->proforma_number ?? '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.mlog.fields.invoiced_line') }}
+                                    </th>
+                                    <td>
+                                        <input type="checkbox" disabled="disabled" {{ $mlog->invoiced_line ? 'checked' : '' }}>
                                     </td>
                                 </tr>
                             </tbody>

@@ -22,13 +22,17 @@ class StoreBrandRequest extends FormRequest
                 'required',
                 'unique:brands',
             ],
+            'brand_url' => [
+                'string',
+                'nullable',
+            ],
             'providers.*' => [
                 'integer',
             ],
             'providers' => [
                 'array',
             ],
-            'brand_url' => [
+            'notes' => [
                 'string',
                 'nullable',
             ],

@@ -36,15 +36,17 @@
                             {{ trans('cruds.proforma.fields.client') }}
                         </th>
                         <td>
-                            {{ $proforma->client->name ?? '' }}
+                            {{ $proforma->client->id_client ?? '' }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.proforma.fields.date') }}
+                            {{ trans('cruds.proforma.fields.boats') }}
                         </th>
                         <td>
-                            {{ $proforma->date }}
+                            @foreach($proforma->boats as $key => $boats)
+                                <span class="label label-info">{{ $boats->name }}</span>
+                            @endforeach
                         </td>
                     </tr>
                     <tr>
@@ -53,8 +55,16 @@
                         </th>
                         <td>
                             @foreach($proforma->wlists as $key => $wlists)
-                                <span class="label label-info">{{ $wlists->desciption }}</span>
+                                <span class="label label-info">{{ $wlists->description }}</span>
                             @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.proforma.fields.date') }}
+                        </th>
+                        <td>
+                            {{ $proforma->date }}
                         </td>
                     </tr>
                     <tr>
@@ -71,6 +81,14 @@
                         </th>
                         <td>
                             {{ $proforma->total_amount }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.proforma.fields.currency') }}
+                        </th>
+                        <td>
+                            {{ $proforma->currency }}
                         </td>
                     </tr>
                     <tr>
@@ -95,6 +113,24 @@
                         </th>
                         <td>
                             {{ $proforma->claims }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.proforma.fields.tags') }}
+                        </th>
+                        <td>
+                            @foreach($proforma->tags as $key => $tags)
+                                <span class="label label-info">{{ $tags->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.proforma.fields.link') }}
+                        </th>
+                        <td>
+                            {{ $proforma->link }}
                         </td>
                     </tr>
                 </tbody>
@@ -128,6 +164,11 @@
                 {{ trans('cruds.claim.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#proforma_number_payments" role="tab" data-toggle="tab">
+                {{ trans('cruds.payment.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="proforma_number_wlogs">
@@ -138,6 +179,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="proforma_number_claims">
             @includeIf('admin.proformas.relationships.proformaNumberClaims', ['claims' => $proforma->proformaNumberClaims])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="proforma_number_payments">
+            @includeIf('admin.proformas.relationships.proformaNumberPayments', ['payments' => $proforma->proformaNumberPayments])
         </div>
     </div>
 </div>

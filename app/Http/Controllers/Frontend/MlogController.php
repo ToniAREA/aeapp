@@ -35,11 +35,11 @@ class MlogController extends Controller
     {
         abort_if(Gate::denies('mlog_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $clients = Client::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $clients = Client::pluck('id_client', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $boats = Boat::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $wlists = Wlist::pluck('description', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $products = Product::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -62,11 +62,11 @@ class MlogController extends Controller
     {
         abort_if(Gate::denies('mlog_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $clients = Client::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $clients = Client::pluck('id_client', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $boats = Boat::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $wlists = Wlist::pluck('description', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $products = Product::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 

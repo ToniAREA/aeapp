@@ -28,7 +28,25 @@
                             {{ trans('cruds.appointment.fields.client') }}
                         </th>
                         <td>
-                            {{ $appointment->client->name ?? '' }}
+                            {{ $appointment->client->id_client ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.appointment.fields.boat') }}
+                        </th>
+                        <td>
+                            {{ $appointment->boat->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.appointment.fields.wlists') }}
+                        </th>
+                        <td>
+                            @foreach($appointment->wlists as $key => $wlists)
+                                <span class="label label-info">{{ $wlists->description }}</span>
+                            @endforeach
                         </td>
                     </tr>
                     <tr>
@@ -73,6 +91,30 @@
                         </th>
                         <td>
                             {{ $appointment->description }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.appointment.fields.priority') }}
+                        </th>
+                        <td>
+                            {{ $appointment->priority->level ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.appointment.fields.coordinates') }}
+                        </th>
+                        <td>
+                            {{ $appointment->coordinates }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.appointment.fields.status') }}
+                        </th>
+                        <td>
+                            {{ $appointment->status }}
                         </td>
                     </tr>
                 </tbody>

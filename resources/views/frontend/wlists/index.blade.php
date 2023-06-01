@@ -36,7 +36,10 @@
                                         {{ trans('cruds.wlist.fields.boat') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.wlist.fields.desciption') }}
+                                        {{ trans('cruds.wlist.fields.order_type') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.description') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.wlist.fields.photos') }}
@@ -54,7 +57,16 @@
                                         {{ trans('cruds.wlist.fields.for_user') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.wlist.fields.wlogs') }}
+                                        {{ trans('cruds.wlist.fields.status') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.url_invoice') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.notes') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.tags') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -68,13 +80,16 @@
                                             {{ $wlist->id ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $wlist->client->name ?? '' }}
+                                            {{ $wlist->client->id_client ?? '' }}
                                         </td>
                                         <td>
                                             {{ $wlist->boat->name ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $wlist->desciption ?? '' }}
+                                            {{ App\Models\Wlist::ORDER_TYPE_RADIO[$wlist->order_type] ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlist->description ?? '' }}
                                         </td>
                                         <td>
                                             @foreach($wlist->photos as $key => $media)
@@ -100,8 +115,17 @@
                                             @endforeach
                                         </td>
                                         <td>
-                                            @foreach($wlist->wlogs as $key => $item)
-                                                <span>{{ $item->date }}</span>
+                                            {{ $wlist->status ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlist->url_invoice ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlist->notes ?? '' }}
+                                        </td>
+                                        <td>
+                                            @foreach($wlist->tags as $key => $item)
+                                                <span>{{ $item->name }}</span>
                                             @endforeach
                                         </td>
                                         <td>

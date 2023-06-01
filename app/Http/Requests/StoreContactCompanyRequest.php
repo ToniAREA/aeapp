@@ -29,7 +29,7 @@ class StoreContactCompanyRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'company_email' => [
+            'company_mobile' => [
                 'string',
                 'nullable',
             ],
@@ -37,7 +37,15 @@ class StoreContactCompanyRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'company_email' => [
+                'string',
+                'nullable',
+            ],
             'company_website' => [
+                'string',
+                'nullable',
+            ],
+            'company_social_link' => [
                 'string',
                 'nullable',
             ],

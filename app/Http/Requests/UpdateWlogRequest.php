@@ -21,10 +21,6 @@ class UpdateWlogRequest extends FormRequest
                 'required',
                 'date_format:' . config('panel.date_format'),
             ],
-            'wlist_id' => [
-                'required',
-                'integer',
-            ],
             'employee_id' => [
                 'required',
                 'integer',

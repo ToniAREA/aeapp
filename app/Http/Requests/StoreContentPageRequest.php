@@ -21,6 +21,10 @@ class StoreContentPageRequest extends FormRequest
                 'string',
                 'required',
             ],
+            'slug' => [
+                'string',
+                'nullable',
+            ],
             'categories.*' => [
                 'integer',
             ],

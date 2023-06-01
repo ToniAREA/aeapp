@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\Auditable;
-use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,13 +14,7 @@ class Client extends Model
 
     public $table = 'clients';
 
-    public const DEFAULTER_RADIO = [
-        'yes' => 'yes',
-        'no'  => 'no',
-    ];
-
     protected $dates = [
-        'lastuse',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -29,32 +22,17 @@ class Client extends Model
 
     public static $searchable = [
         'id_client',
-        'lastname',
-        'vat',
-        'address',
-        'country',
-        'email',
-        'phone',
-        'mobile',
         'notes',
         'internalnotes',
     ];
 
     protected $fillable = [
+        'defaulter',
         'id_client',
-        'name',
-        'lastname',
-        'vat',
-        'address',
-        'country',
-        'email',
-        'phone',
-        'mobile',
+        'company_id',
         'notes',
         'internalnotes',
-        'defaulter',
-        'lastuse',
-        'link_fd',
+        'link',
         'coordinates',
         'created_at',
         'updated_at',
@@ -91,18 +69,18 @@ class Client extends Model
         return $this->belongsToMany(Boat::class);
     }
 
+    public function company()
+    {
+        return $this->belongsTo(ContactCompany::class, 'company_id');
+    }
+
+    public function contacts()
+    {
+        return $this->belongsToMany(ContactContact::class);
+    }
+
     public function boats()
     {
         return $this->belongsToMany(Boat::class);
-    }
-
-    public function getLastuseAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
-    }
-
-    public function setLastuseAttribute($value)
-    {
-        $this->attributes['lastuse'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 }

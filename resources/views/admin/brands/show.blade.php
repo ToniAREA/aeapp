@@ -33,16 +33,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.brand.fields.provider') }}
-                        </th>
-                        <td>
-                            @foreach($brand->providers as $key => $provider)
-                                <span class="label label-info">{{ $provider->name }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.brand.fields.brand_logo') }}
                         </th>
                         <td>
@@ -59,6 +49,24 @@
                         </th>
                         <td>
                             {{ $brand->brand_url }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.brand.fields.providers') }}
+                        </th>
+                        <td>
+                            @foreach($brand->providers as $key => $providers)
+                                <span class="label label-info">{{ $providers->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.brand.fields.notes') }}
+                        </th>
+                        <td>
+                            {{ $brand->notes }}
                         </td>
                     </tr>
                     <tr>
@@ -91,7 +99,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#brand_providers" role="tab" data-toggle="tab">
+            <a class="nav-link" href="#brands_providers" role="tab" data-toggle="tab">
                 {{ trans('cruds.provider.title') }}
             </a>
         </li>
@@ -100,8 +108,8 @@
         <div class="tab-pane" role="tabpanel" id="brand_products">
             @includeIf('admin.brands.relationships.brandProducts', ['products' => $brand->brandProducts])
         </div>
-        <div class="tab-pane" role="tabpanel" id="brand_providers">
-            @includeIf('admin.brands.relationships.brandProviders', ['providers' => $brand->brandProviders])
+        <div class="tab-pane" role="tabpanel" id="brands_providers">
+            @includeIf('admin.brands.relationships.brandsProviders', ['providers' => $brand->brandsProviders])
         </div>
     </div>
 </div>

@@ -9,6 +9,8 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Boat;
 use App\Models\Client;
+use App\Models\ContactCompany;
+use App\Models\ContactContact;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +23,7 @@ class ClientsController extends Controller
     {
         abort_if(Gate::denies('client_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $clients = Client::with(['boats'])->get();
+        $clients = Client::with(['company', 'contacts', 'boats'])->get();
 
         return view('admin.clients.index', compact('clients'));
     }
@@ -30,14 +32,19 @@ class ClientsController extends Controller
     {
         abort_if(Gate::denies('client_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $companies = ContactCompany::pluck('company_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $contacts = ContactContact::pluck('contact_first_name', 'id');
+
         $boats = Boat::pluck('name', 'id');
 
-        return view('admin.clients.create', compact('boats'));
+        return view('admin.clients.create', compact('boats', 'companies', 'contacts'));
     }
 
     public function store(StoreClientRequest $request)
     {
         $client = Client::create($request->all());
+        $client->contacts()->sync($request->input('contacts', []));
         $client->boats()->sync($request->input('boats', []));
 
         return redirect()->route('admin.clients.index');
@@ -47,16 +54,21 @@ class ClientsController extends Controller
     {
         abort_if(Gate::denies('client_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $companies = ContactCompany::pluck('company_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $contacts = ContactContact::pluck('contact_first_name', 'id');
+
         $boats = Boat::pluck('name', 'id');
 
-        $client->load('boats');
+        $client->load('company', 'contacts', 'boats');
 
-        return view('admin.clients.edit', compact('boats', 'client'));
+        return view('admin.clients.edit', compact('boats', 'client', 'companies', 'contacts'));
     }
 
     public function update(UpdateClientRequest $request, Client $client)
     {
         $client->update($request->all());
+        $client->contacts()->sync($request->input('contacts', []));
         $client->boats()->sync($request->input('boats', []));
 
         return redirect()->route('admin.clients.index');
@@ -66,7 +78,7 @@ class ClientsController extends Controller
     {
         abort_if(Gate::denies('client_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $client->load('boats', 'clientWlists', 'clientAppointments', 'clientMlogs', 'clientProformas', 'clientBoats');
+        $client->load('company', 'contacts', 'boats', 'clientWlists', 'clientAppointments', 'clientMlogs', 'clientProformas', 'clientBoats');
 
         return view('admin.clients.show', compact('client'));
     }

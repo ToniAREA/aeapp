@@ -165,6 +165,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('claims/destroy', 'ClaimController@massDestroy')->name('claims.massDestroy');
     Route::resource('claims', 'ClaimController');
 
+    // Payment
+    Route::delete('payments/destroy', 'PaymentController@massDestroy')->name('payments.massDestroy');
+    Route::resource('payments', 'PaymentController');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
 });
@@ -306,6 +310,10 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     // Claim
     Route::delete('claims/destroy', 'ClaimController@massDestroy')->name('claims.massDestroy');
     Route::resource('claims', 'ClaimController');
+
+    // Payment
+    Route::delete('payments/destroy', 'PaymentController@massDestroy')->name('payments.massDestroy');
+    Route::resource('payments', 'PaymentController');
 
     Route::get('frontend/profile', 'ProfileController@index')->name('profile.index');
     Route::post('frontend/profile', 'ProfileController@update')->name('profile.update');

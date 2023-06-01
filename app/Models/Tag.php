@@ -36,4 +36,9 @@ class Tag extends Model
     {
         return $this->belongsToMany(Wlog::class);
     }
+
+    public function tagsWlists()
+    {
+        return $this->belongsToMany(Wlist::class);
+    }
 }

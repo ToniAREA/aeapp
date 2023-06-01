@@ -41,6 +41,10 @@ class StoreEmployeeRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'link' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

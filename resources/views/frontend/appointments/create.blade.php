@@ -28,6 +28,38 @@
                             <span class="help-block">{{ trans('cruds.appointment.fields.client_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="boat_id">{{ trans('cruds.appointment.fields.boat') }}</label>
+                            <select class="form-control select2" name="boat_id" id="boat_id">
+                                @foreach($boats as $id => $entry)
+                                    <option value="{{ $id }}" {{ old('boat_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('boat'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('boat') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.appointment.fields.boat_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="wlists">{{ trans('cruds.appointment.fields.wlists') }}</label>
+                            <div style="padding-bottom: 4px">
+                                <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                                <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                            </div>
+                            <select class="form-control select2" name="wlists[]" id="wlists" multiple>
+                                @foreach($wlists as $id => $wlist)
+                                    <option value="{{ $id }}" {{ in_array($id, old('wlists', [])) ? 'selected' : '' }}>{{ $wlist }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('wlists'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('wlists') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.appointment.fields.wlists_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label for="for_roles">{{ trans('cruds.appointment.fields.for_role') }}</label>
                             <div style="padding-bottom: 4px">
                                 <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
@@ -92,6 +124,40 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.appointment.fields.description_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="priority_id">{{ trans('cruds.appointment.fields.priority') }}</label>
+                            <select class="form-control select2" name="priority_id" id="priority_id">
+                                @foreach($priorities as $id => $entry)
+                                    <option value="{{ $id }}" {{ old('priority_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('priority'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('priority') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.appointment.fields.priority_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="coordinates">{{ trans('cruds.appointment.fields.coordinates') }}</label>
+                            <input class="form-control" type="text" name="coordinates" id="coordinates" value="{{ old('coordinates', '') }}">
+                            @if($errors->has('coordinates'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('coordinates') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.appointment.fields.coordinates_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">{{ trans('cruds.appointment.fields.status') }}</label>
+                            <input class="form-control" type="text" name="status" id="status" value="{{ old('status', '') }}">
+                            @if($errors->has('status'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('status') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.appointment.fields.status_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">

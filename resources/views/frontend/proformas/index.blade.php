@@ -36,19 +36,22 @@
                                         {{ trans('cruds.proforma.fields.client') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.client.fields.lastname') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.proforma.fields.date') }}
+                                        {{ trans('cruds.proforma.fields.boats') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.proforma.fields.wlists') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.proforma.fields.date') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.proforma.fields.description') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.proforma.fields.total_amount') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.proforma.fields.currency') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.proforma.fields.sent') }}
@@ -58,6 +61,12 @@
                                     </th>
                                     <th>
                                         {{ trans('cruds.proforma.fields.claims') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.proforma.fields.tags') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.proforma.fields.link') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -74,24 +83,29 @@
                                             {{ $proforma->proforma_number ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $proforma->client->name ?? '' }}
+                                            {{ $proforma->client->id_client ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $proforma->client->lastname ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $proforma->date ?? '' }}
+                                            @foreach($proforma->boats as $key => $item)
+                                                <span>{{ $item->name }}</span>
+                                            @endforeach
                                         </td>
                                         <td>
                                             @foreach($proforma->wlists as $key => $item)
-                                                <span>{{ $item->desciption }}</span>
+                                                <span>{{ $item->description }}</span>
                                             @endforeach
+                                        </td>
+                                        <td>
+                                            {{ $proforma->date ?? '' }}
                                         </td>
                                         <td>
                                             {{ $proforma->description ?? '' }}
                                         </td>
                                         <td>
                                             {{ $proforma->total_amount ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $proforma->currency ?? '' }}
                                         </td>
                                         <td>
                                             <span style="display:none">{{ $proforma->sent ?? '' }}</span>
@@ -103,6 +117,14 @@
                                         </td>
                                         <td>
                                             {{ $proforma->claims ?? '' }}
+                                        </td>
+                                        <td>
+                                            @foreach($proforma->tags as $key => $item)
+                                                <span>{{ $item->name }}</span>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            {{ $proforma->link ?? '' }}
                                         </td>
                                         <td>
                                             @can('proforma_show')

@@ -24,10 +24,6 @@ class StoreBoatRequest extends FormRequest
                 'max:2147483647',
                 'unique:boats,id_boat',
             ],
-            'type' => [
-                'string',
-                'nullable',
-            ],
             'name' => [
                 'string',
                 'min:1',
@@ -56,8 +52,8 @@ class StoreBoatRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'lastuse' => [
-                'date_format:' . config('panel.date_format'),
+            'coordinates' => [
+                'string',
                 'nullable',
             ],
         ];

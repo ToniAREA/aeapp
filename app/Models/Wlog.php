@@ -27,13 +27,14 @@ class Wlog extends Model
     ];
 
     protected $fillable = [
-        'date',
         'wlist_id',
+        'date',
         'employee_id',
         'marina_id',
         'description',
         'hours',
         'proforma_number_id',
+        'invoiced_line',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -44,6 +45,11 @@ class Wlog extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
+    public function wlist()
+    {
+        return $this->belongsTo(Wlist::class, 'wlist_id');
+    }
+
     public function getDateAttribute($value)
     {
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
@@ -52,11 +58,6 @@ class Wlog extends Model
     public function setDateAttribute($value)
     {
         $this->attributes['date'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    }
-
-    public function wlist()
-    {
-        return $this->belongsTo(Wlist::class, 'wlist_id');
     }
 
     public function employee()

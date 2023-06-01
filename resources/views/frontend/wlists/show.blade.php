@@ -31,7 +31,7 @@
                                         {{ trans('cruds.wlist.fields.client') }}
                                     </th>
                                     <td>
-                                        {{ $wlist->client->name ?? '' }}
+                                        {{ $wlist->client->id_client ?? '' }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -44,10 +44,18 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.wlist.fields.desciption') }}
+                                        {{ trans('cruds.wlist.fields.order_type') }}
                                     </th>
                                     <td>
-                                        {{ $wlist->desciption }}
+                                        {{ App\Models\Wlist::ORDER_TYPE_RADIO[$wlist->order_type] ?? '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.description') }}
+                                    </th>
+                                    <td>
+                                        {{ $wlist->description }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -100,11 +108,35 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.wlist.fields.wlogs') }}
+                                        {{ trans('cruds.wlist.fields.status') }}
                                     </th>
                                     <td>
-                                        @foreach($wlist->wlogs as $key => $wlogs)
-                                            <span class="label label-info">{{ $wlogs->date }}</span>
+                                        {{ $wlist->status }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.url_invoice') }}
+                                    </th>
+                                    <td>
+                                        {{ $wlist->url_invoice }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.notes') }}
+                                    </th>
+                                    <td>
+                                        {{ $wlist->notes }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.wlist.fields.tags') }}
+                                    </th>
+                                    <td>
+                                        @foreach($wlist->tags as $key => $tags)
+                                            <span class="label label-info">{{ $tags->name }}</span>
                                         @endforeach
                                     </td>
                                 </tr>

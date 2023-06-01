@@ -21,6 +21,7 @@ class Priority extends Model
 
     protected $fillable = [
         'level',
+        'weight',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -39,5 +40,10 @@ class Priority extends Model
     public function priorityWlists()
     {
         return $this->hasMany(Wlist::class, 'priority_id', 'id');
+    }
+
+    public function priorityAppointments()
+    {
+        return $this->hasMany(Appointment::class, 'priority_id', 'id');
     }
 }

@@ -33,6 +33,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.contentPage.fields.slug') }}
+                        </th>
+                        <td>
+                            {{ $contentPage->slug }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.contentPage.fields.category') }}
                         </th>
                         <td>

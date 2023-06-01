@@ -33,6 +33,9 @@
                                         {{ trans('cruds.productCategory.fields.name') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.productCategory.fields.category_slug') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.productCategory.fields.description') }}
                                     </th>
                                     <th>
@@ -51,6 +54,9 @@
                                         </td>
                                         <td>
                                             {{ $productCategory->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $productCategory->category_slug ?? '' }}
                                         </td>
                                         <td>
                                             {{ $productCategory->description ?? '' }}

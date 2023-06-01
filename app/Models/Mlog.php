@@ -33,6 +33,7 @@ class Mlog extends Model
         'total',
         'status',
         'proforma_number_id',
+        'invoiced_line',
         'created_at',
         'updated_at',
         'deleted_at',

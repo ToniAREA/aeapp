@@ -28,6 +28,7 @@ class ContentPage extends Model implements HasMedia
 
     protected $fillable = [
         'title',
+        'slug',
         'page_text',
         'excerpt',
         'created_at',

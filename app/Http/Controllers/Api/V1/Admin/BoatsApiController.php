@@ -17,7 +17,7 @@ class BoatsApiController extends Controller
     {
         abort_if(Gate::denies('boat_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new BoatResource(Boat::with(['marina', 'clients'])->get());
+        return new BoatResource(Boat::with(['boat_type', 'marina', 'clients'])->get());
     }
 
     public function store(StoreBoatRequest $request)
@@ -34,7 +34,7 @@ class BoatsApiController extends Controller
     {
         abort_if(Gate::denies('boat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new BoatResource($boat->load(['marina', 'clients']));
+        return new BoatResource($boat->load(['boat_type', 'marina', 'clients']));
     }
 
     public function update(UpdateBoatRequest $request, Boat $boat)

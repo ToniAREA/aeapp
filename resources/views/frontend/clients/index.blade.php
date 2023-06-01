@@ -30,34 +30,22 @@
                                         {{ trans('cruds.client.fields.id') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.client.fields.defaulter') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.client.fields.id_client') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.client.fields.name') }}
+                                        {{ trans('cruds.client.fields.company') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.client.fields.lastname') }}
+                                        {{ trans('cruds.contactCompany.fields.company_email') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.client.fields.contacts') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.client.fields.boats') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.client.fields.vat') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.client.fields.address') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.client.fields.country') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.client.fields.email') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.client.fields.phone') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.client.fields.mobile') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.client.fields.notes') }}
@@ -66,13 +54,7 @@
                                         {{ trans('cruds.client.fields.internalnotes') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.client.fields.defaulter') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.client.fields.lastuse') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.client.fields.link_fd') }}
+                                        {{ trans('cruds.client.fields.link') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.client.fields.coordinates') }}
@@ -89,36 +71,27 @@
                                             {{ $client->id ?? '' }}
                                         </td>
                                         <td>
+                                            <span style="display:none">{{ $client->defaulter ?? '' }}</span>
+                                            <input type="checkbox" disabled="disabled" {{ $client->defaulter ? 'checked' : '' }}>
+                                        </td>
+                                        <td>
                                             {{ $client->id_client ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $client->name ?? '' }}
+                                            {{ $client->company->company_name ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $client->lastname ?? '' }}
+                                            {{ $client->company->company_email ?? '' }}
+                                        </td>
+                                        <td>
+                                            @foreach($client->contacts as $key => $item)
+                                                <span>{{ $item->contact_first_name }}</span>
+                                            @endforeach
                                         </td>
                                         <td>
                                             @foreach($client->boats as $key => $item)
                                                 <span>{{ $item->name }}</span>
                                             @endforeach
-                                        </td>
-                                        <td>
-                                            {{ $client->vat ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $client->address ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $client->country ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $client->email ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $client->phone ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $client->mobile ?? '' }}
                                         </td>
                                         <td>
                                             {{ $client->notes ?? '' }}
@@ -127,13 +100,7 @@
                                             {{ $client->internalnotes ?? '' }}
                                         </td>
                                         <td>
-                                            {{ App\Models\Client::DEFAULTER_RADIO[$client->defaulter] ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $client->lastuse ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $client->link_fd ?? '' }}
+                                            {{ $client->link ?? '' }}
                                         </td>
                                         <td>
                                             {{ $client->coordinates ?? '' }}
@@ -210,7 +177,7 @@
 
   $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
+    order: [[ 2, 'desc' ]],
     pageLength: 100,
   });
   let table = $('.datatable-Client:not(.ajaxTable)').DataTable({ buttons: dtButtons })

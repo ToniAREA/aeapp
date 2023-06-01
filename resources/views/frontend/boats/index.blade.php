@@ -33,7 +33,7 @@
                                         {{ trans('cruds.boat.fields.id_boat') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.boat.fields.type') }}
+                                        {{ trans('cruds.boat.fields.boat_type') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.boat.fields.name') }}
@@ -57,7 +57,7 @@
                                         {{ trans('cruds.boat.fields.internalnotes') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.boat.fields.lastuse') }}
+                                        {{ trans('cruds.boat.fields.coordinates') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -74,7 +74,7 @@
                                             {{ $boat->id_boat ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $boat->type ?? '' }}
+                                            {{ $boat->boat_type->type ?? '' }}
                                         </td>
                                         <td>
                                             {{ $boat->name ?? '' }}
@@ -90,7 +90,7 @@
                                         </td>
                                         <td>
                                             @foreach($boat->clients as $key => $item)
-                                                <span>{{ $item->name }}</span>
+                                                <span>{{ $item->id_client }}</span>
                                             @endforeach
                                         </td>
                                         <td>
@@ -100,7 +100,7 @@
                                             {{ $boat->internalnotes ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $boat->lastuse ?? '' }}
+                                            {{ $boat->coordinates ?? '' }}
                                         </td>
                                         <td>
                                             @can('boat_show')

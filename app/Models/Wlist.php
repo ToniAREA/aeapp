@@ -29,12 +29,22 @@ class Wlist extends Model implements HasMedia
         'deleted_at',
     ];
 
+    public const ORDER_TYPE_RADIO = [
+        'estimate' => 'Estimate',
+        'order'    => 'Order',
+        'work'     => 'Work',
+    ];
+
     protected $fillable = [
         'client_id',
         'boat_id',
-        'desciption',
+        'order_type',
+        'description',
         'deadline',
         'priority_id',
+        'status',
+        'url_invoice',
+        'notes',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -59,6 +69,11 @@ class Wlist extends Model implements HasMedia
     public function wlistMlogs()
     {
         return $this->hasMany(Mlog::class, 'wlist_id', 'id');
+    }
+
+    public function wlistsAppointments()
+    {
+        return $this->belongsToMany(Appointment::class);
     }
 
     public function wlistsProformas()
@@ -111,5 +126,10 @@ class Wlist extends Model implements HasMedia
     public function for_users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

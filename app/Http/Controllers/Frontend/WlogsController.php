@@ -34,7 +34,7 @@ class WlogsController extends Controller
     {
         abort_if(Gate::denies('wlog_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $wlists = Wlist::pluck('description', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -59,7 +59,7 @@ class WlogsController extends Controller
     {
         abort_if(Gate::denies('wlog_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlists = Wlist::pluck('desciption', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $wlists = Wlist::pluck('description', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 

@@ -28,6 +28,14 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.client.fields.defaulter') }}
+                                    </th>
+                                    <td>
+                                        <input type="checkbox" disabled="disabled" {{ $client->defaulter ? 'checked' : '' }}>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.client.fields.id_client') }}
                                     </th>
                                     <td>
@@ -36,18 +44,20 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.client.fields.name') }}
+                                        {{ trans('cruds.client.fields.company') }}
                                     </th>
                                     <td>
-                                        {{ $client->name }}
+                                        {{ $client->company->company_name ?? '' }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.client.fields.lastname') }}
+                                        {{ trans('cruds.client.fields.contacts') }}
                                     </th>
                                     <td>
-                                        {{ $client->lastname }}
+                                        @foreach($client->contacts as $key => $contacts)
+                                            <span class="label label-info">{{ $contacts->contact_first_name }}</span>
+                                        @endforeach
                                     </td>
                                 </tr>
                                 <tr>
@@ -58,54 +68,6 @@
                                         @foreach($client->boats as $key => $boats)
                                             <span class="label label-info">{{ $boats->name }}</span>
                                         @endforeach
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.client.fields.vat') }}
-                                    </th>
-                                    <td>
-                                        {{ $client->vat }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.client.fields.address') }}
-                                    </th>
-                                    <td>
-                                        {{ $client->address }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.client.fields.country') }}
-                                    </th>
-                                    <td>
-                                        {{ $client->country }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.client.fields.email') }}
-                                    </th>
-                                    <td>
-                                        {{ $client->email }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.client.fields.phone') }}
-                                    </th>
-                                    <td>
-                                        {{ $client->phone }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.client.fields.mobile') }}
-                                    </th>
-                                    <td>
-                                        {{ $client->mobile }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -126,26 +88,10 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.client.fields.defaulter') }}
+                                        {{ trans('cruds.client.fields.link') }}
                                     </th>
                                     <td>
-                                        {{ App\Models\Client::DEFAULTER_RADIO[$client->defaulter] ?? '' }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.client.fields.lastuse') }}
-                                    </th>
-                                    <td>
-                                        {{ $client->lastuse }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.client.fields.link_fd') }}
-                                    </th>
-                                    <td>
-                                        {{ $client->link_fd }}
+                                        {{ $client->link }}
                                     </td>
                                 </tr>
                                 <tr>

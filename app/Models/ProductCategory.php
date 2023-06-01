@@ -29,6 +29,7 @@ class ProductCategory extends Model implements HasMedia
 
     protected $fillable = [
         'name',
+        'category_slug',
         'description',
         'created_at',
         'updated_at',

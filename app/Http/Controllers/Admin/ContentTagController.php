@@ -68,7 +68,11 @@ class ContentTagController extends Controller
 
     public function massDestroy(MassDestroyContentTagRequest $request)
     {
-        ContentTag::whereIn('id', request('ids'))->delete();
+        $contentTags = ContentTag::find(request('ids'));
+
+        foreach ($contentTags as $contentTag) {
+            $contentTag->delete();
+        }
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

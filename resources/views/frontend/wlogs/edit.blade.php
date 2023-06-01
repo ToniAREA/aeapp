@@ -14,18 +14,8 @@
                         @method('PUT')
                         @csrf
                         <div class="form-group">
-                            <label class="required" for="date">{{ trans('cruds.wlog.fields.date') }}</label>
-                            <input class="form-control date" type="text" name="date" id="date" value="{{ old('date', $wlog->date) }}" required>
-                            @if($errors->has('date'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('date') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.wlog.fields.date_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label class="required" for="wlist_id">{{ trans('cruds.wlog.fields.wlist') }}</label>
-                            <select class="form-control select2" name="wlist_id" id="wlist_id" required>
+                            <label for="wlist_id">{{ trans('cruds.wlog.fields.wlist') }}</label>
+                            <select class="form-control select2" name="wlist_id" id="wlist_id">
                                 @foreach($wlists as $id => $entry)
                                     <option value="{{ $id }}" {{ (old('wlist_id') ? old('wlist_id') : $wlog->wlist->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
                                 @endforeach
@@ -36,6 +26,16 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.wlog.fields.wlist_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="date">{{ trans('cruds.wlog.fields.date') }}</label>
+                            <input class="form-control date" type="text" name="date" id="date" value="{{ old('date', $wlog->date) }}" required>
+                            @if($errors->has('date'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('date') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.wlog.fields.date_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label class="required" for="employee_id">{{ trans('cruds.wlog.fields.employee') }}</label>
@@ -102,6 +102,33 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.wlog.fields.tags_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="proforma_number_id">{{ trans('cruds.wlog.fields.proforma_number') }}</label>
+                            <select class="form-control select2" name="proforma_number_id" id="proforma_number_id">
+                                @foreach($proforma_numbers as $id => $entry)
+                                    <option value="{{ $id }}" {{ (old('proforma_number_id') ? old('proforma_number_id') : $wlog->proforma_number->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('proforma_number'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('proforma_number') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.wlog.fields.proforma_number_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <input type="hidden" name="invoiced_line" value="0">
+                                <input type="checkbox" name="invoiced_line" id="invoiced_line" value="1" {{ $wlog->invoiced_line || old('invoiced_line', 0) === 1 ? 'checked' : '' }}>
+                                <label for="invoiced_line">{{ trans('cruds.wlog.fields.invoiced_line') }}</label>
+                            </div>
+                            @if($errors->has('invoiced_line'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('invoiced_line') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.wlog.fields.invoiced_line_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">

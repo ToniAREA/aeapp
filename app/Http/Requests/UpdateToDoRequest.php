@@ -45,6 +45,10 @@ class UpdateToDoRequest extends FormRequest
             'for_users' => [
                 'array',
             ],
+            'notes' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

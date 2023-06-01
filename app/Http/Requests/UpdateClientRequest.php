@@ -24,41 +24,17 @@ class UpdateClientRequest extends FormRequest
                 'max:2147483647',
                 'unique:clients,id_client,' . request()->route('client')->id,
             ],
-            'name' => [
-                'string',
-                'min:4',
-                'max:50',
-                'required',
+            'contacts.*' => [
+                'integer',
             ],
-            'lastname' => [
-                'string',
-                'nullable',
+            'contacts' => [
+                'array',
             ],
             'boats.*' => [
                 'integer',
             ],
             'boats' => [
                 'array',
-            ],
-            'vat' => [
-                'string',
-                'nullable',
-            ],
-            'address' => [
-                'string',
-                'nullable',
-            ],
-            'country' => [
-                'string',
-                'nullable',
-            ],
-            'phone' => [
-                'string',
-                'nullable',
-            ],
-            'mobile' => [
-                'string',
-                'nullable',
             ],
             'notes' => [
                 'string',
@@ -68,11 +44,7 @@ class UpdateClientRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'lastuse' => [
-                'date_format:' . config('panel.date_format'),
-                'nullable',
-            ],
-            'link_fd' => [
+            'link' => [
                 'string',
                 'nullable',
             ],

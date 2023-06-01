@@ -24,14 +24,18 @@
                             <span class="help-block">{{ trans('cruds.boat.fields.id_boat_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="type">{{ trans('cruds.boat.fields.type') }}</label>
-                            <input class="form-control" type="text" name="type" id="type" value="{{ old('type', $boat->type) }}">
-                            @if($errors->has('type'))
+                            <label for="boat_type_id">{{ trans('cruds.boat.fields.boat_type') }}</label>
+                            <select class="form-control select2" name="boat_type_id" id="boat_type_id">
+                                @foreach($boat_types as $id => $entry)
+                                    <option value="{{ $id }}" {{ (old('boat_type_id') ? old('boat_type_id') : $boat->boat_type->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('boat_type'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('type') }}
+                                    {{ $errors->first('boat_type') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.boat.fields.type_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.boat.fields.boat_type_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label class="required" for="name">{{ trans('cruds.boat.fields.name') }}</label>
@@ -116,14 +120,14 @@
                             <span class="help-block">{{ trans('cruds.boat.fields.internalnotes_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="lastuse">{{ trans('cruds.boat.fields.lastuse') }}</label>
-                            <input class="form-control date" type="text" name="lastuse" id="lastuse" value="{{ old('lastuse', $boat->lastuse) }}">
-                            @if($errors->has('lastuse'))
+                            <label for="coordinates">{{ trans('cruds.boat.fields.coordinates') }}</label>
+                            <input class="form-control" type="text" name="coordinates" id="coordinates" value="{{ old('coordinates', $boat->coordinates) }}">
+                            @if($errors->has('coordinates'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('lastuse') }}
+                                    {{ $errors->first('coordinates') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.boat.fields.lastuse_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.boat.fields.coordinates_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">

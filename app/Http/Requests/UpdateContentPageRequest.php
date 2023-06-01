@@ -21,6 +21,10 @@ class UpdateContentPageRequest extends FormRequest
                 'string',
                 'required',
             ],
+            'slug' => [
+                'string',
+                'nullable',
+            ],
             'categories.*' => [
                 'integer',
             ],

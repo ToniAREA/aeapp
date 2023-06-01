@@ -24,7 +24,7 @@ class ProviderController extends Controller
     {
         abort_if(Gate::denies('provider_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $providers = Provider::with(['brands', 'company', 'media'])->get();
+        $providers = Provider::with(['company', 'brands', 'media'])->get();
 
         return view('admin.providers.index', compact('providers'));
     }
@@ -33,9 +33,9 @@ class ProviderController extends Controller
     {
         abort_if(Gate::denies('provider_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $brands = Brand::pluck('brand', 'id');
-
         $companies = ContactCompany::pluck('company_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $brands = Brand::pluck('brand', 'id');
 
         return view('admin.providers.create', compact('brands', 'companies'));
     }
@@ -44,12 +44,12 @@ class ProviderController extends Controller
     {
         $provider = Provider::create($request->all());
         $provider->brands()->sync($request->input('brands', []));
-        foreach ($request->input('price_list', []) as $file) {
-            $provider->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('price_list');
-        }
-
         if ($request->input('provider_logo', false)) {
             $provider->addMedia(storage_path('tmp/uploads/' . basename($request->input('provider_logo'))))->toMediaCollection('provider_logo');
+        }
+
+        foreach ($request->input('price_lists', []) as $file) {
+            $provider->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('price_lists');
         }
 
         if ($media = $request->input('ck-media', false)) {
@@ -63,11 +63,11 @@ class ProviderController extends Controller
     {
         abort_if(Gate::denies('provider_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $brands = Brand::pluck('brand', 'id');
-
         $companies = ContactCompany::pluck('company_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $provider->load('brands', 'company');
+        $brands = Brand::pluck('brand', 'id');
+
+        $provider->load('company', 'brands');
 
         return view('admin.providers.edit', compact('brands', 'companies', 'provider'));
     }
@@ -76,20 +76,6 @@ class ProviderController extends Controller
     {
         $provider->update($request->all());
         $provider->brands()->sync($request->input('brands', []));
-        if (count($provider->price_list) > 0) {
-            foreach ($provider->price_list as $media) {
-                if (! in_array($media->file_name, $request->input('price_list', []))) {
-                    $media->delete();
-                }
-            }
-        }
-        $media = $provider->price_list->pluck('file_name')->toArray();
-        foreach ($request->input('price_list', []) as $file) {
-            if (count($media) === 0 || ! in_array($file, $media)) {
-                $provider->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('price_list');
-            }
-        }
-
         if ($request->input('provider_logo', false)) {
             if (! $provider->provider_logo || $request->input('provider_logo') !== $provider->provider_logo->file_name) {
                 if ($provider->provider_logo) {
@@ -101,6 +87,20 @@ class ProviderController extends Controller
             $provider->provider_logo->delete();
         }
 
+        if (count($provider->price_lists) > 0) {
+            foreach ($provider->price_lists as $media) {
+                if (! in_array($media->file_name, $request->input('price_lists', []))) {
+                    $media->delete();
+                }
+            }
+        }
+        $media = $provider->price_lists->pluck('file_name')->toArray();
+        foreach ($request->input('price_lists', []) as $file) {
+            if (count($media) === 0 || ! in_array($file, $media)) {
+                $provider->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('price_lists');
+            }
+        }
+
         return redirect()->route('admin.providers.index');
     }
 
@@ -108,7 +108,7 @@ class ProviderController extends Controller
     {
         abort_if(Gate::denies('provider_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $provider->load('brands', 'company', 'providerBrands');
+        $provider->load('company', 'brands', 'providersBrands');
 
         return view('admin.providers.show', compact('provider'));
     }

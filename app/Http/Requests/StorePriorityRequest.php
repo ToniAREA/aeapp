@@ -22,6 +22,12 @@ class StorePriorityRequest extends FormRequest
                 'max:10',
                 'nullable',
             ],
+            'weight' => [
+                'nullable',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+            ],
         ];
     }
 }

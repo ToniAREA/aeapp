@@ -21,6 +21,10 @@ class UpdateProductCategoryRequest extends FormRequest
                 'string',
                 'required',
             ],
+            'category_slug' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

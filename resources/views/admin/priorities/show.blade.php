@@ -31,6 +31,14 @@
                             {{ $priority->level }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.priority.fields.weight') }}
+                        </th>
+                        <td>
+                            {{ $priority->weight }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -57,6 +65,11 @@
                 {{ trans('cruds.wlist.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#priority_appointments" role="tab" data-toggle="tab">
+                {{ trans('cruds.appointment.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="priority_to_dos">
@@ -64,6 +77,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="priority_wlists">
             @includeIf('admin.priorities.relationships.priorityWlists', ['wlists' => $priority->priorityWlists])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="priority_appointments">
+            @includeIf('admin.priorities.relationships.priorityAppointments', ['appointments' => $priority->priorityAppointments])
         </div>
     </div>
 </div>

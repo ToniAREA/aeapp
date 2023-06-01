@@ -33,13 +33,16 @@
                             {{ trans('cruds.brand.fields.brand') }}
                         </th>
                         <th>
-                            {{ trans('cruds.brand.fields.provider') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.brand.fields.brand_logo') }}
                         </th>
                         <th>
                             {{ trans('cruds.brand.fields.brand_url') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.brand.fields.providers') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.brand.fields.notes') }}
                         </th>
                         <th>
                             {{ trans('cruds.brand.fields.internal_notes') }}
@@ -62,11 +65,6 @@
                                 {{ $brand->brand ?? '' }}
                             </td>
                             <td>
-                                @foreach($brand->providers as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
                                 @if($brand->brand_logo)
                                     <a href="{{ $brand->brand_logo->getUrl() }}" target="_blank" style="display: inline-block">
                                         <img src="{{ $brand->brand_logo->getUrl('thumb') }}">
@@ -75,6 +73,14 @@
                             </td>
                             <td>
                                 {{ $brand->brand_url ?? '' }}
+                            </td>
+                            <td>
+                                @foreach($brand->providers as $key => $item)
+                                    <span class="badge badge-info">{{ $item->name }}</span>
+                                @endforeach
+                            </td>
+                            <td>
+                                {{ $brand->notes ?? '' }}
                             </td>
                             <td>
                                 {{ $brand->internal_notes ?? '' }}

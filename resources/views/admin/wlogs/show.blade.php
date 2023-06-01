@@ -25,18 +25,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.wlog.fields.date') }}
+                            {{ trans('cruds.wlog.fields.wlist') }}
                         </th>
                         <td>
-                            {{ $wlog->date }}
+                            {{ $wlog->wlist->description ?? '' }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.wlog.fields.wlist') }}
+                            {{ trans('cruds.wlog.fields.date') }}
                         </th>
                         <td>
-                            {{ $wlog->wlist->desciption ?? '' }}
+                            {{ $wlog->date }}
                         </td>
                     </tr>
                     <tr>
@@ -87,6 +87,14 @@
                         </th>
                         <td>
                             {{ $wlog->proforma_number->proforma_number ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.wlog.fields.invoiced_line') }}
+                        </th>
+                        <td>
+                            <input type="checkbox" disabled="disabled" {{ $wlog->invoiced_line ? 'checked' : '' }}>
                         </td>
                     </tr>
                 </tbody>

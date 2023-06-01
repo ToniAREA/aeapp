@@ -37,11 +37,19 @@ class UpdateContactContactRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'contact_mobile' => [
+                'string',
+                'nullable',
+            ],
+            'contact_mobile_2' => [
+                'string',
+                'nullable',
+            ],
             'contact_email' => [
                 'string',
                 'nullable',
             ],
-            'contact_mobile' => [
+            'social_link' => [
                 'string',
                 'nullable',
             ],
