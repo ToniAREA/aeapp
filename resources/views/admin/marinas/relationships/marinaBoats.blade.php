@@ -55,6 +55,9 @@
                                 {{ trans('cruds.boat.fields.coordinates') }}
                             </th>
                             <th>
+                                {{ trans('cruds.boat.fields.link') }}
+                            </th>
+                            <th>
                                 &nbsp;
                             </th>
                         </tr>
@@ -99,6 +102,9 @@
                                 </td>
                                 <td>
                                     {{ $boat->coordinates ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $boat->link ?? '' }}
                                 </td>
                                 <td>
                                     @can('boat_show')

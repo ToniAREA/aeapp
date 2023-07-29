@@ -12,6 +12,14 @@ class CreateClientsTable extends Migration
             $table->bigIncrements('id');
             $table->boolean('defaulter')->default(0)->nullable();
             $table->integer('id_client')->unique();
+            $table->string('name')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('vat')->nullable();
+            $table->string('address')->nullable();
+            $table->string('country')->nullable();
+            $table->string('telephone')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('email')->nullable();
             $table->string('notes')->nullable();
             $table->string('internalnotes')->nullable();
             $table->string('link')->nullable();

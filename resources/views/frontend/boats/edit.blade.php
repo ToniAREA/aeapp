@@ -130,6 +130,16 @@
                             <span class="help-block">{{ trans('cruds.boat.fields.coordinates_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="link">{{ trans('cruds.boat.fields.link') }}</label>
+                            <input class="form-control" type="text" name="link" id="link" value="{{ old('link', $boat->link) }}">
+                            @if($errors->has('link'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('link') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.link_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <button class="btn btn-danger" type="submit">
                                 {{ trans('global.save') }}
                             </button>

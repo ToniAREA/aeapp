@@ -41,6 +41,70 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.client.fields.name') }}
+                        </th>
+                        <td>
+                            {{ $client->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.lastname') }}
+                        </th>
+                        <td>
+                            {{ $client->lastname }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.vat') }}
+                        </th>
+                        <td>
+                            {{ $client->vat }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.address') }}
+                        </th>
+                        <td>
+                            {{ $client->address }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.country') }}
+                        </th>
+                        <td>
+                            {{ $client->country }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.telephone') }}
+                        </th>
+                        <td>
+                            {{ $client->telephone }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.mobile') }}
+                        </th>
+                        <td>
+                            {{ $client->mobile }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.email') }}
+                        </th>
+                        <td>
+                            {{ $client->email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.client.fields.company') }}
                         </th>
                         <td>

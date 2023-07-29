@@ -105,6 +105,14 @@
                             {{ $boat->coordinates }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.boat.fields.link') }}
+                        </th>
+                        <td>
+                            {{ $boat->link }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

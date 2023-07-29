@@ -37,6 +37,86 @@
                             <span class="help-block">{{ trans('cruds.client.fields.id_client_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="name">{{ trans('cruds.client.fields.name') }}</label>
+                            <input class="form-control" type="text" name="name" id="name" value="{{ old('name', '') }}">
+                            @if($errors->has('name'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('name') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.client.fields.name_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">{{ trans('cruds.client.fields.lastname') }}</label>
+                            <input class="form-control" type="text" name="lastname" id="lastname" value="{{ old('lastname', '') }}">
+                            @if($errors->has('lastname'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('lastname') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.client.fields.lastname_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="vat">{{ trans('cruds.client.fields.vat') }}</label>
+                            <input class="form-control" type="text" name="vat" id="vat" value="{{ old('vat', '') }}">
+                            @if($errors->has('vat'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('vat') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.client.fields.vat_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">{{ trans('cruds.client.fields.address') }}</label>
+                            <input class="form-control" type="text" name="address" id="address" value="{{ old('address', '') }}">
+                            @if($errors->has('address'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('address') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.client.fields.address_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">{{ trans('cruds.client.fields.country') }}</label>
+                            <input class="form-control" type="text" name="country" id="country" value="{{ old('country', '') }}">
+                            @if($errors->has('country'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('country') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.client.fields.country_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone">{{ trans('cruds.client.fields.telephone') }}</label>
+                            <input class="form-control" type="text" name="telephone" id="telephone" value="{{ old('telephone', '') }}">
+                            @if($errors->has('telephone'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('telephone') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.client.fields.telephone_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">{{ trans('cruds.client.fields.mobile') }}</label>
+                            <input class="form-control" type="text" name="mobile" id="mobile" value="{{ old('mobile', '') }}">
+                            @if($errors->has('mobile'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('mobile') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.client.fields.mobile_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">{{ trans('cruds.client.fields.email') }}</label>
+                            <input class="form-control" type="text" name="email" id="email" value="{{ old('email', '') }}">
+                            @if($errors->has('email'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('email') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.client.fields.email_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label for="company_id">{{ trans('cruds.client.fields.company') }}</label>
                             <select class="form-control select2" name="company_id" id="company_id">
                                 @foreach($companies as $id => $entry)
