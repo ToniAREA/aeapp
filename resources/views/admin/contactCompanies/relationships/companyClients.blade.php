@@ -31,6 +31,30 @@
                                 {{ trans('cruds.client.fields.id_client') }}
                             </th>
                             <th>
+                                {{ trans('cruds.client.fields.name') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.client.fields.lastname') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.client.fields.vat') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.client.fields.address') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.client.fields.country') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.client.fields.telephone') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.client.fields.mobile') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.client.fields.email') }}
+                            </th>
+                            <th>
                                 {{ trans('cruds.client.fields.company') }}
                             </th>
                             <th>
@@ -74,6 +98,30 @@
                                 </td>
                                 <td>
                                     {{ $client->id_client ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $client->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $client->lastname ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $client->vat ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $client->address ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $client->country ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $client->telephone ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $client->mobile ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $client->email ?? '' }}
                                 </td>
                                 <td>
                                     {{ $client->company->company_name ?? '' }}

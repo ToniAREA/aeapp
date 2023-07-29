@@ -56,6 +56,10 @@ class UpdateBoatRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'link' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

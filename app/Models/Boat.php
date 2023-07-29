@@ -37,6 +37,7 @@ class Boat extends Model
         'notes',
         'internalnotes',
         'coordinates',
+        'link',
         'created_at',
         'updated_at',
         'deleted_at',

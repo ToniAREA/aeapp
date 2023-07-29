@@ -25,7 +25,13 @@ class BoatsController extends Controller
 
         $boats = Boat::with(['boat_type', 'marina', 'clients'])->get();
 
-        return view('admin.boats.index', compact('boats'));
+        $boats_types = BoatsType::get();
+
+        $marinas = Marina::get();
+
+        $clients = Client::get();
+
+        return view('admin.boats.index', compact('boats', 'boats_types', 'clients', 'marinas'));
     }
 
     public function create()

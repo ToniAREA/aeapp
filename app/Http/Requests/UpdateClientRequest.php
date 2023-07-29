@@ -24,6 +24,38 @@ class UpdateClientRequest extends FormRequest
                 'max:2147483647',
                 'unique:clients,id_client,' . request()->route('client')->id,
             ],
+            'name' => [
+                'string',
+                'nullable',
+            ],
+            'lastname' => [
+                'string',
+                'nullable',
+            ],
+            'vat' => [
+                'string',
+                'nullable',
+            ],
+            'address' => [
+                'string',
+                'nullable',
+            ],
+            'country' => [
+                'string',
+                'nullable',
+            ],
+            'telephone' => [
+                'string',
+                'nullable',
+            ],
+            'mobile' => [
+                'string',
+                'nullable',
+            ],
+            'email' => [
+                'string',
+                'nullable',
+            ],
             'contacts.*' => [
                 'integer',
             ],

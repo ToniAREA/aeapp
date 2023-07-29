@@ -56,6 +56,10 @@ class StoreBoatRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'link' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }
