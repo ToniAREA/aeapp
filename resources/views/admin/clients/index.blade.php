@@ -19,171 +19,75 @@
     </div>
 
     <div class="card-body">
-        <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Client">
-                <thead>
-                    <tr>
-                        <th width="10">
+        <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-Client">
+            <thead>
+                <tr>
+                    <th width="10">
 
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.defaulter') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.id_client') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.name') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.lastname') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.vat') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.address') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.country') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.telephone') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.mobile') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.email') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.company') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.contactCompany.fields.company_email') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.contacts') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.boats') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.notes') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.internalnotes') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.link') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.client.fields.coordinates') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($clients as $key => $client)
-                        <tr data-entry-id="{{ $client->id }}">
-                            <td>
-
-                            </td>
-                            <td>
-                                {{ $client->id ?? '' }}
-                            </td>
-                            <td>
-                                <span style="display:none">{{ $client->defaulter ?? '' }}</span>
-                                <input type="checkbox" disabled="disabled" {{ $client->defaulter ? 'checked' : '' }}>
-                            </td>
-                            <td>
-                                {{ $client->id_client ?? '' }}
-                            </td>
-                            <td>
-                                {{ $client->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $client->lastname ?? '' }}
-                            </td>
-                            <td>
-                                {{ $client->vat ?? '' }}
-                            </td>
-                            <td>
-                                {{ $client->address ?? '' }}
-                            </td>
-                            <td>
-                                {{ $client->country ?? '' }}
-                            </td>
-                            <td>
-                                {{ $client->telephone ?? '' }}
-                            </td>
-                            <td>
-                                {{ $client->mobile ?? '' }}
-                            </td>
-                            <td>
-                                {{ $client->email ?? '' }}
-                            </td>
-                            <td>
-                                {{ $client->company->company_name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $client->company->company_email ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($client->contacts as $key => $item)
-                                    <span class="badge badge-info">{{ $item->contact_first_name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                @foreach($client->boats as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                {{ $client->notes ?? '' }}
-                            </td>
-                            <td>
-                                {{ $client->internalnotes ?? '' }}
-                            </td>
-                            <td>
-                                {{ $client->link ?? '' }}
-                            </td>
-                            <td>
-                                {{ $client->coordinates ?? '' }}
-                            </td>
-                            <td>
-                                @can('client_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.clients.show', $client->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
-
-                                @can('client_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.clients.edit', $client->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
-
-                                @can('client_delete')
-                                    <form action="{{ route('admin.clients.destroy', $client->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
-
-                            </td>
-
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.id') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.defaulter') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.id_client') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.name') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.lastname') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.vat') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.address') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.country') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.telephone') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.mobile') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.email') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.company') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.contactCompany.fields.company_email') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.contacts') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.boats') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.notes') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.internalnotes') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.link') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.coordinates') }}
+                    </th>
+                    <th>
+                        &nbsp;
+                    </th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </div>
 
@@ -196,14 +100,14 @@
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 @can('client_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
+  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.clients.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-          return $(entry).data('entry-id')
+      var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
+          return entry.id
       });
 
       if (ids.length === 0) {
@@ -225,18 +129,47 @@
   dtButtons.push(deleteButton)
 @endcan
 
-  $.extend(true, $.fn.dataTable.defaults, {
+  let dtOverrideGlobals = {
+    buttons: dtButtons,
+    processing: true,
+    serverSide: true,
+    retrieve: true,
+    aaSorting: [],
+    ajax: "{{ route('admin.clients.index') }}",
+    columns: [
+      { data: 'placeholder', name: 'placeholder' },
+{ data: 'id', name: 'id' },
+{ data: 'defaulter', name: 'defaulter' },
+{ data: 'id_client', name: 'id_client' },
+{ data: 'name', name: 'name' },
+{ data: 'lastname', name: 'lastname' },
+{ data: 'vat', name: 'vat' },
+{ data: 'address', name: 'address' },
+{ data: 'country', name: 'country' },
+{ data: 'telephone', name: 'telephone' },
+{ data: 'mobile', name: 'mobile' },
+{ data: 'email', name: 'email' },
+{ data: 'company_company_name', name: 'company.company_name' },
+{ data: 'company.company_email', name: 'company.company_email' },
+{ data: 'contacts', name: 'contacts.contact_first_name' },
+{ data: 'boats', name: 'boats.name' },
+{ data: 'notes', name: 'notes' },
+{ data: 'internalnotes', name: 'internalnotes' },
+{ data: 'link', name: 'link' },
+{ data: 'coordinates', name: 'coordinates' },
+{ data: 'actions', name: '{{ trans('global.actions') }}' }
+    ],
     orderCellsTop: true,
     order: [[ 3, 'desc' ]],
     pageLength: 100,
-  });
-  let table = $('.datatable-Client:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  };
+  let table = $('.datatable-Client').DataTable(dtOverrideGlobals);
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
   
-})
+});
 
 </script>
 @endsection

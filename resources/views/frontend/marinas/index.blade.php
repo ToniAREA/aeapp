@@ -30,13 +30,16 @@
                                         {{ trans('cruds.marina.fields.id') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.marina.fields.id_marina') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.marina.fields.name') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.marina.fields.coordinates') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.marina.fields.boats') }}
+                                        {{ trans('cruds.marina.fields.link') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -50,15 +53,16 @@
                                             {{ $marina->id ?? '' }}
                                         </td>
                                         <td>
+                                            {{ $marina->id_marina ?? '' }}
+                                        </td>
+                                        <td>
                                             {{ $marina->name ?? '' }}
                                         </td>
                                         <td>
                                             {{ $marina->coordinates ?? '' }}
                                         </td>
                                         <td>
-                                            @foreach($marina->boats as $key => $item)
-                                                <span>{{ $item->name }}</span>
-                                            @endforeach
+                                            {{ $marina->link ?? '' }}
                                         </td>
                                         <td>
                                             @can('marina_show')

@@ -28,6 +28,7 @@ class Marina extends Model
         'id_marina',
         'name',
         'coordinates',
+        'link',
         'created_at',
         'updated_at',
         'deleted_at',

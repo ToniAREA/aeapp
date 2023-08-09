@@ -16,18 +16,91 @@ use App\Models\Wlog;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class WlogsController extends Controller
 {
     use CsvImportTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('wlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlogs = Wlog::with(['wlist', 'employee', 'marina', 'tags', 'proforma_number'])->get();
+        if ($request->ajax()) {
+            $query = Wlog::with(['wlist', 'employee', 'marina', 'tags', 'proforma_number'])->select(sprintf('%s.*', (new Wlog)->table));
+            $table = Datatables::of($query);
 
-        return view('admin.wlogs.index', compact('wlogs'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'wlog_show';
+                $editGate      = 'wlog_edit';
+                $deleteGate    = 'wlog_delete';
+                $crudRoutePart = 'wlogs';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->addColumn('wlist_description', function ($row) {
+                return $row->wlist ? $row->wlist->description : '';
+            });
+
+            $table->editColumn('wlist.status', function ($row) {
+                return $row->wlist ? (is_string($row->wlist) ? $row->wlist : $row->wlist->status) : '';
+            });
+
+            $table->addColumn('employee_name', function ($row) {
+                return $row->employee ? $row->employee->name : '';
+            });
+
+            $table->editColumn('employee.email', function ($row) {
+                return $row->employee ? (is_string($row->employee) ? $row->employee : $row->employee->email) : '';
+            });
+            $table->addColumn('marina_name', function ($row) {
+                return $row->marina ? $row->marina->name : '';
+            });
+
+            $table->editColumn('description', function ($row) {
+                return $row->description ? $row->description : '';
+            });
+            $table->editColumn('hours', function ($row) {
+                return $row->hours ? $row->hours : '';
+            });
+            $table->editColumn('tags', function ($row) {
+                $labels = [];
+                foreach ($row->tags as $tag) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $tag->name);
+                }
+
+                return implode(' ', $labels);
+            });
+            $table->addColumn('proforma_number_proforma_number', function ($row) {
+                return $row->proforma_number ? $row->proforma_number->proforma_number : '';
+            });
+
+            $table->editColumn('proforma_number.description', function ($row) {
+                return $row->proforma_number ? (is_string($row->proforma_number) ? $row->proforma_number : $row->proforma_number->description) : '';
+            });
+            $table->editColumn('invoiced_line', function ($row) {
+                return '<input type="checkbox" disabled ' . ($row->invoiced_line ? 'checked' : null) . '>';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'wlist', 'employee', 'marina', 'tags', 'proforma_number', 'invoiced_line']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.wlogs.index');
     }
 
     public function create()

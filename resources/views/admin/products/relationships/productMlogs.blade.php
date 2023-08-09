@@ -34,9 +34,6 @@
                                 {{ trans('cruds.mlog.fields.boat') }}
                             </th>
                             <th>
-                                {{ trans('cruds.boat.fields.type') }}
-                            </th>
-                            <th>
                                 {{ trans('cruds.mlog.fields.wlist') }}
                             </th>
                             <th>
@@ -100,9 +97,6 @@
                                 </td>
                                 <td>
                                     {{ $mlog->boat->name ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $mlog->boat->type ?? '' }}
                                 </td>
                                 <td>
                                     {{ $mlog->wlist->description ?? '' }}

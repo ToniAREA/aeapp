@@ -19,130 +19,51 @@
     </div>
 
     <div class="card-body">
-        <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Product">
-                <thead>
-                    <tr>
-                        <th width="10">
+        <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-Product">
+            <thead>
+                <tr>
+                    <th width="10">
 
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.category') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.brand') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.model') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.name') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.product_slug') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.description') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.photos') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.price') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.tag') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.product.fields.file') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($products as $key => $product)
-                        <tr data-entry-id="{{ $product->id }}">
-                            <td>
-
-                            </td>
-                            <td>
-                                {{ $product->id ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($product->categories as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                {{ $product->brand->brand ?? '' }}
-                            </td>
-                            <td>
-                                {{ $product->model ?? '' }}
-                            </td>
-                            <td>
-                                {{ $product->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $product->product_slug ?? '' }}
-                            </td>
-                            <td>
-                                {{ $product->description ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($product->photos as $key => $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $media->getUrl('thumb') }}">
-                                    </a>
-                                @endforeach
-                            </td>
-                            <td>
-                                {{ $product->price ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($product->tags as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                @foreach($product->file as $key => $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank">
-                                        {{ trans('global.view_file') }}
-                                    </a>
-                                @endforeach
-                            </td>
-                            <td>
-                                @can('product_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.products.show', $product->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
-
-                                @can('product_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.products.edit', $product->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
-
-                                @can('product_delete')
-                                    <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
-
-                            </td>
-
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                    </th>
+                    <th>
+                        {{ trans('cruds.product.fields.id') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.product.fields.category') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.product.fields.brand') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.product.fields.model') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.product.fields.name') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.product.fields.product_slug') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.product.fields.description') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.product.fields.photos') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.product.fields.price') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.product.fields.tag') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.product.fields.file') }}
+                    </th>
+                    <th>
+                        &nbsp;
+                    </th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </div>
 
@@ -155,14 +76,14 @@
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 @can('product_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
+  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.products.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-          return $(entry).data('entry-id')
+      var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
+          return entry.id
       });
 
       if (ids.length === 0) {
@@ -184,18 +105,39 @@
   dtButtons.push(deleteButton)
 @endcan
 
-  $.extend(true, $.fn.dataTable.defaults, {
+  let dtOverrideGlobals = {
+    buttons: dtButtons,
+    processing: true,
+    serverSide: true,
+    retrieve: true,
+    aaSorting: [],
+    ajax: "{{ route('admin.products.index') }}",
+    columns: [
+      { data: 'placeholder', name: 'placeholder' },
+{ data: 'id', name: 'id' },
+{ data: 'category', name: 'categories.name' },
+{ data: 'brand_brand', name: 'brand.brand' },
+{ data: 'model', name: 'model' },
+{ data: 'name', name: 'name' },
+{ data: 'product_slug', name: 'product_slug' },
+{ data: 'description', name: 'description' },
+{ data: 'photos', name: 'photos', sortable: false, searchable: false },
+{ data: 'price', name: 'price' },
+{ data: 'tag', name: 'tags.name' },
+{ data: 'file', name: 'file', sortable: false, searchable: false },
+{ data: 'actions', name: '{{ trans('global.actions') }}' }
+    ],
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
     pageLength: 100,
-  });
-  let table = $('.datatable-Product:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  };
+  let table = $('.datatable-Product').DataTable(dtOverrideGlobals);
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
   
-})
+});
 
 </script>
 @endsection

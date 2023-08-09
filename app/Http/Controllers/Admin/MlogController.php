@@ -17,18 +17,109 @@ use App\Models\Wlist;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class MlogController extends Controller
 {
     use CsvImportTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('mlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $mlogs = Mlog::with(['client', 'boat', 'wlist', 'product', 'tags', 'proforma_number'])->get();
+        if ($request->ajax()) {
+            $query = Mlog::with(['client', 'boat', 'wlist', 'product', 'tags', 'proforma_number'])->select(sprintf('%s.*', (new Mlog)->table));
+            $table = Datatables::of($query);
 
-        return view('admin.mlogs.index', compact('mlogs'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'mlog_show';
+                $editGate      = 'mlog_edit';
+                $deleteGate    = 'mlog_delete';
+                $crudRoutePart = 'mlogs';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->editColumn('id_mlog', function ($row) {
+                return $row->id_mlog ? $row->id_mlog : '';
+            });
+            $table->addColumn('client_id_client', function ($row) {
+                return $row->client ? $row->client->id_client : '';
+            });
+
+            $table->addColumn('boat_name', function ($row) {
+                return $row->boat ? $row->boat->name : '';
+            });
+
+            $table->addColumn('wlist_description', function ($row) {
+                return $row->wlist ? $row->wlist->description : '';
+            });
+
+            $table->editColumn('wlist.status', function ($row) {
+                return $row->wlist ? (is_string($row->wlist) ? $row->wlist : $row->wlist->status) : '';
+            });
+            $table->addColumn('product_name', function ($row) {
+                return $row->product ? $row->product->name : '';
+            });
+
+            $table->editColumn('product.description', function ($row) {
+                return $row->product ? (is_string($row->product) ? $row->product : $row->product->description) : '';
+            });
+            $table->editColumn('description', function ($row) {
+                return $row->description ? $row->description : '';
+            });
+            $table->editColumn('quantity', function ($row) {
+                return $row->quantity ? $row->quantity : '';
+            });
+            $table->editColumn('price_unit', function ($row) {
+                return $row->price_unit ? $row->price_unit : '';
+            });
+            $table->editColumn('discount', function ($row) {
+                return $row->discount ? $row->discount : '';
+            });
+            $table->editColumn('total', function ($row) {
+                return $row->total ? $row->total : '';
+            });
+            $table->editColumn('status', function ($row) {
+                return $row->status ? $row->status : '';
+            });
+            $table->editColumn('tags', function ($row) {
+                $labels = [];
+                foreach ($row->tags as $tag) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $tag->name);
+                }
+
+                return implode(' ', $labels);
+            });
+            $table->addColumn('proforma_number_proforma_number', function ($row) {
+                return $row->proforma_number ? $row->proforma_number->proforma_number : '';
+            });
+
+            $table->editColumn('proforma_number.description', function ($row) {
+                return $row->proforma_number ? (is_string($row->proforma_number) ? $row->proforma_number : $row->proforma_number->description) : '';
+            });
+            $table->editColumn('invoiced_line', function ($row) {
+                return '<input type="checkbox" disabled ' . ($row->invoiced_line ? 'checked' : null) . '>';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'client', 'boat', 'wlist', 'product', 'tags', 'proforma_number', 'invoiced_line']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.mlogs.index');
     }
 
     public function create()

@@ -14,18 +14,113 @@ use App\Models\ContactContact;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class ClientsController extends Controller
 {
     use CsvImportTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('client_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $clients = Client::with(['company', 'contacts', 'boats'])->get();
+        if ($request->ajax()) {
+            $query = Client::with(['company', 'contacts', 'boats'])->select(sprintf('%s.*', (new Client)->table));
+            $table = Datatables::of($query);
 
-        return view('admin.clients.index', compact('clients'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'client_show';
+                $editGate      = 'client_edit';
+                $deleteGate    = 'client_delete';
+                $crudRoutePart = 'clients';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->editColumn('defaulter', function ($row) {
+                return '<input type="checkbox" disabled ' . ($row->defaulter ? 'checked' : null) . '>';
+            });
+            $table->editColumn('id_client', function ($row) {
+                return $row->id_client ? $row->id_client : '';
+            });
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : '';
+            });
+            $table->editColumn('lastname', function ($row) {
+                return $row->lastname ? $row->lastname : '';
+            });
+            $table->editColumn('vat', function ($row) {
+                return $row->vat ? $row->vat : '';
+            });
+            $table->editColumn('address', function ($row) {
+                return $row->address ? $row->address : '';
+            });
+            $table->editColumn('country', function ($row) {
+                return $row->country ? $row->country : '';
+            });
+            $table->editColumn('telephone', function ($row) {
+                return $row->telephone ? $row->telephone : '';
+            });
+            $table->editColumn('mobile', function ($row) {
+                return $row->mobile ? $row->mobile : '';
+            });
+            $table->editColumn('email', function ($row) {
+                return $row->email ? $row->email : '';
+            });
+            $table->addColumn('company_company_name', function ($row) {
+                return $row->company ? $row->company->company_name : '';
+            });
+
+            $table->editColumn('company.company_email', function ($row) {
+                return $row->company ? (is_string($row->company) ? $row->company : $row->company->company_email) : '';
+            });
+            $table->editColumn('contacts', function ($row) {
+                $labels = [];
+                foreach ($row->contacts as $contact) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $contact->contact_first_name);
+                }
+
+                return implode(' ', $labels);
+            });
+            $table->editColumn('boats', function ($row) {
+                $labels = [];
+                foreach ($row->boats as $boat) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $boat->name);
+                }
+
+                return implode(' ', $labels);
+            });
+            $table->editColumn('notes', function ($row) {
+                return $row->notes ? $row->notes : '';
+            });
+            $table->editColumn('internalnotes', function ($row) {
+                return $row->internalnotes ? $row->internalnotes : '';
+            });
+            $table->editColumn('link', function ($row) {
+                return $row->link ? $row->link : '';
+            });
+            $table->editColumn('coordinates', function ($row) {
+                return $row->coordinates ? $row->coordinates : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'defaulter', 'company', 'contacts', 'boats']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.clients.index');
     }
 
     public function create()
