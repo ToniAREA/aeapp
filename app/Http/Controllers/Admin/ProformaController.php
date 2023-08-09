@@ -15,18 +15,101 @@ use App\Models\Wlist;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProformaController extends Controller
 {
     use CsvImportTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('proforma_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $proformas = Proforma::with(['client', 'boats', 'wlists', 'tags'])->get();
+        if ($request->ajax()) {
+            $query = Proforma::with(['client', 'boats', 'wlists', 'tags'])->select(sprintf('%s.*', (new Proforma)->table));
+            $table = Datatables::of($query);
 
-        return view('admin.proformas.index', compact('proformas'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'proforma_show';
+                $editGate      = 'proforma_edit';
+                $deleteGate    = 'proforma_delete';
+                $crudRoutePart = 'proformas';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->editColumn('proforma_number', function ($row) {
+                return $row->proforma_number ? $row->proforma_number : '';
+            });
+            $table->addColumn('client_id_client', function ($row) {
+                return $row->client ? $row->client->id_client : '';
+            });
+
+            $table->editColumn('boats', function ($row) {
+                $labels = [];
+                foreach ($row->boats as $boat) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $boat->name);
+                }
+
+                return implode(' ', $labels);
+            });
+            $table->editColumn('wlists', function ($row) {
+                $labels = [];
+                foreach ($row->wlists as $wlist) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $wlist->description);
+                }
+
+                return implode(' ', $labels);
+            });
+
+            $table->editColumn('description', function ($row) {
+                return $row->description ? $row->description : '';
+            });
+            $table->editColumn('total_amount', function ($row) {
+                return $row->total_amount ? $row->total_amount : '';
+            });
+            $table->editColumn('currency', function ($row) {
+                return $row->currency ? $row->currency : '';
+            });
+            $table->editColumn('sent', function ($row) {
+                return '<input type="checkbox" disabled ' . ($row->sent ? 'checked' : null) . '>';
+            });
+            $table->editColumn('paid', function ($row) {
+                return '<input type="checkbox" disabled ' . ($row->paid ? 'checked' : null) . '>';
+            });
+            $table->editColumn('claims', function ($row) {
+                return $row->claims ? $row->claims : '';
+            });
+            $table->editColumn('tags', function ($row) {
+                $labels = [];
+                foreach ($row->tags as $tag) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $tag->name);
+                }
+
+                return implode(' ', $labels);
+            });
+            $table->editColumn('link', function ($row) {
+                return $row->link ? $row->link : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'client', 'boats', 'wlists', 'sent', 'paid', 'tags']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.proformas.index');
     }
 
     public function create()

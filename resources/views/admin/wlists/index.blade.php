@@ -19,146 +19,60 @@
     </div>
 
     <div class="card-body">
-        <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Wlist">
-                <thead>
-                    <tr>
-                        <th width="10">
+        <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-Wlist">
+            <thead>
+                <tr>
+                    <th width="10">
 
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.client') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.boat') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.order_type') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.description') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.photos') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.deadline') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.priority') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.for_role') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.for_user') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.status') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.url_invoice') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.notes') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.wlist.fields.tags') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($wlists as $key => $wlist)
-                        <tr data-entry-id="{{ $wlist->id }}">
-                            <td>
-
-                            </td>
-                            <td>
-                                {{ $wlist->id ?? '' }}
-                            </td>
-                            <td>
-                                {{ $wlist->client->id_client ?? '' }}
-                            </td>
-                            <td>
-                                {{ $wlist->boat->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ App\Models\Wlist::ORDER_TYPE_RADIO[$wlist->order_type] ?? '' }}
-                            </td>
-                            <td>
-                                {{ $wlist->description ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($wlist->photos as $key => $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $media->getUrl('thumb') }}">
-                                    </a>
-                                @endforeach
-                            </td>
-                            <td>
-                                {{ $wlist->deadline ?? '' }}
-                            </td>
-                            <td>
-                                {{ $wlist->priority->level ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($wlist->for_roles as $key => $item)
-                                    <span class="badge badge-info">{{ $item->title }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                @foreach($wlist->for_users as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                {{ $wlist->status ?? '' }}
-                            </td>
-                            <td>
-                                {{ $wlist->url_invoice ?? '' }}
-                            </td>
-                            <td>
-                                {{ $wlist->notes ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($wlist->tags as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                @can('wlist_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.wlists.show', $wlist->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
-
-                                @can('wlist_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.wlists.edit', $wlist->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
-
-                                @can('wlist_delete')
-                                    <form action="{{ route('admin.wlists.destroy', $wlist->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
-
-                            </td>
-
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.id') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.client') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.boat') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.order_type') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.description') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.photos') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.deadline') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.priority') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.for_role') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.for_user') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.status') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.url_invoice') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.notes') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.tags') }}
+                    </th>
+                    <th>
+                        &nbsp;
+                    </th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </div>
 
@@ -171,14 +85,14 @@
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 @can('wlist_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
+  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.wlists.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-          return $(entry).data('entry-id')
+      var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
+          return entry.id
       });
 
       if (ids.length === 0) {
@@ -200,18 +114,42 @@
   dtButtons.push(deleteButton)
 @endcan
 
-  $.extend(true, $.fn.dataTable.defaults, {
+  let dtOverrideGlobals = {
+    buttons: dtButtons,
+    processing: true,
+    serverSide: true,
+    retrieve: true,
+    aaSorting: [],
+    ajax: "{{ route('admin.wlists.index') }}",
+    columns: [
+      { data: 'placeholder', name: 'placeholder' },
+{ data: 'id', name: 'id' },
+{ data: 'client_id_client', name: 'client.id_client' },
+{ data: 'boat_name', name: 'boat.name' },
+{ data: 'order_type', name: 'order_type' },
+{ data: 'description', name: 'description' },
+{ data: 'photos', name: 'photos', sortable: false, searchable: false },
+{ data: 'deadline', name: 'deadline' },
+{ data: 'priority_level', name: 'priority.level' },
+{ data: 'for_role', name: 'for_roles.title' },
+{ data: 'for_user', name: 'for_users.name' },
+{ data: 'status', name: 'status' },
+{ data: 'url_invoice', name: 'url_invoice' },
+{ data: 'notes', name: 'notes' },
+{ data: 'tags', name: 'tags.name' },
+{ data: 'actions', name: '{{ trans('global.actions') }}' }
+    ],
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
     pageLength: 100,
-  });
-  let table = $('.datatable-Wlist:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  };
+  let table = $('.datatable-Wlist').DataTable(dtOverrideGlobals);
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
   
-})
+});
 
 </script>
 @endsection

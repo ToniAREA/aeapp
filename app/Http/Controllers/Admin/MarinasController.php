@@ -11,18 +11,60 @@ use App\Models\Marina;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class MarinasController extends Controller
 {
     use CsvImportTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('marina_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $marinas = Marina::all();
+        if ($request->ajax()) {
+            $query = Marina::query()->select(sprintf('%s.*', (new Marina)->table));
+            $table = Datatables::of($query);
 
-        return view('admin.marinas.index', compact('marinas'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'marina_show';
+                $editGate      = 'marina_edit';
+                $deleteGate    = 'marina_delete';
+                $crudRoutePart = 'marinas';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->editColumn('id_marina', function ($row) {
+                return $row->id_marina ? $row->id_marina : '';
+            });
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : '';
+            });
+            $table->editColumn('coordinates', function ($row) {
+                return $row->coordinates ? $row->coordinates : '';
+            });
+            $table->editColumn('link', function ($row) {
+                return $row->link ? $row->link : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.marinas.index');
     }
 
     public function create()

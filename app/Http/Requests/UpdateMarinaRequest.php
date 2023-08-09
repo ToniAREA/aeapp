@@ -32,6 +32,10 @@ class UpdateMarinaRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'link' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

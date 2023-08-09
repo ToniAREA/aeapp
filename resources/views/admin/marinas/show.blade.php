@@ -47,6 +47,14 @@
                             {{ $marina->coordinates }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.marina.fields.link') }}
+                        </th>
+                        <td>
+                            {{ $marina->link }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

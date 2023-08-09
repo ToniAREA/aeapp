@@ -169,6 +169,55 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('payments/destroy', 'PaymentController@massDestroy')->name('payments.massDestroy');
     Route::resource('payments', 'PaymentController');
 
+    // Asset Category
+    Route::delete('asset-categories/destroy', 'AssetCategoryController@massDestroy')->name('asset-categories.massDestroy');
+    Route::resource('asset-categories', 'AssetCategoryController');
+
+    // Asset Location
+    Route::delete('asset-locations/destroy', 'AssetLocationController@massDestroy')->name('asset-locations.massDestroy');
+    Route::resource('asset-locations', 'AssetLocationController');
+
+    // Asset Status
+    Route::delete('asset-statuses/destroy', 'AssetStatusController@massDestroy')->name('asset-statuses.massDestroy');
+    Route::resource('asset-statuses', 'AssetStatusController');
+
+    // Asset
+    Route::delete('assets/destroy', 'AssetController@massDestroy')->name('assets.massDestroy');
+    Route::post('assets/media', 'AssetController@storeMedia')->name('assets.storeMedia');
+    Route::post('assets/ckmedia', 'AssetController@storeCKEditorImages')->name('assets.storeCKEditorImages');
+    Route::resource('assets', 'AssetController');
+
+    // Assets History
+    Route::resource('assets-histories', 'AssetsHistoryController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // Faq Category
+    Route::delete('faq-categories/destroy', 'FaqCategoryController@massDestroy')->name('faq-categories.massDestroy');
+    Route::resource('faq-categories', 'FaqCategoryController');
+
+    // Faq Question
+    Route::delete('faq-questions/destroy', 'FaqQuestionController@massDestroy')->name('faq-questions.massDestroy');
+    Route::resource('faq-questions', 'FaqQuestionController');
+
+    // Expense Category
+    Route::delete('expense-categories/destroy', 'ExpenseCategoryController@massDestroy')->name('expense-categories.massDestroy');
+    Route::resource('expense-categories', 'ExpenseCategoryController');
+
+    // Income Category
+    Route::delete('income-categories/destroy', 'IncomeCategoryController@massDestroy')->name('income-categories.massDestroy');
+    Route::resource('income-categories', 'IncomeCategoryController');
+
+    // Expense
+    Route::delete('expenses/destroy', 'ExpenseController@massDestroy')->name('expenses.massDestroy');
+    Route::resource('expenses', 'ExpenseController');
+
+    // Income
+    Route::delete('incomes/destroy', 'IncomeController@massDestroy')->name('incomes.massDestroy');
+    Route::resource('incomes', 'IncomeController');
+
+    // Expense Report
+    Route::delete('expense-reports/destroy', 'ExpenseReportController@massDestroy')->name('expense-reports.massDestroy');
+    Route::resource('expense-reports', 'ExpenseReportController');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
 });
@@ -314,6 +363,51 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     // Payment
     Route::delete('payments/destroy', 'PaymentController@massDestroy')->name('payments.massDestroy');
     Route::resource('payments', 'PaymentController');
+
+    // Asset Category
+    Route::delete('asset-categories/destroy', 'AssetCategoryController@massDestroy')->name('asset-categories.massDestroy');
+    Route::resource('asset-categories', 'AssetCategoryController');
+
+    // Asset Location
+    Route::delete('asset-locations/destroy', 'AssetLocationController@massDestroy')->name('asset-locations.massDestroy');
+    Route::resource('asset-locations', 'AssetLocationController');
+
+    // Asset Status
+    Route::delete('asset-statuses/destroy', 'AssetStatusController@massDestroy')->name('asset-statuses.massDestroy');
+    Route::resource('asset-statuses', 'AssetStatusController');
+
+    // Asset
+    Route::delete('assets/destroy', 'AssetController@massDestroy')->name('assets.massDestroy');
+    Route::post('assets/media', 'AssetController@storeMedia')->name('assets.storeMedia');
+    Route::post('assets/ckmedia', 'AssetController@storeCKEditorImages')->name('assets.storeCKEditorImages');
+    Route::resource('assets', 'AssetController');
+
+    // Assets History
+    Route::resource('assets-histories', 'AssetsHistoryController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // Faq Category
+    Route::delete('faq-categories/destroy', 'FaqCategoryController@massDestroy')->name('faq-categories.massDestroy');
+    Route::resource('faq-categories', 'FaqCategoryController');
+
+    // Faq Question
+    Route::delete('faq-questions/destroy', 'FaqQuestionController@massDestroy')->name('faq-questions.massDestroy');
+    Route::resource('faq-questions', 'FaqQuestionController');
+
+    // Expense Category
+    Route::delete('expense-categories/destroy', 'ExpenseCategoryController@massDestroy')->name('expense-categories.massDestroy');
+    Route::resource('expense-categories', 'ExpenseCategoryController');
+
+    // Income Category
+    Route::delete('income-categories/destroy', 'IncomeCategoryController@massDestroy')->name('income-categories.massDestroy');
+    Route::resource('income-categories', 'IncomeCategoryController');
+
+    // Expense
+    Route::delete('expenses/destroy', 'ExpenseController@massDestroy')->name('expenses.massDestroy');
+    Route::resource('expenses', 'ExpenseController');
+
+    // Income
+    Route::delete('incomes/destroy', 'IncomeController@massDestroy')->name('incomes.massDestroy');
+    Route::resource('incomes', 'IncomeController');
 
     Route::get('frontend/profile', 'ProfileController@index')->name('profile.index');
     Route::post('frontend/profile', 'ProfileController@update')->name('profile.update');

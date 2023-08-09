@@ -16,18 +16,105 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
     use MediaUploadingTrait, CsvImportTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('product_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $products = Product::with(['categories', 'brand', 'tags', 'media'])->get();
+        if ($request->ajax()) {
+            $query = Product::with(['categories', 'brand', 'tags'])->select(sprintf('%s.*', (new Product)->table));
+            $table = Datatables::of($query);
 
-        return view('admin.products.index', compact('products'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'product_show';
+                $editGate      = 'product_edit';
+                $deleteGate    = 'product_delete';
+                $crudRoutePart = 'products';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->editColumn('category', function ($row) {
+                $labels = [];
+                foreach ($row->categories as $category) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $category->name);
+                }
+
+                return implode(' ', $labels);
+            });
+            $table->addColumn('brand_brand', function ($row) {
+                return $row->brand ? $row->brand->brand : '';
+            });
+
+            $table->editColumn('model', function ($row) {
+                return $row->model ? $row->model : '';
+            });
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : '';
+            });
+            $table->editColumn('product_slug', function ($row) {
+                return $row->product_slug ? $row->product_slug : '';
+            });
+            $table->editColumn('description', function ($row) {
+                return $row->description ? $row->description : '';
+            });
+            $table->editColumn('photos', function ($row) {
+                if (! $row->photos) {
+                    return '';
+                }
+                $links = [];
+                foreach ($row->photos as $media) {
+                    $links[] = '<a href="' . $media->getUrl() . '" target="_blank"><img src="' . $media->getUrl('thumb') . '" width="50px" height="50px"></a>';
+                }
+
+                return implode(' ', $links);
+            });
+            $table->editColumn('price', function ($row) {
+                return $row->price ? $row->price : '';
+            });
+            $table->editColumn('tag', function ($row) {
+                $labels = [];
+                foreach ($row->tags as $tag) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $tag->name);
+                }
+
+                return implode(' ', $labels);
+            });
+            $table->editColumn('file', function ($row) {
+                if (! $row->file) {
+                    return '';
+                }
+                $links = [];
+                foreach ($row->file as $media) {
+                    $links[] = '<a href="' . $media->getUrl() . '" target="_blank">' . trans('global.downloadFile') . '</a>';
+                }
+
+                return implode(', ', $links);
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'category', 'brand', 'photos', 'tag', 'file']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.products.index');
     }
 
     public function create()
