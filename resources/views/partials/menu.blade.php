@@ -74,8 +74,8 @@
                     </li>
                 @endcan
                 @can('work_access')
-                    <li class="nav-item has-treeview {{ request()->is("admin/wlists*") ? "menu-open" : "" }} {{ request()->is("admin/wlogs*") ? "menu-open" : "" }} {{ request()->is("admin/appointments*") ? "menu-open" : "" }}">
-                        <a class="nav-link nav-dropdown-toggle {{ request()->is("admin/wlists*") ? "active" : "" }} {{ request()->is("admin/wlogs*") ? "active" : "" }} {{ request()->is("admin/appointments*") ? "active" : "" }}" href="#">
+                    <li class="nav-item has-treeview {{ request()->is("admin/appointments*") ? "menu-open" : "" }} {{ request()->is("admin/wlists*") ? "menu-open" : "" }} {{ request()->is("admin/wlogs*") ? "menu-open" : "" }} {{ request()->is("admin/mat-logs*") ? "menu-open" : "" }}">
+                        <a class="nav-link nav-dropdown-toggle {{ request()->is("admin/appointments*") ? "active" : "" }} {{ request()->is("admin/wlists*") ? "active" : "" }} {{ request()->is("admin/wlogs*") ? "active" : "" }} {{ request()->is("admin/mat-logs*") ? "active" : "" }}" href="#">
                             <i class="fa-fw nav-icon fas fa-briefcase">
 
                             </i>
@@ -85,6 +85,18 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            @can('appointment_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.appointments.index") }}" class="nav-link {{ request()->is("admin/appointments") || request()->is("admin/appointments/*") ? "active" : "" }}">
+                                        <i class="fa-fw nav-icon fas fa-calendar-check">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.appointment.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
                             @can('wlist_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.wlists.index") }}" class="nav-link {{ request()->is("admin/wlists") || request()->is("admin/wlists/*") ? "active" : "" }}">
@@ -109,14 +121,14 @@
                                     </a>
                                 </li>
                             @endcan
-                            @can('appointment_access')
+                            @can('mat_log_access')
                                 <li class="nav-item">
-                                    <a href="{{ route("admin.appointments.index") }}" class="nav-link {{ request()->is("admin/appointments") || request()->is("admin/appointments/*") ? "active" : "" }}">
-                                        <i class="fa-fw nav-icon fas fa-calendar-check">
+                                    <a href="{{ route("admin.mat-logs.index") }}" class="nav-link {{ request()->is("admin/mat-logs") || request()->is("admin/mat-logs/*") ? "active" : "" }}">
+                                        <i class="fa-fw nav-icon fas fa-briefcase">
 
                                         </i>
                                         <p>
-                                            {{ trans('cruds.appointment.title') }}
+                                            {{ trans('cruds.matLog.title') }}
                                         </p>
                                     </a>
                                 </li>

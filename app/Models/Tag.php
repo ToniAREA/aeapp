@@ -41,4 +41,9 @@ class Tag extends Model
     {
         return $this->belongsToMany(Wlist::class);
     }
+
+    public function tagsMatLogs()
+    {
+        return $this->belongsToMany(MatLog::class);
+    }
 }

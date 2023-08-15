@@ -58,6 +58,11 @@ class Boat extends Model
         return $this->hasMany(Appointment::class, 'boat_id', 'id');
     }
 
+    public function boatMatLogs()
+    {
+        return $this->hasMany(MatLog::class, 'boat_id', 'id');
+    }
+
     public function boatsClients()
     {
         return $this->belongsToMany(Client::class);

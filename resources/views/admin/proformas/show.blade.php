@@ -164,6 +164,11 @@
                 {{ trans('cruds.payment.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#proforma_number_mat_logs" role="tab" data-toggle="tab">
+                {{ trans('cruds.matLog.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="proforma_number_wlogs">
@@ -174,6 +179,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="proforma_number_payments">
             @includeIf('admin.proformas.relationships.proformaNumberPayments', ['payments' => $proforma->proformaNumberPayments])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="proforma_number_mat_logs">
+            @includeIf('admin.proformas.relationships.proformaNumberMatLogs', ['matLogs' => $proforma->proformaNumberMatLogs])
         </div>
     </div>
 </div>

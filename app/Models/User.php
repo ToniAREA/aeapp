@@ -119,6 +119,11 @@ class User extends Authenticatable
         return $this->hasMany(Wlog::class, 'employee_id', 'id');
     }
 
+    public function employeeMatLogs()
+    {
+        return $this->hasMany(MatLog::class, 'employee_id', 'id');
+    }
+
     public function forUserToDos()
     {
         return $this->belongsToMany(ToDo::class);

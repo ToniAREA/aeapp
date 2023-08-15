@@ -824,6 +824,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 204,
+                'title' => 'mat_log_create',
+            ],
+            [
+                'id'    => 205,
+                'title' => 'mat_log_edit',
+            ],
+            [
+                'id'    => 206,
+                'title' => 'mat_log_show',
+            ],
+            [
+                'id'    => 207,
+                'title' => 'mat_log_delete',
+            ],
+            [
+                'id'    => 208,
+                'title' => 'mat_log_access',
+            ],
+            [
+                'id'    => 209,
                 'title' => 'profile_password_edit',
             ],
         ];

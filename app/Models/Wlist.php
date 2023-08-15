@@ -66,6 +66,11 @@ class Wlist extends Model implements HasMedia
         return $this->hasMany(Wlog::class, 'wlist_id', 'id');
     }
 
+    public function wlistMatLogs()
+    {
+        return $this->hasMany(MatLog::class, 'wlist_id', 'id');
+    }
+
     public function wlistsAppointments()
     {
         return $this->belongsToMany(Appointment::class);
