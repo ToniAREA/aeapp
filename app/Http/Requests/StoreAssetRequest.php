@@ -17,17 +17,21 @@ class StoreAssetRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => [
+            'name' => [
+                'string',
                 'required',
-                'integer',
+            ],
+            'description' => [
+                'string',
+                'nullable',
             ],
             'serial_number' => [
                 'string',
                 'nullable',
             ],
-            'name' => [
-                'string',
+            'category_id' => [
                 'required',
+                'integer',
             ],
             'photos' => [
                 'array',

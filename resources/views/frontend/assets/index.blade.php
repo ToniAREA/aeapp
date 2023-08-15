@@ -9,6 +9,10 @@
                         <a class="btn btn-success" href="{{ route('frontend.assets.create') }}">
                             {{ trans('global.add') }} {{ trans('cruds.asset.title_singular') }}
                         </a>
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+                            {{ trans('global.app_csvImport') }}
+                        </button>
+                        @include('csvImport.modal', ['model' => 'Asset', 'route' => 'admin.assets.parseCsvImport'])
                     </div>
                 </div>
             @endcan
@@ -26,13 +30,16 @@
                                         {{ trans('cruds.asset.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.asset.fields.category') }}
+                                        {{ trans('cruds.asset.fields.name') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.asset.fields.description') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.asset.fields.serial_number') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.asset.fields.name') }}
+                                        {{ trans('cruds.asset.fields.category') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.asset.fields.photos') }}
@@ -61,13 +68,16 @@
                                             {{ $asset->id ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $asset->category->name ?? '' }}
+                                            {{ $asset->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $asset->description ?? '' }}
                                         </td>
                                         <td>
                                             {{ $asset->serial_number ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $asset->name ?? '' }}
+                                            {{ $asset->category->name ?? '' }}
                                         </td>
                                         <td>
                                             @foreach($asset->photos as $key => $media)

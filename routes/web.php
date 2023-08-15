@@ -185,6 +185,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('assets/destroy', 'AssetController@massDestroy')->name('assets.massDestroy');
     Route::post('assets/media', 'AssetController@storeMedia')->name('assets.storeMedia');
     Route::post('assets/ckmedia', 'AssetController@storeCKEditorImages')->name('assets.storeCKEditorImages');
+    Route::post('assets/parse-csv-import', 'AssetController@parseCsvImport')->name('assets.parseCsvImport');
+    Route::post('assets/process-csv-import', 'AssetController@processCsvImport')->name('assets.processCsvImport');
     Route::resource('assets', 'AssetController');
 
     // Assets History

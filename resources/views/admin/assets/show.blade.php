@@ -25,10 +25,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.asset.fields.category') }}
+                            {{ trans('cruds.asset.fields.name') }}
                         </th>
                         <td>
-                            {{ $asset->category->name ?? '' }}
+                            {{ $asset->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.asset.fields.description') }}
+                        </th>
+                        <td>
+                            {{ $asset->description }}
                         </td>
                     </tr>
                     <tr>
@@ -41,10 +49,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.asset.fields.name') }}
+                            {{ trans('cruds.asset.fields.category') }}
                         </th>
                         <td>
-                            {{ $asset->name }}
+                            {{ $asset->category->name ?? '' }}
                         </td>
                     </tr>
                     <tr>
