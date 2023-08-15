@@ -58,6 +58,10 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Payment
     Route::apiResource('payments', 'PaymentApiController');
 
+    // Asset
+    Route::post('assets/media', 'AssetApiController@storeMedia')->name('assets.storeMedia');
+    Route::apiResource('assets', 'AssetApiController');
+
     // Assets History
     Route::apiResource('assets-histories', 'AssetsHistoryApiController', ['except' => ['store', 'show', 'update', 'destroy']]);
 });

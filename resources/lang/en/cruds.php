@@ -2,8 +2,8 @@
 
 return [
     'userManagement' => [
-        'title'          => 'Users',
-        'title_singular' => 'User',
+        'title'          => 'User management',
+        'title_singular' => 'User management',
     ],
     'permission' => [
         'title'          => 'Permissions',
@@ -923,6 +923,8 @@ return [
             'updated_at_helper'    => ' ',
             'deleted_at'           => 'Deleted At',
             'deleted_at_helper'    => ' ',
+            'description'          => 'Description',
+            'description_helper'   => ' ',
         ],
     ],
     'assetsHistory' => [
@@ -986,8 +988,8 @@ return [
         ],
     ],
     'expenseManagement' => [
-        'title'          => 'Expenses',
-        'title_singular' => 'Expense',
+        'title'          => 'Expense Management',
+        'title_singular' => 'Expense Management',
     ],
     'expenseCategory' => [
         'title'          => 'Expense Categories',

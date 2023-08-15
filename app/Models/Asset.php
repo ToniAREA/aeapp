@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Asset extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia, HasFactory;
+    use SoftDeletes, InteractsWithMedia, Auditable, HasFactory;
 
     public $table = 'assets';
 
@@ -27,9 +28,10 @@ class Asset extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'category_id',
-        'serial_number',
         'name',
+        'description',
+        'serial_number',
+        'category_id',
         'status_id',
         'location_id',
         'notes',
