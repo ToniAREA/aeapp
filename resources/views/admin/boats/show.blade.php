@@ -135,11 +135,6 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#boat_mlogs" role="tab" data-toggle="tab">
-                {{ trans('cruds.mlog.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="#boat_appointments" role="tab" data-toggle="tab">
                 {{ trans('cruds.appointment.title') }}
             </a>
@@ -158,9 +153,6 @@
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="boat_wlists">
             @includeIf('admin.boats.relationships.boatWlists', ['wlists' => $boat->boatWlists])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="boat_mlogs">
-            @includeIf('admin.boats.relationships.boatMlogs', ['mlogs' => $boat->boatMlogs])
         </div>
         <div class="tab-pane" role="tabpanel" id="boat_appointments">
             @includeIf('admin.boats.relationships.boatAppointments', ['appointments' => $boat->boatAppointments])

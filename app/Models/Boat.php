@@ -53,11 +53,6 @@ class Boat extends Model
         return $this->hasMany(Wlist::class, 'boat_id', 'id');
     }
 
-    public function boatMlogs()
-    {
-        return $this->hasMany(Mlog::class, 'boat_id', 'id');
-    }
-
     public function boatAppointments()
     {
         return $this->hasMany(Appointment::class, 'boat_id', 'id');

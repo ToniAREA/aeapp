@@ -126,22 +126,6 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.relatedData') }}
-    </div>
-    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-        <li class="nav-item">
-            <a class="nav-link" href="#product_mlogs" role="tab" data-toggle="tab">
-                {{ trans('cruds.mlog.title') }}
-            </a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="product_mlogs">
-            @includeIf('admin.products.relationships.productMlogs', ['mlogs' => $product->productMlogs])
-        </div>
-    </div>
-</div>
+
 
 @endsection

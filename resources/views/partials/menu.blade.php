@@ -74,8 +74,8 @@
                     </li>
                 @endcan
                 @can('work_access')
-                    <li class="nav-item has-treeview {{ request()->is("admin/wlists*") ? "menu-open" : "" }} {{ request()->is("admin/wlogs*") ? "menu-open" : "" }} {{ request()->is("admin/mlogs*") ? "menu-open" : "" }} {{ request()->is("admin/appointments*") ? "menu-open" : "" }}">
-                        <a class="nav-link nav-dropdown-toggle {{ request()->is("admin/wlists*") ? "active" : "" }} {{ request()->is("admin/wlogs*") ? "active" : "" }} {{ request()->is("admin/mlogs*") ? "active" : "" }} {{ request()->is("admin/appointments*") ? "active" : "" }}" href="#">
+                    <li class="nav-item has-treeview {{ request()->is("admin/wlists*") ? "menu-open" : "" }} {{ request()->is("admin/wlogs*") ? "menu-open" : "" }} {{ request()->is("admin/appointments*") ? "menu-open" : "" }}">
+                        <a class="nav-link nav-dropdown-toggle {{ request()->is("admin/wlists*") ? "active" : "" }} {{ request()->is("admin/wlogs*") ? "active" : "" }} {{ request()->is("admin/appointments*") ? "active" : "" }}" href="#">
                             <i class="fa-fw nav-icon fas fa-briefcase">
 
                             </i>
@@ -105,18 +105,6 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.wlog.title') }}
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('mlog_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.mlogs.index") }}" class="nav-link {{ request()->is("admin/mlogs") || request()->is("admin/mlogs/*") ? "active" : "" }}">
-                                        <i class="fa-fw nav-icon fas fa-box-open">
-
-                                        </i>
-                                        <p>
-                                            {{ trans('cruds.mlog.title') }}
                                         </p>
                                     </a>
                                 </li>

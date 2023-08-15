@@ -190,11 +190,6 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#client_mlogs" role="tab" data-toggle="tab">
-                {{ trans('cruds.mlog.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="#client_proformas" role="tab" data-toggle="tab">
                 {{ trans('cruds.proforma.title') }}
             </a>
@@ -211,9 +206,6 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="client_appointments">
             @includeIf('admin.clients.relationships.clientAppointments', ['appointments' => $client->clientAppointments])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="client_mlogs">
-            @includeIf('admin.clients.relationships.clientMlogs', ['mlogs' => $client->clientMlogs])
         </div>
         <div class="tab-pane" role="tabpanel" id="client_proformas">
             @includeIf('admin.clients.relationships.clientProformas', ['proformas' => $client->clientProformas])

@@ -149,12 +149,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('tags/destroy', 'TagsController@massDestroy')->name('tags.massDestroy');
     Route::resource('tags', 'TagsController');
 
-    // Mlog
-    Route::delete('mlogs/destroy', 'MlogController@massDestroy')->name('mlogs.massDestroy');
-    Route::post('mlogs/parse-csv-import', 'MlogController@parseCsvImport')->name('mlogs.parseCsvImport');
-    Route::post('mlogs/process-csv-import', 'MlogController@processCsvImport')->name('mlogs.processCsvImport');
-    Route::resource('mlogs', 'MlogController');
-
     // Proforma
     Route::delete('proformas/destroy', 'ProformaController@massDestroy')->name('proformas.massDestroy');
     Route::post('proformas/parse-csv-import', 'ProformaController@parseCsvImport')->name('proformas.parseCsvImport');
@@ -349,10 +343,6 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     // Tags
     Route::delete('tags/destroy', 'TagsController@massDestroy')->name('tags.massDestroy');
     Route::resource('tags', 'TagsController');
-
-    // Mlog
-    Route::delete('mlogs/destroy', 'MlogController@massDestroy')->name('mlogs.massDestroy');
-    Route::resource('mlogs', 'MlogController');
 
     // Proforma
     Route::delete('proformas/destroy', 'ProformaController@massDestroy')->name('proformas.massDestroy');

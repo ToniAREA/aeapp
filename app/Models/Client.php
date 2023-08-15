@@ -62,11 +62,6 @@ class Client extends Model
         return $this->hasMany(Appointment::class, 'client_id', 'id');
     }
 
-    public function clientMlogs()
-    {
-        return $this->hasMany(Mlog::class, 'client_id', 'id');
-    }
-
     public function clientProformas()
     {
         return $this->hasMany(Proforma::class, 'client_id', 'id');

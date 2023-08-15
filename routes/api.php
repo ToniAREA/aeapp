@@ -46,9 +46,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::post('brands/media', 'BrandsApiController@storeMedia')->name('brands.storeMedia');
     Route::apiResource('brands', 'BrandsApiController');
 
-    // Mlog
-    Route::apiResource('mlogs', 'MlogApiController');
-
     // Proforma
     Route::apiResource('proformas', 'ProformaApiController');
 

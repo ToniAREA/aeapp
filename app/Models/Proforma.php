@@ -48,11 +48,6 @@ class Proforma extends Model
         return $this->hasMany(Wlog::class, 'proforma_number_id', 'id');
     }
 
-    public function proformaNumberMlogs()
-    {
-        return $this->hasMany(Mlog::class, 'proforma_number_id', 'id');
-    }
-
     public function proformaNumberClaims()
     {
         return $this->hasMany(Claim::class, 'proforma_number_id', 'id');
