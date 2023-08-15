@@ -34,11 +34,11 @@ class ClientsSeeder extends Seeder
                 'vat' => $client->vat,
                 'address' => $client->address,
                 'country' => $client->country,
-                'phone' => $client->phone,
+                'telephone' => $client->phone,
                 'mobile' => $client->mobile,
                 'email' => $client->email,
                 'notes' => $client->notes,
-                'link_fd' => $client->link_fd,
+                'link' => $client->link_fd,
                 'internalnotes' => $client->internalnotes,
                 'defaulter' => $client->defaulter
             ]);

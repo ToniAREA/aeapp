@@ -19,7 +19,7 @@ class BoatTypeSeeder extends Seeder
         $boat_types = [
             [
                 'id'    => 1,
-                'type' => 'SY',
+                'type' => 'XX',
             ],
             [
                 'id'    => 2,
@@ -27,11 +27,11 @@ class BoatTypeSeeder extends Seeder
             ],
             [
                 'id'    => 3,
-                'type' => 'TT',
+                'type' => 'SY',
             ],
             [
                 'id'    => 4,
-                'type' => 'Other',
+                'type' => 'TT',
             ]
         ];
 
