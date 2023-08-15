@@ -18,6 +18,7 @@ class GlobalSearchController extends Controller
         'ContactContact' => 'cruds.contactContact.title',
         'Employee'       => 'cruds.employee.title',
         'Provider'       => 'cruds.provider.title',
+        'MatLog'         => 'cruds.matLog.title',
     ];
 
     public function search(Request $request)

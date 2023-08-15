@@ -57,6 +57,11 @@
                 {{ trans('cruds.wlist.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tags_mat_logs" role="tab" data-toggle="tab">
+                {{ trans('cruds.matLog.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="tags_wlogs">
@@ -64,6 +69,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="tags_wlists">
             @includeIf('admin.tags.relationships.tagsWlists', ['wlists' => $tag->tagsWlists])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="tags_mat_logs">
+            @includeIf('admin.tags.relationships.tagsMatLogs', ['matLogs' => $tag->tagsMatLogs])
         </div>
     </div>
 </div>

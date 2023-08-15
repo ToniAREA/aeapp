@@ -9,11 +9,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Proforma extends Model
+class MatLog extends Model
 {
     use SoftDeletes, Auditable, HasFactory;
 
-    public $table = 'proformas';
+    public $table = 'mat_logs';
+
+    public static $searchable = [
+        'description',
+    ];
 
     protected $dates = [
         'date',
@@ -23,16 +27,16 @@ class Proforma extends Model
     ];
 
     protected $fillable = [
-        'proforma_number',
-        'client_id',
+        'boat_id',
+        'wlist_id',
         'date',
+        'employee_id',
+        'product',
         'description',
-        'total_amount',
-        'currency',
-        'sent',
-        'paid',
-        'claims',
-        'link',
+        'pvp',
+        'units',
+        'proforma_number_id',
+        'invoiced_line',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -43,39 +47,14 @@ class Proforma extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function proformaNumberWlogs()
+    public function boat()
     {
-        return $this->hasMany(Wlog::class, 'proforma_number_id', 'id');
+        return $this->belongsTo(Boat::class, 'boat_id');
     }
 
-    public function proformaNumberClaims()
+    public function wlist()
     {
-        return $this->hasMany(Claim::class, 'proforma_number_id', 'id');
-    }
-
-    public function proformaNumberPayments()
-    {
-        return $this->hasMany(Payment::class, 'proforma_number_id', 'id');
-    }
-
-    public function proformaNumberMatLogs()
-    {
-        return $this->hasMany(MatLog::class, 'proforma_number_id', 'id');
-    }
-
-    public function client()
-    {
-        return $this->belongsTo(Client::class, 'client_id');
-    }
-
-    public function boats()
-    {
-        return $this->belongsToMany(Boat::class);
-    }
-
-    public function wlists()
-    {
-        return $this->belongsToMany(Wlist::class);
+        return $this->belongsTo(Wlist::class, 'wlist_id');
     }
 
     public function getDateAttribute($value)
@@ -88,8 +67,18 @@ class Proforma extends Model
         $this->attributes['date'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 
+    public function employee()
+    {
+        return $this->belongsTo(User::class, 'employee_id');
+    }
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function proforma_number()
+    {
+        return $this->belongsTo(Proforma::class, 'proforma_number_id');
     }
 }

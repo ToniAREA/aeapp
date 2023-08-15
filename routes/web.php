@@ -214,6 +214,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('expense-reports/destroy', 'ExpenseReportController@massDestroy')->name('expense-reports.massDestroy');
     Route::resource('expense-reports', 'ExpenseReportController');
 
+    // Mat Logs
+    Route::delete('mat-logs/destroy', 'MatLogsController@massDestroy')->name('mat-logs.massDestroy');
+    Route::post('mat-logs/parse-csv-import', 'MatLogsController@parseCsvImport')->name('mat-logs.parseCsvImport');
+    Route::post('mat-logs/process-csv-import', 'MatLogsController@processCsvImport')->name('mat-logs.processCsvImport');
+    Route::resource('mat-logs', 'MatLogsController');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
 });
@@ -400,6 +406,10 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     // Income
     Route::delete('incomes/destroy', 'IncomeController@massDestroy')->name('incomes.massDestroy');
     Route::resource('incomes', 'IncomeController');
+
+    // Mat Logs
+    Route::delete('mat-logs/destroy', 'MatLogsController@massDestroy')->name('mat-logs.massDestroy');
+    Route::resource('mat-logs', 'MatLogsController');
 
     Route::get('frontend/profile', 'ProfileController@index')->name('profile.index');
     Route::post('frontend/profile', 'ProfileController@update')->name('profile.update');

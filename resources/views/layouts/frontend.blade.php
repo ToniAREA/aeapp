@@ -117,6 +117,11 @@
                                             {{ trans('cruds.appointment.title') }}
                                         </a>
                                     @endcan
+                                    @can('mat_log_access')
+                                        <a class="dropdown-item ml-3" href="{{ route('frontend.mat-logs.index') }}">
+                                            {{ trans('cruds.matLog.title') }}
+                                        </a>
+                                    @endcan
                                     @can('billing_access')
                                         <a class="dropdown-item disabled" href="#">
                                             {{ trans('cruds.billing.title') }}

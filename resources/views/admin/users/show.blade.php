@@ -108,6 +108,11 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#employee_mat_logs" role="tab" data-toggle="tab">
+                {{ trans('cruds.matLog.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#for_user_to_dos" role="tab" data-toggle="tab">
                 {{ trans('cruds.toDo.title') }}
             </a>
@@ -129,6 +134,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="employee_wlogs">
             @includeIf('admin.users.relationships.employeeWlogs', ['wlogs' => $user->employeeWlogs])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="employee_mat_logs">
+            @includeIf('admin.users.relationships.employeeMatLogs', ['matLogs' => $user->employeeMatLogs])
         </div>
         <div class="tab-pane" role="tabpanel" id="for_user_to_dos">
             @includeIf('admin.users.relationships.forUserToDos', ['toDos' => $user->forUserToDos])
