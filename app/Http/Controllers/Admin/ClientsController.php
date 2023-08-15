@@ -173,7 +173,7 @@ class ClientsController extends Controller
     {
         abort_if(Gate::denies('client_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $client->load('company', 'contacts', 'boats', 'clientWlists', 'clientAppointments', 'clientMlogs', 'clientProformas', 'clientBoats');
+        $client->load('company', 'contacts', 'boats', 'clientWlists', 'clientAppointments', 'clientProformas', 'clientBoats');
 
         return view('admin.clients.show', compact('client'));
     }

@@ -112,11 +112,6 @@
                                             {{ trans('cruds.wlog.title') }}
                                         </a>
                                     @endcan
-                                    @can('mlog_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.mlogs.index') }}">
-                                            {{ trans('cruds.mlog.title') }}
-                                        </a>
-                                    @endcan
                                     @can('appointment_access')
                                         <a class="dropdown-item ml-3" href="{{ route('frontend.appointments.index') }}">
                                             {{ trans('cruds.appointment.title') }}

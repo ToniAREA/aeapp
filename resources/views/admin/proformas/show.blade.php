@@ -155,11 +155,6 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#proforma_number_mlogs" role="tab" data-toggle="tab">
-                {{ trans('cruds.mlog.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="#proforma_number_claims" role="tab" data-toggle="tab">
                 {{ trans('cruds.claim.title') }}
             </a>
@@ -173,9 +168,6 @@
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="proforma_number_wlogs">
             @includeIf('admin.proformas.relationships.proformaNumberWlogs', ['wlogs' => $proforma->proformaNumberWlogs])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="proforma_number_mlogs">
-            @includeIf('admin.proformas.relationships.proformaNumberMlogs', ['mlogs' => $proforma->proformaNumberMlogs])
         </div>
         <div class="tab-pane" role="tabpanel" id="proforma_number_claims">
             @includeIf('admin.proformas.relationships.proformaNumberClaims', ['claims' => $proforma->proformaNumberClaims])
