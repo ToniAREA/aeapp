@@ -19,8 +19,8 @@ cp  ./config/database.php ./config/database_copy.php
 echo "Copying config/filesystems.php to config/filesystems_copy.php"
 cp  ./config/filesystems.php ./config/filesystems_copy.php
 
-echo "Copying lang/en/crud.php to lang/en/crud_copy.php"
-cp  ./resources/lang/en/crud.php ./resources/lang/en/crud_copy.php
+echo "Copying lang/en/cruds.php to lang/en/cruds_copy.php"
+cp  ./resources/lang/en/cruds.php ./resources/lang/en/cruds_copy.php
 
 echo "Copying database/seeders/UsersTableSeeder.php to database/seeders/UsersTableSeeder_copy.php"
 cp  ./database/seeders/UsersTableSeeder.php ./database/seeders/UsersTableSeeder_copy.php
@@ -61,8 +61,8 @@ cp  ./config/database_copy.php ./config/database.php
 echo "Copying config/filesystems_copy.php to config/filesystems.php"
 cp  ./config/filesystems_copy.php ./config/filesystems.php
 
-echo "Copying lang/en/crud_copy.php to lang/en/crud.php"
-cp  ./resources/lang/en/crud_copy.php ./resources/lang/en/crud.php
+echo "Copying lang/en/cruds_copy.php to lang/en/cruds.php"
+cp  ./resources/lang/en/cruds_copy.php ./resources/lang/en/cruds.php
 
 echo "Copying UsersTableSeeder_copy.php to UsersTableSeeder.php"
 cp  ./database/seeders/UsersTableSeeder_copy.php ./database/seeders/UsersTableSeeder.php
