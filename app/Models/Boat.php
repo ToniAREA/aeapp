@@ -29,7 +29,7 @@ class Boat extends Model
 
     protected $fillable = [
         'id_boat',
-        'boat_type_id',
+        'boat_type',
         'name',
         'imo',
         'mmsi',
@@ -71,11 +71,6 @@ class Boat extends Model
     public function boatsProformas()
     {
         return $this->belongsToMany(Proforma::class);
-    }
-
-    public function boat_type()
-    {
-        return $this->belongsTo(BoatsType::class, 'boat_type_id');
     }
 
     public function marina()

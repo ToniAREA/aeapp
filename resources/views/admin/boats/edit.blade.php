@@ -19,12 +19,8 @@
                 <span class="help-block">{{ trans('cruds.boat.fields.id_boat_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="boat_type_id">{{ trans('cruds.boat.fields.boat_type') }}</label>
-                <select class="form-control select2 {{ $errors->has('boat_type') ? 'is-invalid' : '' }}" name="boat_type_id" id="boat_type_id">
-                    @foreach($boat_types as $id => $entry)
-                        <option value="{{ $id }}" {{ (old('boat_type_id') ? old('boat_type_id') : $boat->boat_type->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
+                <label for="boat_type">{{ trans('cruds.boat.fields.boat_type') }}</label>
+                <input class="form-control {{ $errors->has('boat_type') ? 'is-invalid' : '' }}" type="text" name="boat_type" id="boat_type" value="{{ old('boat_type', $boat->boat_type) }}">
                 @if($errors->has('boat_type'))
                     <span class="text-danger">{{ $errors->first('boat_type') }}</span>
                 @endif
