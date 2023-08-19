@@ -28,8 +28,8 @@ cp  ./database/seeders/UsersTableSeeder.php ./database/seeders/UsersTableSeeder_
 echo "Copying database/seeders/DatabaseSeeder.php to database/seeders/DatabaseSeeder_copy.php"
 cp  ./database/seeders/DatabaseSeeder.php ./database/seeders/DatabaseSeeder_copy.php
 
-echo "Copying database/seeders/BoatSeeder.php to database/seeders/BoatSeeder_copy.php"
-cp  ./database/seeders/BoatSeeder.php ./database/seeders/BoatSeeder_copy.php
+echo "Copying database/seeders/BoatsSeeder.php to database/seeders/BoatsSeeder_copy.php"
+cp  ./database/seeders/BoatsSeeder.php ./database/seeders/BoatsSeeder_copy.php
 
 
 # Recupera los cambios más recientes del repositorio remoto
@@ -70,8 +70,8 @@ cp  ./database/seeders/UsersTableSeeder_copy.php ./database/seeders/UsersTableSe
 echo "Copying DatabaseSeeder_copy.php to DatabaseSeeder.php"
 cp  ./database/seeders/DatabaseSeeder_copy.php ./database/seeders/DatabaseSeeder.php
 
-echo "Copying BoatSeeder_copy.php to BoatSeeder.php"
-cp  ./database/seeders/BoatSeeder_copy.php ./database/seeders/BoatSeeder.php
+echo "Copying BoatsSeeder_copy.php to BoatsSeeder.php"
+cp  ./database/seeders/BoatsSeeder_copy.php ./database/seeders/BoatsSeeder.php
 
 # Run composer install
 echo "Do you want to run: composer install? (y/n)"
