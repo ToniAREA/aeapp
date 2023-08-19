@@ -68,7 +68,7 @@ class BoatsSeeder extends Seeder
 
             // Si no existe, inserta el registro en la tabla pivotante
             if (!$exists) {
-                $this->command->line("NOT in pivot boat_client {$boat->id} - {$boat->client_id}");
+                $this->command->line("\nNOT in pivot boat_client {$boat->id} - {$boat->client_id}");
 
                 $boatExists = DB::table('boats')->where('id', $boat->id)->exists();
                 if ($boatExists) {
@@ -80,17 +80,18 @@ class BoatsSeeder extends Seeder
                             'boat_id' => $boat->id,
                             'client_id' => $boat->client_id,
                         ]);
-                        $this->command->line("Inserted in boat_client DB: {$boat->id} - {$boat->client_id}");
+                        $this->command->line("\nInserted in boat_client DB: {$boat->id} - {$boat->client_id}");
                     } else {
-                        $this->command->line("Client ID{$boat->client_id} does NOT exist in clients_table");
+                        $this->command->line("C\nlient ID{$boat->client_id} does NOT exist in clients_table");
                     }
                 } else {
-                    $this->command->line("Boat ID{$boat->id} does NOT exist in boats DB");
+                    $this->command->line("\nBoat ID{$boat->id} does NOT exist in boats DB");
                 }
             } else {
                 //$this->command->line("Already exists in PIVOT boat_client DB: {$boat->id} - {$boat->client_id}");
             }
             
+            $this->command->getOutput()->write('.');
         }
     }
 }
