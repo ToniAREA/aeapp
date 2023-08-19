@@ -25,6 +25,9 @@ fi
 echo "Copying .env_copy to .env"
 cp  ./.env_copy ./.env
 
+echo "Copying README_copy.md to README.md"
+cp  ./README_copy.md ./README.md
+
 echo "Copying config/database_copy.php to config/database.php"
 cp  ./config/database_copy.php ./config/database.php
 
