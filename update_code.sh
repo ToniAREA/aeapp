@@ -6,7 +6,34 @@ clear
 # Cambia al directorio del repositorio
 cd ~/MEGA/MisWebs/AEAPPv5/aeapp
 
+# Copy to *copy files...
+echo "SAVING BEFORE SYNC. Copying .env to .env_copy"
+cp  ./.env ./.env_copy
+
+echo "Copying README.md to README_copy.md"
+cp  ./README.md ./README_copy.md
+
+echo "Copying config/database.php to config/database_copy.php"
+cp  ./config/database.php ./config/database_copy.php
+
+echo "Copying config/filesystems.php to config/filesystems_copy.php"
+cp  ./config/filesystems.php ./config/filesystems_copy.php
+
+echo "Copying lang/en/crud.php to lang/en/crud_copy.php"
+cp  ./resources/lang/en/crud.php ./resources/lang/en/crud_copy.php
+
+echo "Copying database/seeders/UsersTableSeeder.php to database/seeders/UsersTableSeeder_copy.php"
+cp  ./database/seeders/UsersTableSeeder.php ./database/seeders/UsersTableSeeder_copy.php
+
+echo "Copying database/seeders/DatabaseSeeder.php to database/seeders/DatabaseSeeder_copy.php"
+cp  ./database/seeders/DatabaseSeeder.php ./database/seeders/DatabaseSeeder_copy.php
+
+echo "Copying database/seeders/BoatSeeder.php to database/seeders/BoatSeeder_copy.php"
+cp  ./database/seeders/BoatSeeder.php ./database/seeders/BoatSeeder_copy.php
+
+
 # Recupera los cambios más recientes del repositorio remoto
+echo "Fetching changes from remote repository..."
 git fetch
 
 # Compara el HEAD local con el HEAD remoto
@@ -33,6 +60,9 @@ cp  ./config/database_copy.php ./config/database.php
 
 echo "Copying config/filesystems_copy.php to config/filesystems.php"
 cp  ./config/filesystems_copy.php ./config/filesystems.php
+
+echo "Copying lang/en/crud_copy.php to lang/en/crud.php"
+cp  ./resources/lang/en/crud_copy.php ./resources/lang/en/crud.php
 
 echo "Copying UsersTableSeeder_copy.php to UsersTableSeeder.php"
 cp  ./database/seeders/UsersTableSeeder_copy.php ./database/seeders/UsersTableSeeder.php
