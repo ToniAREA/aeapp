@@ -24,12 +24,8 @@
                             <span class="help-block">{{ trans('cruds.boat.fields.id_boat_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="boat_type_id">{{ trans('cruds.boat.fields.boat_type') }}</label>
-                            <select class="form-control select2" name="boat_type_id" id="boat_type_id">
-                                @foreach($boat_types as $id => $entry)
-                                    <option value="{{ $id }}" {{ old('boat_type_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                                @endforeach
-                            </select>
+                            <label for="boat_type">{{ trans('cruds.boat.fields.boat_type') }}</label>
+                            <input class="form-control" type="text" name="boat_type" id="boat_type" value="{{ old('boat_type', '') }}">
                             @if($errors->has('boat_type'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('boat_type') }}

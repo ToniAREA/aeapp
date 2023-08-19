@@ -24,6 +24,10 @@ class UpdateBoatRequest extends FormRequest
                 'max:2147483647',
                 'unique:boats,id_boat,' . request()->route('boat')->id,
             ],
+            'boat_type' => [
+                'string',
+                'nullable',
+            ],
             'name' => [
                 'string',
                 'min:1',

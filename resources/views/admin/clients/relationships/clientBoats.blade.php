@@ -75,7 +75,7 @@
                                     {{ $boat->id_boat ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $boat->boat_type->type ?? '' }}
+                                    {{ $boat->boat_type ?? '' }}
                                 </td>
                                 <td>
                                     {{ $boat->name ?? '' }}

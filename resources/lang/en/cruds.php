@@ -2,8 +2,8 @@
 
 return [
     'userManagement' => [
-        'title'          => 'Users',
-        'title_singular' => 'User',
+        'title'          => 'User management',
+        'title_singular' => 'User management',
     ],
     'permission' => [
         'title'          => 'Permissions',
@@ -157,10 +157,10 @@ return [
             'imo_helper'           => ' ',
             'coordinates'          => 'Coordinates',
             'coordinates_helper'   => ' ',
-            'boat_type'            => 'Boat Type',
-            'boat_type_helper'     => ' ',
             'link'                 => 'Link',
             'link_helper'          => ' ',
+            'boat_type'            => 'Boat Type',
+            'boat_type_helper'     => ' ',
         ],
     ],
     'contentManagement' => [
@@ -946,8 +946,8 @@ return [
         ],
     ],
     'expenseManagement' => [
-        'title'          => 'Expenses',
-        'title_singular' => 'Expense',
+        'title'          => 'Expense Management',
+        'title_singular' => 'Expense Management',
     ],
     'expenseCategory' => [
         'title'          => 'Expense Categories',
