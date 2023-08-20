@@ -29,16 +29,7 @@ class BoatsSeeder extends Seeder
             //$this->command->line("Objeto en formato JSON: {$json}");
             //$this->command->line("...");
 
-            if ($boat->type == 'XX') {
-                $boat->type = '1';
-            } elseif ($boat->type == 'MY') {
-                $boat->type = '2';
-            } elseif ($boat->type == 'SY') {
-                $boat->type = '3';
-            } elseif ($boat->type == 'TT') {
-                $boat->type = '4';
-            }
-
+            
             $boat_exists = DB::connection('mysql')->table('boats')
                 ->where('id_boat', $boat->id)
                 ->exists();
@@ -48,7 +39,7 @@ class BoatsSeeder extends Seeder
             } else {
                 DB::table('boats')->insert([
                     'id_boat' => $boat->id,
-                    'boat_type_id' => $boat->type,
+                    'boat_type' => $boat->type,
                     'name' => $boat->name,
                     'marina_id' => $boat->marina_id,
                     'mmsi' => $boat->mmsi,
@@ -68,29 +59,30 @@ class BoatsSeeder extends Seeder
 
             // Si no existe, inserta el registro en la tabla pivotante
             if (!$exists) {
-                $this->command->line("NOT in pivot boat_client {$boat->id} - {$boat->client_id}");
+                $this->command->line("\nNOT in pivot boat_client {$boat->id} - {$boat->client_id}");
 
-                $boatExists = DB::table('boats')->where('id', $boat->id)->exists();
+                $boatExists = DB::table('boats')->where('id_boat', $boat->id)->exists();
                 if ($boatExists) {
                     //$this->command->line("Boat ID{$boat->id} exists in boats_table");
-                    $clientExists = DB::table('clients')->where('id', $boat->client_id)->exists();
+                    $clientExists = DB::table('clients')->where('id_client', $boat->client_id)->exists();
                     if ($clientExists) {
                         //$this->command->line("Client ID{$boat->client_id} exists in clients_table");
                         DB::connection('mysql')->table('boat_client')->insert([
                             'boat_id' => $boat->id,
                             'client_id' => $boat->client_id,
                         ]);
-                        $this->command->line("Inserted in boat_client DB: {$boat->id} - {$boat->client_id}");
+                        $this->command->line("\nInserted in boat_client DB: {$boat->id} - {$boat->client_id}");
                     } else {
-                        $this->command->line("Client ID{$boat->client_id} does NOT exist in clients_table");
+                        $this->command->line("C\nlient ID{$boat->client_id} does NOT exist in clients_table");
                     }
                 } else {
-                    $this->command->line("Boat ID{$boat->id} does NOT exist in boats DB");
+                    $this->command->line("\nBoat ID{$boat->id} does NOT exist in boats DB");
                 }
             } else {
                 //$this->command->line("Already exists in PIVOT boat_client DB: {$boat->id} - {$boat->client_id}");
             }
             
+            $this->command->getOutput()->write('.');
         }
     }
 }
