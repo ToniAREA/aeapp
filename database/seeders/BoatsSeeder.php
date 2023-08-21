@@ -19,10 +19,9 @@ class BoatsSeeder extends Seeder
 
         //get last id in oldBoats array
         $last_id = $oldBoats->last()->id;
-        $last_id++;
 
         // Insertar los datos en la tabla destino de la nueva base de datos
-        for($i = 0; $i < $last_id; $i++){
+        for($i = 1; $i < $last_id; $i++){
 
             //check next id in boats table
             $this->command->line("Next id in boats table: {$i}");

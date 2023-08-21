@@ -19,10 +19,9 @@ class ClientsSeeder extends Seeder
 
         //get last id in oldClients array
         $last_id = $oldClients->last()->id;
-        $last_id++;
 
         // Insertar los datos en la tabla destino de la nueva base de datos
-        for ($i = 0; $i < $last_id; $i++) {
+        for ($i = 1; $i < $last_id; $i++) {
 
             //check next id in clients table
             $this->command->line("Next id in clients table: {$i}");

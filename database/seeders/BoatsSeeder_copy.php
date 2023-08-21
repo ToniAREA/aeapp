@@ -37,6 +37,12 @@ class BoatsSeeder extends Seeder
                     'internalnotes' => '',
                     'coordinates' => '',
                 ];
+                DB::table('boats')->insert([
+                    'name' => $boat->name,
+                    'notes' => $boat->notes,
+                    'internalnotes' => $boat->internalnotes,
+                    'coordinates' => $boat->coordinates,
+                ]);
             }else{
                 //check that $i is the same as $boat->id
                 if($i != $boat->id){
