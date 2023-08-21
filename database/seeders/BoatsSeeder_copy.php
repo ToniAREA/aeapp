@@ -38,7 +38,7 @@ class BoatsSeeder extends Seeder
                 ->exists();
 
             if ($boat_exists) {
-                $this->command->getOutput()->write("\tok");
+                $this->command->getOutput()->write("<info>ok</info>");
             } else {
                 DB::table('boats')->insert([
                     'id_boat' => $boat->id,
@@ -49,7 +49,7 @@ class BoatsSeeder extends Seeder
                     'notes' => $boat->notes,
                     'internalnotes' => $boat->internalnotes,
                 ]);
-                $this->command->getOutput()->write("\tInserted");
+                $this->command->getOutput()->write("<comment>Inserted</comment>");
                 $presentBoats = DB::connection('mysql')->table('boats')->get();
             }
             
