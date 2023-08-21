@@ -22,12 +22,12 @@
                 <span class="help-block">{{ trans('cruds.client.fields.defaulter_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="id_client">{{ trans('cruds.client.fields.id_client') }}</label>
-                <input class="form-control {{ $errors->has('id_client') ? 'is-invalid' : '' }}" type="number" name="id_client" id="id_client" value="{{ old('id_client', $client->id_client) }}" step="1" required>
-                @if($errors->has('id_client'))
-                    <span class="text-danger">{{ $errors->first('id_client') }}</span>
+                <label for="ref">{{ trans('cruds.client.fields.ref') }}</label>
+                <input class="form-control {{ $errors->has('ref') ? 'is-invalid' : '' }}" type="text" name="ref" id="ref" value="{{ old('ref', $client->ref) }}">
+                @if($errors->has('ref'))
+                    <span class="text-danger">{{ $errors->first('ref') }}</span>
                 @endif
-                <span class="help-block">{{ trans('cruds.client.fields.id_client_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.client.fields.ref_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="name">{{ trans('cruds.client.fields.name') }}</label>

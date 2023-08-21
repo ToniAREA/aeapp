@@ -24,20 +24,6 @@
                             <span class="help-block">{{ trans('cruds.proforma.fields.proforma_number_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="client_id">{{ trans('cruds.proforma.fields.client') }}</label>
-                            <select class="form-control select2" name="client_id" id="client_id">
-                                @foreach($clients as $id => $entry)
-                                    <option value="{{ $id }}" {{ old('client_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('client'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('client') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.proforma.fields.client_helper') }}</span>
-                        </div>
-                        <div class="form-group">
                             <label for="boats">{{ trans('cruds.proforma.fields.boats') }}</label>
                             <div style="padding-bottom: 4px">
                                 <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>

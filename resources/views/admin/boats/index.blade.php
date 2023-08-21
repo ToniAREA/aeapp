@@ -29,7 +29,7 @@
                         {{ trans('cruds.boat.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.boat.fields.id_boat') }}
+                        {{ trans('cruds.boat.fields.ref') }}
                     </th>
                     <th>
                         {{ trans('cruds.boat.fields.boat_type') }}
@@ -45,9 +45,6 @@
                     </th>
                     <th>
                         {{ trans('cruds.boat.fields.marina') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.boat.fields.client') }}
                     </th>
                     <th>
                         {{ trans('cruds.boat.fields.notes') }}
@@ -91,14 +88,6 @@
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($marinas as $key => $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($clients as $key => $item)
-                                <option value="{{ $item->id_client }}">{{ $item->id_client }}</option>
                             @endforeach
                         </select>
                     </td>
@@ -170,13 +159,12 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'id_boat', name: 'id_boat' },
+{ data: 'ref', name: 'ref' },
 { data: 'boat_type', name: 'boat_type' },
 { data: 'name', name: 'name' },
 { data: 'imo', name: 'imo' },
 { data: 'mmsi', name: 'mmsi' },
 { data: 'marina_name', name: 'marina.name' },
-{ data: 'client', name: 'clients.id_client' },
 { data: 'notes', name: 'notes' },
 { data: 'internalnotes', name: 'internalnotes' },
 { data: 'coordinates', name: 'coordinates' },

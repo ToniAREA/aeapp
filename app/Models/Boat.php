@@ -21,14 +21,13 @@ class Boat extends Model
     ];
 
     public static $searchable = [
-        'id_boat',
         'mmsi',
         'notes',
         'internalnotes',
     ];
 
     protected $fillable = [
-        'id_boat',
+        'ref',
         'boat_type',
         'name',
         'imo',
@@ -76,10 +75,5 @@ class Boat extends Model
     public function marina()
     {
         return $this->belongsTo(Marina::class, 'marina_id');
-    }
-
-    public function clients()
-    {
-        return $this->belongsToMany(Client::class);
     }
 }

@@ -8,7 +8,6 @@ use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
 use App\Models\Appointment;
 use App\Models\Boat;
-use App\Models\Client;
 use App\Models\Priority;
 use App\Models\Role;
 use App\Models\User;
@@ -23,7 +22,7 @@ class AppointmentsController extends Controller
     {
         abort_if(Gate::denies('appointment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $appointments = Appointment::with(['client', 'boat', 'wlists', 'for_roles', 'for_users', 'priority'])->get();
+        $appointments = Appointment::with(['boat', 'wlists', 'for_roles', 'for_users', 'priority'])->get();
 
         return view('frontend.appointments.index', compact('appointments'));
     }
@@ -31,8 +30,6 @@ class AppointmentsController extends Controller
     public function create()
     {
         abort_if(Gate::denies('appointment_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $clients = Client::pluck('id_client', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $boats = Boat::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -44,7 +41,7 @@ class AppointmentsController extends Controller
 
         $priorities = Priority::pluck('level', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('frontend.appointments.create', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities', 'wlists'));
+        return view('frontend.appointments.create', compact('boats', 'for_roles', 'for_users', 'priorities', 'wlists'));
     }
 
     public function store(StoreAppointmentRequest $request)
@@ -61,8 +58,6 @@ class AppointmentsController extends Controller
     {
         abort_if(Gate::denies('appointment_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $clients = Client::pluck('id_client', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $boats = Boat::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $wlists = Wlist::pluck('description', 'id');
@@ -73,9 +68,9 @@ class AppointmentsController extends Controller
 
         $priorities = Priority::pluck('level', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $appointment->load('client', 'boat', 'wlists', 'for_roles', 'for_users', 'priority');
+        $appointment->load('boat', 'wlists', 'for_roles', 'for_users', 'priority');
 
-        return view('frontend.appointments.edit', compact('appointment', 'boats', 'clients', 'for_roles', 'for_users', 'priorities', 'wlists'));
+        return view('frontend.appointments.edit', compact('appointment', 'boats', 'for_roles', 'for_users', 'priorities', 'wlists'));
     }
 
     public function update(UpdateAppointmentRequest $request, Appointment $appointment)
@@ -92,7 +87,7 @@ class AppointmentsController extends Controller
     {
         abort_if(Gate::denies('appointment_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $appointment->load('client', 'boat', 'wlists', 'for_roles', 'for_users', 'priority');
+        $appointment->load('boat', 'wlists', 'for_roles', 'for_users', 'priority');
 
         return view('frontend.appointments.show', compact('appointment'));
     }

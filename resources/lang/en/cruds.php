@@ -2,8 +2,8 @@
 
 return [
     'userManagement' => [
-        'title'          => 'Users',
-        'title_singular' => 'User',
+        'title'          => 'User management',
+        'title_singular' => 'User management',
     ],
     'permission' => [
         'title'          => 'Permissions',
@@ -99,8 +99,6 @@ return [
             'internalnotes_helper' => ' ',
             'coordinates'          => 'Coordinates',
             'coordinates_helper'   => ' ',
-            'id_client'            => 'ID Client',
-            'id_client_helper'     => ' ',
             'company'              => 'Company',
             'company_helper'       => ' ',
             'contacts'             => 'Contacts',
@@ -125,6 +123,8 @@ return [
             'mobile_helper'        => ' ',
             'email'                => 'Email',
             'email_helper'         => ' ',
+            'ref'                  => 'Ref',
+            'ref_helper'           => ' ',
         ],
     ],
     'boat' => [
@@ -145,22 +145,20 @@ return [
             'notes_helper'         => ' ',
             'internalnotes'        => 'Internalnotes',
             'internalnotes_helper' => ' ',
-            'id_boat'              => 'ID Boat',
-            'id_boat_helper'       => ' ',
             'mmsi'                 => 'MMSI',
             'mmsi_helper'          => ' ',
             'marina'               => 'Marina',
             'marina_helper'        => ' ',
-            'client'               => 'Client',
-            'client_helper'        => ' ',
             'imo'                  => 'IMO',
             'imo_helper'           => ' ',
             'coordinates'          => 'Coordinates',
             'coordinates_helper'   => ' ',
-            'boat_type'            => 'Boat Type',
-            'boat_type_helper'     => ' ',
             'link'                 => 'Link',
             'link_helper'          => ' ',
+            'boat_type'            => 'Boat Type',
+            'boat_type_helper'     => ' ',
+            'ref'                  => 'Ref',
+            'ref_helper'           => ' ',
         ],
     ],
     'contentManagement' => [
@@ -281,8 +279,6 @@ return [
             'updated_at_helper'  => ' ',
             'deleted_at'         => 'Deleted at',
             'deleted_at_helper'  => ' ',
-            'client'             => 'Client',
-            'client_helper'      => ' ',
             'boat'               => 'Boat',
             'boat_helper'        => ' ',
             'priority'           => 'Priority',
@@ -365,8 +361,6 @@ return [
         'fields'         => [
             'id'                 => 'ID',
             'id_helper'          => ' ',
-            'client'             => 'Client',
-            'client_helper'      => 'With which client is the appointment?',
             'when_starts'        => 'When Starts',
             'when_starts_helper' => 'Select date and time when appointment starts.',
             'when_ends'          => 'When Ends',
@@ -745,8 +739,6 @@ return [
             'boats_helper'           => ' ',
             'wlists'                 => 'Wlists',
             'wlists_helper'          => ' ',
-            'client'                 => 'Client',
-            'client_helper'          => ' ',
         ],
     ],
     'claim' => [
@@ -946,8 +938,8 @@ return [
         ],
     ],
     'expenseManagement' => [
-        'title'          => 'Expenses',
-        'title_singular' => 'Expense',
+        'title'          => 'Expense Management',
+        'title_singular' => 'Expense Management',
     ],
     'expenseCategory' => [
         'title'          => 'Expense Categories',

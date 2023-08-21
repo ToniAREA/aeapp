@@ -17,12 +17,9 @@ class StoreBoatRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_boat' => [
-                'required',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647',
-                'unique:boats,id_boat',
+            'ref' => [
+                'string',
+                'nullable',
             ],
             'boat_type' => [
                 'string',
@@ -41,12 +38,6 @@ class StoreBoatRequest extends FormRequest
             'mmsi' => [
                 'string',
                 'nullable',
-            ],
-            'clients.*' => [
-                'integer',
-            ],
-            'clients' => [
-                'array',
             ],
             'notes' => [
                 'string',

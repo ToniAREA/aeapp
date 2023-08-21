@@ -24,7 +24,6 @@ class Proforma extends Model
 
     protected $fillable = [
         'proforma_number',
-        'client_id',
         'date',
         'description',
         'total_amount',
@@ -61,11 +60,6 @@ class Proforma extends Model
     public function proformaNumberMatLogs()
     {
         return $this->hasMany(MatLog::class, 'proforma_number_id', 'id');
-    }
-
-    public function client()
-    {
-        return $this->belongsTo(Client::class, 'client_id');
     }
 
     public function boats()

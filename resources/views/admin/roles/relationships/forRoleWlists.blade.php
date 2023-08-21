@@ -25,9 +25,6 @@
                                 {{ trans('cruds.wlist.fields.id') }}
                             </th>
                             <th>
-                                {{ trans('cruds.wlist.fields.client') }}
-                            </th>
-                            <th>
                                 {{ trans('cruds.wlist.fields.boat') }}
                             </th>
                             <th>
@@ -76,9 +73,6 @@
                                 </td>
                                 <td>
                                     {{ $wlist->id ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $wlist->client->id_client ?? '' }}
                                 </td>
                                 <td>
                                     {{ $wlist->boat->name ?? '' }}

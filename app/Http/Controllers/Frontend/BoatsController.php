@@ -8,7 +8,6 @@ use App\Http\Requests\MassDestroyBoatRequest;
 use App\Http\Requests\StoreBoatRequest;
 use App\Http\Requests\UpdateBoatRequest;
 use App\Models\Boat;
-use App\Models\Client;
 use App\Models\Marina;
 use Gate;
 use Illuminate\Http\Request;
@@ -22,13 +21,11 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boats = Boat::with(['marina', 'clients'])->get();
+        $boats = Boat::with(['marina'])->get();
 
         $marinas = Marina::get();
 
-        $clients = Client::get();
-
-        return view('frontend.boats.index', compact('boats', 'clients', 'marinas'));
+        return view('frontend.boats.index', compact('boats', 'marinas'));
     }
 
     public function create()
@@ -37,15 +34,12 @@ class BoatsController extends Controller
 
         $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $clients = Client::pluck('id_client', 'id');
-
-        return view('frontend.boats.create', compact('clients', 'marinas'));
+        return view('frontend.boats.create', compact('marinas'));
     }
 
     public function store(StoreBoatRequest $request)
     {
         $boat = Boat::create($request->all());
-        $boat->clients()->sync($request->input('clients', []));
 
         return redirect()->route('frontend.boats.index');
     }
@@ -56,17 +50,14 @@ class BoatsController extends Controller
 
         $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $clients = Client::pluck('id_client', 'id');
+        $boat->load('marina');
 
-        $boat->load('marina', 'clients');
-
-        return view('frontend.boats.edit', compact('boat', 'clients', 'marinas'));
+        return view('frontend.boats.edit', compact('boat', 'marinas'));
     }
 
     public function update(UpdateBoatRequest $request, Boat $boat)
     {
         $boat->update($request->all());
-        $boat->clients()->sync($request->input('clients', []));
 
         return redirect()->route('frontend.boats.index');
     }
@@ -75,7 +66,7 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boat->load('marina', 'clients', 'boatWlists', 'boatAppointments', 'boatMatLogs', 'boatsClients', 'boatsProformas');
+        $boat->load('marina', 'boatWlists', 'boatAppointments', 'boatMatLogs', 'boatsClients', 'boatsProformas');
 
         return view('frontend.boats.show', compact('boat'));
     }

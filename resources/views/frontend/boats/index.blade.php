@@ -30,7 +30,7 @@
                                         {{ trans('cruds.boat.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.boat.fields.id_boat') }}
+                                        {{ trans('cruds.boat.fields.ref') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.boat.fields.boat_type') }}
@@ -46,9 +46,6 @@
                                     </th>
                                     <th>
                                         {{ trans('cruds.boat.fields.marina') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.boat.fields.client') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.boat.fields.notes') }}
@@ -96,14 +93,6 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select class="search">
-                                            <option value>{{ trans('global.all') }}</option>
-                                            @foreach($clients as $key => $item)
-                                                <option value="{{ $item->id_client }}">{{ $item->id_client }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
@@ -126,7 +115,7 @@
                                             {{ $boat->id ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $boat->id_boat ?? '' }}
+                                            {{ $boat->ref ?? '' }}
                                         </td>
                                         <td>
                                             {{ $boat->boat_type ?? '' }}
@@ -142,11 +131,6 @@
                                         </td>
                                         <td>
                                             {{ $boat->marina->name ?? '' }}
-                                        </td>
-                                        <td>
-                                            @foreach($boat->clients as $key => $item)
-                                                <span>{{ $item->id_client }}</span>
-                                            @endforeach
                                         </td>
                                         <td>
                                             {{ $boat->notes ?? '' }}

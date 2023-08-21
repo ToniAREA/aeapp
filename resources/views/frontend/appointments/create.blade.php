@@ -14,20 +14,6 @@
                         @method('POST')
                         @csrf
                         <div class="form-group">
-                            <label class="required" for="client_id">{{ trans('cruds.appointment.fields.client') }}</label>
-                            <select class="form-control select2" name="client_id" id="client_id" required>
-                                @foreach($clients as $id => $entry)
-                                    <option value="{{ $id }}" {{ old('client_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('client'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('client') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.appointment.fields.client_helper') }}</span>
-                        </div>
-                        <div class="form-group">
                             <label for="boat_id">{{ trans('cruds.appointment.fields.boat') }}</label>
                             <select class="form-control select2" name="boat_id" id="boat_id">
                                 @foreach($boats as $id => $entry)

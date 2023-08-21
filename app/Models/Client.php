@@ -14,21 +14,20 @@ class Client extends Model
 
     public $table = 'clients';
 
+    public static $searchable = [
+        'notes',
+        'internalnotes',
+    ];
+
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    public static $searchable = [
-        'id_client',
-        'notes',
-        'internalnotes',
-    ];
-
     protected $fillable = [
         'defaulter',
-        'id_client',
+        'ref',
         'name',
         'lastname',
         'vat',
@@ -50,26 +49,6 @@ class Client extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
-    }
-
-    public function clientWlists()
-    {
-        return $this->hasMany(Wlist::class, 'client_id', 'id');
-    }
-
-    public function clientAppointments()
-    {
-        return $this->hasMany(Appointment::class, 'client_id', 'id');
-    }
-
-    public function clientProformas()
-    {
-        return $this->hasMany(Proforma::class, 'client_id', 'id');
-    }
-
-    public function clientBoats()
-    {
-        return $this->belongsToMany(Boat::class);
     }
 
     public function company()

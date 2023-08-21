@@ -17,13 +17,12 @@ class BoatsApiController extends Controller
     {
         abort_if(Gate::denies('boat_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new BoatResource(Boat::with(['marina', 'clients'])->get());
+        return new BoatResource(Boat::with(['marina'])->get());
     }
 
     public function store(StoreBoatRequest $request)
     {
         $boat = Boat::create($request->all());
-        $boat->clients()->sync($request->input('clients', []));
 
         return (new BoatResource($boat))
             ->response()
@@ -34,13 +33,12 @@ class BoatsApiController extends Controller
     {
         abort_if(Gate::denies('boat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new BoatResource($boat->load(['marina', 'clients']));
+        return new BoatResource($boat->load(['marina']));
     }
 
     public function update(UpdateBoatRequest $request, Boat $boat)
     {
         $boat->update($request->all());
-        $boat->clients()->sync($request->input('clients', []));
 
         return (new BoatResource($boat))
             ->response()
