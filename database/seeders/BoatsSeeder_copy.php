@@ -16,43 +16,41 @@ class BoatsSeeder extends Seeder
     {
         // Obtener datos de la tabla origen de la base de datos antigua
         $oldBoats = DB::connection('mysql_old')->table('boats')->get();
-        $presentBoats = DB::connection('mysql')->table('boats')->get();
+
+        //get last id in oldBoats array
+        $last_id = $oldBoats->last()->id;
+        $last_id++;
 
         // Insertar los datos en la tabla destino de la nueva base de datos
-        foreach ($oldBoats as $boat) {
-            //Print boat name and id
-            $this->command->getOutput()->write("\nB{$boat->id}, ");
-            $this->command->getOutput()->write("\t{$boat->type} {$boat->name}, ");
+        for($i = 0; $i < $last_id; $i++){
 
-            $boat_client = DB::connection('mysql_old')->table('clients')
-            ->where('id', $boat->client_id)
-            ->first();
+            //check next id in boats table
+            $this->command->line("Next id in boats table: {$i}");
 
-            if ($boat_client) {
-                $this->command->getOutput()->write("\tC".$boat_client->id."\t".$boat_client->name);
+            //find boat with $i in $oldBoats array
+            $boat = $oldBoats->where('id', $i)->first();
+            // if $boat is null, make a dummy boat with id $i and name 'empty boat'
+            if($boat == null){
+                $boat = (object) [
+                    'name' => 'empty boat',
+                    'notes' => '',
+                    'internalnotes' => '',
+                    'coordinates' => '',
+                ];
+            }else{
+                //check that $i is the same as $boat->id
+                if($i != $boat->id){
+                    $this->command->line("Error: {$i} is not the same as {$boat->id}");
+                }else{
+                    $this->command->line("{$i} is the same as {$boat->id}");
+                    DB::table('boats')->insert([
+                        'name' => $boat->name,
+                        'notes' => $boat->notes,
+                        'internalnotes' => $boat->internalnotes,
+                        'coordinates' => $boat->coordinates,
+                    ]);
+                }
             }
-
-            $boat_exists = DB::connection('mysql')->table('boats')
-                ->where('id_boat', $boat->id)
-                ->where('name', $boat->name)
-                ->exists();
-
-            if ($boat_exists) {
-                $this->command->getOutput()->write("<info>ok</info>");
-            } else {
-                DB::table('boats')->insert([
-                    'id_boat' => $boat->id,
-                    'boat_type' => $boat->type,
-                    'name' => $boat->name,
-                    'marina_id' => $boat->marina_id,
-                    'mmsi' => $boat->mmsi,
-                    'notes' => $boat->notes,
-                    'internalnotes' => $boat->internalnotes,
-                ]);
-                $this->command->getOutput()->write("<comment>Inserted</comment>");
-                $presentBoats = DB::connection('mysql')->table('boats')->get();
-            }
-            
-
-        }}
+        }
+    }
 }
