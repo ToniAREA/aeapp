@@ -39,7 +39,7 @@
                                         {{ trans('cruds.boat.fields.boat_type') }}
                                     </th>
                                     <td>
-                                        {{ $boat->boat_type->type ?? '' }}
+                                        {{ $boat->boat_type }}
                                     </td>
                                 </tr>
                                 <tr>

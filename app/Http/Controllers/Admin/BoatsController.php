@@ -8,7 +8,6 @@ use App\Http\Requests\MassDestroyBoatRequest;
 use App\Http\Requests\StoreBoatRequest;
 use App\Http\Requests\UpdateBoatRequest;
 use App\Models\Boat;
-use App\Models\BoatsType;
 use App\Models\Client;
 use App\Models\Marina;
 use Gate;
@@ -25,7 +24,7 @@ class BoatsController extends Controller
         abort_if(Gate::denies('boat_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Boat::with(['boat_type', 'marina', 'clients'])->select(sprintf('%s.*', (new Boat)->table));
+            $query = Boat::with(['marina', 'clients'])->select(sprintf('%s.*', (new Boat)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -52,10 +51,9 @@ class BoatsController extends Controller
             $table->editColumn('ref', function ($row) {
                 return $row->ref ? $row->ref : '';
             });
-            $table->addColumn('boat_type_type', function ($row) {
-                return $row->boat_type ? $row->boat_type->type : '';
+            $table->editColumn('boat_type', function ($row) {
+                return $row->boat_type ? $row->boat_type : '';
             });
-
             $table->editColumn('name', function ($row) {
                 return $row->name ? $row->name : '';
             });
@@ -90,29 +88,26 @@ class BoatsController extends Controller
                 return $row->link ? $row->link : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'boat_type', 'marina', 'clients']);
+            $table->rawColumns(['actions', 'placeholder', 'marina', 'clients']);
 
             return $table->make(true);
         }
 
-        $boats_types = BoatsType::get();
-        $marinas     = Marina::get();
-        $clients     = Client::get();
+        $marinas = Marina::get();
+        $clients = Client::get();
 
-        return view('admin.boats.index', compact('boats_types', 'marinas', 'clients'));
+        return view('admin.boats.index', compact('marinas', 'clients'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('boat_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boat_types = BoatsType::pluck('type', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $clients = Client::pluck('name', 'id');
 
-        return view('admin.boats.create', compact('boat_types', 'clients', 'marinas'));
+        return view('admin.boats.create', compact('clients', 'marinas'));
     }
 
     public function store(StoreBoatRequest $request)
@@ -127,15 +122,13 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boat_types = BoatsType::pluck('type', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $clients = Client::pluck('name', 'id');
 
-        $boat->load('boat_type', 'marina', 'clients');
+        $boat->load('marina', 'clients');
 
-        return view('admin.boats.edit', compact('boat', 'boat_types', 'clients', 'marinas'));
+        return view('admin.boats.edit', compact('boat', 'clients', 'marinas'));
     }
 
     public function update(UpdateBoatRequest $request, Boat $boat)
@@ -150,7 +143,7 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boat->load('boat_type', 'marina', 'clients', 'boatWlists', 'boatAppointments', 'boatMatLogs', 'boatsClients', 'boatsProformas');
+        $boat->load('marina', 'clients', 'boatWlists', 'boatAppointments', 'boatMatLogs', 'boatsClients', 'boatsProformas');
 
         return view('admin.boats.show', compact('boat'));
     }

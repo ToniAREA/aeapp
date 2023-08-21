@@ -42,22 +42,6 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.relatedData') }}
-    </div>
-    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-        <li class="nav-item">
-            <a class="nav-link" href="#boat_type_boats" role="tab" data-toggle="tab">
-                {{ trans('cruds.boat.title') }}
-            </a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="boat_type_boats">
-            @includeIf('admin.boatsTypes.relationships.boatTypeBoats', ['boats' => $boatsType->boatTypeBoats])
-        </div>
-    </div>
-</div>
+
 
 @endsection
