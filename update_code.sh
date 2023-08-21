@@ -10,20 +10,8 @@ cd ~/MEGA/MisWebs/AEAPPv5/aeapp
 echo "SAVING BEFORE SYNC. Copying .env to .env_copy"
 cp  ./.env ./.env_copy
 
-echo "Copying README.md to README_copy.md"
-cp  ./README.md ./README_copy.md
-
-echo "Copying config/database.php to config/database_copy.php"
-cp  ./config/database.php ./config/database_copy.php
-
 echo "Copying config/filesystems.php to config/filesystems_copy.php"
 cp  ./config/filesystems.php ./config/filesystems_copy.php
-
-echo "Copying lang/en/cruds.php to lang/en/cruds_copy.php"
-cp  ./resources/lang/en/cruds.php ./resources/lang/en/cruds_copy.php
-
-echo "Copying database/seeders/UsersTableSeeder.php to database/seeders/UsersTableSeeder_copy.php"
-cp  ./database/seeders/UsersTableSeeder.php ./database/seeders/UsersTableSeeder_copy.php
 
 echo "Copying database/seeders/DatabaseSeeder.php to database/seeders/DatabaseSeeder_copy.php"
 cp  ./database/seeders/DatabaseSeeder.php ./database/seeders/DatabaseSeeder_copy.php
