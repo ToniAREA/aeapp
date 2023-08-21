@@ -54,6 +54,9 @@
                                         {{ trans('cruds.boat.fields.internalnotes') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.boat.fields.clients') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.boat.fields.coordinates') }}
                                     </th>
                                     <th>
@@ -73,7 +76,12 @@
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($boats_types as $key => $item)
+                                                <option value="{{ $item->type }}">{{ $item->type }}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -99,6 +107,14 @@
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($clients as $key => $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
@@ -118,7 +134,7 @@
                                             {{ $boat->ref ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $boat->boat_type ?? '' }}
+                                            {{ $boat->boat_type->type ?? '' }}
                                         </td>
                                         <td>
                                             {{ $boat->name ?? '' }}
@@ -137,6 +153,11 @@
                                         </td>
                                         <td>
                                             {{ $boat->internalnotes ?? '' }}
+                                        </td>
+                                        <td>
+                                            @foreach($boat->clients as $key => $item)
+                                                <span>{{ $item->name }}</span>
+                                            @endforeach
                                         </td>
                                         <td>
                                             {{ $boat->coordinates ?? '' }}

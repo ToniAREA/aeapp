@@ -54,6 +54,8 @@ class BoatsTypeController extends Controller
     {
         abort_if(Gate::denies('boats_type_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $boatsType->load('boatTypeBoats');
+
         return view('admin.boatsTypes.show', compact('boatsType'));
     }
 

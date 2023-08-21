@@ -24,8 +24,12 @@
                             <span class="help-block">{{ trans('cruds.boat.fields.ref_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="boat_type">{{ trans('cruds.boat.fields.boat_type') }}</label>
-                            <input class="form-control" type="text" name="boat_type" id="boat_type" value="{{ old('boat_type', '') }}">
+                            <label for="boat_type_id">{{ trans('cruds.boat.fields.boat_type') }}</label>
+                            <select class="form-control select2" name="boat_type_id" id="boat_type_id">
+                                @foreach($boat_types as $id => $entry)
+                                    <option value="{{ $id }}" {{ old('boat_type_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                @endforeach
+                            </select>
                             @if($errors->has('boat_type'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('boat_type') }}
@@ -96,6 +100,24 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.boat.fields.internalnotes_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="clients">{{ trans('cruds.boat.fields.clients') }}</label>
+                            <div style="padding-bottom: 4px">
+                                <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                                <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                            </div>
+                            <select class="form-control select2" name="clients[]" id="clients" multiple>
+                                @foreach($clients as $id => $client)
+                                    <option value="{{ $id }}" {{ in_array($id, old('clients', [])) ? 'selected' : '' }}>{{ $client }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('clients'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('clients') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.boat.fields.clients_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label for="coordinates">{{ trans('cruds.boat.fields.coordinates') }}</label>

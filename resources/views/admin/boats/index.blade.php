@@ -53,6 +53,9 @@
                         {{ trans('cruds.boat.fields.internalnotes') }}
                     </th>
                     <th>
+                        {{ trans('cruds.boat.fields.clients') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.boat.fields.coordinates') }}
                     </th>
                     <th>
@@ -72,7 +75,12 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($boats_types as $key => $item)
+                                <option value="{{ $item->type }}">{{ $item->type }}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -96,6 +104,14 @@
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($clients as $key => $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -160,13 +176,14 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'ref', name: 'ref' },
-{ data: 'boat_type', name: 'boat_type' },
+{ data: 'boat_type_type', name: 'boat_type.type' },
 { data: 'name', name: 'name' },
 { data: 'imo', name: 'imo' },
 { data: 'mmsi', name: 'mmsi' },
 { data: 'marina_name', name: 'marina.name' },
 { data: 'notes', name: 'notes' },
 { data: 'internalnotes', name: 'internalnotes' },
+{ data: 'clients', name: 'clients.name' },
 { data: 'coordinates', name: 'coordinates' },
 { data: 'link', name: 'link' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }

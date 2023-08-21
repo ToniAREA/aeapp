@@ -10,6 +10,18 @@
         <form method="POST" action="{{ route("admin.wlists.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
+                <label for="client_id">{{ trans('cruds.wlist.fields.client') }}</label>
+                <select class="form-control select2 {{ $errors->has('client') ? 'is-invalid' : '' }}" name="client_id" id="client_id">
+                    @foreach($clients as $id => $entry)
+                        <option value="{{ $id }}" {{ old('client_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('client'))
+                    <span class="text-danger">{{ $errors->first('client') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.wlist.fields.client_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="boat_id">{{ trans('cruds.wlist.fields.boat') }}</label>
                 <select class="form-control select2 {{ $errors->has('boat') ? 'is-invalid' : '' }}" name="boat_id" id="boat_id" required>
                     @foreach($boats as $id => $entry)

@@ -33,9 +33,11 @@ class Wlist extends Model implements HasMedia
         'estimate' => 'Estimate',
         'order'    => 'Order',
         'work'     => 'Work',
+        'requests' => 'Requests',
     ];
 
     protected $fillable = [
+        'client_id',
         'boat_id',
         'order_type',
         'description',
@@ -78,6 +80,11 @@ class Wlist extends Model implements HasMedia
     public function wlistsProformas()
     {
         return $this->belongsToMany(Proforma::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
     }
 
     public function boat()

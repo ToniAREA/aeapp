@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyProformaRequest;
 use App\Http\Requests\StoreProformaRequest;
 use App\Http\Requests\UpdateProformaRequest;
 use App\Models\Boat;
+use App\Models\Client;
 use App\Models\Proforma;
 use App\Models\Tag;
 use App\Models\Wlist;
@@ -25,7 +26,7 @@ class ProformaController extends Controller
         abort_if(Gate::denies('proforma_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Proforma::with(['boats', 'wlists', 'tags'])->select(sprintf('%s.*', (new Proforma)->table));
+            $query = Proforma::with(['client', 'boats', 'wlists', 'tags'])->select(sprintf('%s.*', (new Proforma)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -51,6 +52,13 @@ class ProformaController extends Controller
             });
             $table->editColumn('proforma_number', function ($row) {
                 return $row->proforma_number ? $row->proforma_number : '';
+            });
+            $table->addColumn('client_name', function ($row) {
+                return $row->client ? $row->client->name : '';
+            });
+
+            $table->editColumn('client.lastname', function ($row) {
+                return $row->client ? (is_string($row->client) ? $row->client : $row->client->lastname) : '';
             });
             $table->editColumn('boats', function ($row) {
                 $labels = [];
@@ -99,7 +107,7 @@ class ProformaController extends Controller
                 return $row->link ? $row->link : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'boats', 'wlists', 'sent', 'paid', 'tags']);
+            $table->rawColumns(['actions', 'placeholder', 'client', 'boats', 'wlists', 'sent', 'paid', 'tags']);
 
             return $table->make(true);
         }
@@ -111,13 +119,15 @@ class ProformaController extends Controller
     {
         abort_if(Gate::denies('proforma_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $clients = Client::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $boats = Boat::pluck('name', 'id');
 
         $wlists = Wlist::pluck('description', 'id');
 
         $tags = Tag::pluck('name', 'id');
 
-        return view('admin.proformas.create', compact('boats', 'tags', 'wlists'));
+        return view('admin.proformas.create', compact('boats', 'clients', 'tags', 'wlists'));
     }
 
     public function store(StoreProformaRequest $request)
@@ -134,15 +144,17 @@ class ProformaController extends Controller
     {
         abort_if(Gate::denies('proforma_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $clients = Client::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $boats = Boat::pluck('name', 'id');
 
         $wlists = Wlist::pluck('description', 'id');
 
         $tags = Tag::pluck('name', 'id');
 
-        $proforma->load('boats', 'wlists', 'tags');
+        $proforma->load('client', 'boats', 'wlists', 'tags');
 
-        return view('admin.proformas.edit', compact('boats', 'proforma', 'tags', 'wlists'));
+        return view('admin.proformas.edit', compact('boats', 'clients', 'proforma', 'tags', 'wlists'));
     }
 
     public function update(UpdateProformaRequest $request, Proforma $proforma)
@@ -159,7 +171,7 @@ class ProformaController extends Controller
     {
         abort_if(Gate::denies('proforma_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $proforma->load('boats', 'wlists', 'tags', 'proformaNumberWlogs', 'proformaNumberClaims', 'proformaNumberPayments', 'proformaNumberMatLogs');
+        $proforma->load('client', 'boats', 'wlists', 'tags', 'proformaNumberWlogs', 'proformaNumberClaims', 'proformaNumberPayments', 'proformaNumberMatLogs');
 
         return view('admin.proformas.show', compact('proforma'));
     }

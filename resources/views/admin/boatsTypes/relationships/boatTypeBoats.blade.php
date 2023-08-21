@@ -1,64 +1,61 @@
 <div class="m-3">
-    @can('appointment_create')
+    @can('boat_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route('admin.appointments.create') }}">
-                    {{ trans('global.add') }} {{ trans('cruds.appointment.title_singular') }}
+                <a class="btn btn-success" href="{{ route('admin.boats.create') }}">
+                    {{ trans('global.add') }} {{ trans('cruds.boat.title_singular') }}
                 </a>
             </div>
         </div>
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.appointment.title_singular') }} {{ trans('global.list') }}
+            {{ trans('cruds.boat.title_singular') }} {{ trans('global.list') }}
         </div>
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class=" table table-bordered table-striped table-hover datatable datatable-priorityAppointments">
+                <table class=" table table-bordered table-striped table-hover datatable datatable-boatTypeBoats">
                     <thead>
                         <tr>
                             <th width="10">
 
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.id') }}
+                                {{ trans('cruds.boat.fields.id') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.client') }}
+                                {{ trans('cruds.boat.fields.ref') }}
                             </th>
                             <th>
-                                {{ trans('cruds.client.fields.lastname') }}
+                                {{ trans('cruds.boat.fields.boat_type') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.boat') }}
+                                {{ trans('cruds.boat.fields.name') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.wlists') }}
+                                {{ trans('cruds.boat.fields.imo') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.for_role') }}
+                                {{ trans('cruds.boat.fields.mmsi') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.for_user') }}
+                                {{ trans('cruds.boat.fields.marina') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.when_starts') }}
+                                {{ trans('cruds.boat.fields.notes') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.when_ends') }}
+                                {{ trans('cruds.boat.fields.internalnotes') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.description') }}
+                                {{ trans('cruds.boat.fields.clients') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.priority') }}
+                                {{ trans('cruds.boat.fields.coordinates') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.coordinates') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.appointment.fields.status') }}
+                                {{ trans('cruds.boat.fields.link') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -66,71 +63,64 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($appointments as $key => $appointment)
-                            <tr data-entry-id="{{ $appointment->id }}">
+                        @foreach($boats as $key => $boat)
+                            <tr data-entry-id="{{ $boat->id }}">
                                 <td>
 
                                 </td>
                                 <td>
-                                    {{ $appointment->id ?? '' }}
+                                    {{ $boat->id ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $appointment->client->name ?? '' }}
+                                    {{ $boat->ref ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $appointment->client->lastname ?? '' }}
+                                    {{ $boat->boat_type->type ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $appointment->boat->name ?? '' }}
+                                    {{ $boat->name ?? '' }}
                                 </td>
                                 <td>
-                                    @foreach($appointment->wlists as $key => $item)
-                                        <span class="badge badge-info">{{ $item->description }}</span>
-                                    @endforeach
+                                    {{ $boat->imo ?? '' }}
                                 </td>
                                 <td>
-                                    @foreach($appointment->for_roles as $key => $item)
-                                        <span class="badge badge-info">{{ $item->title }}</span>
-                                    @endforeach
+                                    {{ $boat->mmsi ?? '' }}
                                 </td>
                                 <td>
-                                    @foreach($appointment->for_users as $key => $item)
+                                    {{ $boat->marina->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $boat->notes ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $boat->internalnotes ?? '' }}
+                                </td>
+                                <td>
+                                    @foreach($boat->clients as $key => $item)
                                         <span class="badge badge-info">{{ $item->name }}</span>
                                     @endforeach
                                 </td>
                                 <td>
-                                    {{ $appointment->when_starts ?? '' }}
+                                    {{ $boat->coordinates ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $appointment->when_ends ?? '' }}
+                                    {{ $boat->link ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $appointment->description ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $appointment->priority->level ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $appointment->coordinates ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $appointment->status ?? '' }}
-                                </td>
-                                <td>
-                                    @can('appointment_show')
-                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.appointments.show', $appointment->id) }}">
+                                    @can('boat_show')
+                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.boats.show', $boat->id) }}">
                                             {{ trans('global.view') }}
                                         </a>
                                     @endcan
 
-                                    @can('appointment_edit')
-                                        <a class="btn btn-xs btn-info" href="{{ route('admin.appointments.edit', $appointment->id) }}">
+                                    @can('boat_edit')
+                                        <a class="btn btn-xs btn-info" href="{{ route('admin.boats.edit', $boat->id) }}">
                                             {{ trans('global.edit') }}
                                         </a>
                                     @endcan
 
-                                    @can('appointment_delete')
-                                        <form action="{{ route('admin.appointments.destroy', $appointment->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    @can('boat_delete')
+                                        <form action="{{ route('admin.boats.destroy', $boat->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -152,11 +142,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('appointment_delete')
+@can('boat_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.appointments.massDestroy') }}",
+    url: "{{ route('admin.boats.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -187,7 +177,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  let table = $('.datatable-priorityAppointments:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  let table = $('.datatable-boatTypeBoats:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();

@@ -29,6 +29,12 @@
                         {{ trans('cruds.wlist.fields.id') }}
                     </th>
                     <th>
+                        {{ trans('cruds.wlist.fields.client') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.lastname') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.wlist.fields.boat') }}
                     </th>
                     <th>
@@ -121,6 +127,8 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
+{ data: 'client_name', name: 'client.name' },
+{ data: 'client.lastname', name: 'client.lastname' },
 { data: 'boat_name', name: 'boat.name' },
 { data: 'order_type', name: 'order_type' },
 { data: 'description', name: 'description' },

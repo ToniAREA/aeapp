@@ -21,10 +21,6 @@ class StoreBoatRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'boat_type' => [
-                'string',
-                'nullable',
-            ],
             'name' => [
                 'string',
                 'min:1',
@@ -46,6 +42,12 @@ class StoreBoatRequest extends FormRequest
             'internalnotes' => [
                 'string',
                 'nullable',
+            ],
+            'clients.*' => [
+                'integer',
+            ],
+            'clients' => [
+                'array',
             ],
             'coordinates' => [
                 'string',

@@ -49,6 +49,9 @@
                                 {{ trans('cruds.boat.fields.internalnotes') }}
                             </th>
                             <th>
+                                {{ trans('cruds.boat.fields.clients') }}
+                            </th>
+                            <th>
                                 {{ trans('cruds.boat.fields.coordinates') }}
                             </th>
                             <th>
@@ -72,7 +75,7 @@
                                     {{ $boat->ref ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $boat->boat_type ?? '' }}
+                                    {{ $boat->boat_type->type ?? '' }}
                                 </td>
                                 <td>
                                     {{ $boat->name ?? '' }}
@@ -91,6 +94,11 @@
                                 </td>
                                 <td>
                                     {{ $boat->internalnotes ?? '' }}
+                                </td>
+                                <td>
+                                    @foreach($boat->clients as $key => $item)
+                                        <span class="badge badge-info">{{ $item->name }}</span>
+                                    @endforeach
                                 </td>
                                 <td>
                                     {{ $boat->coordinates ?? '' }}
