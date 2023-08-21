@@ -14,23 +14,33 @@ class BoatClientPivotSeeder extends Seeder
      */
     public function run()
     {
-        // Obtener la conexión a la base de datos source y consulta registros de la tabla boats
-        $boats = DB::connection('mysql_old')->table('boats')->get();
+        // Obtener datos de la tabla origen de la base de datos antigua
+        $oldBoats = DB::connection('mysql_old')->table('boats')->get();
 
-        foreach ($boats as $boat) {
-            // Comprueba si el registro ya existe en la tabla pivotante en la base de datos target usando la conexión mysql2 (o el nombre de tu segunda conexión)
-            $exists = DB::connection('mysql')->table('boat_client')
-                ->where('boat_id', $boat->id)
+        // Insertar los datos en la tabla destino de la nueva base de datos
+        foreach ($oldBoats as $boat) {
+            //Print boat name and id
+            $this->command->getOutput()->write("\nB{$boat->id}, ");
+            $this->command->getOutput()->write("\t{$boat->type} {$boat->name}, ");
+
+            $boat_client_pivot = DB::connection('mysql')->table('boat_client')
                 ->where('client_id', $boat->client_id)
+                ->where('boat_id', $boat->id)
                 ->exists();
 
-            // Si no existe, inserta el registro en la tabla pivotante
-            if (!$exists) {
-                DB::connection('mysql')->table('boat_client')->insert([
-                    'boat_id' => $boat->id,
+            $client = DB::connection('mysql')->table('clients')
+                ->where('id_client', $boat->client_id)
+                ->first();
+
+            if ($boat_client_pivot) {
+                $this->command->getOutput()->write("\tC" . $boat->client_id . "\t" . $client->name . "\t<info>exist</info>");
+            } else {
+                $this->command->getOutput()->write("\tC" . $boat->client_id . "\t" . $client->name . "\t<comment>not exist</comment>");
+                DB::table('boat_client')->insert([
                     'client_id' => $boat->client_id,
+                    'boat_id' => $boat->id,
                 ]);
-                $this->command->line("Inserted in boat_client DB: {$boat->id} - {$boat->client_id}");
+                $this->command->getOutput()->write("\t<info>Inserted</info>");
             }
         }
     }
