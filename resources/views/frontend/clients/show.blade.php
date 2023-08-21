@@ -36,10 +36,10 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.client.fields.id_client') }}
+                                        {{ trans('cruds.client.fields.ref') }}
                                     </th>
                                     <td>
-                                        {{ $client->id_client }}
+                                        {{ $client->ref }}
                                     </td>
                                 </tr>
                                 <tr>

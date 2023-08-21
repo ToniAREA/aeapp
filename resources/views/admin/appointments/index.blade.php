@@ -26,13 +26,7 @@
                             {{ trans('cruds.appointment.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.appointment.fields.client') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.appointment.fields.boat') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.boat.fields.type') }}
                         </th>
                         <th>
                             {{ trans('cruds.appointment.fields.wlists') }}
@@ -76,13 +70,7 @@
                                 {{ $appointment->id ?? '' }}
                             </td>
                             <td>
-                                {{ $appointment->client->id_client ?? '' }}
-                            </td>
-                            <td>
                                 {{ $appointment->boat->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $appointment->boat->type ?? '' }}
                             </td>
                             <td>
                                 @foreach($appointment->wlists as $key => $item)

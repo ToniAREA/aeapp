@@ -17,10 +17,6 @@ class UpdateAppointmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'client_id' => [
-                'required',
-                'integer',
-            ],
             'wlists.*' => [
                 'integer',
             ],

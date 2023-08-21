@@ -17,7 +17,7 @@ class ProformaApiController extends Controller
     {
         abort_if(Gate::denies('proforma_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ProformaResource(Proforma::with(['client', 'boats', 'wlists', 'tags'])->get());
+        return new ProformaResource(Proforma::with(['boats', 'wlists', 'tags'])->get());
     }
 
     public function store(StoreProformaRequest $request)
@@ -36,7 +36,7 @@ class ProformaApiController extends Controller
     {
         abort_if(Gate::denies('proforma_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ProformaResource($proforma->load(['client', 'boats', 'wlists', 'tags']));
+        return new ProformaResource($proforma->load(['boats', 'wlists', 'tags']));
     }
 
     public function update(UpdateProformaRequest $request, Proforma $proforma)

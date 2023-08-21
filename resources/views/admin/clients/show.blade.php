@@ -33,10 +33,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.client.fields.id_client') }}
+                            {{ trans('cruds.client.fields.ref') }}
                         </th>
                         <td>
-                            {{ $client->id_client }}
+                            {{ $client->ref }}
                         </td>
                     </tr>
                     <tr>
@@ -174,46 +174,6 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.relatedData') }}
-    </div>
-    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-        <li class="nav-item">
-            <a class="nav-link" href="#client_wlists" role="tab" data-toggle="tab">
-                {{ trans('cruds.wlist.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#client_appointments" role="tab" data-toggle="tab">
-                {{ trans('cruds.appointment.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#client_proformas" role="tab" data-toggle="tab">
-                {{ trans('cruds.proforma.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#client_boats" role="tab" data-toggle="tab">
-                {{ trans('cruds.boat.title') }}
-            </a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="client_wlists">
-            @includeIf('admin.clients.relationships.clientWlists', ['wlists' => $client->clientWlists])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="client_appointments">
-            @includeIf('admin.clients.relationships.clientAppointments', ['appointments' => $client->clientAppointments])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="client_proformas">
-            @includeIf('admin.clients.relationships.clientProformas', ['proformas' => $client->clientProformas])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="client_boats">
-            @includeIf('admin.clients.relationships.clientBoats', ['boats' => $client->clientBoats])
-        </div>
-    </div>
-</div>
+
 
 @endsection

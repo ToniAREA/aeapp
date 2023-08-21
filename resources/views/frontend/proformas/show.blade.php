@@ -36,14 +36,6 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.proforma.fields.client') }}
-                                    </th>
-                                    <td>
-                                        {{ $proforma->client->id_client ?? '' }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.proforma.fields.boats') }}
                                     </th>
                                     <td>

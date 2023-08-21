@@ -11,18 +11,6 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label class="required" for="client_id">{{ trans('cruds.wlist.fields.client') }}</label>
-                <select class="form-control select2 {{ $errors->has('client') ? 'is-invalid' : '' }}" name="client_id" id="client_id" required>
-                    @foreach($clients as $id => $entry)
-                        <option value="{{ $id }}" {{ (old('client_id') ? old('client_id') : $wlist->client->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('client'))
-                    <span class="text-danger">{{ $errors->first('client') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.wlist.fields.client_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label class="required" for="boat_id">{{ trans('cruds.wlist.fields.boat') }}</label>
                 <select class="form-control select2 {{ $errors->has('boat') ? 'is-invalid' : '' }}" name="boat_id" id="boat_id" required>
                     @foreach($boats as $id => $entry)

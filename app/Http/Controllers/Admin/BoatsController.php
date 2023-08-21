@@ -8,7 +8,6 @@ use App\Http\Requests\MassDestroyBoatRequest;
 use App\Http\Requests\StoreBoatRequest;
 use App\Http\Requests\UpdateBoatRequest;
 use App\Models\Boat;
-use App\Models\Client;
 use App\Models\Marina;
 use Gate;
 use Illuminate\Http\Request;
@@ -24,7 +23,7 @@ class BoatsController extends Controller
         abort_if(Gate::denies('boat_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Boat::with(['marina', 'clients'])->select(sprintf('%s.*', (new Boat)->table));
+            $query = Boat::with(['marina'])->select(sprintf('%s.*', (new Boat)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -48,8 +47,8 @@ class BoatsController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : '';
             });
-            $table->editColumn('id_boat', function ($row) {
-                return $row->id_boat ? $row->id_boat : '';
+            $table->editColumn('ref', function ($row) {
+                return $row->ref ? $row->ref : '';
             });
             $table->editColumn('boat_type', function ($row) {
                 return $row->boat_type ? $row->boat_type : '';
@@ -67,14 +66,6 @@ class BoatsController extends Controller
                 return $row->marina ? $row->marina->name : '';
             });
 
-            $table->editColumn('client', function ($row) {
-                $labels = [];
-                foreach ($row->clients as $client) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $client->id_client);
-                }
-
-                return implode(' ', $labels);
-            });
             $table->editColumn('notes', function ($row) {
                 return $row->notes ? $row->notes : '';
             });
@@ -88,15 +79,14 @@ class BoatsController extends Controller
                 return $row->link ? $row->link : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'marina', 'client']);
+            $table->rawColumns(['actions', 'placeholder', 'marina']);
 
             return $table->make(true);
         }
 
         $marinas = Marina::get();
-        $clients = Client::get();
 
-        return view('admin.boats.index', compact('marinas', 'clients'));
+        return view('admin.boats.index', compact('marinas'));
     }
 
     public function create()
@@ -105,15 +95,12 @@ class BoatsController extends Controller
 
         $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $clients = Client::pluck('id_client', 'id');
-
-        return view('admin.boats.create', compact('clients', 'marinas'));
+        return view('admin.boats.create', compact('marinas'));
     }
 
     public function store(StoreBoatRequest $request)
     {
         $boat = Boat::create($request->all());
-        $boat->clients()->sync($request->input('clients', []));
 
         return redirect()->route('admin.boats.index');
     }
@@ -124,17 +111,14 @@ class BoatsController extends Controller
 
         $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $clients = Client::pluck('id_client', 'id');
+        $boat->load('marina');
 
-        $boat->load('marina', 'clients');
-
-        return view('admin.boats.edit', compact('boat', 'clients', 'marinas'));
+        return view('admin.boats.edit', compact('boat', 'marinas'));
     }
 
     public function update(UpdateBoatRequest $request, Boat $boat)
     {
         $boat->update($request->all());
-        $boat->clients()->sync($request->input('clients', []));
 
         return redirect()->route('admin.boats.index');
     }
@@ -143,7 +127,7 @@ class BoatsController extends Controller
     {
         abort_if(Gate::denies('boat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $boat->load('marina', 'clients', 'boatWlists', 'boatAppointments', 'boatMatLogs', 'boatsClients', 'boatsProformas');
+        $boat->load('marina', 'boatWlists', 'boatAppointments', 'boatMatLogs', 'boatsClients', 'boatsProformas');
 
         return view('admin.boats.show', compact('boat'));
     }

@@ -9,7 +9,6 @@ use App\Http\Requests\MassDestroyWlistRequest;
 use App\Http\Requests\StoreWlistRequest;
 use App\Http\Requests\UpdateWlistRequest;
 use App\Models\Boat;
-use App\Models\Client;
 use App\Models\Priority;
 use App\Models\Role;
 use App\Models\Tag;
@@ -28,7 +27,7 @@ class WlistController extends Controller
     {
         abort_if(Gate::denies('wlist_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlists = Wlist::with(['client', 'boat', 'priority', 'for_roles', 'for_users', 'tags', 'media'])->get();
+        $wlists = Wlist::with(['boat', 'priority', 'for_roles', 'for_users', 'tags', 'media'])->get();
 
         return view('frontend.wlists.index', compact('wlists'));
     }
@@ -36,8 +35,6 @@ class WlistController extends Controller
     public function create()
     {
         abort_if(Gate::denies('wlist_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $clients = Client::pluck('id_client', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $boats = Boat::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -49,7 +46,7 @@ class WlistController extends Controller
 
         $tags = Tag::pluck('name', 'id');
 
-        return view('frontend.wlists.create', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities', 'tags'));
+        return view('frontend.wlists.create', compact('boats', 'for_roles', 'for_users', 'priorities', 'tags'));
     }
 
     public function store(StoreWlistRequest $request)
@@ -73,8 +70,6 @@ class WlistController extends Controller
     {
         abort_if(Gate::denies('wlist_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $clients = Client::pluck('id_client', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $boats = Boat::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $priorities = Priority::pluck('level', 'id')->prepend(trans('global.pleaseSelect'), '');
@@ -85,9 +80,9 @@ class WlistController extends Controller
 
         $tags = Tag::pluck('name', 'id');
 
-        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users', 'tags');
+        $wlist->load('boat', 'priority', 'for_roles', 'for_users', 'tags');
 
-        return view('frontend.wlists.edit', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities', 'tags', 'wlist'));
+        return view('frontend.wlists.edit', compact('boats', 'for_roles', 'for_users', 'priorities', 'tags', 'wlist'));
     }
 
     public function update(UpdateWlistRequest $request, Wlist $wlist)
@@ -117,7 +112,7 @@ class WlistController extends Controller
     {
         abort_if(Gate::denies('wlist_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users', 'tags', 'wlistWlogs', 'wlistMlogs', 'wlistsAppointments', 'wlistsProformas');
+        $wlist->load('boat', 'priority', 'for_roles', 'for_users', 'tags', 'wlistWlogs', 'wlistMatLogs', 'wlistsAppointments', 'wlistsProformas');
 
         return view('frontend.wlists.show', compact('wlist'));
     }

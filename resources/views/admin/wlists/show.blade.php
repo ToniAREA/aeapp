@@ -25,14 +25,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.wlist.fields.client') }}
-                        </th>
-                        <td>
-                            {{ $wlist->client->id_client ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.wlist.fields.boat') }}
                         </th>
                         <td>

@@ -32,7 +32,7 @@
                         {{ trans('cruds.client.fields.defaulter') }}
                     </th>
                     <th>
-                        {{ trans('cruds.client.fields.id_client') }}
+                        {{ trans('cruds.client.fields.ref') }}
                     </th>
                     <th>
                         {{ trans('cruds.client.fields.name') }}
@@ -140,7 +140,7 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'defaulter', name: 'defaulter' },
-{ data: 'id_client', name: 'id_client' },
+{ data: 'ref', name: 'ref' },
 { data: 'name', name: 'name' },
 { data: 'lastname', name: 'lastname' },
 { data: 'vat', name: 'vat' },
@@ -160,7 +160,7 @@
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,
-    order: [[ 3, 'desc' ]],
+    order: [[ 1, 'desc' ]],
     pageLength: 100,
   };
   let table = $('.datatable-Client').DataTable(dtOverrideGlobals);

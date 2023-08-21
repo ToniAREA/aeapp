@@ -28,7 +28,7 @@
                                 {{ trans('cruds.client.fields.defaulter') }}
                             </th>
                             <th>
-                                {{ trans('cruds.client.fields.id_client') }}
+                                {{ trans('cruds.client.fields.ref') }}
                             </th>
                             <th>
                                 {{ trans('cruds.client.fields.name') }}
@@ -97,7 +97,7 @@
                                     <input type="checkbox" disabled="disabled" {{ $client->defaulter ? 'checked' : '' }}>
                                 </td>
                                 <td>
-                                    {{ $client->id_client ?? '' }}
+                                    {{ $client->ref ?? '' }}
                                 </td>
                                 <td>
                                     {{ $client->name ?? '' }}
@@ -219,7 +219,7 @@
 
   $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
-    order: [[ 3, 'desc' ]],
+    order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
   let table = $('.datatable-companyClients:not(.ajaxTable)').DataTable({ buttons: dtButtons })

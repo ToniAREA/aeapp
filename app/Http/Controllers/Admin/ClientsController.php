@@ -52,8 +52,8 @@ class ClientsController extends Controller
             $table->editColumn('defaulter', function ($row) {
                 return '<input type="checkbox" disabled ' . ($row->defaulter ? 'checked' : null) . '>';
             });
-            $table->editColumn('id_client', function ($row) {
-                return $row->id_client ? $row->id_client : '';
+            $table->editColumn('ref', function ($row) {
+                return $row->ref ? $row->ref : '';
             });
             $table->editColumn('name', function ($row) {
                 return $row->name ? $row->name : '';
@@ -173,7 +173,7 @@ class ClientsController extends Controller
     {
         abort_if(Gate::denies('client_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $client->load('company', 'contacts', 'boats', 'clientWlists', 'clientAppointments', 'clientProformas', 'clientBoats');
+        $client->load('company', 'contacts', 'boats');
 
         return view('admin.clients.show', compact('client'));
     }

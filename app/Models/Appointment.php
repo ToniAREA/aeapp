@@ -23,7 +23,6 @@ class Appointment extends Model
     ];
 
     protected $fillable = [
-        'client_id',
         'boat_id',
         'when_starts',
         'when_ends',
@@ -39,11 +38,6 @@ class Appointment extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
-    }
-
-    public function client()
-    {
-        return $this->belongsTo(Client::class, 'client_id');
     }
 
     public function boat()

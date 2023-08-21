@@ -25,7 +25,7 @@
                                 {{ trans('cruds.boat.fields.id') }}
                             </th>
                             <th>
-                                {{ trans('cruds.boat.fields.id_boat') }}
+                                {{ trans('cruds.boat.fields.ref') }}
                             </th>
                             <th>
                                 {{ trans('cruds.boat.fields.boat_type') }}
@@ -41,9 +41,6 @@
                             </th>
                             <th>
                                 {{ trans('cruds.boat.fields.marina') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.boat.fields.client') }}
                             </th>
                             <th>
                                 {{ trans('cruds.boat.fields.notes') }}
@@ -72,7 +69,7 @@
                                     {{ $boat->id ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $boat->id_boat ?? '' }}
+                                    {{ $boat->ref ?? '' }}
                                 </td>
                                 <td>
                                     {{ $boat->boat_type ?? '' }}
@@ -88,11 +85,6 @@
                                 </td>
                                 <td>
                                     {{ $boat->marina->name ?? '' }}
-                                </td>
-                                <td>
-                                    @foreach($boat->clients as $key => $item)
-                                        <span class="badge badge-info">{{ $item->id_client }}</span>
-                                    @endforeach
                                 </td>
                                 <td>
                                     {{ $boat->notes ?? '' }}

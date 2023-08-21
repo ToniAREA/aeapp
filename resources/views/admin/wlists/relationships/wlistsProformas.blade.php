@@ -28,9 +28,6 @@
                                 {{ trans('cruds.proforma.fields.proforma_number') }}
                             </th>
                             <th>
-                                {{ trans('cruds.proforma.fields.client') }}
-                            </th>
-                            <th>
                                 {{ trans('cruds.proforma.fields.boats') }}
                             </th>
                             <th>
@@ -79,9 +76,6 @@
                                 </td>
                                 <td>
                                     {{ $proforma->proforma_number ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $proforma->client->id_client ?? '' }}
                                 </td>
                                 <td>
                                     @foreach($proforma->boats as $key => $item)

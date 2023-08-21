@@ -25,9 +25,6 @@
                                 {{ trans('cruds.appointment.fields.id') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.client') }}
-                            </th>
-                            <th>
                                 {{ trans('cruds.appointment.fields.boat') }}
                             </th>
                             <th>
@@ -70,9 +67,6 @@
                                 </td>
                                 <td>
                                     {{ $appointment->id ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $appointment->client->id_client ?? '' }}
                                 </td>
                                 <td>
                                     {{ $appointment->boat->name ?? '' }}

@@ -25,10 +25,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.boat.fields.id_boat') }}
+                            {{ trans('cruds.boat.fields.ref') }}
                         </th>
                         <td>
-                            {{ $boat->id_boat }}
+                            {{ $boat->ref }}
                         </td>
                     </tr>
                     <tr>
@@ -69,16 +69,6 @@
                         </th>
                         <td>
                             {{ $boat->marina->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.boat.fields.client') }}
-                        </th>
-                        <td>
-                            @foreach($boat->clients as $key => $client)
-                                <span class="label label-info">{{ $client->id_client }}</span>
-                            @endforeach
                         </td>
                     </tr>
                     <tr>
