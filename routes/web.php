@@ -125,10 +125,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('employees/process-csv-import', 'EmployeesController@processCsvImport')->name('employees.processCsvImport');
     Route::resource('employees', 'EmployeesController');
 
-    // Boats Type
-    Route::delete('boats-types/destroy', 'BoatsTypeController@massDestroy')->name('boats-types.massDestroy');
-    Route::resource('boats-types', 'BoatsTypeController');
-
     // Provider
     Route::delete('providers/destroy', 'ProviderController@massDestroy')->name('providers.massDestroy');
     Route::post('providers/media', 'ProviderController@storeMedia')->name('providers.storeMedia');
@@ -329,10 +325,6 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     Route::post('employees/media', 'EmployeesController@storeMedia')->name('employees.storeMedia');
     Route::post('employees/ckmedia', 'EmployeesController@storeCKEditorImages')->name('employees.storeCKEditorImages');
     Route::resource('employees', 'EmployeesController');
-
-    // Boats Type
-    Route::delete('boats-types/destroy', 'BoatsTypeController@massDestroy')->name('boats-types.massDestroy');
-    Route::resource('boats-types', 'BoatsTypeController');
 
     // Provider
     Route::delete('providers/destroy', 'ProviderController@massDestroy')->name('providers.massDestroy');

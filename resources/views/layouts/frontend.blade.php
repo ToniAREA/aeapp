@@ -292,11 +292,6 @@
                                             {{ trans('cruds.configuration.title') }}
                                         </a>
                                     @endcan
-                                    @can('boats_type_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.boats-types.index') }}">
-                                            {{ trans('cruds.boatsType.title') }}
-                                        </a>
-                                    @endcan
                                     @can('tag_access')
                                         <a class="dropdown-item ml-3" href="{{ route('frontend.tags.index') }}">
                                             {{ trans('cruds.tag.title') }}
