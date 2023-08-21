@@ -578,8 +578,8 @@
                     </li>
                 @endcan
                 @can('configuration_access')
-                    <li class="nav-item has-treeview {{ request()->is("admin/boats-types*") ? "menu-open" : "" }} {{ request()->is("admin/tags*") ? "menu-open" : "" }} {{ request()->is("admin/priorities*") ? "menu-open" : "" }}">
-                        <a class="nav-link nav-dropdown-toggle {{ request()->is("admin/boats-types*") ? "active" : "" }} {{ request()->is("admin/tags*") ? "active" : "" }} {{ request()->is("admin/priorities*") ? "active" : "" }}" href="#">
+                    <li class="nav-item has-treeview {{ request()->is("admin/tags*") ? "menu-open" : "" }} {{ request()->is("admin/priorities*") ? "menu-open" : "" }}">
+                        <a class="nav-link nav-dropdown-toggle {{ request()->is("admin/tags*") ? "active" : "" }} {{ request()->is("admin/priorities*") ? "active" : "" }}" href="#">
                             <i class="fa-fw nav-icon fas fa-cogs">
 
                             </i>
@@ -589,18 +589,6 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            @can('boats_type_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.boats-types.index") }}" class="nav-link {{ request()->is("admin/boats-types") || request()->is("admin/boats-types/*") ? "active" : "" }}">
-                                        <i class="fa-fw nav-icon fas fa-ship">
-
-                                        </i>
-                                        <p>
-                                            {{ trans('cruds.boatsType.title') }}
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
                             @can('tag_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.tags.index") }}" class="nav-link {{ request()->is("admin/tags") || request()->is("admin/tags/*") ? "active" : "" }}">
