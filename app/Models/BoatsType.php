@@ -31,4 +31,9 @@ class BoatsType extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function boatTypeBoats()
+    {
+        return $this->hasMany(Boat::class, 'boat_type_id', 'id');
+    }
 }

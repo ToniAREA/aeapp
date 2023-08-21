@@ -28,6 +28,14 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.appointment.fields.client') }}
+                                    </th>
+                                    <td>
+                                        {{ $appointment->client->name ?? '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.appointment.fields.boat') }}
                                     </th>
                                     <td>

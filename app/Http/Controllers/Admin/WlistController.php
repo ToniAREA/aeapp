@@ -9,6 +9,7 @@ use App\Http\Requests\MassDestroyWlistRequest;
 use App\Http\Requests\StoreWlistRequest;
 use App\Http\Requests\UpdateWlistRequest;
 use App\Models\Boat;
+use App\Models\Client;
 use App\Models\Priority;
 use App\Models\Role;
 use App\Models\Tag;
@@ -29,7 +30,7 @@ class WlistController extends Controller
         abort_if(Gate::denies('wlist_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Wlist::with(['boat', 'priority', 'for_roles', 'for_users', 'tags'])->select(sprintf('%s.*', (new Wlist)->table));
+            $query = Wlist::with(['client', 'boat', 'priority', 'for_roles', 'for_users', 'tags'])->select(sprintf('%s.*', (new Wlist)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -52,6 +53,13 @@ class WlistController extends Controller
 
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : '';
+            });
+            $table->addColumn('client_name', function ($row) {
+                return $row->client ? $row->client->name : '';
+            });
+
+            $table->editColumn('client.lastname', function ($row) {
+                return $row->client ? (is_string($row->client) ? $row->client : $row->client->lastname) : '';
             });
             $table->addColumn('boat_name', function ($row) {
                 return $row->boat ? $row->boat->name : '';
@@ -113,7 +121,7 @@ class WlistController extends Controller
                 return implode(' ', $labels);
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'boat', 'photos', 'priority', 'for_role', 'for_user', 'tags']);
+            $table->rawColumns(['actions', 'placeholder', 'client', 'boat', 'photos', 'priority', 'for_role', 'for_user', 'tags']);
 
             return $table->make(true);
         }
@@ -125,6 +133,8 @@ class WlistController extends Controller
     {
         abort_if(Gate::denies('wlist_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $clients = Client::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $boats = Boat::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $priorities = Priority::pluck('level', 'id')->prepend(trans('global.pleaseSelect'), '');
@@ -135,7 +145,7 @@ class WlistController extends Controller
 
         $tags = Tag::pluck('name', 'id');
 
-        return view('admin.wlists.create', compact('boats', 'for_roles', 'for_users', 'priorities', 'tags'));
+        return view('admin.wlists.create', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities', 'tags'));
     }
 
     public function store(StoreWlistRequest $request)
@@ -159,6 +169,8 @@ class WlistController extends Controller
     {
         abort_if(Gate::denies('wlist_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $clients = Client::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $boats = Boat::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $priorities = Priority::pluck('level', 'id')->prepend(trans('global.pleaseSelect'), '');
@@ -169,9 +181,9 @@ class WlistController extends Controller
 
         $tags = Tag::pluck('name', 'id');
 
-        $wlist->load('boat', 'priority', 'for_roles', 'for_users', 'tags');
+        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users', 'tags');
 
-        return view('admin.wlists.edit', compact('boats', 'for_roles', 'for_users', 'priorities', 'tags', 'wlist'));
+        return view('admin.wlists.edit', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities', 'tags', 'wlist'));
     }
 
     public function update(UpdateWlistRequest $request, Wlist $wlist)
@@ -201,7 +213,7 @@ class WlistController extends Controller
     {
         abort_if(Gate::denies('wlist_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlist->load('boat', 'priority', 'for_roles', 'for_users', 'tags', 'wlistWlogs', 'wlistMatLogs', 'wlistsAppointments', 'wlistsProformas');
+        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users', 'tags', 'wlistWlogs', 'wlistMatLogs', 'wlistsAppointments', 'wlistsProformas');
 
         return view('admin.wlists.show', compact('wlist'));
     }

@@ -51,6 +51,26 @@ class Client extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
+    public function clientProformas()
+    {
+        return $this->hasMany(Proforma::class, 'client_id', 'id');
+    }
+
+    public function clientWlists()
+    {
+        return $this->hasMany(Wlist::class, 'client_id', 'id');
+    }
+
+    public function clientAppointments()
+    {
+        return $this->hasMany(Appointment::class, 'client_id', 'id');
+    }
+
+    public function clientsBoats()
+    {
+        return $this->belongsToMany(Boat::class);
+    }
+
     public function company()
     {
         return $this->belongsTo(ContactCompany::class, 'company_id');

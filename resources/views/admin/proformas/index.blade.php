@@ -32,6 +32,12 @@
                         {{ trans('cruds.proforma.fields.proforma_number') }}
                     </th>
                     <th>
+                        {{ trans('cruds.proforma.fields.client') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.client.fields.lastname') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.proforma.fields.boats') }}
                     </th>
                     <th>
@@ -122,6 +128,8 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'proforma_number', name: 'proforma_number' },
+{ data: 'client_name', name: 'client.name' },
+{ data: 'client.lastname', name: 'client.lastname' },
 { data: 'boats', name: 'boats.name' },
 { data: 'wlists', name: 'wlists.description' },
 { data: 'date', name: 'date' },

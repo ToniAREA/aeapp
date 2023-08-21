@@ -21,6 +21,7 @@ class Boat extends Model
     ];
 
     public static $searchable = [
+        'ref',
         'mmsi',
         'notes',
         'internalnotes',
@@ -28,7 +29,7 @@ class Boat extends Model
 
     protected $fillable = [
         'ref',
-        'boat_type',
+        'boat_type_id',
         'name',
         'imo',
         'mmsi',
@@ -72,8 +73,18 @@ class Boat extends Model
         return $this->belongsToMany(Proforma::class);
     }
 
+    public function boat_type()
+    {
+        return $this->belongsTo(BoatsType::class, 'boat_type_id');
+    }
+
     public function marina()
     {
         return $this->belongsTo(Marina::class, 'marina_id');
+    }
+
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class);
     }
 }

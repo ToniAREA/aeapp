@@ -39,7 +39,7 @@
                                         {{ trans('cruds.boat.fields.boat_type') }}
                                     </th>
                                     <td>
-                                        {{ $boat->boat_type }}
+                                        {{ $boat->boat_type->type ?? '' }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -88,6 +88,16 @@
                                     </th>
                                     <td>
                                         {{ $boat->internalnotes }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.clients') }}
+                                    </th>
+                                    <td>
+                                        @foreach($boat->clients as $key => $clients)
+                                            <span class="label label-info">{{ $clients->name }}</span>
+                                        @endforeach
                                     </td>
                                 </tr>
                                 <tr>

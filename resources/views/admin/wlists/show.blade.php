@@ -25,6 +25,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.wlist.fields.client') }}
+                        </th>
+                        <td>
+                            {{ $wlist->client->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.wlist.fields.boat') }}
                         </th>
                         <td>
