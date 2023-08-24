@@ -53,6 +53,7 @@ class BoatsSeeder extends Seeder
                         'mmsi' => $boat->mmsi,
                         'notes' => $boat->notes,
                         'internalnotes' => $boat->internalnotes,
+                        'marina_id' => $boat->marina_id,
                     ]);
                 }
             }
