@@ -29,7 +29,7 @@ class BoatClientPivotSeeder extends Seeder
                 ->exists();
 
             $client = DB::connection('mysql')->table('clients')
-                ->where('id_client', $boat->client_id)
+                ->where('id', $boat->client_id)
                 ->first();
 
             if ($boat_client_pivot) {

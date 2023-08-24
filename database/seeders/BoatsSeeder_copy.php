@@ -29,24 +29,18 @@ class BoatsSeeder extends Seeder
             // if $boat is null, make a dummy boat with id $i and name 'empty boat'
             if ($boat == null) {
                 $boat = (object) [
-                    'boat_type' => '',
+                    'type' => '',
                     'name' => '------',
-                    'imo' => '',
                     'mmsi' => '',
                     'notes' => '',
                     'internalnotes' => '',
-                    'coordinates' => '',
-                    'link' => '',
                 ];
                 DB::table('boats')->insert([
-                    'boat_type' => $boat->boat_type,
+                    'boat_type' => $boat->type,
                     'name' => $boat->name,
-                    'imo' => $boat->imo,
                     'mmsi' => $boat->mmsi,
                     'notes' => $boat->notes,
                     'internalnotes' => $boat->internalnotes,
-                    'coordinates' => $boat->coordinates,
-                    'link' => $boat->link,
                 ]);
             } else {
                 if ($i != $boat->id) {
@@ -54,14 +48,11 @@ class BoatsSeeder extends Seeder
                 } else {
                     $this->command->line("{$i} is the same as {$boat->id}");
                     DB::table('boats')->insert([
-                        'boat_type' => $boat->boat_type,
+                        'boat_type' => $boat->type,
                         'name' => $boat->name,
-                        'imo' => $boat->imo,
                         'mmsi' => $boat->mmsi,
                         'notes' => $boat->notes,
                         'internalnotes' => $boat->internalnotes,
-                        'coordinates' => $boat->coordinates,
-                        'link' => $boat->link,
                     ]);
                 }
             }

@@ -16,22 +16,48 @@ class WlistSeeder extends Seeder
      */
     public function run()
     {
-        $oldWlists = DB::connection('mysql_old')->table('marinas')->get();
+        // Obtener datos de la tabla origen de la base de datos antigua
+        $oldWlists = DB::connection('mysql_old')->table('wlists')->get();
+
+        //get last id in oldWlists array
+        $last_id = $oldWlists->last()->id;
+        $last_id++;
 
         // Insertar los datos en la tabla destino de la nueva base de datos
-        foreach ($oldWlists as $wlist) {
+        for ($i = 1; $i < $last_id; $i++) {
 
-            // Convertir el objeto en una cadena JSON
-            $json = json_encode($wlist);
-            // Mostrar la cadena JSON resultante en la consola
-            $this->command->line("Objeto en formato JSON: {$json}");
-            $this->command->line("...");
-
-            DB::table('wlists')->insert([
-                'id_wlist' => $wlist->id,
-                'name' => $wlist->name,
-                'coordinates' => $wlist->coordinates,
-            ]);
+            //find wlist with $i in $oldWlists array
+            $wlist = $oldWlists->where('id', $i)->first();
+            // if $wlist is null, make a dummy wlist with id $i and name 'empty wlist'
+            if ($wlist == null) {
+                $wlist = (object) [
+                    'type' => '',
+                    'name' => '------',
+                    'mmsi' => '',
+                    'notes' => '',
+                    'internalnotes' => '',
+                ];
+                DB::table('wlists')->insert([
+                    'wlist_type' => $wlist->type,
+                    'name' => $wlist->name,
+                    'mmsi' => $wlist->mmsi,
+                    'notes' => $wlist->notes,
+                    'internalnotes' => $wlist->internalnotes,
+                ]);
+            } else {
+                if ($i != $wlist->id) {
+                    $this->command->line("Error: {$i} is not the same as {$wlist->id}");
+                } else {
+                    $this->command->line("{$i} is the same as {$wlist->id}");
+                    DB::table('wlists')->insert([
+                        'wlist_type' => $wlist->type,
+                        'name' => $wlist->name,
+                        'mmsi' => $wlist->mmsi,
+                        'notes' => $wlist->notes,
+                        'internalnotes' => $wlist->internalnotes,
+                    ]);
+                }
+            }
         }
     }
 }
