@@ -7,7 +7,6 @@ use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyToDoRequest;
 use App\Http\Requests\StoreToDoRequest;
 use App\Http\Requests\UpdateToDoRequest;
-use App\Models\Priority;
 use App\Models\Role;
 use App\Models\ToDo;
 use App\Models\User;
@@ -24,7 +23,7 @@ class ToDoController extends Controller
     {
         abort_if(Gate::denies('to_do_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $toDos = ToDo::with(['priority', 'for_roles', 'for_users', 'media'])->get();
+        $toDos = ToDo::with(['for_roles', 'for_users', 'media'])->get();
 
         return view('frontend.toDos.index', compact('toDos'));
     }
@@ -33,13 +32,11 @@ class ToDoController extends Controller
     {
         abort_if(Gate::denies('to_do_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $priorities = Priority::pluck('level', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $for_roles = Role::pluck('title', 'id');
 
         $for_users = User::pluck('name', 'id');
 
-        return view('frontend.toDos.create', compact('for_roles', 'for_users', 'priorities'));
+        return view('frontend.toDos.create', compact('for_roles', 'for_users'));
     }
 
     public function store(StoreToDoRequest $request)
@@ -62,15 +59,13 @@ class ToDoController extends Controller
     {
         abort_if(Gate::denies('to_do_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $priorities = Priority::pluck('level', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $for_roles = Role::pluck('title', 'id');
 
         $for_users = User::pluck('name', 'id');
 
-        $toDo->load('priority', 'for_roles', 'for_users');
+        $toDo->load('for_roles', 'for_users');
 
-        return view('frontend.toDos.edit', compact('for_roles', 'for_users', 'priorities', 'toDo'));
+        return view('frontend.toDos.edit', compact('for_roles', 'for_users', 'toDo'));
     }
 
     public function update(UpdateToDoRequest $request, ToDo $toDo)
@@ -99,7 +94,7 @@ class ToDoController extends Controller
     {
         abort_if(Gate::denies('to_do_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $toDo->load('priority', 'for_roles', 'for_users');
+        $toDo->load('for_roles', 'for_users');
 
         return view('frontend.toDos.show', compact('toDo'));
     }

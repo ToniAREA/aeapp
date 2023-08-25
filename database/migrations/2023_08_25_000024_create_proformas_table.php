@@ -19,6 +19,8 @@ class CreateProformasTable extends Migration
             $table->boolean('paid')->default(0)->nullable();
             $table->integer('claims')->nullable();
             $table->string('link')->nullable();
+            $table->string('status')->nullable();
+            $table->string('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

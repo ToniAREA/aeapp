@@ -35,6 +35,7 @@ class Wlog extends Model
         'hours',
         'proforma_number_id',
         'invoiced_line',
+        'status',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -68,11 +69,6 @@ class Wlog extends Model
     public function marina()
     {
         return $this->belongsTo(Marina::class, 'marina_id');
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
     }
 
     public function proforma_number()

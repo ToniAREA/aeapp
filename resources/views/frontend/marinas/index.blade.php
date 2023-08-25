@@ -30,9 +30,6 @@
                                         {{ trans('cruds.marina.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.marina.fields.id_marina') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.marina.fields.name') }}
                                     </th>
                                     <th>
@@ -40,6 +37,15 @@
                                     </th>
                                     <th>
                                         {{ trans('cruds.marina.fields.link') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.marina.fields.notes') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.marina.fields.internal_notes') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.marina.fields.last_use') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -53,9 +59,6 @@
                                             {{ $marina->id ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $marina->id_marina ?? '' }}
-                                        </td>
-                                        <td>
                                             {{ $marina->name ?? '' }}
                                         </td>
                                         <td>
@@ -63,6 +66,15 @@
                                         </td>
                                         <td>
                                             {{ $marina->link ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $marina->notes ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $marina->internal_notes ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $marina->last_use ?? '' }}
                                         </td>
                                         <td>
                                             @can('marina_show')
@@ -136,7 +148,7 @@
 
   $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
+    order: [[ 1, 'asc' ]],
     pageLength: 100,
   });
   let table = $('.datatable-Marina:not(.ajaxTable)').DataTable({ buttons: dtButtons })

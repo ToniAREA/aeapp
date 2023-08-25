@@ -64,9 +64,6 @@
                                 {{ trans('cruds.wlist.fields.notes') }}
                             </th>
                             <th>
-                                {{ trans('cruds.wlist.fields.tags') }}
-                            </th>
-                            <th>
                                 &nbsp;
                             </th>
                         </tr>
@@ -106,7 +103,7 @@
                                     {{ $wlist->deadline ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $wlist->priority->level ?? '' }}
+                                    {{ $wlist->priority ?? '' }}
                                 </td>
                                 <td>
                                     @foreach($wlist->for_roles as $key => $item)
@@ -126,11 +123,6 @@
                                 </td>
                                 <td>
                                     {{ $wlist->notes ?? '' }}
-                                </td>
-                                <td>
-                                    @foreach($wlist->tags as $key => $item)
-                                        <span class="badge badge-info">{{ $item->name }}</span>
-                                    @endforeach
                                 </td>
                                 <td>
                                     @can('wlist_show')

@@ -28,14 +28,6 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.marina.fields.id_marina') }}
-                                    </th>
-                                    <td>
-                                        {{ $marina->id_marina }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.marina.fields.name') }}
                                     </th>
                                     <td>
@@ -56,6 +48,30 @@
                                     </th>
                                     <td>
                                         {{ $marina->link }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.marina.fields.notes') }}
+                                    </th>
+                                    <td>
+                                        {{ $marina->notes }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.marina.fields.internal_notes') }}
+                                    </th>
+                                    <td>
+                                        {{ $marina->internal_notes }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.marina.fields.last_use') }}
+                                    </th>
+                                    <td>
+                                        {{ $marina->last_use }}
                                     </td>
                                 </tr>
                             </tbody>

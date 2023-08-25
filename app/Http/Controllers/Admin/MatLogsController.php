@@ -9,8 +9,8 @@ use App\Http\Requests\StoreMatLogRequest;
 use App\Http\Requests\UpdateMatLogRequest;
 use App\Models\Boat;
 use App\Models\MatLog;
+use App\Models\Product;
 use App\Models\Proforma;
-use App\Models\Tag;
 use App\Models\User;
 use App\Models\Wlist;
 use Gate;
@@ -27,7 +27,7 @@ class MatLogsController extends Controller
         abort_if(Gate::denies('mat_log_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = MatLog::with(['boat', 'wlist', 'employee', 'tags', 'proforma_number'])->select(sprintf('%s.*', (new MatLog)->table));
+            $query = MatLog::with(['boat', 'wlist', 'employee', 'product', 'proforma_number'])->select(sprintf('%s.*', (new MatLog)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -73,8 +73,15 @@ class MatLogsController extends Controller
             $table->editColumn('employee.email', function ($row) {
                 return $row->employee ? (is_string($row->employee) ? $row->employee : $row->employee->email) : '';
             });
-            $table->editColumn('product', function ($row) {
-                return $row->product ? $row->product : '';
+            $table->editColumn('item', function ($row) {
+                return $row->item ? $row->item : '';
+            });
+            $table->addColumn('product_name', function ($row) {
+                return $row->product ? $row->product->name : '';
+            });
+
+            $table->editColumn('product.description', function ($row) {
+                return $row->product ? (is_string($row->product) ? $row->product : $row->product->description) : '';
             });
             $table->editColumn('description', function ($row) {
                 return $row->description ? $row->description : '';
@@ -84,14 +91,6 @@ class MatLogsController extends Controller
             });
             $table->editColumn('units', function ($row) {
                 return $row->units ? $row->units : '';
-            });
-            $table->editColumn('tags', function ($row) {
-                $labels = [];
-                foreach ($row->tags as $tag) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $tag->name);
-                }
-
-                return implode(' ', $labels);
             });
             $table->addColumn('proforma_number_proforma_number', function ($row) {
                 return $row->proforma_number ? $row->proforma_number->proforma_number : '';
@@ -103,8 +102,11 @@ class MatLogsController extends Controller
             $table->editColumn('invoiced_line', function ($row) {
                 return '<input type="checkbox" disabled ' . ($row->invoiced_line ? 'checked' : null) . '>';
             });
+            $table->editColumn('status', function ($row) {
+                return $row->status ? $row->status : '';
+            });
 
-            $table->rawColumns(['actions', 'placeholder', 'boat', 'wlist', 'employee', 'tags', 'proforma_number', 'invoiced_line']);
+            $table->rawColumns(['actions', 'placeholder', 'boat', 'wlist', 'employee', 'product', 'proforma_number', 'invoiced_line']);
 
             return $table->make(true);
         }
@@ -122,17 +124,16 @@ class MatLogsController extends Controller
 
         $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $tags = Tag::pluck('name', 'id');
+        $products = Product::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $proforma_numbers = Proforma::pluck('proforma_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.matLogs.create', compact('boats', 'employees', 'proforma_numbers', 'tags', 'wlists'));
+        return view('admin.matLogs.create', compact('boats', 'employees', 'products', 'proforma_numbers', 'wlists'));
     }
 
     public function store(StoreMatLogRequest $request)
     {
         $matLog = MatLog::create($request->all());
-        $matLog->tags()->sync($request->input('tags', []));
 
         return redirect()->route('admin.mat-logs.index');
     }
@@ -147,19 +148,18 @@ class MatLogsController extends Controller
 
         $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $tags = Tag::pluck('name', 'id');
+        $products = Product::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $proforma_numbers = Proforma::pluck('proforma_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $matLog->load('boat', 'wlist', 'employee', 'tags', 'proforma_number');
+        $matLog->load('boat', 'wlist', 'employee', 'product', 'proforma_number');
 
-        return view('admin.matLogs.edit', compact('boats', 'employees', 'matLog', 'proforma_numbers', 'tags', 'wlists'));
+        return view('admin.matLogs.edit', compact('boats', 'employees', 'matLog', 'products', 'proforma_numbers', 'wlists'));
     }
 
     public function update(UpdateMatLogRequest $request, MatLog $matLog)
     {
         $matLog->update($request->all());
-        $matLog->tags()->sync($request->input('tags', []));
 
         return redirect()->route('admin.mat-logs.index');
     }
@@ -168,7 +168,7 @@ class MatLogsController extends Controller
     {
         abort_if(Gate::denies('mat_log_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $matLog->load('boat', 'wlist', 'employee', 'tags', 'proforma_number');
+        $matLog->load('boat', 'wlist', 'employee', 'product', 'proforma_number');
 
         return view('admin.matLogs.show', compact('matLog'));
     }

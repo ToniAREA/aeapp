@@ -85,6 +85,22 @@
                 <span class="help-block">{{ trans('cruds.contactCompany.fields.company_social_link_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="contacts">{{ trans('cruds.contactCompany.fields.contacts') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('contacts') ? 'is-invalid' : '' }}" name="contacts[]" id="contacts" multiple>
+                    @foreach($contacts as $id => $contact)
+                        <option value="{{ $id }}" {{ in_array($id, old('contacts', [])) ? 'selected' : '' }}>{{ $contact }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('contacts'))
+                    <span class="text-danger">{{ $errors->first('contacts') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.contactCompany.fields.contacts_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

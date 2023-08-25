@@ -47,9 +47,6 @@
                             {{ trans('cruds.payment.fields.status') }}
                         </th>
                         <th>
-                            {{ trans('cruds.payment.fields.tags') }}
-                        </th>
-                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -83,11 +80,6 @@
                             </td>
                             <td>
                                 {{ $payment->status ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($payment->tags as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
                             </td>
                             <td>
                                 @can('payment_show')

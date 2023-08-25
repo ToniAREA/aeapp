@@ -11,11 +11,12 @@ class CreateMatLogsTable extends Migration
         Schema::create('mat_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('date');
-            $table->string('product')->nullable();
+            $table->string('item')->nullable();
             $table->string('description')->nullable();
             $table->float('pvp', 10, 2)->nullable();
             $table->float('units', 10, 2)->nullable();
             $table->boolean('invoiced_line')->default(0)->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -18,7 +18,9 @@ class CreateContactContactsTable extends Migration
             $table->string('contact_mobile')->nullable();
             $table->string('contact_mobile_2')->nullable();
             $table->string('contact_email')->nullable();
+            $table->string('contact_email_2')->nullable();
             $table->string('social_link')->nullable();
+            $table->string('contact_tags')->nullable();
             $table->string('contact_notes')->nullable();
             $table->string('contact_internalnotes')->nullable();
             $table->timestamps();

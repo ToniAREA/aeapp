@@ -111,6 +111,14 @@
                 <span class="help-block">{{ trans('cruds.boat.fields.link_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="last_use">{{ trans('cruds.boat.fields.last_use') }}</label>
+                <input class="form-control datetime {{ $errors->has('last_use') ? 'is-invalid' : '' }}" type="text" name="last_use" id="last_use" value="{{ old('last_use', $boat->last_use) }}">
+                @if($errors->has('last_use'))
+                    <span class="text-danger">{{ $errors->first('last_use') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.boat.fields.last_use_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

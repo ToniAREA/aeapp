@@ -9,7 +9,6 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Boat;
 use App\Models\Client;
-use App\Models\ContactCompany;
 use App\Models\ContactContact;
 use Gate;
 use Illuminate\Http\Request;
@@ -25,7 +24,7 @@ class ClientsController extends Controller
         abort_if(Gate::denies('client_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Client::with(['company', 'contacts', 'boats'])->select(sprintf('%s.*', (new Client)->table));
+            $query = Client::with(['contacts', 'boats'])->select(sprintf('%s.*', (new Client)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -79,13 +78,6 @@ class ClientsController extends Controller
             $table->editColumn('email', function ($row) {
                 return $row->email ? $row->email : '';
             });
-            $table->addColumn('company_company_name', function ($row) {
-                return $row->company ? $row->company->company_name : '';
-            });
-
-            $table->editColumn('company.company_email', function ($row) {
-                return $row->company ? (is_string($row->company) ? $row->company : $row->company->company_email) : '';
-            });
             $table->editColumn('contacts', function ($row) {
                 $labels = [];
                 foreach ($row->contacts as $contact) {
@@ -115,25 +107,26 @@ class ClientsController extends Controller
                 return $row->coordinates ? $row->coordinates : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'defaulter', 'company', 'contacts', 'boats']);
+            $table->rawColumns(['actions', 'placeholder', 'defaulter', 'contacts', 'boats']);
 
             return $table->make(true);
         }
 
-        return view('admin.clients.index');
+        $contact_contacts = ContactContact::get();
+        $boats            = Boat::get();
+
+        return view('admin.clients.index', compact('contact_contacts', 'boats'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('client_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $companies = ContactCompany::pluck('company_name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $contacts = ContactContact::pluck('contact_first_name', 'id');
 
         $boats = Boat::pluck('name', 'id');
 
-        return view('admin.clients.create', compact('boats', 'companies', 'contacts'));
+        return view('admin.clients.create', compact('boats', 'contacts'));
     }
 
     public function store(StoreClientRequest $request)
@@ -149,15 +142,13 @@ class ClientsController extends Controller
     {
         abort_if(Gate::denies('client_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $companies = ContactCompany::pluck('company_name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $contacts = ContactContact::pluck('contact_first_name', 'id');
 
         $boats = Boat::pluck('name', 'id');
 
-        $client->load('company', 'contacts', 'boats');
+        $client->load('contacts', 'boats');
 
-        return view('admin.clients.edit', compact('boats', 'client', 'companies', 'contacts'));
+        return view('admin.clients.edit', compact('boats', 'client', 'contacts'));
     }
 
     public function update(UpdateClientRequest $request, Client $client)
@@ -173,7 +164,7 @@ class ClientsController extends Controller
     {
         abort_if(Gate::denies('client_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $client->load('company', 'contacts', 'boats', 'clientProformas', 'clientWlists', 'clientAppointments', 'clientsBoats');
+        $client->load('contacts', 'boats', 'clientProformas', 'clientWlists', 'clientAppointments', 'clientsBoats');
 
         return view('admin.clients.show', compact('client'));
     }

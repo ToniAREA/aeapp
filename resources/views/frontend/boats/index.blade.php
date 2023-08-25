@@ -63,6 +63,9 @@
                                         {{ trans('cruds.boat.fields.link') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.boat.fields.last_use') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -116,6 +119,9 @@
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
                                     </td>
                                 </tr>
                             </thead>
@@ -159,6 +165,9 @@
                                         </td>
                                         <td>
                                             {{ $boat->link ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $boat->last_use ?? '' }}
                                         </td>
                                         <td>
                                             @can('boat_show')

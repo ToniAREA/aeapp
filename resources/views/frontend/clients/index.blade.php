@@ -60,12 +60,6 @@
                                         {{ trans('cruds.client.fields.email') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.client.fields.company') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.contactCompany.fields.company_email') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.client.fields.contacts') }}
                                     </th>
                                     <th>
@@ -84,8 +78,80 @@
                                         {{ trans('cruds.client.fields.coordinates') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.client.fields.last_use') }}
+                                    </th>
+                                    <th>
                                         &nbsp;
                                     </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($contact_contacts as $key => $item)
+                                                <option value="{{ $item->contact_first_name }}">{{ $item->contact_first_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($boats as $key => $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                                    </td>
+                                    <td>
+                                    </td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -126,12 +192,6 @@
                                             {{ $client->email ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $client->company->company_name ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $client->company->company_email ?? '' }}
-                                        </td>
-                                        <td>
                                             @foreach($client->contacts as $key => $item)
                                                 <span>{{ $item->contact_first_name }}</span>
                                             @endforeach
@@ -152,6 +212,9 @@
                                         </td>
                                         <td>
                                             {{ $client->coordinates ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $client->last_use ?? '' }}
                                         </td>
                                         <td>
                                             @can('client_show')
@@ -234,6 +297,27 @@
           .columns.adjust();
   });
   
+let visibleColumnsIndexes = null;
+$('.datatable thead').on('input', '.search', function () {
+      let strict = $(this).attr('strict') || false
+      let value = strict && this.value ? "^" + this.value + "$" : this.value
+
+      let index = $(this).parent().index()
+      if (visibleColumnsIndexes !== null) {
+        index = visibleColumnsIndexes[index]
+      }
+
+      table
+        .column(index)
+        .search(value, strict)
+        .draw()
+  });
+table.on('column-visibility.dt', function(e, settings, column, state) {
+      visibleColumnsIndexes = []
+      table.columns(":visible").every(function(colIdx) {
+          visibleColumnsIndexes.push(colIdx);
+      });
+  })
 })
 
 </script>

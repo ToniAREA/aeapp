@@ -34,11 +34,9 @@ class UpdateWlogRequest extends FormRequest
                 'min:0',
                 'max:24',
             ],
-            'tags.*' => [
-                'integer',
-            ],
-            'tags' => [
-                'array',
+            'status' => [
+                'string',
+                'nullable',
             ],
         ];
     }

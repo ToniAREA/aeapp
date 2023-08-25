@@ -10,10 +10,12 @@ class CreateMarinasTable extends Migration
     {
         Schema::create('marinas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_marina')->nullable();
             $table->string('name')->unique();
             $table->string('coordinates')->nullable();
             $table->string('link')->nullable();
+            $table->string('notes')->nullable();
+            $table->string('internal_notes')->nullable();
+            $table->datetime('last_use')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

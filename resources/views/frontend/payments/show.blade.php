@@ -74,16 +74,6 @@
                                         {{ $payment->status }}
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.payment.fields.tags') }}
-                                    </th>
-                                    <td>
-                                        @foreach($payment->tags as $key => $tags)
-                                            <span class="label label-info">{{ $tags->name }}</span>
-                                        @endforeach
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

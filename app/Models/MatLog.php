@@ -31,12 +31,14 @@ class MatLog extends Model
         'wlist_id',
         'date',
         'employee_id',
-        'product',
+        'item',
+        'product_id',
         'description',
         'pvp',
         'units',
         'proforma_number_id',
         'invoiced_line',
+        'status',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -72,9 +74,9 @@ class MatLog extends Model
         return $this->belongsTo(User::class, 'employee_id');
     }
 
-    public function tags()
+    public function product()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     public function proforma_number()

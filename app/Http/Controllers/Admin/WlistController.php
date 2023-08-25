@@ -10,9 +10,7 @@ use App\Http\Requests\StoreWlistRequest;
 use App\Http\Requests\UpdateWlistRequest;
 use App\Models\Boat;
 use App\Models\Client;
-use App\Models\Priority;
 use App\Models\Role;
-use App\Models\Tag;
 use App\Models\User;
 use App\Models\Wlist;
 use Gate;
@@ -30,7 +28,7 @@ class WlistController extends Controller
         abort_if(Gate::denies('wlist_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Wlist::with(['client', 'boat', 'priority', 'for_roles', 'for_users', 'tags'])->select(sprintf('%s.*', (new Wlist)->table));
+            $query = Wlist::with(['client', 'boat', 'for_roles', 'for_users'])->select(sprintf('%s.*', (new Wlist)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -83,10 +81,9 @@ class WlistController extends Controller
                 return implode(' ', $links);
             });
 
-            $table->addColumn('priority_level', function ($row) {
-                return $row->priority ? $row->priority->level : '';
+            $table->editColumn('priority', function ($row) {
+                return $row->priority ? $row->priority : '';
             });
-
             $table->editColumn('for_role', function ($row) {
                 $labels = [];
                 foreach ($row->for_roles as $for_role) {
@@ -112,16 +109,8 @@ class WlistController extends Controller
             $table->editColumn('notes', function ($row) {
                 return $row->notes ? $row->notes : '';
             });
-            $table->editColumn('tags', function ($row) {
-                $labels = [];
-                foreach ($row->tags as $tag) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $tag->name);
-                }
 
-                return implode(' ', $labels);
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'client', 'boat', 'photos', 'priority', 'for_role', 'for_user', 'tags']);
+            $table->rawColumns(['actions', 'placeholder', 'client', 'boat', 'photos', 'for_role', 'for_user']);
 
             return $table->make(true);
         }
@@ -137,15 +126,11 @@ class WlistController extends Controller
 
         $boats = Boat::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $priorities = Priority::pluck('level', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $for_roles = Role::pluck('title', 'id');
 
         $for_users = User::pluck('name', 'id');
 
-        $tags = Tag::pluck('name', 'id');
-
-        return view('admin.wlists.create', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities', 'tags'));
+        return view('admin.wlists.create', compact('boats', 'clients', 'for_roles', 'for_users'));
     }
 
     public function store(StoreWlistRequest $request)
@@ -153,7 +138,6 @@ class WlistController extends Controller
         $wlist = Wlist::create($request->all());
         $wlist->for_roles()->sync($request->input('for_roles', []));
         $wlist->for_users()->sync($request->input('for_users', []));
-        $wlist->tags()->sync($request->input('tags', []));
         foreach ($request->input('photos', []) as $file) {
             $wlist->addMedia(storage_path('tmp/uploads/' . basename($file)))->toMediaCollection('photos');
         }
@@ -173,17 +157,13 @@ class WlistController extends Controller
 
         $boats = Boat::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $priorities = Priority::pluck('level', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $for_roles = Role::pluck('title', 'id');
 
         $for_users = User::pluck('name', 'id');
 
-        $tags = Tag::pluck('name', 'id');
+        $wlist->load('client', 'boat', 'for_roles', 'for_users');
 
-        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users', 'tags');
-
-        return view('admin.wlists.edit', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities', 'tags', 'wlist'));
+        return view('admin.wlists.edit', compact('boats', 'clients', 'for_roles', 'for_users', 'wlist'));
     }
 
     public function update(UpdateWlistRequest $request, Wlist $wlist)
@@ -191,7 +171,6 @@ class WlistController extends Controller
         $wlist->update($request->all());
         $wlist->for_roles()->sync($request->input('for_roles', []));
         $wlist->for_users()->sync($request->input('for_users', []));
-        $wlist->tags()->sync($request->input('tags', []));
         if (count($wlist->photos) > 0) {
             foreach ($wlist->photos as $media) {
                 if (! in_array($media->file_name, $request->input('photos', []))) {
@@ -213,7 +192,7 @@ class WlistController extends Controller
     {
         abort_if(Gate::denies('wlist_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlist->load('client', 'boat', 'priority', 'for_roles', 'for_users', 'tags', 'wlistWlogs', 'wlistMatLogs', 'wlistsAppointments', 'wlistsProformas');
+        $wlist->load('client', 'boat', 'for_roles', 'for_users', 'wlistWlogs', 'wlistMatLogs', 'wlistsAppointments', 'wlistsProformas');
 
         return view('admin.wlists.show', compact('wlist'));
     }

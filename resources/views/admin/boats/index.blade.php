@@ -62,6 +62,9 @@
                         {{ trans('cruds.boat.fields.link') }}
                     </th>
                     <th>
+                        {{ trans('cruds.boat.fields.last_use') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -107,6 +110,9 @@
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -181,6 +187,7 @@
 { data: 'clients', name: 'clients.name' },
 { data: 'coordinates', name: 'coordinates' },
 { data: 'link', name: 'link' },
+{ data: 'last_use', name: 'last_use' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

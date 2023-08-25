@@ -116,6 +116,14 @@
                                         {{ $boat->link }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.boat.fields.last_use') }}
+                                    </th>
+                                    <td>
+                                        {{ $boat->last_use }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

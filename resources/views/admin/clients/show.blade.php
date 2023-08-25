@@ -105,14 +105,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.client.fields.company') }}
-                        </th>
-                        <td>
-                            {{ $client->company->company_name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.client.fields.contacts') }}
                         </th>
                         <td>
@@ -161,6 +153,14 @@
                         </th>
                         <td>
                             {{ $client->coordinates }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.client.fields.last_use') }}
+                        </th>
+                        <td>
+                            {{ $client->last_use }}
                         </td>
                     </tr>
                 </tbody>

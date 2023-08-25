@@ -36,7 +36,9 @@ class ContactContact extends Model
         'contact_mobile',
         'contact_mobile_2',
         'contact_email',
+        'contact_email_2',
         'social_link',
+        'contact_tags',
         'contact_notes',
         'contact_internalnotes',
         'created_at',
@@ -57,5 +59,10 @@ class ContactContact extends Model
     public function contactsClients()
     {
         return $this->belongsToMany(Client::class);
+    }
+
+    public function contactsContactCompanies()
+    {
+        return $this->belongsToMany(ContactCompany::class);
     }
 }

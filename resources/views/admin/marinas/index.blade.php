@@ -29,9 +29,6 @@
                         {{ trans('cruds.marina.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.marina.fields.id_marina') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.marina.fields.name') }}
                     </th>
                     <th>
@@ -39,6 +36,15 @@
                     </th>
                     <th>
                         {{ trans('cruds.marina.fields.link') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.marina.fields.notes') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.marina.fields.internal_notes') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.marina.fields.last_use') }}
                     </th>
                     <th>
                         &nbsp;
@@ -97,14 +103,16 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'id_marina', name: 'id_marina' },
 { data: 'name', name: 'name' },
 { data: 'coordinates', name: 'coordinates' },
 { data: 'link', name: 'link' },
+{ data: 'notes', name: 'notes' },
+{ data: 'internal_notes', name: 'internal_notes' },
+{ data: 'last_use', name: 'last_use' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
+    order: [[ 1, 'asc' ]],
     pageLength: 100,
   };
   let table = $('.datatable-Marina').DataTable(dtOverrideGlobals);

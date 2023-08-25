@@ -70,8 +70,14 @@ class ContactContactsController extends Controller
             $table->editColumn('contact_email', function ($row) {
                 return $row->contact_email ? $row->contact_email : '';
             });
+            $table->editColumn('contact_email_2', function ($row) {
+                return $row->contact_email_2 ? $row->contact_email_2 : '';
+            });
             $table->editColumn('social_link', function ($row) {
                 return $row->social_link ? $row->social_link : '';
+            });
+            $table->editColumn('contact_tags', function ($row) {
+                return $row->contact_tags ? $row->contact_tags : '';
             });
             $table->editColumn('contact_notes', function ($row) {
                 return $row->contact_notes ? $row->contact_notes : '';
@@ -120,7 +126,7 @@ class ContactContactsController extends Controller
     {
         abort_if(Gate::denies('contact_contact_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $contactContact->load('contactEmployees', 'contactsClients');
+        $contactContact->load('contactEmployees', 'contactsClients', 'contactsContactCompanies');
 
         return view('admin.contactContacts.show', compact('contactContact'));
     }

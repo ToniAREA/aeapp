@@ -66,10 +66,13 @@
                                         {{ trans('cruds.proforma.fields.claims') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.proforma.fields.tags') }}
+                                        {{ trans('cruds.proforma.fields.link') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.proforma.fields.link') }}
+                                        {{ trans('cruds.proforma.fields.status') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.proforma.fields.notes') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -125,12 +128,13 @@
                                             {{ $proforma->claims ?? '' }}
                                         </td>
                                         <td>
-                                            @foreach($proforma->tags as $key => $item)
-                                                <span>{{ $item->name }}</span>
-                                            @endforeach
+                                            {{ $proforma->link ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $proforma->link ?? '' }}
+                                            {{ $proforma->status ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $proforma->notes ?? '' }}
                                         </td>
                                         <td>
                                             @can('proforma_show')

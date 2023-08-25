@@ -56,13 +56,15 @@ class StoreProformaRequest extends FormRequest
                 'min:-2147483648',
                 'max:2147483647',
             ],
-            'tags.*' => [
-                'integer',
-            ],
-            'tags' => [
-                'array',
-            ],
             'link' => [
+                'string',
+                'nullable',
+            ],
+            'status' => [
+                'string',
+                'nullable',
+            ],
+            'notes' => [
                 'string',
                 'nullable',
             ],

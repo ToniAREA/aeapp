@@ -71,7 +71,7 @@
                                             {{ $toDo->deadline ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $toDo->priority->level ?? '' }}
+                                            {{ $toDo->priority ?? '' }}
                                         </td>
                                         <td>
                                             @foreach($toDo->for_roles as $key => $item)

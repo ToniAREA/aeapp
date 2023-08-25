@@ -50,7 +50,13 @@
                         {{ trans('cruds.user.fields.email') }}
                     </th>
                     <th>
+                        {{ trans('cruds.matLog.fields.item') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.matLog.fields.product') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.product.fields.description') }}
                     </th>
                     <th>
                         {{ trans('cruds.matLog.fields.description') }}
@@ -62,9 +68,6 @@
                         {{ trans('cruds.matLog.fields.units') }}
                     </th>
                     <th>
-                        {{ trans('cruds.matLog.fields.tags') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.matLog.fields.proforma_number') }}
                     </th>
                     <th>
@@ -72,6 +75,9 @@
                     </th>
                     <th>
                         {{ trans('cruds.matLog.fields.invoiced_line') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.matLog.fields.status') }}
                     </th>
                     <th>
                         &nbsp;
@@ -137,14 +143,16 @@
 { data: 'date', name: 'date' },
 { data: 'employee_name', name: 'employee.name' },
 { data: 'employee.email', name: 'employee.email' },
-{ data: 'product', name: 'product' },
+{ data: 'item', name: 'item' },
+{ data: 'product_name', name: 'product.name' },
+{ data: 'product.description', name: 'product.description' },
 { data: 'description', name: 'description' },
 { data: 'pvp', name: 'pvp' },
 { data: 'units', name: 'units' },
-{ data: 'tags', name: 'tags.name' },
 { data: 'proforma_number_proforma_number', name: 'proforma_number.proforma_number' },
 { data: 'proforma_number.description', name: 'proforma_number.description' },
 { data: 'invoiced_line', name: 'invoiced_line' },
+{ data: 'status', name: 'status' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

@@ -46,9 +46,6 @@ class MarinasController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : '';
             });
-            $table->editColumn('id_marina', function ($row) {
-                return $row->id_marina ? $row->id_marina : '';
-            });
             $table->editColumn('name', function ($row) {
                 return $row->name ? $row->name : '';
             });
@@ -57,6 +54,12 @@ class MarinasController extends Controller
             });
             $table->editColumn('link', function ($row) {
                 return $row->link ? $row->link : '';
+            });
+            $table->editColumn('notes', function ($row) {
+                return $row->notes ? $row->notes : '';
+            });
+            $table->editColumn('internal_notes', function ($row) {
+                return $row->internal_notes ? $row->internal_notes : '';
             });
 
             $table->rawColumns(['actions', 'placeholder']);

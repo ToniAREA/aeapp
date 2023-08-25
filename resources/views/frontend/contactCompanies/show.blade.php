@@ -98,6 +98,16 @@
                                         {{ $contactCompany->company_social_link }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.contactCompany.fields.contacts') }}
+                                    </th>
+                                    <td>
+                                        @foreach($contactCompany->contacts as $key => $contacts)
+                                            <span class="label label-info">{{ $contacts->contact_first_name }}</span>
+                                        @endforeach
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

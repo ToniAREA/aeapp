@@ -50,8 +50,8 @@ class ContactCompany extends Model
         return $this->hasMany(Provider::class, 'company_id', 'id');
     }
 
-    public function companyClients()
+    public function contacts()
     {
-        return $this->hasMany(Client::class, 'company_id', 'id');
+        return $this->belongsToMany(ContactContact::class);
     }
 }

@@ -58,6 +58,9 @@
                                 {{ trans('cruds.boat.fields.link') }}
                             </th>
                             <th>
+                                {{ trans('cruds.boat.fields.last_use') }}
+                            </th>
+                            <th>
                                 &nbsp;
                             </th>
                         </tr>
@@ -105,6 +108,9 @@
                                 </td>
                                 <td>
                                     {{ $boat->link ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $boat->last_use ?? '' }}
                                 </td>
                                 <td>
                                     @can('boat_show')

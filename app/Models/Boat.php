@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Auditable;
+use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,17 +15,18 @@ class Boat extends Model
 
     public $table = 'boats';
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
-
     public static $searchable = [
         'ref',
         'mmsi',
         'notes',
         'internalnotes',
+    ];
+
+    protected $dates = [
+        'last_use',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -38,6 +40,7 @@ class Boat extends Model
         'internalnotes',
         'coordinates',
         'link',
+        'last_use',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -81,5 +84,15 @@ class Boat extends Model
     public function clients()
     {
         return $this->belongsToMany(Client::class);
+    }
+
+    public function getLastUseAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+    }
+
+    public function setLastUseAttribute($value)
+    {
+        $this->attributes['last_use'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
     }
 }

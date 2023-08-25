@@ -7,13 +7,14 @@ use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ToDo extends Model implements HasMedia
 {
-    use InteractsWithMedia, Auditable, HasFactory;
+    use SoftDeletes, InteractsWithMedia, Auditable, HasFactory;
 
     public $table = 'to_dos';
 
@@ -31,7 +32,7 @@ class ToDo extends Model implements HasMedia
     protected $fillable = [
         'task',
         'deadline',
-        'priority_id',
+        'priority',
         'notes',
         'created_at',
         'updated_at',
@@ -69,11 +70,6 @@ class ToDo extends Model implements HasMedia
     public function setDeadlineAttribute($value)
     {
         $this->attributes['deadline'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    }
-
-    public function priority()
-    {
-        return $this->belongsTo(Priority::class, 'priority_id');
     }
 
     public function for_roles()

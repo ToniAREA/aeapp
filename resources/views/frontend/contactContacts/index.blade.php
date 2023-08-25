@@ -54,7 +54,13 @@
                                         {{ trans('cruds.contactContact.fields.contact_email') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.contactContact.fields.contact_email_2') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.contactContact.fields.social_link') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.contactContact.fields.contact_tags') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.contactContact.fields.contact_notes') }}
@@ -98,7 +104,13 @@
                                             {{ $contactContact->contact_email ?? '' }}
                                         </td>
                                         <td>
+                                            {{ $contactContact->contact_email_2 ?? '' }}
+                                        </td>
+                                        <td>
                                             {{ $contactContact->social_link ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $contactContact->contact_tags ?? '' }}
                                         </td>
                                         <td>
                                             {{ $contactContact->contact_notes ?? '' }}

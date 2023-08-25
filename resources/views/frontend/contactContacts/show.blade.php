@@ -92,10 +92,26 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.contactContact.fields.contact_email_2') }}
+                                    </th>
+                                    <td>
+                                        {{ $contactContact->contact_email_2 }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.contactContact.fields.social_link') }}
                                     </th>
                                     <td>
                                         {{ $contactContact->social_link }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.contactContact.fields.contact_tags') }}
+                                    </th>
+                                    <td>
+                                        {{ $contactContact->contact_tags }}
                                     </td>
                                 </tr>
                                 <tr>

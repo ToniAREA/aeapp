@@ -49,6 +49,12 @@ class StoreContactCompanyRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'contacts.*' => [
+                'integer',
+            ],
+            'contacts' => [
+                'array',
+            ],
         ];
     }
 }

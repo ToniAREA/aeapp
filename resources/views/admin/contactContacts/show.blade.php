@@ -89,10 +89,26 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.contactContact.fields.contact_email_2') }}
+                        </th>
+                        <td>
+                            {{ $contactContact->contact_email_2 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.contactContact.fields.social_link') }}
                         </th>
                         <td>
                             {{ $contactContact->social_link }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.contactContact.fields.contact_tags') }}
+                        </th>
+                        <td>
+                            {{ $contactContact->contact_tags }}
                         </td>
                     </tr>
                     <tr>
@@ -137,6 +153,11 @@
                 {{ trans('cruds.client.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#contacts_contact_companies" role="tab" data-toggle="tab">
+                {{ trans('cruds.contactCompany.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="contact_employees">
@@ -144,6 +165,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="contacts_clients">
             @includeIf('admin.contactContacts.relationships.contactsClients', ['clients' => $contactContact->contactsClients])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="contacts_contact_companies">
+            @includeIf('admin.contactContacts.relationships.contactsContactCompanies', ['contactCompanies' => $contactContact->contactsContactCompanies])
         </div>
     </div>
 </div>

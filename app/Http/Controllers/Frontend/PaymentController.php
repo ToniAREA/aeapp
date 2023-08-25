@@ -8,7 +8,6 @@ use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 use App\Models\Payment;
 use App\Models\Proforma;
-use App\Models\Tag;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +18,7 @@ class PaymentController extends Controller
     {
         abort_if(Gate::denies('payment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $payments = Payment::with(['proforma_number', 'tags'])->get();
+        $payments = Payment::with(['proforma_number'])->get();
 
         return view('frontend.payments.index', compact('payments'));
     }
@@ -30,15 +29,12 @@ class PaymentController extends Controller
 
         $proforma_numbers = Proforma::pluck('proforma_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $tags = Tag::pluck('name', 'id');
-
-        return view('frontend.payments.create', compact('proforma_numbers', 'tags'));
+        return view('frontend.payments.create', compact('proforma_numbers'));
     }
 
     public function store(StorePaymentRequest $request)
     {
         $payment = Payment::create($request->all());
-        $payment->tags()->sync($request->input('tags', []));
 
         return redirect()->route('frontend.payments.index');
     }
@@ -49,17 +45,14 @@ class PaymentController extends Controller
 
         $proforma_numbers = Proforma::pluck('proforma_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $tags = Tag::pluck('name', 'id');
+        $payment->load('proforma_number');
 
-        $payment->load('proforma_number', 'tags');
-
-        return view('frontend.payments.edit', compact('payment', 'proforma_numbers', 'tags'));
+        return view('frontend.payments.edit', compact('payment', 'proforma_numbers'));
     }
 
     public function update(UpdatePaymentRequest $request, Payment $payment)
     {
         $payment->update($request->all());
-        $payment->tags()->sync($request->input('tags', []));
 
         return redirect()->route('frontend.payments.index');
     }
@@ -68,7 +61,7 @@ class PaymentController extends Controller
     {
         abort_if(Gate::denies('payment_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $payment->load('proforma_number', 'tags');
+        $payment->load('proforma_number');
 
         return view('frontend.payments.show', compact('payment'));
     }

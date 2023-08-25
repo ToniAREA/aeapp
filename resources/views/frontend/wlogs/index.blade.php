@@ -54,9 +54,6 @@
                                         {{ trans('cruds.wlog.fields.hours') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.wlog.fields.tags') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.wlog.fields.proforma_number') }}
                                     </th>
                                     <th>
@@ -64,6 +61,9 @@
                                     </th>
                                     <th>
                                         {{ trans('cruds.wlog.fields.invoiced_line') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.wlog.fields.status') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -101,11 +101,6 @@
                                             {{ $wlog->hours ?? '' }}
                                         </td>
                                         <td>
-                                            @foreach($wlog->tags as $key => $item)
-                                                <span>{{ $item->name }}</span>
-                                            @endforeach
-                                        </td>
-                                        <td>
                                             {{ $wlog->proforma_number->proforma_number ?? '' }}
                                         </td>
                                         <td>
@@ -114,6 +109,9 @@
                                         <td>
                                             <span style="display:none">{{ $wlog->invoiced_line ?? '' }}</span>
                                             <input type="checkbox" disabled="disabled" {{ $wlog->invoiced_line ? 'checked' : '' }}>
+                                        </td>
+                                        <td>
+                                            {{ $wlog->status ?? '' }}
                                         </td>
                                         <td>
                                             @can('wlog_show')

@@ -41,9 +41,4 @@ class Payment extends Model
     {
         return $this->belongsTo(Proforma::class, 'proforma_number_id');
     }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
-    }
 }

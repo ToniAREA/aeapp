@@ -10,9 +10,9 @@ class CreateClientContactContactPivotTable extends Migration
     {
         Schema::create('client_contact_contact', function (Blueprint $table) {
             $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id', 'client_id_fk_8342793')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreign('client_id', 'client_id_fk_8921135')->references('id')->on('clients')->onDelete('cascade');
             $table->unsignedBigInteger('contact_contact_id');
-            $table->foreign('contact_contact_id', 'contact_contact_id_fk_8342793')->references('id')->on('contact_contacts')->onDelete('cascade');
+            $table->foreign('contact_contact_id', 'contact_contact_id_fk_8921135')->references('id')->on('contact_contacts')->onDelete('cascade');
         });
     }
 }

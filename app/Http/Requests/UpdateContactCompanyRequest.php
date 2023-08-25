@@ -49,6 +49,12 @@ class UpdateContactCompanyRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'contacts.*' => [
+                'integer',
+            ],
+            'contacts' => [
+                'array',
+            ],
         ];
     }
 }
