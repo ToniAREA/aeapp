@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Priority;
 use Illuminate\Database\Seeder;
 
@@ -17,19 +18,31 @@ class PriorityTableSeeder extends Seeder
         $priorities = [
             [
                 'id'    => 1,
-                'level' => 'Urgent',
+                'name' => 'Urgent',
+                'slug' => 'urgent',
+                'weight' => 10,
+                'created_at' => now()
             ],
             [
                 'id'    => 2,
-                'level' => 'High',
+                'name' => 'High',
+                'slug' => 'high',
+                'weight' => 8,
+                'created_at' => now()
             ],
             [
                 'id'    => 3,
-                'level' => 'Normal',
+                'name' => 'Normal',
+                'slug' => 'normal',
+                'weight' => 5,
+                'created_at' => now()
             ],
             [
                 'id'    => 4,
-                'level' => 'Low',
+                'name' => 'Low',
+                'slug' => 'low',
+                'weight' => 3,
+                'created_at' => now()
             ]
         ];
 
