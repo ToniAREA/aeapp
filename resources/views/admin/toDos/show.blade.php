@@ -25,6 +25,26 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.toDo.fields.for_role') }}
+                        </th>
+                        <td>
+                            @foreach($toDo->for_roles as $key => $for_role)
+                                <span class="label label-info">{{ $for_role->title }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.toDo.fields.for_user') }}
+                        </th>
+                        <td>
+                            @foreach($toDo->for_users as $key => $for_user)
+                                <span class="label label-info">{{ $for_user->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.toDo.fields.task') }}
                         </th>
                         <td>
@@ -56,27 +76,7 @@
                             {{ trans('cruds.toDo.fields.priority') }}
                         </th>
                         <td>
-                            {{ $toDo->priority }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.toDo.fields.for_role') }}
-                        </th>
-                        <td>
-                            @foreach($toDo->for_roles as $key => $for_role)
-                                <span class="label label-info">{{ $for_role->title }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.toDo.fields.for_user') }}
-                        </th>
-                        <td>
-                            @foreach($toDo->for_users as $key => $for_user)
-                                <span class="label label-info">{{ $for_user->name }}</span>
-                            @endforeach
+                            {{ $toDo->priority->name ?? '' }}
                         </td>
                     </tr>
                     <tr>

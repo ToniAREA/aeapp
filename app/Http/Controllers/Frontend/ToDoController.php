@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyToDoRequest;
 use App\Http\Requests\StoreToDoRequest;
 use App\Http\Requests\UpdateToDoRequest;
+use App\Models\Priority;
 use App\Models\Role;
 use App\Models\ToDo;
 use App\Models\User;
@@ -23,7 +24,7 @@ class ToDoController extends Controller
     {
         abort_if(Gate::denies('to_do_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $toDos = ToDo::with(['for_roles', 'for_users', 'media'])->get();
+        $toDos = ToDo::with(['for_roles', 'for_users', 'priority', 'media'])->get();
 
         return view('frontend.toDos.index', compact('toDos'));
     }
@@ -36,7 +37,9 @@ class ToDoController extends Controller
 
         $for_users = User::pluck('name', 'id');
 
-        return view('frontend.toDos.create', compact('for_roles', 'for_users'));
+        $priorities = Priority::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('frontend.toDos.create', compact('for_roles', 'for_users', 'priorities'));
     }
 
     public function store(StoreToDoRequest $request)
@@ -63,9 +66,11 @@ class ToDoController extends Controller
 
         $for_users = User::pluck('name', 'id');
 
-        $toDo->load('for_roles', 'for_users');
+        $priorities = Priority::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('frontend.toDos.edit', compact('for_roles', 'for_users', 'toDo'));
+        $toDo->load('for_roles', 'for_users', 'priority');
+
+        return view('frontend.toDos.edit', compact('for_roles', 'for_users', 'priorities', 'toDo'));
     }
 
     public function update(UpdateToDoRequest $request, ToDo $toDo)
@@ -94,7 +99,7 @@ class ToDoController extends Controller
     {
         abort_if(Gate::denies('to_do_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $toDo->load('for_roles', 'for_users');
+        $toDo->load('for_roles', 'for_users', 'priority');
 
         return view('frontend.toDos.show', compact('toDo'));
     }

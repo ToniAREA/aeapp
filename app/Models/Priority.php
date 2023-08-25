@@ -20,8 +20,9 @@ class Priority extends Model
     ];
 
     protected $fillable = [
-        'level',
+        'name',
         'weight',
+        'slug',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -32,9 +33,9 @@ class Priority extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function priorityToDos()
+    public function priorityAppointments()
     {
-        return $this->hasMany(ToDo::class, 'priority_id', 'id');
+        return $this->hasMany(Appointment::class, 'priority_id', 'id');
     }
 
     public function priorityWlists()
@@ -42,8 +43,8 @@ class Priority extends Model
         return $this->hasMany(Wlist::class, 'priority_id', 'id');
     }
 
-    public function priorityAppointments()
+    public function priorityToDos()
     {
-        return $this->hasMany(Appointment::class, 'priority_id', 'id');
+        return $this->hasMany(ToDo::class, 'priority_id', 'id');
     }
 }

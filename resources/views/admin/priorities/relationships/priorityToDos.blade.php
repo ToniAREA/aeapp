@@ -25,6 +25,12 @@
                                 {{ trans('cruds.toDo.fields.id') }}
                             </th>
                             <th>
+                                {{ trans('cruds.toDo.fields.for_role') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.toDo.fields.for_user') }}
+                            </th>
+                            <th>
                                 {{ trans('cruds.toDo.fields.task') }}
                             </th>
                             <th>
@@ -37,10 +43,7 @@
                                 {{ trans('cruds.toDo.fields.priority') }}
                             </th>
                             <th>
-                                {{ trans('cruds.toDo.fields.for_role') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.toDo.fields.for_user') }}
+                                {{ trans('cruds.priority.fields.weight') }}
                             </th>
                             <th>
                                 {{ trans('cruds.toDo.fields.notes') }}
@@ -60,6 +63,16 @@
                                     {{ $toDo->id ?? '' }}
                                 </td>
                                 <td>
+                                    @foreach($toDo->for_roles as $key => $item)
+                                        <span class="badge badge-info">{{ $item->title }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach($toDo->for_users as $key => $item)
+                                        <span class="badge badge-info">{{ $item->name }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
                                     {{ $toDo->task ?? '' }}
                                 </td>
                                 <td>
@@ -73,17 +86,10 @@
                                     {{ $toDo->deadline ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $toDo->priority->level ?? '' }}
+                                    {{ $toDo->priority->name ?? '' }}
                                 </td>
                                 <td>
-                                    @foreach($toDo->for_roles as $key => $item)
-                                        <span class="badge badge-info">{{ $item->title }}</span>
-                                    @endforeach
-                                </td>
-                                <td>
-                                    @foreach($toDo->for_users as $key => $item)
-                                        <span class="badge badge-info">{{ $item->name }}</span>
-                                    @endforeach
+                                    {{ $toDo->priority->weight ?? '' }}
                                 </td>
                                 <td>
                                     {{ $toDo->notes ?? '' }}

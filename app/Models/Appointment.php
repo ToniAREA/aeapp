@@ -26,13 +26,14 @@ class Appointment extends Model
     protected $fillable = [
         'client_id',
         'boat_id',
+        'boat_namecomplete',
+        'description',
         'when_starts',
         'when_ends',
-        'description',
+        'priority_id',
+        'status',
         'notes',
         'coordinates',
-        'status',
-        'priority',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -86,5 +87,10 @@ class Appointment extends Model
     public function setWhenEndsAttribute($value)
     {
         $this->attributes['when_ends'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
+    }
+
+    public function priority()
+    {
+        return $this->belongsTo(Priority::class, 'priority_id');
     }
 }

@@ -28,10 +28,10 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.priority.fields.level') }}
+                                        {{ trans('cruds.priority.fields.name') }}
                                     </th>
                                     <td>
-                                        {{ $priority->level }}
+                                        {{ $priority->name }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -40,6 +40,14 @@
                                     </th>
                                     <td>
                                         {{ $priority->weight }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.priority.fields.slug') }}
+                                    </th>
+                                    <td>
+                                        {{ $priority->slug }}
                                     </td>
                                 </tr>
                             </tbody>

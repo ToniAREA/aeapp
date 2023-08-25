@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyToDoRequest;
 use App\Http\Requests\StoreToDoRequest;
 use App\Http\Requests\UpdateToDoRequest;
+use App\Models\Priority;
 use App\Models\Role;
 use App\Models\ToDo;
 use App\Models\User;
@@ -25,7 +26,7 @@ class ToDoController extends Controller
         abort_if(Gate::denies('to_do_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = ToDo::with(['for_roles', 'for_users'])->select(sprintf('%s.*', (new ToDo)->table));
+            $query = ToDo::with(['for_roles', 'for_users', 'priority'])->select(sprintf('%s.*', (new ToDo)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -49,24 +50,6 @@ class ToDoController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : '';
             });
-            $table->editColumn('task', function ($row) {
-                return $row->task ? $row->task : '';
-            });
-            $table->editColumn('photo', function ($row) {
-                if (! $row->photo) {
-                    return '';
-                }
-                $links = [];
-                foreach ($row->photo as $media) {
-                    $links[] = '<a href="' . $media->getUrl() . '" target="_blank"><img src="' . $media->getUrl('thumb') . '" width="50px" height="50px"></a>';
-                }
-
-                return implode(' ', $links);
-            });
-
-            $table->editColumn('priority', function ($row) {
-                return $row->priority ? $row->priority : '';
-            });
             $table->editColumn('for_role', function ($row) {
                 $labels = [];
                 foreach ($row->for_roles as $for_role) {
@@ -83,11 +66,33 @@ class ToDoController extends Controller
 
                 return implode(' ', $labels);
             });
+            $table->editColumn('task', function ($row) {
+                return $row->task ? $row->task : '';
+            });
+            $table->editColumn('photo', function ($row) {
+                if (! $row->photo) {
+                    return '';
+                }
+                $links = [];
+                foreach ($row->photo as $media) {
+                    $links[] = '<a href="' . $media->getUrl() . '" target="_blank"><img src="' . $media->getUrl('thumb') . '" width="50px" height="50px"></a>';
+                }
+
+                return implode(' ', $links);
+            });
+
+            $table->addColumn('priority_name', function ($row) {
+                return $row->priority ? $row->priority->name : '';
+            });
+
+            $table->editColumn('priority.weight', function ($row) {
+                return $row->priority ? (is_string($row->priority) ? $row->priority : $row->priority->weight) : '';
+            });
             $table->editColumn('notes', function ($row) {
                 return $row->notes ? $row->notes : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'photo', 'for_role', 'for_user']);
+            $table->rawColumns(['actions', 'placeholder', 'for_role', 'for_user', 'photo', 'priority']);
 
             return $table->make(true);
         }
@@ -103,7 +108,9 @@ class ToDoController extends Controller
 
         $for_users = User::pluck('name', 'id');
 
-        return view('admin.toDos.create', compact('for_roles', 'for_users'));
+        $priorities = Priority::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.toDos.create', compact('for_roles', 'for_users', 'priorities'));
     }
 
     public function store(StoreToDoRequest $request)
@@ -130,9 +137,11 @@ class ToDoController extends Controller
 
         $for_users = User::pluck('name', 'id');
 
-        $toDo->load('for_roles', 'for_users');
+        $priorities = Priority::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.toDos.edit', compact('for_roles', 'for_users', 'toDo'));
+        $toDo->load('for_roles', 'for_users', 'priority');
+
+        return view('admin.toDos.edit', compact('for_roles', 'for_users', 'priorities', 'toDo'));
     }
 
     public function update(UpdateToDoRequest $request, ToDo $toDo)
@@ -161,7 +170,7 @@ class ToDoController extends Controller
     {
         abort_if(Gate::denies('to_do_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $toDo->load('for_roles', 'for_users');
+        $toDo->load('for_roles', 'for_users', 'priority');
 
         return view('admin.toDos.show', compact('toDo'));
     }

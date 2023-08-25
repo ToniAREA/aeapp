@@ -11,12 +11,12 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="level">{{ trans('cruds.priority.fields.level') }}</label>
-                <input class="form-control {{ $errors->has('level') ? 'is-invalid' : '' }}" type="text" name="level" id="level" value="{{ old('level', $priority->level) }}">
-                @if($errors->has('level'))
-                    <span class="text-danger">{{ $errors->first('level') }}</span>
+                <label class="required" for="name">{{ trans('cruds.priority.fields.name') }}</label>
+                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $priority->name) }}" required>
+                @if($errors->has('name'))
+                    <span class="text-danger">{{ $errors->first('name') }}</span>
                 @endif
-                <span class="help-block">{{ trans('cruds.priority.fields.level_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.priority.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="weight">{{ trans('cruds.priority.fields.weight') }}</label>
@@ -25,6 +25,14 @@
                     <span class="text-danger">{{ $errors->first('weight') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.priority.fields.weight_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="slug">{{ trans('cruds.priority.fields.slug') }}</label>
+                <input class="form-control {{ $errors->has('slug') ? 'is-invalid' : '' }}" type="text" name="slug" id="slug" value="{{ old('slug', $priority->slug) }}">
+                @if($errors->has('slug'))
+                    <span class="text-danger">{{ $errors->first('slug') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.priority.fields.slug_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

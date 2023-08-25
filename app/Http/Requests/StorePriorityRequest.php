@@ -17,16 +17,20 @@ class StorePriorityRequest extends FormRequest
     public function rules()
     {
         return [
-            'level' => [
+            'name' => [
                 'string',
-                'max:10',
-                'nullable',
+                'required',
+                'unique:priorities',
             ],
             'weight' => [
                 'nullable',
                 'integer',
                 'min:-2147483648',
                 'max:2147483647',
+            ],
+            'slug' => [
+                'string',
+                'nullable',
             ],
         ];
     }

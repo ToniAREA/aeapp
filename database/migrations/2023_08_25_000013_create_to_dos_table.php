@@ -12,7 +12,6 @@ class CreateToDosTable extends Migration
             $table->bigIncrements('id');
             $table->string('task')->nullable();
             $table->date('deadline')->nullable();
-            $table->string('priority')->nullable();
             $table->string('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();

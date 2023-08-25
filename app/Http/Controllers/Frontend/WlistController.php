@@ -10,6 +10,7 @@ use App\Http\Requests\StoreWlistRequest;
 use App\Http\Requests\UpdateWlistRequest;
 use App\Models\Boat;
 use App\Models\Client;
+use App\Models\Priority;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Wlist;
@@ -26,7 +27,7 @@ class WlistController extends Controller
     {
         abort_if(Gate::denies('wlist_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlists = Wlist::with(['client', 'boat', 'for_roles', 'for_users', 'media'])->get();
+        $wlists = Wlist::with(['client', 'boat', 'for_roles', 'for_users', 'priority', 'media'])->get();
 
         return view('frontend.wlists.index', compact('wlists'));
     }
@@ -43,7 +44,9 @@ class WlistController extends Controller
 
         $for_users = User::pluck('name', 'id');
 
-        return view('frontend.wlists.create', compact('boats', 'clients', 'for_roles', 'for_users'));
+        $priorities = Priority::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('frontend.wlists.create', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities'));
     }
 
     public function store(StoreWlistRequest $request)
@@ -74,9 +77,11 @@ class WlistController extends Controller
 
         $for_users = User::pluck('name', 'id');
 
-        $wlist->load('client', 'boat', 'for_roles', 'for_users');
+        $priorities = Priority::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('frontend.wlists.edit', compact('boats', 'clients', 'for_roles', 'for_users', 'wlist'));
+        $wlist->load('client', 'boat', 'for_roles', 'for_users', 'priority');
+
+        return view('frontend.wlists.edit', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities', 'wlist'));
     }
 
     public function update(UpdateWlistRequest $request, Wlist $wlist)
@@ -105,7 +110,7 @@ class WlistController extends Controller
     {
         abort_if(Gate::denies('wlist_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlist->load('client', 'boat', 'for_roles', 'for_users', 'wlistWlogs', 'wlistMatLogs', 'wlistsAppointments', 'wlistsProformas');
+        $wlist->load('client', 'boat', 'for_roles', 'for_users', 'priority', 'wlistWlogs', 'wlistMatLogs', 'wlistsAppointments', 'wlistsProformas');
 
         return view('frontend.wlists.show', compact('wlist'));
     }

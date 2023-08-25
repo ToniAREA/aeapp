@@ -47,25 +47,31 @@
                         {{ trans('cruds.appointment.fields.for_user') }}
                     </th>
                     <th>
+                        {{ trans('cruds.appointment.fields.boat_namecomplete') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.appointment.fields.description') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.appointment.fields.when_starts') }}
                     </th>
                     <th>
                         {{ trans('cruds.appointment.fields.when_ends') }}
                     </th>
                     <th>
-                        {{ trans('cruds.appointment.fields.description') }}
+                        {{ trans('cruds.appointment.fields.priority') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.priority.fields.weight') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.appointment.fields.status') }}
                     </th>
                     <th>
                         {{ trans('cruds.appointment.fields.notes') }}
                     </th>
                     <th>
                         {{ trans('cruds.appointment.fields.coordinates') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.appointment.fields.status') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.appointment.fields.priority') }}
                     </th>
                     <th>
                         &nbsp;
@@ -130,13 +136,15 @@
 { data: 'wlists', name: 'wlists.description' },
 { data: 'for_role', name: 'for_roles.title' },
 { data: 'for_user', name: 'for_users.name' },
+{ data: 'boat_namecomplete', name: 'boat_namecomplete' },
+{ data: 'description', name: 'description' },
 { data: 'when_starts', name: 'when_starts' },
 { data: 'when_ends', name: 'when_ends' },
-{ data: 'description', name: 'description' },
+{ data: 'priority_name', name: 'priority.name' },
+{ data: 'priority.weight', name: 'priority.weight' },
+{ data: 'status', name: 'status' },
 { data: 'notes', name: 'notes' },
 { data: 'coordinates', name: 'coordinates' },
-{ data: 'status', name: 'status' },
-{ data: 'priority', name: 'priority' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

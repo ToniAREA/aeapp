@@ -37,6 +37,15 @@
                                 {{ trans('cruds.wlist.fields.order_type') }}
                             </th>
                             <th>
+                                {{ trans('cruds.wlist.fields.for_role') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.wlist.fields.for_user') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.wlist.fields.boat_namecomplete') }}
+                            </th>
+                            <th>
                                 {{ trans('cruds.wlist.fields.description') }}
                             </th>
                             <th>
@@ -49,10 +58,7 @@
                                 {{ trans('cruds.wlist.fields.priority') }}
                             </th>
                             <th>
-                                {{ trans('cruds.wlist.fields.for_role') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.wlist.fields.for_user') }}
+                                {{ trans('cruds.priority.fields.weight') }}
                             </th>
                             <th>
                                 {{ trans('cruds.wlist.fields.status') }}
@@ -62,9 +68,6 @@
                             </th>
                             <th>
                                 {{ trans('cruds.wlist.fields.notes') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.wlist.fields.tags') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -93,6 +96,19 @@
                                     {{ App\Models\Wlist::ORDER_TYPE_RADIO[$wlist->order_type] ?? '' }}
                                 </td>
                                 <td>
+                                    @foreach($wlist->for_roles as $key => $item)
+                                        <span class="badge badge-info">{{ $item->title }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach($wlist->for_users as $key => $item)
+                                        <span class="badge badge-info">{{ $item->name }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    {{ $wlist->boat_namecomplete ?? '' }}
+                                </td>
+                                <td>
                                     {{ $wlist->description ?? '' }}
                                 </td>
                                 <td>
@@ -106,17 +122,10 @@
                                     {{ $wlist->deadline ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $wlist->priority->level ?? '' }}
+                                    {{ $wlist->priority->name ?? '' }}
                                 </td>
                                 <td>
-                                    @foreach($wlist->for_roles as $key => $item)
-                                        <span class="badge badge-info">{{ $item->title }}</span>
-                                    @endforeach
-                                </td>
-                                <td>
-                                    @foreach($wlist->for_users as $key => $item)
-                                        <span class="badge badge-info">{{ $item->name }}</span>
-                                    @endforeach
+                                    {{ $wlist->priority->weight ?? '' }}
                                 </td>
                                 <td>
                                     {{ $wlist->status ?? '' }}
@@ -126,11 +135,6 @@
                                 </td>
                                 <td>
                                     {{ $wlist->notes ?? '' }}
-                                </td>
-                                <td>
-                                    @foreach($wlist->tags as $key => $item)
-                                        <span class="badge badge-info">{{ $item->name }}</span>
-                                    @endforeach
                                 </td>
                                 <td>
                                     @can('wlist_show')

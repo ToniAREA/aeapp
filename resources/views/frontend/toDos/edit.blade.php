@@ -14,47 +14,6 @@
                         @method('PUT')
                         @csrf
                         <div class="form-group">
-                            <label for="task">{{ trans('cruds.toDo.fields.task') }}</label>
-                            <input class="form-control" type="text" name="task" id="task" value="{{ old('task', $toDo->task) }}">
-                            @if($errors->has('task'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('task') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.toDo.fields.task_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="photo">{{ trans('cruds.toDo.fields.photo') }}</label>
-                            <div class="needsclick dropzone" id="photo-dropzone">
-                            </div>
-                            @if($errors->has('photo'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('photo') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.toDo.fields.photo_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="deadline">{{ trans('cruds.toDo.fields.deadline') }}</label>
-                            <input class="form-control date" type="text" name="deadline" id="deadline" value="{{ old('deadline', $toDo->deadline) }}">
-                            @if($errors->has('deadline'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('deadline') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.toDo.fields.deadline_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="priority">{{ trans('cruds.toDo.fields.priority') }}</label>
-                            <input class="form-control" type="text" name="priority" id="priority" value="{{ old('priority', $toDo->priority) }}">
-                            @if($errors->has('priority'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('priority') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.toDo.fields.priority_helper') }}</span>
-                        </div>
-                        <div class="form-group">
                             <label for="for_roles">{{ trans('cruds.toDo.fields.for_role') }}</label>
                             <div style="padding-bottom: 4px">
                                 <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
@@ -89,6 +48,51 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.toDo.fields.for_user_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="task">{{ trans('cruds.toDo.fields.task') }}</label>
+                            <input class="form-control" type="text" name="task" id="task" value="{{ old('task', $toDo->task) }}">
+                            @if($errors->has('task'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('task') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.toDo.fields.task_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="photo">{{ trans('cruds.toDo.fields.photo') }}</label>
+                            <div class="needsclick dropzone" id="photo-dropzone">
+                            </div>
+                            @if($errors->has('photo'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('photo') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.toDo.fields.photo_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="deadline">{{ trans('cruds.toDo.fields.deadline') }}</label>
+                            <input class="form-control date" type="text" name="deadline" id="deadline" value="{{ old('deadline', $toDo->deadline) }}">
+                            @if($errors->has('deadline'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('deadline') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.toDo.fields.deadline_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="priority_id">{{ trans('cruds.toDo.fields.priority') }}</label>
+                            <select class="form-control select2" name="priority_id" id="priority_id">
+                                @foreach($priorities as $id => $entry)
+                                    <option value="{{ $id }}" {{ (old('priority_id') ? old('priority_id') : $toDo->priority->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('priority'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('priority') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.toDo.fields.priority_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label for="notes">{{ trans('cruds.toDo.fields.notes') }}</label>

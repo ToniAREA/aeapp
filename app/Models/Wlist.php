@@ -43,7 +43,7 @@ class Wlist extends Model implements HasMedia
         'boat_namecomplete',
         'description',
         'deadline',
-        'priority',
+        'priority_id',
         'status',
         'url_invoice',
         'notes',
@@ -93,6 +93,16 @@ class Wlist extends Model implements HasMedia
         return $this->belongsTo(Boat::class, 'boat_id');
     }
 
+    public function for_roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function for_users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     public function getPhotosAttribute()
     {
         $files = $this->getMedia('photos');
@@ -115,13 +125,8 @@ class Wlist extends Model implements HasMedia
         $this->attributes['deadline'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 
-    public function for_roles()
+    public function priority()
     {
-        return $this->belongsToMany(Role::class);
-    }
-
-    public function for_users()
-    {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(Priority::class, 'priority_id');
     }
 }

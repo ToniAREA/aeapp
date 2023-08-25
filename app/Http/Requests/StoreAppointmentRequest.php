@@ -35,6 +35,14 @@ class StoreAppointmentRequest extends FormRequest
             'for_users' => [
                 'array',
             ],
+            'boat_namecomplete' => [
+                'string',
+                'nullable',
+            ],
+            'description' => [
+                'string',
+                'required',
+            ],
             'when_starts' => [
                 'required',
                 'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
@@ -43,23 +51,15 @@ class StoreAppointmentRequest extends FormRequest
                 'required',
                 'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
             ],
-            'description' => [
+            'status' => [
                 'string',
-                'required',
+                'nullable',
             ],
             'notes' => [
                 'string',
                 'nullable',
             ],
             'coordinates' => [
-                'string',
-                'nullable',
-            ],
-            'status' => [
-                'string',
-                'nullable',
-            ],
-            'priority' => [
                 'string',
                 'nullable',
             ],
