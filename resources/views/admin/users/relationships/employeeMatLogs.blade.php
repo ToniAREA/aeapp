@@ -31,6 +31,9 @@
                                 {{ trans('cruds.boat.fields.internalnotes') }}
                             </th>
                             <th>
+                                {{ trans('cruds.matLog.fields.boat_namecomplete') }}
+                            </th>
+                            <th>
                                 {{ trans('cruds.matLog.fields.wlist') }}
                             </th>
                             <th>
@@ -94,6 +97,9 @@
                                 </td>
                                 <td>
                                     {{ $matLog->boat->internalnotes ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $matLog->boat_namecomplete ?? '' }}
                                 </td>
                                 <td>
                                     {{ $matLog->wlist->description ?? '' }}

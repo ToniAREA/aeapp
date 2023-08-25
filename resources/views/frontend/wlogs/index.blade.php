@@ -36,6 +36,9 @@
                                         {{ trans('cruds.wlist.fields.status') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.wlog.fields.boat_namecomplete') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.wlog.fields.date') }}
                                     </th>
                                     <th>
@@ -81,6 +84,9 @@
                                         </td>
                                         <td>
                                             {{ $wlog->wlist->status ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $wlog->boat_namecomplete ?? '' }}
                                         </td>
                                         <td>
                                             {{ $wlog->date ?? '' }}

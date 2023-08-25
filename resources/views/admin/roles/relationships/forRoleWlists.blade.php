@@ -37,6 +37,9 @@
                                 {{ trans('cruds.wlist.fields.order_type') }}
                             </th>
                             <th>
+                                {{ trans('cruds.wlist.fields.boat_namecomplete') }}
+                            </th>
+                            <th>
                                 {{ trans('cruds.wlist.fields.description') }}
                             </th>
                             <th>
@@ -88,6 +91,9 @@
                                 </td>
                                 <td>
                                     {{ App\Models\Wlist::ORDER_TYPE_RADIO[$wlist->order_type] ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $wlist->boat_namecomplete ?? '' }}
                                 </td>
                                 <td>
                                     {{ $wlist->description ?? '' }}

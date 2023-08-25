@@ -36,6 +36,14 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.matLog.fields.boat_namecomplete') }}
+                                    </th>
+                                    <td>
+                                        {{ $matLog->boat_namecomplete }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.matLog.fields.wlist') }}
                                     </th>
                                     <td>

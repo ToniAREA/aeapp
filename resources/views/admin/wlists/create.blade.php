@@ -47,6 +47,14 @@
                 <span class="help-block">{{ trans('cruds.wlist.fields.order_type_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="boat_namecomplete">{{ trans('cruds.wlist.fields.boat_namecomplete') }}</label>
+                <input class="form-control {{ $errors->has('boat_namecomplete') ? 'is-invalid' : '' }}" type="text" name="boat_namecomplete" id="boat_namecomplete" value="{{ old('boat_namecomplete', '') }}">
+                @if($errors->has('boat_namecomplete'))
+                    <span class="text-danger">{{ $errors->first('boat_namecomplete') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.wlist.fields.boat_namecomplete_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label for="description">{{ trans('cruds.wlist.fields.description') }}</label>
                 <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" type="text" name="description" id="description" value="{{ old('description', '') }}">
                 @if($errors->has('description'))

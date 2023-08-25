@@ -10,6 +10,7 @@ class CreateMatLogsTable extends Migration
     {
         Schema::create('mat_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('boat_namecomplete')->nullable();
             $table->date('date');
             $table->string('item')->nullable();
             $table->string('description')->nullable();

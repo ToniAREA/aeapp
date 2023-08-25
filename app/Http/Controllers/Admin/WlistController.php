@@ -66,6 +66,9 @@ class WlistController extends Controller
             $table->editColumn('order_type', function ($row) {
                 return $row->order_type ? Wlist::ORDER_TYPE_RADIO[$row->order_type] : '';
             });
+            $table->editColumn('boat_namecomplete', function ($row) {
+                return $row->boat_namecomplete ? $row->boat_namecomplete : '';
+            });
             $table->editColumn('description', function ($row) {
                 return $row->description ? $row->description : '';
             });

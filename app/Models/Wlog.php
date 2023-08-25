@@ -28,6 +28,7 @@ class Wlog extends Model
 
     protected $fillable = [
         'wlist_id',
+        'boat_namecomplete',
         'date',
         'employee_id',
         'marina_id',

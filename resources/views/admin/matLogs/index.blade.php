@@ -35,6 +35,9 @@
                         {{ trans('cruds.boat.fields.internalnotes') }}
                     </th>
                     <th>
+                        {{ trans('cruds.matLog.fields.boat_namecomplete') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.matLog.fields.wlist') }}
                     </th>
                     <th>
@@ -138,6 +141,7 @@
 { data: 'id', name: 'id' },
 { data: 'boat_name', name: 'boat.name' },
 { data: 'boat.internalnotes', name: 'boat.internalnotes' },
+{ data: 'boat_namecomplete', name: 'boat_namecomplete' },
 { data: 'wlist_description', name: 'wlist.description' },
 { data: 'wlist.status', name: 'wlist.status' },
 { data: 'date', name: 'date' },
