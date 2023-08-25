@@ -25,6 +25,12 @@
                         {{ trans('cruds.toDo.fields.id') }}
                     </th>
                     <th>
+                        {{ trans('cruds.toDo.fields.for_role') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.toDo.fields.for_user') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.toDo.fields.task') }}
                     </th>
                     <th>
@@ -37,10 +43,7 @@
                         {{ trans('cruds.toDo.fields.priority') }}
                     </th>
                     <th>
-                        {{ trans('cruds.toDo.fields.for_role') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.toDo.fields.for_user') }}
+                        {{ trans('cruds.priority.fields.weight') }}
                     </th>
                     <th>
                         {{ trans('cruds.toDo.fields.notes') }}
@@ -102,12 +105,13 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
+{ data: 'for_role', name: 'for_roles.title' },
+{ data: 'for_user', name: 'for_users.name' },
 { data: 'task', name: 'task' },
 { data: 'photo', name: 'photo', sortable: false, searchable: false },
 { data: 'deadline', name: 'deadline' },
-{ data: 'priority', name: 'priority' },
-{ data: 'for_role', name: 'for_roles.title' },
-{ data: 'for_user', name: 'for_users.name' },
+{ data: 'priority_name', name: 'priority.name' },
+{ data: 'priority.weight', name: 'priority.weight' },
 { data: 'notes', name: 'notes' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],

@@ -32,7 +32,7 @@ class ToDo extends Model implements HasMedia
     protected $fillable = [
         'task',
         'deadline',
-        'priority',
+        'priority_id',
         'notes',
         'created_at',
         'updated_at',
@@ -48,6 +48,16 @@ class ToDo extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
+    }
+
+    public function for_roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function for_users()
+    {
+        return $this->belongsToMany(User::class);
     }
 
     public function getPhotoAttribute()
@@ -72,13 +82,8 @@ class ToDo extends Model implements HasMedia
         $this->attributes['deadline'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 
-    public function for_roles()
+    public function priority()
     {
-        return $this->belongsToMany(Role::class);
-    }
-
-    public function for_users()
-    {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(Priority::class, 'priority_id');
     }
 }

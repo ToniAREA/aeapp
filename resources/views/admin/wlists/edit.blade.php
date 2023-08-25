@@ -48,6 +48,38 @@
                 <span class="help-block">{{ trans('cruds.wlist.fields.order_type_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="for_roles">{{ trans('cruds.wlist.fields.for_role') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('for_roles') ? 'is-invalid' : '' }}" name="for_roles[]" id="for_roles" multiple>
+                    @foreach($for_roles as $id => $for_role)
+                        <option value="{{ $id }}" {{ (in_array($id, old('for_roles', [])) || $wlist->for_roles->contains($id)) ? 'selected' : '' }}>{{ $for_role }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('for_roles'))
+                    <span class="text-danger">{{ $errors->first('for_roles') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.wlist.fields.for_role_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="for_users">{{ trans('cruds.wlist.fields.for_user') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('for_users') ? 'is-invalid' : '' }}" name="for_users[]" id="for_users" multiple>
+                    @foreach($for_users as $id => $for_user)
+                        <option value="{{ $id }}" {{ (in_array($id, old('for_users', [])) || $wlist->for_users->contains($id)) ? 'selected' : '' }}>{{ $for_user }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('for_users'))
+                    <span class="text-danger">{{ $errors->first('for_users') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.wlist.fields.for_user_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label for="boat_namecomplete">{{ trans('cruds.wlist.fields.boat_namecomplete') }}</label>
                 <input class="form-control {{ $errors->has('boat_namecomplete') ? 'is-invalid' : '' }}" type="text" name="boat_namecomplete" id="boat_namecomplete" value="{{ old('boat_namecomplete', $wlist->boat_namecomplete) }}">
                 @if($errors->has('boat_namecomplete'))
@@ -81,44 +113,16 @@
                 <span class="help-block">{{ trans('cruds.wlist.fields.deadline_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="priority">{{ trans('cruds.wlist.fields.priority') }}</label>
-                <input class="form-control {{ $errors->has('priority') ? 'is-invalid' : '' }}" type="text" name="priority" id="priority" value="{{ old('priority', $wlist->priority) }}">
+                <label for="priority_id">{{ trans('cruds.wlist.fields.priority') }}</label>
+                <select class="form-control select2 {{ $errors->has('priority') ? 'is-invalid' : '' }}" name="priority_id" id="priority_id">
+                    @foreach($priorities as $id => $entry)
+                        <option value="{{ $id }}" {{ (old('priority_id') ? old('priority_id') : $wlist->priority->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                    @endforeach
+                </select>
                 @if($errors->has('priority'))
                     <span class="text-danger">{{ $errors->first('priority') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.wlist.fields.priority_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="for_roles">{{ trans('cruds.wlist.fields.for_role') }}</label>
-                <div style="padding-bottom: 4px">
-                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                </div>
-                <select class="form-control select2 {{ $errors->has('for_roles') ? 'is-invalid' : '' }}" name="for_roles[]" id="for_roles" multiple>
-                    @foreach($for_roles as $id => $for_role)
-                        <option value="{{ $id }}" {{ (in_array($id, old('for_roles', [])) || $wlist->for_roles->contains($id)) ? 'selected' : '' }}>{{ $for_role }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('for_roles'))
-                    <span class="text-danger">{{ $errors->first('for_roles') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.wlist.fields.for_role_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="for_users">{{ trans('cruds.wlist.fields.for_user') }}</label>
-                <div style="padding-bottom: 4px">
-                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                </div>
-                <select class="form-control select2 {{ $errors->has('for_users') ? 'is-invalid' : '' }}" name="for_users[]" id="for_users" multiple>
-                    @foreach($for_users as $id => $for_user)
-                        <option value="{{ $id }}" {{ (in_array($id, old('for_users', [])) || $wlist->for_users->contains($id)) ? 'selected' : '' }}>{{ $for_user }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('for_users'))
-                    <span class="text-danger">{{ $errors->first('for_users') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.wlist.fields.for_user_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="status">{{ trans('cruds.wlist.fields.status') }}</label>

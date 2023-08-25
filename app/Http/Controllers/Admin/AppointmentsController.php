@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateAppointmentRequest;
 use App\Models\Appointment;
 use App\Models\Boat;
 use App\Models\Client;
+use App\Models\Priority;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Wlist;
@@ -27,7 +28,7 @@ class AppointmentsController extends Controller
         abort_if(Gate::denies('appointment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Appointment::with(['client', 'boat', 'wlists', 'for_roles', 'for_users'])->select(sprintf('%s.*', (new Appointment)->table));
+            $query = Appointment::with(['client', 'boat', 'wlists', 'for_roles', 'for_users', 'priority'])->select(sprintf('%s.*', (new Appointment)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -86,9 +87,22 @@ class AppointmentsController extends Controller
 
                 return implode(' ', $labels);
             });
-
+            $table->editColumn('boat_namecomplete', function ($row) {
+                return $row->boat_namecomplete ? $row->boat_namecomplete : '';
+            });
             $table->editColumn('description', function ($row) {
                 return $row->description ? $row->description : '';
+            });
+
+            $table->addColumn('priority_name', function ($row) {
+                return $row->priority ? $row->priority->name : '';
+            });
+
+            $table->editColumn('priority.weight', function ($row) {
+                return $row->priority ? (is_string($row->priority) ? $row->priority : $row->priority->weight) : '';
+            });
+            $table->editColumn('status', function ($row) {
+                return $row->status ? $row->status : '';
             });
             $table->editColumn('notes', function ($row) {
                 return $row->notes ? $row->notes : '';
@@ -96,14 +110,8 @@ class AppointmentsController extends Controller
             $table->editColumn('coordinates', function ($row) {
                 return $row->coordinates ? $row->coordinates : '';
             });
-            $table->editColumn('status', function ($row) {
-                return $row->status ? $row->status : '';
-            });
-            $table->editColumn('priority', function ($row) {
-                return $row->priority ? $row->priority : '';
-            });
 
-            $table->rawColumns(['actions', 'placeholder', 'client', 'boat', 'wlists', 'for_role', 'for_user']);
+            $table->rawColumns(['actions', 'placeholder', 'client', 'boat', 'wlists', 'for_role', 'for_user', 'priority']);
 
             return $table->make(true);
         }
@@ -125,7 +133,9 @@ class AppointmentsController extends Controller
 
         $for_users = User::pluck('name', 'id');
 
-        return view('admin.appointments.create', compact('boats', 'clients', 'for_roles', 'for_users', 'wlists'));
+        $priorities = Priority::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.appointments.create', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities', 'wlists'));
     }
 
     public function store(StoreAppointmentRequest $request)
@@ -152,9 +162,11 @@ class AppointmentsController extends Controller
 
         $for_users = User::pluck('name', 'id');
 
-        $appointment->load('client', 'boat', 'wlists', 'for_roles', 'for_users');
+        $priorities = Priority::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.appointments.edit', compact('appointment', 'boats', 'clients', 'for_roles', 'for_users', 'wlists'));
+        $appointment->load('client', 'boat', 'wlists', 'for_roles', 'for_users', 'priority');
+
+        return view('admin.appointments.edit', compact('appointment', 'boats', 'clients', 'for_roles', 'for_users', 'priorities', 'wlists'));
     }
 
     public function update(UpdateAppointmentRequest $request, Appointment $appointment)
@@ -171,7 +183,7 @@ class AppointmentsController extends Controller
     {
         abort_if(Gate::denies('appointment_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $appointment->load('client', 'boat', 'wlists', 'for_roles', 'for_users');
+        $appointment->load('client', 'boat', 'wlists', 'for_roles', 'for_users', 'priority');
 
         return view('admin.appointments.show', compact('appointment'));
     }

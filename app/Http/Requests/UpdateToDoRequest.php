@@ -17,22 +17,6 @@ class UpdateToDoRequest extends FormRequest
     public function rules()
     {
         return [
-            'task' => [
-                'string',
-                'max:200',
-                'nullable',
-            ],
-            'photo' => [
-                'array',
-            ],
-            'deadline' => [
-                'date_format:' . config('panel.date_format'),
-                'nullable',
-            ],
-            'priority' => [
-                'string',
-                'nullable',
-            ],
             'for_roles.*' => [
                 'integer',
             ],
@@ -44,6 +28,18 @@ class UpdateToDoRequest extends FormRequest
             ],
             'for_users' => [
                 'array',
+            ],
+            'task' => [
+                'string',
+                'max:200',
+                'nullable',
+            ],
+            'photo' => [
+                'array',
+            ],
+            'deadline' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable',
             ],
             'notes' => [
                 'string',

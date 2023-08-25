@@ -10,13 +10,13 @@ class CreateAppointmentsTable extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('boat_namecomplete')->nullable();
+            $table->string('description');
             $table->datetime('when_starts');
             $table->datetime('when_ends');
-            $table->string('description');
+            $table->string('status')->nullable();
             $table->string('notes')->nullable();
             $table->string('coordinates')->nullable();
-            $table->string('status')->nullable();
-            $table->string('priority')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

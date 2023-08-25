@@ -210,6 +210,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('mat-logs/process-csv-import', 'MatLogsController@processCsvImport')->name('mat-logs.processCsvImport');
     Route::resource('mat-logs', 'MatLogsController');
 
+    // Contact Tag
+    Route::delete('contact-tags/destroy', 'ContactTagController@massDestroy')->name('contact-tags.massDestroy');
+    Route::resource('contact-tags', 'ContactTagController');
+
+    // Priorities
+    Route::delete('priorities/destroy', 'PrioritiesController@massDestroy')->name('priorities.massDestroy');
+    Route::resource('priorities', 'PrioritiesController');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
 });
@@ -388,6 +396,14 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     // Mat Logs
     Route::delete('mat-logs/destroy', 'MatLogsController@massDestroy')->name('mat-logs.massDestroy');
     Route::resource('mat-logs', 'MatLogsController');
+
+    // Contact Tag
+    Route::delete('contact-tags/destroy', 'ContactTagController@massDestroy')->name('contact-tags.massDestroy');
+    Route::resource('contact-tags', 'ContactTagController');
+
+    // Priorities
+    Route::delete('priorities/destroy', 'PrioritiesController@massDestroy')->name('priorities.massDestroy');
+    Route::resource('priorities', 'PrioritiesController');
 
     Route::get('frontend/profile', 'ProfileController@index')->name('profile.index');
     Route::post('frontend/profile', 'ProfileController@update')->name('profile.update');

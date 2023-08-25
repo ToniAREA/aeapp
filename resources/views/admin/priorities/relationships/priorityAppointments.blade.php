@@ -43,22 +43,31 @@
                                 {{ trans('cruds.appointment.fields.for_user') }}
                             </th>
                             <th>
+                                {{ trans('cruds.appointment.fields.boat_namecomplete') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.appointment.fields.description') }}
+                            </th>
+                            <th>
                                 {{ trans('cruds.appointment.fields.when_starts') }}
                             </th>
                             <th>
                                 {{ trans('cruds.appointment.fields.when_ends') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.description') }}
-                            </th>
-                            <th>
                                 {{ trans('cruds.appointment.fields.priority') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.coordinates') }}
+                                {{ trans('cruds.priority.fields.weight') }}
                             </th>
                             <th>
                                 {{ trans('cruds.appointment.fields.status') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.appointment.fields.notes') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.appointment.fields.coordinates') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -99,22 +108,31 @@
                                     @endforeach
                                 </td>
                                 <td>
+                                    {{ $appointment->boat_namecomplete ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $appointment->description ?? '' }}
+                                </td>
+                                <td>
                                     {{ $appointment->when_starts ?? '' }}
                                 </td>
                                 <td>
                                     {{ $appointment->when_ends ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $appointment->description ?? '' }}
+                                    {{ $appointment->priority->name ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $appointment->priority->level ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $appointment->coordinates ?? '' }}
+                                    {{ $appointment->priority->weight ?? '' }}
                                 </td>
                                 <td>
                                     {{ $appointment->status ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $appointment->notes ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $appointment->coordinates ?? '' }}
                                 </td>
                                 <td>
                                     @can('appointment_show')

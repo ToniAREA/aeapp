@@ -96,6 +96,26 @@
                             <span class="help-block">{{ trans('cruds.appointment.fields.for_user_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="boat_namecomplete">{{ trans('cruds.appointment.fields.boat_namecomplete') }}</label>
+                            <input class="form-control" type="text" name="boat_namecomplete" id="boat_namecomplete" value="{{ old('boat_namecomplete', $appointment->boat_namecomplete) }}">
+                            @if($errors->has('boat_namecomplete'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('boat_namecomplete') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.appointment.fields.boat_namecomplete_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="description">{{ trans('cruds.appointment.fields.description') }}</label>
+                            <input class="form-control" type="text" name="description" id="description" value="{{ old('description', $appointment->description) }}" required>
+                            @if($errors->has('description'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('description') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.appointment.fields.description_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label class="required" for="when_starts">{{ trans('cruds.appointment.fields.when_starts') }}</label>
                             <input class="form-control datetime" type="text" name="when_starts" id="when_starts" value="{{ old('when_starts', $appointment->when_starts) }}" required>
                             @if($errors->has('when_starts'))
@@ -116,14 +136,28 @@
                             <span class="help-block">{{ trans('cruds.appointment.fields.when_ends_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label class="required" for="description">{{ trans('cruds.appointment.fields.description') }}</label>
-                            <input class="form-control" type="text" name="description" id="description" value="{{ old('description', $appointment->description) }}" required>
-                            @if($errors->has('description'))
+                            <label for="priority_id">{{ trans('cruds.appointment.fields.priority') }}</label>
+                            <select class="form-control select2" name="priority_id" id="priority_id">
+                                @foreach($priorities as $id => $entry)
+                                    <option value="{{ $id }}" {{ (old('priority_id') ? old('priority_id') : $appointment->priority->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('priority'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('description') }}
+                                    {{ $errors->first('priority') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.appointment.fields.description_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.appointment.fields.priority_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">{{ trans('cruds.appointment.fields.status') }}</label>
+                            <input class="form-control" type="text" name="status" id="status" value="{{ old('status', $appointment->status) }}">
+                            @if($errors->has('status'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('status') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.appointment.fields.status_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label for="notes">{{ trans('cruds.appointment.fields.notes') }}</label>
@@ -144,26 +178,6 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.appointment.fields.coordinates_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="status">{{ trans('cruds.appointment.fields.status') }}</label>
-                            <input class="form-control" type="text" name="status" id="status" value="{{ old('status', $appointment->status) }}">
-                            @if($errors->has('status'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('status') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.appointment.fields.status_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="priority">{{ trans('cruds.appointment.fields.priority') }}</label>
-                            <input class="form-control" type="text" name="priority" id="priority" value="{{ old('priority', $appointment->priority) }}">
-                            @if($errors->has('priority'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('priority') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.appointment.fields.priority_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">

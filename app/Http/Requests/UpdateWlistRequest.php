@@ -21,6 +21,18 @@ class UpdateWlistRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'for_roles.*' => [
+                'integer',
+            ],
+            'for_roles' => [
+                'array',
+            ],
+            'for_users.*' => [
+                'integer',
+            ],
+            'for_users' => [
+                'array',
+            ],
             'boat_namecomplete' => [
                 'string',
                 'nullable',
@@ -35,22 +47,6 @@ class UpdateWlistRequest extends FormRequest
             'deadline' => [
                 'date_format:' . config('panel.date_format'),
                 'nullable',
-            ],
-            'priority' => [
-                'string',
-                'nullable',
-            ],
-            'for_roles.*' => [
-                'integer',
-            ],
-            'for_roles' => [
-                'array',
-            ],
-            'for_users.*' => [
-                'integer',
-            ],
-            'for_users' => [
-                'array',
             ],
             'status' => [
                 'string',

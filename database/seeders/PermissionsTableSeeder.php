@@ -780,6 +780,50 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 193,
+                'title' => 'setup_access',
+            ],
+            [
+                'id'    => 194,
+                'title' => 'contact_tag_create',
+            ],
+            [
+                'id'    => 195,
+                'title' => 'contact_tag_edit',
+            ],
+            [
+                'id'    => 196,
+                'title' => 'contact_tag_show',
+            ],
+            [
+                'id'    => 197,
+                'title' => 'contact_tag_delete',
+            ],
+            [
+                'id'    => 198,
+                'title' => 'contact_tag_access',
+            ],
+            [
+                'id'    => 199,
+                'title' => 'priority_create',
+            ],
+            [
+                'id'    => 200,
+                'title' => 'priority_edit',
+            ],
+            [
+                'id'    => 201,
+                'title' => 'priority_show',
+            ],
+            [
+                'id'    => 202,
+                'title' => 'priority_delete',
+            ],
+            [
+                'id'    => 203,
+                'title' => 'priority_access',
+            ],
+            [
+                'id'    => 204,
                 'title' => 'profile_password_edit',
             ],
         ];

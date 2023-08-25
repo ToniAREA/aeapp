@@ -49,6 +49,26 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.wlist.fields.for_role') }}
+                        </th>
+                        <td>
+                            @foreach($wlist->for_roles as $key => $for_role)
+                                <span class="label label-info">{{ $for_role->title }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.wlist.fields.for_user') }}
+                        </th>
+                        <td>
+                            @foreach($wlist->for_users as $key => $for_user)
+                                <span class="label label-info">{{ $for_user->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.wlist.fields.boat_namecomplete') }}
                         </th>
                         <td>
@@ -88,27 +108,7 @@
                             {{ trans('cruds.wlist.fields.priority') }}
                         </th>
                         <td>
-                            {{ $wlist->priority }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.wlist.fields.for_role') }}
-                        </th>
-                        <td>
-                            @foreach($wlist->for_roles as $key => $for_role)
-                                <span class="label label-info">{{ $for_role->title }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.wlist.fields.for_user') }}
-                        </th>
-                        <td>
-                            @foreach($wlist->for_users as $key => $for_user)
-                                <span class="label label-info">{{ $for_user->name }}</span>
-                            @endforeach
+                            {{ $wlist->priority->name ?? '' }}
                         </td>
                     </tr>
                     <tr>

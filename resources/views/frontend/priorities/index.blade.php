@@ -26,10 +26,13 @@
                                         {{ trans('cruds.priority.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.priority.fields.level') }}
+                                        {{ trans('cruds.priority.fields.name') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.priority.fields.weight') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.priority.fields.slug') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -43,10 +46,13 @@
                                             {{ $priority->id ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $priority->level ?? '' }}
+                                            {{ $priority->name ?? '' }}
                                         </td>
                                         <td>
                                             {{ $priority->weight ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $priority->slug ?? '' }}
                                         </td>
                                         <td>
                                             @can('priority_show')

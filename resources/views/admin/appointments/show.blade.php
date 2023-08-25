@@ -71,6 +71,22 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.appointment.fields.boat_namecomplete') }}
+                        </th>
+                        <td>
+                            {{ $appointment->boat_namecomplete }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.appointment.fields.description') }}
+                        </th>
+                        <td>
+                            {{ $appointment->description }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.appointment.fields.when_starts') }}
                         </th>
                         <td>
@@ -87,10 +103,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.appointment.fields.description') }}
+                            {{ trans('cruds.appointment.fields.priority') }}
                         </th>
                         <td>
-                            {{ $appointment->description }}
+                            {{ $appointment->priority->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.appointment.fields.status') }}
+                        </th>
+                        <td>
+                            {{ $appointment->status }}
                         </td>
                     </tr>
                     <tr>
@@ -107,22 +131,6 @@
                         </th>
                         <td>
                             {{ $appointment->coordinates }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.appointment.fields.status') }}
-                        </th>
-                        <td>
-                            {{ $appointment->status }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.appointment.fields.priority') }}
-                        </th>
-                        <td>
-                            {{ $appointment->priority }}
                         </td>
                     </tr>
                 </tbody>

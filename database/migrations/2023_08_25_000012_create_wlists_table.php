@@ -14,7 +14,6 @@ class CreateWlistsTable extends Migration
             $table->string('boat_namecomplete')->nullable();
             $table->string('description')->nullable();
             $table->date('deadline')->nullable();
-            $table->string('priority')->nullable();
             $table->string('status')->nullable();
             $table->string('url_invoice')->nullable();
             $table->string('notes')->nullable();

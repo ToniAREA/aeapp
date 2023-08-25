@@ -41,6 +41,12 @@
                         {{ trans('cruds.wlist.fields.order_type') }}
                     </th>
                     <th>
+                        {{ trans('cruds.wlist.fields.for_role') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlist.fields.for_user') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.wlist.fields.boat_namecomplete') }}
                     </th>
                     <th>
@@ -56,10 +62,7 @@
                         {{ trans('cruds.wlist.fields.priority') }}
                     </th>
                     <th>
-                        {{ trans('cruds.wlist.fields.for_role') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.wlist.fields.for_user') }}
+                        {{ trans('cruds.priority.fields.weight') }}
                     </th>
                     <th>
                         {{ trans('cruds.wlist.fields.status') }}
@@ -131,13 +134,14 @@
 { data: 'client.lastname', name: 'client.lastname' },
 { data: 'boat_name', name: 'boat.name' },
 { data: 'order_type', name: 'order_type' },
+{ data: 'for_role', name: 'for_roles.title' },
+{ data: 'for_user', name: 'for_users.name' },
 { data: 'boat_namecomplete', name: 'boat_namecomplete' },
 { data: 'description', name: 'description' },
 { data: 'photos', name: 'photos', sortable: false, searchable: false },
 { data: 'deadline', name: 'deadline' },
-{ data: 'priority', name: 'priority' },
-{ data: 'for_role', name: 'for_roles.title' },
-{ data: 'for_user', name: 'for_users.name' },
+{ data: 'priority_name', name: 'priority.name' },
+{ data: 'priority.weight', name: 'priority.weight' },
 { data: 'status', name: 'status' },
 { data: 'url_invoice', name: 'url_invoice' },
 { data: 'notes', name: 'notes' },

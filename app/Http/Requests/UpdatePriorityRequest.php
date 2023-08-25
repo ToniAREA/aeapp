@@ -17,16 +17,20 @@ class UpdatePriorityRequest extends FormRequest
     public function rules()
     {
         return [
-            'level' => [
+            'name' => [
                 'string',
-                'max:10',
-                'nullable',
+                'required',
+                'unique:priorities,name,' . request()->route('priority')->id,
             ],
             'weight' => [
                 'nullable',
                 'integer',
                 'min:-2147483648',
                 'max:2147483647',
+            ],
+            'slug' => [
+                'string',
+                'nullable',
             ],
         ];
     }
