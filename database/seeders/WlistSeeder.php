@@ -29,41 +29,70 @@ class WlistSeeder extends Seeder
             $wlist = $oldWlists->where('id', $i)->first();
             // if $wlist is null, make a dummy wlist with id $i and name 'empty wlist'
             if ($wlist == null) {
-                $this->command->line("<comment>{$i} is null</comment>");
+                $this->command->line("<comment>{$wlist} is null</comment>");
+
+                // create wlist object  with id $i and name 'empty wlist'
+
+                
+
+
                 $wlist = (object) [
-                    'created_at' => '',
-                    'updated_at' => '',
+                    'order_type' => 'empty',
                     'client_id' => '',
                     'boat_id' => '',
-                    'type' => '',
-                    'type' => '',
-                    'type' => '',
-                    'type' => '',
-                    'type' => '',
-                    'type' => '',
-                    'type' => '',
-                    
+                    'order_type' => '',
+                    'description' => '------',
+                    'deadline' => '',
+                    'status' => '',
+                    'url_invoice' => '',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+
                 ];
 
-                /* DB::table('wlists')->insert([
-                    'wlist_type' => $wlist->type,
-                    'name' => $wlist->name,
-                    'mmsi' => $wlist->mmsi,
-                    'notes' => $wlist->notes,
-                    'internalnotes' => $wlist->internalnotes,
+                $this->command->line("<comment>{$wlist->id}</comment>");
+                $this->command->line("<comment>{$wlist->type}</comment>");
+                $this->command->line("<comment>{$wlist->client_id}</comment>");
+                $this->command->line("<comment>{$wlist->boat_id}</comment>");
+                $this->command->line("<comment>{$wlist->description}</comment>");
+                $this->command->line("<comment>{$wlist->deadline}</comment>");
+                $this->command->line("<comment>{$wlist->status}</comment>");
+                $this->command->line("<comment>{$wlist->link_dn}</comment>");
+                $this->command->line("<comment>{$wlist->created_at}</comment>");
+                $this->command->line("<comment>{$wlist->updated_at}</comment>");
+
+
+                DB::table('wlists')->insert([
+                    'order_type' => $wlist->type,
+                    'client_id' => $wlist->client_id,
+                    'boat_id' => $wlist->boat_id,
+                    'order_type' => $wlist->type,
+                    'description' => $wlist->description,
+                    'deadline' => $wlist->deadline,
+                    'status' => $wlist->status,
+                    'url_invoice' => $wlist->link_dn,
+                    'created_at' => $wlist->created_at,
+                    'updated_at' => $wlist->updated_at,
                 ]);
- */            } else {
+
+            } else {
+
                 if ($i != $wlist->id) {
                     $this->command->line("<error>Error: {$i} is not the same as {$wlist->id}</error>");
                 } else {
                     $this->command->line("{$i} is the same as {$wlist->id} for \t{$wlist->boat_namecomplete}");
 
-                     DB::table('wlists')->insert([
-                        'wlist_type' => $wlist->type,
-                        'name' => $wlist->name,
-                        'mmsi' => $wlist->mmsi,
-                        'notes' => $wlist->notes,
-                        'internalnotes' => $wlist->internalnotes,
+                    DB::table('wlists')->insert([
+                        'order_type' => $wlist->type,
+                        'client_id' => $wlist->client_id,
+                        'boat_id' => $wlist->boat_id,
+                        'order_type' => $wlist->type,
+                        'description' => $wlist->description,
+                        'deadline' => $wlist->deadline,
+                        'status' => $wlist->status,
+                        'url_invoice' => $wlist->link_dn,
+                        'created_at' => $wlist->created_at,
+                        'updated_at' => $wlist->updated_at,
                     ]);
                 }
             }
