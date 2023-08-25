@@ -10,6 +10,7 @@ class CreateWlogsTable extends Migration
     {
         Schema::create('wlogs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('boat_namecomplete')->nullable();
             $table->date('date');
             $table->string('description')->nullable();
             $table->float('hours', 4, 2)->nullable();

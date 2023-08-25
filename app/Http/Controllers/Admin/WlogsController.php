@@ -57,6 +57,9 @@ class WlogsController extends Controller
             $table->editColumn('wlist.status', function ($row) {
                 return $row->wlist ? (is_string($row->wlist) ? $row->wlist : $row->wlist->status) : '';
             });
+            $table->editColumn('boat_namecomplete', function ($row) {
+                return $row->boat_namecomplete ? $row->boat_namecomplete : '';
+            });
 
             $table->addColumn('employee_name', function ($row) {
                 return $row->employee ? $row->employee->name : '';

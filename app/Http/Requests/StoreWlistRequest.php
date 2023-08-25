@@ -21,6 +21,10 @@ class StoreWlistRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'boat_namecomplete' => [
+                'string',
+                'nullable',
+            ],
             'description' => [
                 'string',
                 'nullable',

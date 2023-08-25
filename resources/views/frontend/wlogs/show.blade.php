@@ -36,6 +36,14 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.wlog.fields.boat_namecomplete') }}
+                                    </th>
+                                    <td>
+                                        {{ $wlog->boat_namecomplete }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.wlog.fields.date') }}
                                     </th>
                                     <td>

@@ -35,6 +35,9 @@
                         {{ trans('cruds.wlist.fields.status') }}
                     </th>
                     <th>
+                        {{ trans('cruds.wlog.fields.boat_namecomplete') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.wlog.fields.date') }}
                     </th>
                     <th>
@@ -123,6 +126,7 @@
 { data: 'id', name: 'id' },
 { data: 'wlist_description', name: 'wlist.description' },
 { data: 'wlist.status', name: 'wlist.status' },
+{ data: 'boat_namecomplete', name: 'boat_namecomplete' },
 { data: 'date', name: 'date' },
 { data: 'employee_name', name: 'employee.name' },
 { data: 'employee.email', name: 'employee.email' },

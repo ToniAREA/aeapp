@@ -28,6 +28,7 @@ class MatLog extends Model
 
     protected $fillable = [
         'boat_id',
+        'boat_namecomplete',
         'wlist_id',
         'date',
         'employee_id',

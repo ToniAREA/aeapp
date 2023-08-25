@@ -40,6 +40,7 @@ class Wlist extends Model implements HasMedia
         'client_id',
         'boat_id',
         'order_type',
+        'boat_namecomplete',
         'description',
         'deadline',
         'priority',

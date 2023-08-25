@@ -21,6 +21,10 @@ class StoreMatLogRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'boat_namecomplete' => [
+                'string',
+                'nullable',
+            ],
             'date' => [
                 'required',
                 'date_format:' . config('panel.date_format'),

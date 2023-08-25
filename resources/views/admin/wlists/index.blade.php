@@ -41,6 +41,9 @@
                         {{ trans('cruds.wlist.fields.order_type') }}
                     </th>
                     <th>
+                        {{ trans('cruds.wlist.fields.boat_namecomplete') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.wlist.fields.description') }}
                     </th>
                     <th>
@@ -128,6 +131,7 @@
 { data: 'client.lastname', name: 'client.lastname' },
 { data: 'boat_name', name: 'boat.name' },
 { data: 'order_type', name: 'order_type' },
+{ data: 'boat_namecomplete', name: 'boat_namecomplete' },
 { data: 'description', name: 'description' },
 { data: 'photos', name: 'photos', sortable: false, searchable: false },
 { data: 'deadline', name: 'deadline' },

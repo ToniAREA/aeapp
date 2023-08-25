@@ -49,6 +49,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.wlist.fields.boat_namecomplete') }}
+                        </th>
+                        <td>
+                            {{ $wlist->boat_namecomplete }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.wlist.fields.description') }}
                         </th>
                         <td>

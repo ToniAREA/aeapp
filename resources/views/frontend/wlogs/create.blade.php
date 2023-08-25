@@ -28,6 +28,16 @@
                             <span class="help-block">{{ trans('cruds.wlog.fields.wlist_helper') }}</span>
                         </div>
                         <div class="form-group">
+                            <label for="boat_namecomplete">{{ trans('cruds.wlog.fields.boat_namecomplete') }}</label>
+                            <input class="form-control" type="text" name="boat_namecomplete" id="boat_namecomplete" value="{{ old('boat_namecomplete', '') }}">
+                            @if($errors->has('boat_namecomplete'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('boat_namecomplete') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.wlog.fields.boat_namecomplete_helper') }}</span>
+                        </div>
+                        <div class="form-group">
                             <label class="required" for="date">{{ trans('cruds.wlog.fields.date') }}</label>
                             <input class="form-control date" type="text" name="date" id="date" value="{{ old('date') }}" required>
                             @if($errors->has('date'))

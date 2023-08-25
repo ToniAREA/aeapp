@@ -58,6 +58,9 @@ class MatLogsController extends Controller
             $table->editColumn('boat.internalnotes', function ($row) {
                 return $row->boat ? (is_string($row->boat) ? $row->boat : $row->boat->internalnotes) : '';
             });
+            $table->editColumn('boat_namecomplete', function ($row) {
+                return $row->boat_namecomplete ? $row->boat_namecomplete : '';
+            });
             $table->addColumn('wlist_description', function ($row) {
                 return $row->wlist ? $row->wlist->description : '';
             });

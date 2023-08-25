@@ -17,6 +17,10 @@ class StoreWlogRequest extends FormRequest
     public function rules()
     {
         return [
+            'boat_namecomplete' => [
+                'string',
+                'nullable',
+            ],
             'date' => [
                 'required',
                 'date_format:' . config('panel.date_format'),

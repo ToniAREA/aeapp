@@ -23,6 +23,14 @@
                 <span class="help-block">{{ trans('cruds.matLog.fields.boat_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="boat_namecomplete">{{ trans('cruds.matLog.fields.boat_namecomplete') }}</label>
+                <input class="form-control {{ $errors->has('boat_namecomplete') ? 'is-invalid' : '' }}" type="text" name="boat_namecomplete" id="boat_namecomplete" value="{{ old('boat_namecomplete', $matLog->boat_namecomplete) }}">
+                @if($errors->has('boat_namecomplete'))
+                    <span class="text-danger">{{ $errors->first('boat_namecomplete') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.matLog.fields.boat_namecomplete_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label for="wlist_id">{{ trans('cruds.matLog.fields.wlist') }}</label>
                 <select class="form-control select2 {{ $errors->has('wlist') ? 'is-invalid' : '' }}" name="wlist_id" id="wlist_id">
                     @foreach($wlists as $id => $entry)

@@ -11,6 +11,7 @@ class CreateWlistsTable extends Migration
         Schema::create('wlists', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('order_type')->nullable();
+            $table->string('boat_namecomplete')->nullable();
             $table->string('description')->nullable();
             $table->date('deadline')->nullable();
             $table->string('priority')->nullable();
