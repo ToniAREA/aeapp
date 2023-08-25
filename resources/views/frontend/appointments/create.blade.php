@@ -126,18 +126,14 @@
                             <span class="help-block">{{ trans('cruds.appointment.fields.description_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="priority_id">{{ trans('cruds.appointment.fields.priority') }}</label>
-                            <select class="form-control select2" name="priority_id" id="priority_id">
-                                @foreach($priorities as $id => $entry)
-                                    <option value="{{ $id }}" {{ old('priority_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('priority'))
+                            <label for="notes">{{ trans('cruds.appointment.fields.notes') }}</label>
+                            <input class="form-control" type="text" name="notes" id="notes" value="{{ old('notes', '') }}">
+                            @if($errors->has('notes'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('priority') }}
+                                    {{ $errors->first('notes') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.appointment.fields.priority_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.appointment.fields.notes_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label for="coordinates">{{ trans('cruds.appointment.fields.coordinates') }}</label>
@@ -158,6 +154,16 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.appointment.fields.status_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="priority">{{ trans('cruds.appointment.fields.priority') }}</label>
+                            <input class="form-control" type="text" name="priority" id="priority" value="{{ old('priority', '') }}">
+                            @if($errors->has('priority'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('priority') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.appointment.fields.priority_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">

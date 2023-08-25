@@ -19,6 +19,7 @@ class CreateBoatsTable extends Migration
             $table->string('internalnotes')->nullable();
             $table->string('coordinates')->nullable();
             $table->string('link')->nullable();
+            $table->datetime('last_use')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -47,11 +47,19 @@ class StoreAppointmentRequest extends FormRequest
                 'string',
                 'required',
             ],
+            'notes' => [
+                'string',
+                'nullable',
+            ],
             'coordinates' => [
                 'string',
                 'nullable',
             ],
             'status' => [
+                'string',
+                'nullable',
+            ],
+            'priority' => [
                 'string',
                 'nullable',
             ],

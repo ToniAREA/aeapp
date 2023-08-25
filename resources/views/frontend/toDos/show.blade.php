@@ -59,7 +59,7 @@
                                         {{ trans('cruds.toDo.fields.priority') }}
                                     </th>
                                     <td>
-                                        {{ $toDo->priority->level ?? '' }}
+                                        {{ $toDo->priority }}
                                     </td>
                                 </tr>
                                 <tr>

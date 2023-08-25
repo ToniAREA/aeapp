@@ -3,29 +3,112 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyAppointmentRequest;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
 use App\Models\Appointment;
 use App\Models\Boat;
 use App\Models\Client;
-use App\Models\Priority;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Wlist;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class AppointmentsController extends Controller
 {
-    public function index()
+    use CsvImportTrait;
+
+    public function index(Request $request)
     {
         abort_if(Gate::denies('appointment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $appointments = Appointment::with(['client', 'boat', 'wlists', 'for_roles', 'for_users', 'priority'])->get();
+        if ($request->ajax()) {
+            $query = Appointment::with(['client', 'boat', 'wlists', 'for_roles', 'for_users'])->select(sprintf('%s.*', (new Appointment)->table));
+            $table = Datatables::of($query);
 
-        return view('admin.appointments.index', compact('appointments'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'appointment_show';
+                $editGate      = 'appointment_edit';
+                $deleteGate    = 'appointment_delete';
+                $crudRoutePart = 'appointments';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->addColumn('client_name', function ($row) {
+                return $row->client ? $row->client->name : '';
+            });
+
+            $table->editColumn('client.lastname', function ($row) {
+                return $row->client ? (is_string($row->client) ? $row->client : $row->client->lastname) : '';
+            });
+            $table->addColumn('boat_name', function ($row) {
+                return $row->boat ? $row->boat->name : '';
+            });
+
+            $table->editColumn('wlists', function ($row) {
+                $labels = [];
+                foreach ($row->wlists as $wlist) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $wlist->description);
+                }
+
+                return implode(' ', $labels);
+            });
+            $table->editColumn('for_role', function ($row) {
+                $labels = [];
+                foreach ($row->for_roles as $for_role) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $for_role->title);
+                }
+
+                return implode(' ', $labels);
+            });
+            $table->editColumn('for_user', function ($row) {
+                $labels = [];
+                foreach ($row->for_users as $for_user) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $for_user->name);
+                }
+
+                return implode(' ', $labels);
+            });
+
+            $table->editColumn('description', function ($row) {
+                return $row->description ? $row->description : '';
+            });
+            $table->editColumn('notes', function ($row) {
+                return $row->notes ? $row->notes : '';
+            });
+            $table->editColumn('coordinates', function ($row) {
+                return $row->coordinates ? $row->coordinates : '';
+            });
+            $table->editColumn('status', function ($row) {
+                return $row->status ? $row->status : '';
+            });
+            $table->editColumn('priority', function ($row) {
+                return $row->priority ? $row->priority : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'client', 'boat', 'wlists', 'for_role', 'for_user']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.appointments.index');
     }
 
     public function create()
@@ -42,9 +125,7 @@ class AppointmentsController extends Controller
 
         $for_users = User::pluck('name', 'id');
 
-        $priorities = Priority::pluck('level', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.appointments.create', compact('boats', 'clients', 'for_roles', 'for_users', 'priorities', 'wlists'));
+        return view('admin.appointments.create', compact('boats', 'clients', 'for_roles', 'for_users', 'wlists'));
     }
 
     public function store(StoreAppointmentRequest $request)
@@ -71,11 +152,9 @@ class AppointmentsController extends Controller
 
         $for_users = User::pluck('name', 'id');
 
-        $priorities = Priority::pluck('level', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $appointment->load('client', 'boat', 'wlists', 'for_roles', 'for_users');
 
-        $appointment->load('client', 'boat', 'wlists', 'for_roles', 'for_users', 'priority');
-
-        return view('admin.appointments.edit', compact('appointment', 'boats', 'clients', 'for_roles', 'for_users', 'priorities', 'wlists'));
+        return view('admin.appointments.edit', compact('appointment', 'boats', 'clients', 'for_roles', 'for_users', 'wlists'));
     }
 
     public function update(UpdateAppointmentRequest $request, Appointment $appointment)
@@ -92,7 +171,7 @@ class AppointmentsController extends Controller
     {
         abort_if(Gate::denies('appointment_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $appointment->load('client', 'boat', 'wlists', 'for_roles', 'for_users', 'priority');
+        $appointment->load('client', 'boat', 'wlists', 'for_roles', 'for_users');
 
         return view('admin.appointments.show', compact('appointment'));
     }

@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyContactCompanyRequest;
 use App\Http\Requests\StoreContactCompanyRequest;
 use App\Http\Requests\UpdateContactCompanyRequest;
 use App\Models\ContactCompany;
+use App\Models\ContactContact;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +23,7 @@ class ContactCompanyController extends Controller
         abort_if(Gate::denies('contact_company_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = ContactCompany::query()->select(sprintf('%s.*', (new ContactCompany)->table));
+            $query = ContactCompany::with(['contacts'])->select(sprintf('%s.*', (new ContactCompany)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -73,25 +74,38 @@ class ContactCompanyController extends Controller
             $table->editColumn('company_social_link', function ($row) {
                 return $row->company_social_link ? $row->company_social_link : '';
             });
+            $table->editColumn('contacts', function ($row) {
+                $labels = [];
+                foreach ($row->contacts as $contact) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $contact->contact_first_name);
+                }
 
-            $table->rawColumns(['actions', 'placeholder', 'defaulter']);
+                return implode(' ', $labels);
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'defaulter', 'contacts']);
 
             return $table->make(true);
         }
 
-        return view('admin.contactCompanies.index');
+        $contact_contacts = ContactContact::get();
+
+        return view('admin.contactCompanies.index', compact('contact_contacts'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('contact_company_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.contactCompanies.create');
+        $contacts = ContactContact::pluck('contact_first_name', 'id');
+
+        return view('admin.contactCompanies.create', compact('contacts'));
     }
 
     public function store(StoreContactCompanyRequest $request)
     {
         $contactCompany = ContactCompany::create($request->all());
+        $contactCompany->contacts()->sync($request->input('contacts', []));
 
         return redirect()->route('admin.contact-companies.index');
     }
@@ -100,12 +114,17 @@ class ContactCompanyController extends Controller
     {
         abort_if(Gate::denies('contact_company_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.contactCompanies.edit', compact('contactCompany'));
+        $contacts = ContactContact::pluck('contact_first_name', 'id');
+
+        $contactCompany->load('contacts');
+
+        return view('admin.contactCompanies.edit', compact('contactCompany', 'contacts'));
     }
 
     public function update(UpdateContactCompanyRequest $request, ContactCompany $contactCompany)
     {
         $contactCompany->update($request->all());
+        $contactCompany->contacts()->sync($request->input('contacts', []));
 
         return redirect()->route('admin.contact-companies.index');
     }
@@ -114,7 +133,7 @@ class ContactCompanyController extends Controller
     {
         abort_if(Gate::denies('contact_company_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $contactCompany->load('companyProviders', 'companyClients');
+        $contactCompany->load('contacts', 'companyProviders');
 
         return view('admin.contactCompanies.show', compact('contactCompany'));
     }

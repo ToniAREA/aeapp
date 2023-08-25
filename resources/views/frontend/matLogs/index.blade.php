@@ -51,7 +51,13 @@
                                         {{ trans('cruds.user.fields.email') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.matLog.fields.item') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.matLog.fields.product') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.product.fields.description') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.matLog.fields.description') }}
@@ -63,9 +69,6 @@
                                         {{ trans('cruds.matLog.fields.units') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.matLog.fields.tags') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.matLog.fields.proforma_number') }}
                                     </th>
                                     <th>
@@ -73,6 +76,9 @@
                                     </th>
                                     <th>
                                         {{ trans('cruds.matLog.fields.invoiced_line') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.matLog.fields.status') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -107,7 +113,13 @@
                                             {{ $matLog->employee->email ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $matLog->product ?? '' }}
+                                            {{ $matLog->item ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $matLog->product->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $matLog->product->description ?? '' }}
                                         </td>
                                         <td>
                                             {{ $matLog->description ?? '' }}
@@ -119,11 +131,6 @@
                                             {{ $matLog->units ?? '' }}
                                         </td>
                                         <td>
-                                            @foreach($matLog->tags as $key => $item)
-                                                <span>{{ $item->name }}</span>
-                                            @endforeach
-                                        </td>
-                                        <td>
                                             {{ $matLog->proforma_number->proforma_number ?? '' }}
                                         </td>
                                         <td>
@@ -132,6 +139,9 @@
                                         <td>
                                             <span style="display:none">{{ $matLog->invoiced_line ?? '' }}</span>
                                             <input type="checkbox" disabled="disabled" {{ $matLog->invoiced_line ? 'checked' : '' }}>
+                                        </td>
+                                        <td>
+                                            {{ $matLog->status ?? '' }}
                                         </td>
                                         <td>
                                             @can('mat_log_show')

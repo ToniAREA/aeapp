@@ -55,12 +55,6 @@
                                 {{ trans('cruds.client.fields.email') }}
                             </th>
                             <th>
-                                {{ trans('cruds.client.fields.company') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.contactCompany.fields.company_email') }}
-                            </th>
-                            <th>
                                 {{ trans('cruds.client.fields.contacts') }}
                             </th>
                             <th>
@@ -77,6 +71,9 @@
                             </th>
                             <th>
                                 {{ trans('cruds.client.fields.coordinates') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.client.fields.last_use') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -124,12 +121,6 @@
                                     {{ $client->email ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $client->company->company_name ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $client->company->company_email ?? '' }}
-                                </td>
-                                <td>
                                     @foreach($client->contacts as $key => $item)
                                         <span class="badge badge-info">{{ $item->contact_first_name }}</span>
                                     @endforeach
@@ -150,6 +141,9 @@
                                 </td>
                                 <td>
                                     {{ $client->coordinates ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $client->last_use ?? '' }}
                                 </td>
                                 <td>
                                     @can('client_show')

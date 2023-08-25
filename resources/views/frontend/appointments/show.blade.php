@@ -98,10 +98,10 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.appointment.fields.priority') }}
+                                        {{ trans('cruds.appointment.fields.notes') }}
                                     </th>
                                     <td>
-                                        {{ $appointment->priority->level ?? '' }}
+                                        {{ $appointment->notes }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -118,6 +118,14 @@
                                     </th>
                                     <td>
                                         {{ $appointment->status }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.appointment.fields.priority') }}
+                                    </th>
+                                    <td>
+                                        {{ $appointment->priority }}
                                     </td>
                                 </tr>
                             </tbody>

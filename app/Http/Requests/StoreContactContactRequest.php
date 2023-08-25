@@ -49,7 +49,15 @@ class StoreContactContactRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'contact_email_2' => [
+                'string',
+                'nullable',
+            ],
             'social_link' => [
+                'string',
+                'nullable',
+            ],
+            'contact_tags' => [
                 'string',
                 'nullable',
             ],

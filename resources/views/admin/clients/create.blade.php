@@ -93,18 +93,6 @@
                 <span class="help-block">{{ trans('cruds.client.fields.email_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="company_id">{{ trans('cruds.client.fields.company') }}</label>
-                <select class="form-control select2 {{ $errors->has('company') ? 'is-invalid' : '' }}" name="company_id" id="company_id">
-                    @foreach($companies as $id => $entry)
-                        <option value="{{ $id }}" {{ old('company_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('company'))
-                    <span class="text-danger">{{ $errors->first('company') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.client.fields.company_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label for="contacts">{{ trans('cruds.client.fields.contacts') }}</label>
                 <div style="padding-bottom: 4px">
                     <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
@@ -167,6 +155,14 @@
                     <span class="text-danger">{{ $errors->first('coordinates') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.client.fields.coordinates_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="last_use">{{ trans('cruds.client.fields.last_use') }}</label>
+                <input class="form-control datetime {{ $errors->has('last_use') ? 'is-invalid' : '' }}" type="text" name="last_use" id="last_use" value="{{ old('last_use') }}">
+                @if($errors->has('last_use'))
+                    <span class="text-danger">{{ $errors->first('last_use') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.client.fields.last_use_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

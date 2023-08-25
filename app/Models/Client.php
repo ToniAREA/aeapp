@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Auditable;
+use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,7 @@ class Client extends Model
     ];
 
     protected $dates = [
+        'last_use',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -36,11 +38,11 @@ class Client extends Model
         'telephone',
         'mobile',
         'email',
-        'company_id',
         'notes',
         'internalnotes',
         'link',
         'coordinates',
+        'last_use',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -71,11 +73,6 @@ class Client extends Model
         return $this->belongsToMany(Boat::class);
     }
 
-    public function company()
-    {
-        return $this->belongsTo(ContactCompany::class, 'company_id');
-    }
-
     public function contacts()
     {
         return $this->belongsToMany(ContactContact::class);
@@ -84,5 +81,15 @@ class Client extends Model
     public function boats()
     {
         return $this->belongsToMany(Boat::class);
+    }
+
+    public function getLastUseAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+    }
+
+    public function setLastUseAttribute($value)
+    {
+        $this->attributes['last_use'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
     }
 }

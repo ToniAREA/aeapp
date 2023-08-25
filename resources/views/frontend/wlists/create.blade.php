@@ -88,12 +88,8 @@
                             <span class="help-block">{{ trans('cruds.wlist.fields.deadline_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="priority_id">{{ trans('cruds.wlist.fields.priority') }}</label>
-                            <select class="form-control select2" name="priority_id" id="priority_id">
-                                @foreach($priorities as $id => $entry)
-                                    <option value="{{ $id }}" {{ old('priority_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                                @endforeach
-                            </select>
+                            <label for="priority">{{ trans('cruds.wlist.fields.priority') }}</label>
+                            <input class="form-control" type="text" name="priority" id="priority" value="{{ old('priority', '') }}">
                             @if($errors->has('priority'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('priority') }}
@@ -166,24 +162,6 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.wlist.fields.notes_helper') }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="tags">{{ trans('cruds.wlist.fields.tags') }}</label>
-                            <div style="padding-bottom: 4px">
-                                <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                                <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                            </div>
-                            <select class="form-control select2" name="tags[]" id="tags" multiple>
-                                @foreach($tags as $id => $tag)
-                                    <option value="{{ $id }}" {{ in_array($id, old('tags', [])) ? 'selected' : '' }}>{{ $tag }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('tags'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('tags') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.wlist.fields.tags_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">

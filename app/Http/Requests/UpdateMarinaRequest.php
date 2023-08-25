@@ -17,12 +17,6 @@ class UpdateMarinaRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_marina' => [
-                'nullable',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647',
-            ],
             'name' => [
                 'string',
                 'required',
@@ -34,6 +28,18 @@ class UpdateMarinaRequest extends FormRequest
             ],
             'link' => [
                 'string',
+                'nullable',
+            ],
+            'notes' => [
+                'string',
+                'nullable',
+            ],
+            'internal_notes' => [
+                'string',
+                'nullable',
+            ],
+            'last_use' => [
+                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
                 'nullable',
             ],
         ];

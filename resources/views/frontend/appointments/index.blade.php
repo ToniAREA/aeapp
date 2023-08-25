@@ -9,6 +9,10 @@
                         <a class="btn btn-success" href="{{ route('frontend.appointments.create') }}">
                             {{ trans('global.add') }} {{ trans('cruds.appointment.title_singular') }}
                         </a>
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+                            {{ trans('global.app_csvImport') }}
+                        </button>
+                        @include('csvImport.modal', ['model' => 'Appointment', 'route' => 'admin.appointments.parseCsvImport'])
                     </div>
                 </div>
             @endcan
@@ -53,13 +57,16 @@
                                         {{ trans('cruds.appointment.fields.description') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.appointment.fields.priority') }}
+                                        {{ trans('cruds.appointment.fields.notes') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.appointment.fields.coordinates') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.appointment.fields.status') }}
+                                    </th>
+                                    <th>
+                                        {{ trans('cruds.appointment.fields.priority') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -106,13 +113,16 @@
                                             {{ $appointment->description ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $appointment->priority->level ?? '' }}
+                                            {{ $appointment->notes ?? '' }}
                                         </td>
                                         <td>
                                             {{ $appointment->coordinates ?? '' }}
                                         </td>
                                         <td>
                                             {{ $appointment->status ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $appointment->priority ?? '' }}
                                         </td>
                                         <td>
                                             @can('appointment_show')

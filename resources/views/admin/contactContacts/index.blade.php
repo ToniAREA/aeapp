@@ -53,7 +53,13 @@
                         {{ trans('cruds.contactContact.fields.contact_email') }}
                     </th>
                     <th>
+                        {{ trans('cruds.contactContact.fields.contact_email_2') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.contactContact.fields.social_link') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.contactContact.fields.contact_tags') }}
                     </th>
                     <th>
                         {{ trans('cruds.contactContact.fields.contact_notes') }}
@@ -126,7 +132,9 @@
 { data: 'contact_mobile', name: 'contact_mobile' },
 { data: 'contact_mobile_2', name: 'contact_mobile_2' },
 { data: 'contact_email', name: 'contact_email' },
+{ data: 'contact_email_2', name: 'contact_email_2' },
 { data: 'social_link', name: 'social_link' },
+{ data: 'contact_tags', name: 'contact_tags' },
 { data: 'contact_notes', name: 'contact_notes' },
 { data: 'contact_internalnotes', name: 'contact_internalnotes' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }

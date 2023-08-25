@@ -86,24 +86,6 @@
                             <span class="help-block">{{ trans('cruds.wlog.fields.hours_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="tags">{{ trans('cruds.wlog.fields.tags') }}</label>
-                            <div style="padding-bottom: 4px">
-                                <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                                <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                            </div>
-                            <select class="form-control select2" name="tags[]" id="tags" multiple>
-                                @foreach($tags as $id => $tag)
-                                    <option value="{{ $id }}" {{ (in_array($id, old('tags', [])) || $wlog->tags->contains($id)) ? 'selected' : '' }}>{{ $tag }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('tags'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('tags') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.wlog.fields.tags_helper') }}</span>
-                        </div>
-                        <div class="form-group">
                             <label for="proforma_number_id">{{ trans('cruds.wlog.fields.proforma_number') }}</label>
                             <select class="form-control select2" name="proforma_number_id" id="proforma_number_id">
                                 @foreach($proforma_numbers as $id => $entry)
@@ -129,6 +111,16 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.wlog.fields.invoiced_line_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">{{ trans('cruds.wlog.fields.status') }}</label>
+                            <input class="form-control" type="text" name="status" id="status" value="{{ old('status', $wlog->status) }}">
+                            @if($errors->has('status'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('status') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.wlog.fields.status_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">

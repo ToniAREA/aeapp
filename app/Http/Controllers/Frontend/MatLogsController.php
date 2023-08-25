@@ -9,8 +9,8 @@ use App\Http\Requests\StoreMatLogRequest;
 use App\Http\Requests\UpdateMatLogRequest;
 use App\Models\Boat;
 use App\Models\MatLog;
+use App\Models\Product;
 use App\Models\Proforma;
-use App\Models\Tag;
 use App\Models\User;
 use App\Models\Wlist;
 use Gate;
@@ -25,7 +25,7 @@ class MatLogsController extends Controller
     {
         abort_if(Gate::denies('mat_log_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $matLogs = MatLog::with(['boat', 'wlist', 'employee', 'tags', 'proforma_number'])->get();
+        $matLogs = MatLog::with(['boat', 'wlist', 'employee', 'product', 'proforma_number'])->get();
 
         return view('frontend.matLogs.index', compact('matLogs'));
     }
@@ -40,17 +40,16 @@ class MatLogsController extends Controller
 
         $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $tags = Tag::pluck('name', 'id');
+        $products = Product::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $proforma_numbers = Proforma::pluck('proforma_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('frontend.matLogs.create', compact('boats', 'employees', 'proforma_numbers', 'tags', 'wlists'));
+        return view('frontend.matLogs.create', compact('boats', 'employees', 'products', 'proforma_numbers', 'wlists'));
     }
 
     public function store(StoreMatLogRequest $request)
     {
         $matLog = MatLog::create($request->all());
-        $matLog->tags()->sync($request->input('tags', []));
 
         return redirect()->route('frontend.mat-logs.index');
     }
@@ -65,19 +64,18 @@ class MatLogsController extends Controller
 
         $employees = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $tags = Tag::pluck('name', 'id');
+        $products = Product::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $proforma_numbers = Proforma::pluck('proforma_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $matLog->load('boat', 'wlist', 'employee', 'tags', 'proforma_number');
+        $matLog->load('boat', 'wlist', 'employee', 'product', 'proforma_number');
 
-        return view('frontend.matLogs.edit', compact('boats', 'employees', 'matLog', 'proforma_numbers', 'tags', 'wlists'));
+        return view('frontend.matLogs.edit', compact('boats', 'employees', 'matLog', 'products', 'proforma_numbers', 'wlists'));
     }
 
     public function update(UpdateMatLogRequest $request, MatLog $matLog)
     {
         $matLog->update($request->all());
-        $matLog->tags()->sync($request->input('tags', []));
 
         return redirect()->route('frontend.mat-logs.index');
     }
@@ -86,7 +84,7 @@ class MatLogsController extends Controller
     {
         abort_if(Gate::denies('mat_log_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $matLog->load('boat', 'wlist', 'employee', 'tags', 'proforma_number');
+        $matLog->load('boat', 'wlist', 'employee', 'product', 'proforma_number');
 
         return view('frontend.matLogs.show', compact('matLog'));
     }

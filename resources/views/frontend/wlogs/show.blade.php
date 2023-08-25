@@ -76,16 +76,6 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.wlog.fields.tags') }}
-                                    </th>
-                                    <td>
-                                        @foreach($wlog->tags as $key => $tags)
-                                            <span class="label label-info">{{ $tags->name }}</span>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.wlog.fields.proforma_number') }}
                                     </th>
                                     <td>
@@ -98,6 +88,14 @@
                                     </th>
                                     <td>
                                         <input type="checkbox" disabled="disabled" {{ $wlog->invoiced_line ? 'checked' : '' }}>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.wlog.fields.status') }}
+                                    </th>
+                                    <td>
+                                        {{ $wlog->status }}
                                     </td>
                                 </tr>
                             </tbody>

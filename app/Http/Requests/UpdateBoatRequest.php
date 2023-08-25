@@ -61,6 +61,10 @@ class UpdateBoatRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'last_use' => [
+                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
+                'nullable',
+            ],
         ];
     }
 }

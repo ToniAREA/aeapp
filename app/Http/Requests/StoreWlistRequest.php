@@ -32,6 +32,10 @@ class StoreWlistRequest extends FormRequest
                 'date_format:' . config('panel.date_format'),
                 'nullable',
             ],
+            'priority' => [
+                'string',
+                'nullable',
+            ],
             'for_roles.*' => [
                 'integer',
             ],
@@ -55,12 +59,6 @@ class StoreWlistRequest extends FormRequest
             'notes' => [
                 'string',
                 'nullable',
-            ],
-            'tags.*' => [
-                'integer',
-            ],
-            'tags' => [
-                'array',
             ],
         ];
     }

@@ -17,13 +17,12 @@ class MatLogsApiController extends Controller
     {
         abort_if(Gate::denies('mat_log_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new MatLogResource(MatLog::with(['boat', 'wlist', 'employee', 'tags', 'proforma_number'])->get());
+        return new MatLogResource(MatLog::with(['boat', 'wlist', 'employee', 'product', 'proforma_number'])->get());
     }
 
     public function store(StoreMatLogRequest $request)
     {
         $matLog = MatLog::create($request->all());
-        $matLog->tags()->sync($request->input('tags', []));
 
         return (new MatLogResource($matLog))
             ->response()
@@ -34,13 +33,12 @@ class MatLogsApiController extends Controller
     {
         abort_if(Gate::denies('mat_log_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new MatLogResource($matLog->load(['boat', 'wlist', 'employee', 'tags', 'proforma_number']));
+        return new MatLogResource($matLog->load(['boat', 'wlist', 'employee', 'product', 'proforma_number']));
     }
 
     public function update(UpdateMatLogRequest $request, MatLog $matLog)
     {
         $matLog->update($request->all());
-        $matLog->tags()->sync($request->input('tags', []));
 
         return (new MatLogResource($matLog))
             ->response()

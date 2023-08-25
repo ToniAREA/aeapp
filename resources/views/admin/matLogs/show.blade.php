@@ -57,10 +57,18 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.matLog.fields.item') }}
+                        </th>
+                        <td>
+                            {{ $matLog->item }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.matLog.fields.product') }}
                         </th>
                         <td>
-                            {{ $matLog->product }}
+                            {{ $matLog->product->name ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -89,16 +97,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.matLog.fields.tags') }}
-                        </th>
-                        <td>
-                            @foreach($matLog->tags as $key => $tags)
-                                <span class="label label-info">{{ $tags->name }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.matLog.fields.proforma_number') }}
                         </th>
                         <td>
@@ -111,6 +109,14 @@
                         </th>
                         <td>
                             <input type="checkbox" disabled="disabled" {{ $matLog->invoiced_line ? 'checked' : '' }}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.matLog.fields.status') }}
+                        </th>
+                        <td>
+                            {{ $matLog->status }}
                         </td>
                     </tr>
                 </tbody>

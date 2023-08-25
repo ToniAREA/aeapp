@@ -33,6 +33,8 @@ class Proforma extends Model
         'paid',
         'claims',
         'link',
+        'status',
+        'notes',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -86,10 +88,5 @@ class Proforma extends Model
     public function setDateAttribute($value)
     {
         $this->attributes['date'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
     }
 }

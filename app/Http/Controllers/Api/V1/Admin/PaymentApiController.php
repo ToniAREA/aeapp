@@ -17,13 +17,12 @@ class PaymentApiController extends Controller
     {
         abort_if(Gate::denies('payment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PaymentResource(Payment::with(['proforma_number', 'tags'])->get());
+        return new PaymentResource(Payment::with(['proforma_number'])->get());
     }
 
     public function store(StorePaymentRequest $request)
     {
         $payment = Payment::create($request->all());
-        $payment->tags()->sync($request->input('tags', []));
 
         return (new PaymentResource($payment))
             ->response()
@@ -34,13 +33,12 @@ class PaymentApiController extends Controller
     {
         abort_if(Gate::denies('payment_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PaymentResource($payment->load(['proforma_number', 'tags']));
+        return new PaymentResource($payment->load(['proforma_number']));
     }
 
     public function update(UpdatePaymentRequest $request, Payment $payment)
     {
         $payment->update($request->all());
-        $payment->tags()->sync($request->input('tags', []));
 
         return (new PaymentResource($payment))
             ->response()

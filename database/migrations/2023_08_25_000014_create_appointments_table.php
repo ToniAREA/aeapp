@@ -13,9 +13,12 @@ class CreateAppointmentsTable extends Migration
             $table->datetime('when_starts');
             $table->datetime('when_ends');
             $table->string('description');
+            $table->string('notes')->nullable();
             $table->string('coordinates')->nullable();
             $table->string('status')->nullable();
+            $table->string('priority')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 }

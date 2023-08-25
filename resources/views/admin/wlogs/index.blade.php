@@ -53,9 +53,6 @@
                         {{ trans('cruds.wlog.fields.hours') }}
                     </th>
                     <th>
-                        {{ trans('cruds.wlog.fields.tags') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.wlog.fields.proforma_number') }}
                     </th>
                     <th>
@@ -63,6 +60,9 @@
                     </th>
                     <th>
                         {{ trans('cruds.wlog.fields.invoiced_line') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.wlog.fields.status') }}
                     </th>
                     <th>
                         &nbsp;
@@ -129,10 +129,10 @@
 { data: 'marina_name', name: 'marina.name' },
 { data: 'description', name: 'description' },
 { data: 'hours', name: 'hours' },
-{ data: 'tags', name: 'tags.name' },
 { data: 'proforma_number_proforma_number', name: 'proforma_number.proforma_number' },
 { data: 'proforma_number.description', name: 'proforma_number.description' },
 { data: 'invoiced_line', name: 'invoiced_line' },
+{ data: 'status', name: 'status' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

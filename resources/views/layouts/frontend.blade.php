@@ -287,21 +287,6 @@
                                             {{ trans('cruds.permission.title') }}
                                         </a>
                                     @endcan
-                                    @can('configuration_access')
-                                        <a class="dropdown-item disabled" href="#">
-                                            {{ trans('cruds.configuration.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('tag_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.tags.index') }}">
-                                            {{ trans('cruds.tag.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('priority_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.priorities.index') }}">
-                                            {{ trans('cruds.priority.title') }}
-                                        </a>
-                                    @endcan
                                     @can('faq_management_access')
                                         <a class="dropdown-item disabled" href="#">
                                             {{ trans('cruds.faqManagement.title') }}

@@ -68,9 +68,6 @@
                         {{ trans('cruds.wlist.fields.notes') }}
                     </th>
                     <th>
-                        {{ trans('cruds.wlist.fields.tags') }}
-                    </th>
-                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -134,13 +131,12 @@
 { data: 'description', name: 'description' },
 { data: 'photos', name: 'photos', sortable: false, searchable: false },
 { data: 'deadline', name: 'deadline' },
-{ data: 'priority_level', name: 'priority.level' },
+{ data: 'priority', name: 'priority' },
 { data: 'for_role', name: 'for_roles.title' },
 { data: 'for_user', name: 'for_users.name' },
 { data: 'status', name: 'status' },
 { data: 'url_invoice', name: 'url_invoice' },
 { data: 'notes', name: 'notes' },
-{ data: 'tags', name: 'tags.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

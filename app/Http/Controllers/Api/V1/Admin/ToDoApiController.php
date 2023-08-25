@@ -20,7 +20,7 @@ class ToDoApiController extends Controller
     {
         abort_if(Gate::denies('to_do_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ToDoResource(ToDo::with(['priority', 'for_roles', 'for_users'])->get());
+        return new ToDoResource(ToDo::with(['for_roles', 'for_users'])->get());
     }
 
     public function store(StoreToDoRequest $request)
@@ -41,7 +41,7 @@ class ToDoApiController extends Controller
     {
         abort_if(Gate::denies('to_do_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ToDoResource($toDo->load(['priority', 'for_roles', 'for_users']));
+        return new ToDoResource($toDo->load(['for_roles', 'for_users']));
     }
 
     public function update(UpdateToDoRequest $request, ToDo $toDo)

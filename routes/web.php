@@ -66,12 +66,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('to-dos/ckmedia', 'ToDoController@storeCKEditorImages')->name('to-dos.storeCKEditorImages');
     Route::resource('to-dos', 'ToDoController');
 
-    // Priorities
-    Route::delete('priorities/destroy', 'PrioritiesController@massDestroy')->name('priorities.massDestroy');
-    Route::resource('priorities', 'PrioritiesController');
-
     // Appointments
     Route::delete('appointments/destroy', 'AppointmentsController@massDestroy')->name('appointments.massDestroy');
+    Route::post('appointments/parse-csv-import', 'AppointmentsController@parseCsvImport')->name('appointments.parseCsvImport');
+    Route::post('appointments/process-csv-import', 'AppointmentsController@processCsvImport')->name('appointments.processCsvImport');
     Route::resource('appointments', 'AppointmentsController');
 
     // Audit Logs
@@ -140,10 +138,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('brands/parse-csv-import', 'BrandsController@parseCsvImport')->name('brands.parseCsvImport');
     Route::post('brands/process-csv-import', 'BrandsController@processCsvImport')->name('brands.processCsvImport');
     Route::resource('brands', 'BrandsController');
-
-    // Tags
-    Route::delete('tags/destroy', 'TagsController@massDestroy')->name('tags.massDestroy');
-    Route::resource('tags', 'TagsController');
 
     // Proforma
     Route::delete('proformas/destroy', 'ProformaController@massDestroy')->name('proformas.massDestroy');
@@ -284,10 +278,6 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     Route::post('to-dos/ckmedia', 'ToDoController@storeCKEditorImages')->name('to-dos.storeCKEditorImages');
     Route::resource('to-dos', 'ToDoController');
 
-    // Priorities
-    Route::delete('priorities/destroy', 'PrioritiesController@massDestroy')->name('priorities.massDestroy');
-    Route::resource('priorities', 'PrioritiesController');
-
     // Appointments
     Route::delete('appointments/destroy', 'AppointmentsController@massDestroy')->name('appointments.massDestroy');
     Route::resource('appointments', 'AppointmentsController');
@@ -337,10 +327,6 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     Route::post('brands/media', 'BrandsController@storeMedia')->name('brands.storeMedia');
     Route::post('brands/ckmedia', 'BrandsController@storeCKEditorImages')->name('brands.storeCKEditorImages');
     Route::resource('brands', 'BrandsController');
-
-    // Tags
-    Route::delete('tags/destroy', 'TagsController@massDestroy')->name('tags.massDestroy');
-    Route::resource('tags', 'TagsController');
 
     // Proforma
     Route::delete('proformas/destroy', 'ProformaController@massDestroy')->name('proformas.massDestroy');

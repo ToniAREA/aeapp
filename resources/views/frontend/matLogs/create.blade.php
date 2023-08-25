@@ -66,8 +66,22 @@
                             <span class="help-block">{{ trans('cruds.matLog.fields.employee_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="product">{{ trans('cruds.matLog.fields.product') }}</label>
-                            <input class="form-control" type="text" name="product" id="product" value="{{ old('product', '') }}">
+                            <label for="item">{{ trans('cruds.matLog.fields.item') }}</label>
+                            <input class="form-control" type="text" name="item" id="item" value="{{ old('item', '') }}">
+                            @if($errors->has('item'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('item') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.matLog.fields.item_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="product_id">{{ trans('cruds.matLog.fields.product') }}</label>
+                            <select class="form-control select2" name="product_id" id="product_id">
+                                @foreach($products as $id => $entry)
+                                    <option value="{{ $id }}" {{ old('product_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                @endforeach
+                            </select>
                             @if($errors->has('product'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('product') }}
@@ -106,24 +120,6 @@
                             <span class="help-block">{{ trans('cruds.matLog.fields.units_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="tags">{{ trans('cruds.matLog.fields.tags') }}</label>
-                            <div style="padding-bottom: 4px">
-                                <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
-                                <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
-                            </div>
-                            <select class="form-control select2" name="tags[]" id="tags" multiple>
-                                @foreach($tags as $id => $tag)
-                                    <option value="{{ $id }}" {{ in_array($id, old('tags', [])) ? 'selected' : '' }}>{{ $tag }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('tags'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('tags') }}
-                                </div>
-                            @endif
-                            <span class="help-block">{{ trans('cruds.matLog.fields.tags_helper') }}</span>
-                        </div>
-                        <div class="form-group">
                             <label for="proforma_number_id">{{ trans('cruds.matLog.fields.proforma_number') }}</label>
                             <select class="form-control select2" name="proforma_number_id" id="proforma_number_id">
                                 @foreach($proforma_numbers as $id => $entry)
@@ -149,6 +145,16 @@
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.matLog.fields.invoiced_line_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">{{ trans('cruds.matLog.fields.status') }}</label>
+                            <input class="form-control" type="text" name="status" id="status" value="{{ old('status', '') }}">
+                            @if($errors->has('status'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('status') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.matLog.fields.status_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">

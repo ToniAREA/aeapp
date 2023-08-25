@@ -29,7 +29,7 @@ class UpdateMatLogRequest extends FormRequest
                 'required',
                 'integer',
             ],
-            'product' => [
+            'item' => [
                 'string',
                 'nullable',
             ],
@@ -43,11 +43,9 @@ class UpdateMatLogRequest extends FormRequest
             'units' => [
                 'numeric',
             ],
-            'tags.*' => [
-                'integer',
-            ],
-            'tags' => [
-                'array',
+            'status' => [
+                'string',
+                'nullable',
             ],
         ];
     }

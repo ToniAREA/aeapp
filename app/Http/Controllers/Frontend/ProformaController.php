@@ -10,7 +10,6 @@ use App\Http\Requests\UpdateProformaRequest;
 use App\Models\Boat;
 use App\Models\Client;
 use App\Models\Proforma;
-use App\Models\Tag;
 use App\Models\Wlist;
 use Gate;
 use Illuminate\Http\Request;
@@ -24,7 +23,7 @@ class ProformaController extends Controller
     {
         abort_if(Gate::denies('proforma_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $proformas = Proforma::with(['client', 'boats', 'wlists', 'tags'])->get();
+        $proformas = Proforma::with(['client', 'boats', 'wlists'])->get();
 
         return view('frontend.proformas.index', compact('proformas'));
     }
@@ -39,9 +38,7 @@ class ProformaController extends Controller
 
         $wlists = Wlist::pluck('description', 'id');
 
-        $tags = Tag::pluck('name', 'id');
-
-        return view('frontend.proformas.create', compact('boats', 'clients', 'tags', 'wlists'));
+        return view('frontend.proformas.create', compact('boats', 'clients', 'wlists'));
     }
 
     public function store(StoreProformaRequest $request)
@@ -49,7 +46,6 @@ class ProformaController extends Controller
         $proforma = Proforma::create($request->all());
         $proforma->boats()->sync($request->input('boats', []));
         $proforma->wlists()->sync($request->input('wlists', []));
-        $proforma->tags()->sync($request->input('tags', []));
 
         return redirect()->route('frontend.proformas.index');
     }
@@ -64,11 +60,9 @@ class ProformaController extends Controller
 
         $wlists = Wlist::pluck('description', 'id');
 
-        $tags = Tag::pluck('name', 'id');
+        $proforma->load('client', 'boats', 'wlists');
 
-        $proforma->load('client', 'boats', 'wlists', 'tags');
-
-        return view('frontend.proformas.edit', compact('boats', 'clients', 'proforma', 'tags', 'wlists'));
+        return view('frontend.proformas.edit', compact('boats', 'clients', 'proforma', 'wlists'));
     }
 
     public function update(UpdateProformaRequest $request, Proforma $proforma)
@@ -76,7 +70,6 @@ class ProformaController extends Controller
         $proforma->update($request->all());
         $proforma->boats()->sync($request->input('boats', []));
         $proforma->wlists()->sync($request->input('wlists', []));
-        $proforma->tags()->sync($request->input('tags', []));
 
         return redirect()->route('frontend.proformas.index');
     }
@@ -85,7 +78,7 @@ class ProformaController extends Controller
     {
         abort_if(Gate::denies('proforma_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $proforma->load('client', 'boats', 'wlists', 'tags', 'proformaNumberWlogs', 'proformaNumberClaims', 'proformaNumberPayments', 'proformaNumberMatLogs');
+        $proforma->load('client', 'boats', 'wlists', 'proformaNumberWlogs', 'proformaNumberClaims', 'proformaNumberPayments', 'proformaNumberMatLogs');
 
         return view('frontend.proformas.show', compact('proforma'));
     }

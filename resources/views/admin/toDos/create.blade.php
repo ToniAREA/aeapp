@@ -35,12 +35,8 @@
                 <span class="help-block">{{ trans('cruds.toDo.fields.deadline_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="priority_id">{{ trans('cruds.toDo.fields.priority') }}</label>
-                <select class="form-control select2 {{ $errors->has('priority') ? 'is-invalid' : '' }}" name="priority_id" id="priority_id" required>
-                    @foreach($priorities as $id => $entry)
-                        <option value="{{ $id }}" {{ old('priority_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
+                <label for="priority">{{ trans('cruds.toDo.fields.priority') }}</label>
+                <input class="form-control {{ $errors->has('priority') ? 'is-invalid' : '' }}" type="text" name="priority" id="priority" value="{{ old('priority', '') }}">
                 @if($errors->has('priority'))
                     <span class="text-danger">{{ $errors->first('priority') }}</span>
                 @endif

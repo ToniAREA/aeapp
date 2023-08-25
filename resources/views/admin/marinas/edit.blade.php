@@ -11,14 +11,6 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="id_marina">{{ trans('cruds.marina.fields.id_marina') }}</label>
-                <input class="form-control {{ $errors->has('id_marina') ? 'is-invalid' : '' }}" type="number" name="id_marina" id="id_marina" value="{{ old('id_marina', $marina->id_marina) }}" step="1">
-                @if($errors->has('id_marina'))
-                    <span class="text-danger">{{ $errors->first('id_marina') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.marina.fields.id_marina_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label class="required" for="name">{{ trans('cruds.marina.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $marina->name) }}" required>
                 @if($errors->has('name'))
@@ -41,6 +33,30 @@
                     <span class="text-danger">{{ $errors->first('link') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.marina.fields.link_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="notes">{{ trans('cruds.marina.fields.notes') }}</label>
+                <input class="form-control {{ $errors->has('notes') ? 'is-invalid' : '' }}" type="text" name="notes" id="notes" value="{{ old('notes', $marina->notes) }}">
+                @if($errors->has('notes'))
+                    <span class="text-danger">{{ $errors->first('notes') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.marina.fields.notes_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="internal_notes">{{ trans('cruds.marina.fields.internal_notes') }}</label>
+                <input class="form-control {{ $errors->has('internal_notes') ? 'is-invalid' : '' }}" type="text" name="internal_notes" id="internal_notes" value="{{ old('internal_notes', $marina->internal_notes) }}">
+                @if($errors->has('internal_notes'))
+                    <span class="text-danger">{{ $errors->first('internal_notes') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.marina.fields.internal_notes_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="last_use">{{ trans('cruds.marina.fields.last_use') }}</label>
+                <input class="form-control datetime {{ $errors->has('last_use') ? 'is-invalid' : '' }}" type="text" name="last_use" id="last_use" value="{{ old('last_use', $marina->last_use) }}">
+                @if($errors->has('last_use'))
+                    <span class="text-danger">{{ $errors->first('last_use') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.marina.fields.last_use_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

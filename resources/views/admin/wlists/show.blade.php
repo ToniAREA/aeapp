@@ -80,7 +80,7 @@
                             {{ trans('cruds.wlist.fields.priority') }}
                         </th>
                         <td>
-                            {{ $wlist->priority->level ?? '' }}
+                            {{ $wlist->priority }}
                         </td>
                     </tr>
                     <tr>
@@ -125,16 +125,6 @@
                         </th>
                         <td>
                             {{ $wlist->notes }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.wlist.fields.tags') }}
-                        </th>
-                        <td>
-                            @foreach($wlist->tags as $key => $tags)
-                                <span class="label label-info">{{ $tags->name }}</span>
-                            @endforeach
                         </td>
                     </tr>
                 </tbody>

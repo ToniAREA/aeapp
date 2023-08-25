@@ -120,20 +120,26 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.proforma.fields.tags') }}
-                                    </th>
-                                    <td>
-                                        @foreach($proforma->tags as $key => $tags)
-                                            <span class="label label-info">{{ $tags->name }}</span>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.proforma.fields.link') }}
                                     </th>
                                     <td>
                                         {{ $proforma->link }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.proforma.fields.status') }}
+                                    </th>
+                                    <td>
+                                        {{ $proforma->status }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.proforma.fields.notes') }}
+                                    </th>
+                                    <td>
+                                        {{ $proforma->notes }}
                                     </td>
                                 </tr>
                             </tbody>

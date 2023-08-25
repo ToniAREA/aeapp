@@ -29,9 +29,9 @@ class UpdateToDoRequest extends FormRequest
                 'date_format:' . config('panel.date_format'),
                 'nullable',
             ],
-            'priority_id' => [
-                'required',
-                'integer',
+            'priority' => [
+                'string',
+                'nullable',
             ],
             'for_roles.*' => [
                 'integer',

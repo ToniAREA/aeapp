@@ -24,6 +24,7 @@ class CreateClientsTable extends Migration
             $table->string('internalnotes')->nullable();
             $table->string('link')->nullable();
             $table->string('coordinates')->nullable();
+            $table->datetime('last_use')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

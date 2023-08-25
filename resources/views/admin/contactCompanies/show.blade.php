@@ -95,6 +95,16 @@
                             {{ $contactCompany->company_social_link }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.contactCompany.fields.contacts') }}
+                        </th>
+                        <td>
+                            @foreach($contactCompany->contacts as $key => $contacts)
+                                <span class="label label-info">{{ $contacts->contact_first_name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -116,18 +126,10 @@
                 {{ trans('cruds.provider.title') }}
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#company_clients" role="tab" data-toggle="tab">
-                {{ trans('cruds.client.title') }}
-            </a>
-        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="company_providers">
             @includeIf('admin.contactCompanies.relationships.companyProviders', ['providers' => $contactCompany->companyProviders])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="company_clients">
-            @includeIf('admin.contactCompanies.relationships.companyClients', ['clients' => $contactCompany->companyClients])
         </div>
     </div>
 </div>

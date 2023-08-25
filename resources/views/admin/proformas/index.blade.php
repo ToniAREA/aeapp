@@ -65,10 +65,13 @@
                         {{ trans('cruds.proforma.fields.claims') }}
                     </th>
                     <th>
-                        {{ trans('cruds.proforma.fields.tags') }}
+                        {{ trans('cruds.proforma.fields.link') }}
                     </th>
                     <th>
-                        {{ trans('cruds.proforma.fields.link') }}
+                        {{ trans('cruds.proforma.fields.status') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.proforma.fields.notes') }}
                     </th>
                     <th>
                         &nbsp;
@@ -139,8 +142,9 @@
 { data: 'sent', name: 'sent' },
 { data: 'paid', name: 'paid' },
 { data: 'claims', name: 'claims' },
-{ data: 'tags', name: 'tags.name' },
 { data: 'link', name: 'link' },
+{ data: 'status', name: 'status' },
+{ data: 'notes', name: 'notes' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

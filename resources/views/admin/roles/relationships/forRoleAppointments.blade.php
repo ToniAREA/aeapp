@@ -52,13 +52,16 @@
                                 {{ trans('cruds.appointment.fields.description') }}
                             </th>
                             <th>
-                                {{ trans('cruds.appointment.fields.priority') }}
+                                {{ trans('cruds.appointment.fields.notes') }}
                             </th>
                             <th>
                                 {{ trans('cruds.appointment.fields.coordinates') }}
                             </th>
                             <th>
                                 {{ trans('cruds.appointment.fields.status') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.appointment.fields.priority') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -108,13 +111,16 @@
                                     {{ $appointment->description ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $appointment->priority->level ?? '' }}
+                                    {{ $appointment->notes ?? '' }}
                                 </td>
                                 <td>
                                     {{ $appointment->coordinates ?? '' }}
                                 </td>
                                 <td>
                                     {{ $appointment->status ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $appointment->priority ?? '' }}
                                 </td>
                                 <td>
                                     @can('appointment_show')

@@ -9,7 +9,6 @@ use App\Http\Requests\StoreWlogRequest;
 use App\Http\Requests\UpdateWlogRequest;
 use App\Models\Marina;
 use App\Models\Proforma;
-use App\Models\Tag;
 use App\Models\User;
 use App\Models\Wlist;
 use App\Models\Wlog;
@@ -27,7 +26,7 @@ class WlogsController extends Controller
         abort_if(Gate::denies('wlog_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Wlog::with(['wlist', 'employee', 'marina', 'tags', 'proforma_number'])->select(sprintf('%s.*', (new Wlog)->table));
+            $query = Wlog::with(['wlist', 'employee', 'marina', 'proforma_number'])->select(sprintf('%s.*', (new Wlog)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -76,14 +75,6 @@ class WlogsController extends Controller
             $table->editColumn('hours', function ($row) {
                 return $row->hours ? $row->hours : '';
             });
-            $table->editColumn('tags', function ($row) {
-                $labels = [];
-                foreach ($row->tags as $tag) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $tag->name);
-                }
-
-                return implode(' ', $labels);
-            });
             $table->addColumn('proforma_number_proforma_number', function ($row) {
                 return $row->proforma_number ? $row->proforma_number->proforma_number : '';
             });
@@ -94,8 +85,11 @@ class WlogsController extends Controller
             $table->editColumn('invoiced_line', function ($row) {
                 return '<input type="checkbox" disabled ' . ($row->invoiced_line ? 'checked' : null) . '>';
             });
+            $table->editColumn('status', function ($row) {
+                return $row->status ? $row->status : '';
+            });
 
-            $table->rawColumns(['actions', 'placeholder', 'wlist', 'employee', 'marina', 'tags', 'proforma_number', 'invoiced_line']);
+            $table->rawColumns(['actions', 'placeholder', 'wlist', 'employee', 'marina', 'proforma_number', 'invoiced_line']);
 
             return $table->make(true);
         }
@@ -113,17 +107,14 @@ class WlogsController extends Controller
 
         $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $tags = Tag::pluck('name', 'id');
-
         $proforma_numbers = Proforma::pluck('proforma_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.wlogs.create', compact('employees', 'marinas', 'proforma_numbers', 'tags', 'wlists'));
+        return view('admin.wlogs.create', compact('employees', 'marinas', 'proforma_numbers', 'wlists'));
     }
 
     public function store(StoreWlogRequest $request)
     {
         $wlog = Wlog::create($request->all());
-        $wlog->tags()->sync($request->input('tags', []));
 
         return redirect()->route('admin.wlogs.index');
     }
@@ -138,19 +129,16 @@ class WlogsController extends Controller
 
         $marinas = Marina::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $tags = Tag::pluck('name', 'id');
-
         $proforma_numbers = Proforma::pluck('proforma_number', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $wlog->load('wlist', 'employee', 'marina', 'tags', 'proforma_number');
+        $wlog->load('wlist', 'employee', 'marina', 'proforma_number');
 
-        return view('admin.wlogs.edit', compact('employees', 'marinas', 'proforma_numbers', 'tags', 'wlists', 'wlog'));
+        return view('admin.wlogs.edit', compact('employees', 'marinas', 'proforma_numbers', 'wlists', 'wlog'));
     }
 
     public function update(UpdateWlogRequest $request, Wlog $wlog)
     {
         $wlog->update($request->all());
-        $wlog->tags()->sync($request->input('tags', []));
 
         return redirect()->route('admin.wlogs.index');
     }
@@ -159,7 +147,7 @@ class WlogsController extends Controller
     {
         abort_if(Gate::denies('wlog_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $wlog->load('wlist', 'employee', 'marina', 'tags', 'proforma_number');
+        $wlog->load('wlist', 'employee', 'marina', 'proforma_number');
 
         return view('admin.wlogs.show', compact('wlog'));
     }
